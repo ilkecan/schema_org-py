@@ -832,9 +832,7 @@
     "src/schema_org/schema_version.py"
   ],
   "schema_source": "https://schema.org/version/30.0/schemaorg-all-https.ttl",
-  "schema_source_sha256": "7784da44bfa147e7c5e3f6eb710cb6e314077e885f3ff28cf954a8c734ee2086",
   "schema_version": "30.0",
-  "schema_vocabulary_sha256": "64456e5f598175faf554868fc6e6ff4f10e033713b99949d1334b96ce1ef1ff3",
   "terms": {
     "classes": [
       "3DModel",

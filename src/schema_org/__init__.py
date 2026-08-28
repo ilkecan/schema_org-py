@@ -5,7 +5,7 @@
 from importlib import import_module
 
 from .base import CircularReferenceError, JsonValue, PropertyMetadata, SchemaEnum, SchemaModel, SchemaScalar, SchemaValue
-from .schema_version import SCHEMA_VERSION, SCHEMA_SOURCE, SCHEMA_SOURCE_SHA256, SCHEMA_VOCABULARY_SHA256
+from .schema_version import SCHEMA_VERSION
 
 _MODEL_MODULES = {
     'ThreeDModel': 'three_d_model',
@@ -1863,9 +1863,6 @@ __all__ = [
     'WearableSizeGroupEnumeration',
     'WearableSizeSystemEnumeration',
     'SCHEMA_VERSION',
-    'SCHEMA_SOURCE',
-    'SCHEMA_SOURCE_SHA256',
-    'SCHEMA_VOCABULARY_SHA256',
     'SchemaModel',
     'SchemaEnum',
     'CircularReferenceError',

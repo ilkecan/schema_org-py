@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 from pathlib import Path, PurePosixPath
@@ -32,27 +31,19 @@ def generate(
     schema_file = Path(schema_file)
     version = SchemaVersion.current(schema_file)
     vocabulary = parse(schema_file)
-    canonical_hash = _canonical_hash(vocabulary)
-    source_hash = version.source_sha256 or canonical_hash
     with tempfile.TemporaryDirectory(prefix="schema-org-generated-", dir=project_root) as temporary:
         staged_package = Path(temporary) / "src/schema_org"
         staged_package.mkdir(parents=True)
-        _render_package(vocabulary, version, source_hash, canonical_hash, staged_package)
+        _render_package(vocabulary, version, staged_package)
         staged_manifest = Path(temporary) / "generated_manifest.json"
-        manifest = _manifest(vocabulary, version, source_hash, canonical_hash, staged_package)
+        manifest = _manifest(vocabulary, version, staged_package)
         staged_manifest.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         _commit_tree(staged_package, output_root / "src/schema_org")
         _atomic_replace(staged_manifest, output_root / "codegen/generated_manifest.json")
     return manifest
 
 
-def _canonical_hash(vocabulary: Vocabulary) -> str:
-    payload = json.dumps(vocabulary.canonical_records(), ensure_ascii=True, separators=(",", ":"))
-    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
-
-
-
-def _render_package(vocabulary: Vocabulary, version: SchemaVersion, source_hash: str, canonical_hash: str, package: Path) -> None:
+def _render_package(vocabulary: Vocabulary, version: SchemaVersion, package: Path) -> None:
     models = sorted(vocabulary.ordinary_classes, key=lambda subject: subject.name)
     for subject in models:
         _atomic_write(package / "models" / f"{module_name(subject.name)}.py", _generated(_render_model(vocabulary, subject.name)))
@@ -60,7 +51,7 @@ def _render_package(vocabulary: Vocabulary, version: SchemaVersion, source_hash:
     _atomic_write(package / "enums.py", _generated(_render_enums(vocabulary)))
     _atomic_write(package / "datatypes.py", _generated(_render_datatypes(vocabulary)))
     _atomic_write(package / "registry.py", _generated(_render_registry(vocabulary, version)))
-    _atomic_write(package / "schema_version.py", _generated(_render_schema_version(version, source_hash, canonical_hash)))
+    _atomic_write(package / "schema_version.py", _generated(_render_schema_version(version)))
     _atomic_write(package / "__init__.py", _generated(_render_root_init(vocabulary)))
     _atomic_write(package / "py.typed", "")
 
@@ -345,13 +336,8 @@ def _render_registry(vocabulary: Vocabulary, version: SchemaVersion) -> str:
     return "\n".join(lines) + "\n"
 
 
-def _render_schema_version(version: SchemaVersion, source_hash: str, canonical_hash: str) -> str:
-    return (
-        f"SCHEMA_VERSION = {version.version!r}\n"
-        f"SCHEMA_SOURCE = {version.schema_source!r}\n"
-        f"SCHEMA_SOURCE_SHA256 = {source_hash!r}\n"
-        f"SCHEMA_VOCABULARY_SHA256 = {canonical_hash!r}\n"
-    )
+def _render_schema_version(version: SchemaVersion) -> str:
+    return f"SCHEMA_VERSION = {version.version!r}\n"
 
 
 def _render_root_init(vocabulary: Vocabulary) -> str:
@@ -360,7 +346,7 @@ def _render_root_init(vocabulary: Vocabulary) -> str:
         "from importlib import import_module",
         "",
         "from .base import CircularReferenceError, JsonValue, PropertyMetadata, SchemaEnum, SchemaModel, SchemaScalar, SchemaValue",
-        "from .schema_version import SCHEMA_VERSION, SCHEMA_SOURCE, SCHEMA_SOURCE_SHA256, SCHEMA_VOCABULARY_SHA256",
+        "from .schema_version import SCHEMA_VERSION",
         "",
         "_MODEL_MODULES = {",
     ]
@@ -389,15 +375,14 @@ def _render_root_init(vocabulary: Vocabulary) -> str:
     lines.extend(f"    {constant_name(s.name)!r}," for s in ordinary)
     lines.extend(f"    {constant_name(s.name)!r}," for s in vocabulary.enumeration_classes)
     lines.extend([
-        "    'SCHEMA_VERSION',", "    'SCHEMA_SOURCE',", "    'SCHEMA_SOURCE_SHA256',",
-        "    'SCHEMA_VOCABULARY_SHA256',", "    'SchemaModel',", "    'SchemaEnum',",
+        "    'SCHEMA_VERSION',", "    'SchemaModel',", "    'SchemaEnum',",
         "    'CircularReferenceError',",
         "]",
     ])
     return "\n".join(lines) + "\n"
 
 
-def _manifest(vocabulary: Vocabulary, version: SchemaVersion, source_hash: str, canonical_hash: str, package: Path) -> dict[str, object]:
+def _manifest(vocabulary: Vocabulary, version: SchemaVersion, package: Path) -> dict[str, object]:
     paths = sorted(f"src/schema_org/{path.relative_to(package).as_posix()}" for path in package.rglob("*") if path.is_file())
     terms = {
         "classes": sorted(s.name for s in vocabulary.classes),
@@ -409,12 +394,9 @@ def _manifest(vocabulary: Vocabulary, version: SchemaVersion, source_hash: str, 
     return {
         "schema_version": version.version,
         "schema_source": version.schema_source,
-        "schema_source_sha256": source_hash,
-        "schema_vocabulary_sha256": canonical_hash,
         "paths": paths,
         "terms": terms,
     }
-
 
 def _commit_tree(staged: Path, destination: Path) -> None:
     destination.mkdir(parents=True, exist_ok=True)

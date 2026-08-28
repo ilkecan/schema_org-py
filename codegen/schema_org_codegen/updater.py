@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 from pathlib import Path, PurePosixPath
@@ -57,11 +56,9 @@ class SchemaUpdater:
             body = body_bytes.decode("utf-8")
         except UnicodeDecodeError as error:
             raise ValidationError("schema download was not valid UTF-8") from error
-        source_hash = hashlib.sha256(body_bytes).hexdigest()
         annotated = (
             f"# schema_org_release: v{numeric}\n"
             f"# schema_org_source: {url}\n"
-            f"# schema_org_source_sha256: {source_hash}\n"
             f"{body}"
         )
         with tempfile.TemporaryDirectory(prefix="schema-org-update-", dir=self.project_root) as temporary:
@@ -71,8 +68,8 @@ class SchemaUpdater:
             candidate.parent.mkdir(parents=True, exist_ok=True)
             candidate.write_text(annotated, encoding="utf-8")
             candidate_version = SchemaVersion.current(candidate)
-            if candidate_version.version != numeric or candidate_version.source_sha256 != source_hash:
-                raise ValidationError("downloaded schema version or source hash mismatch")
+            if candidate_version.version != numeric:
+                raise ValidationError("downloaded schema version mismatch")
             try:
                 vocabulary = Vocabulary.from_file(candidate)
             except ValidationError:

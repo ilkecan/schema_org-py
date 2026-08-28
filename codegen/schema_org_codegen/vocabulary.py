@@ -5,11 +5,10 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
-from rdflib import Graph, URIRef
+from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import OWL, RDF, RDFS
-
 from .model import ClassDefinition, EnumerationMember, PropertyDefinition, Subject, schema_name, schema_uri
-from .naming import constant_name, enum_member_name, property_name, snake_name
+from .naming import constant_name, enum_member_name, module_name, property_name
 
 SCHEMA_HTTP = "http://schema.org/"
 SCHEMA_HTTPS = "https://schema.org/"
@@ -22,7 +21,9 @@ class ValidationError(ValueError):
 class Vocabulary:
     TOP_LEVEL_RESERVED_NAMES = frozenset({
         "SchemaModel", "SchemaEnum", "CircularReferenceError", "JsonValue",
-        "SCHEMA_VERSION", "SCHEMA_TYPE", "SCHEMA_TYPES", "SCHEMA_PROPERTIES",
+        "SchemaScalar", "SchemaValue", "PropertyMetadata", "ClassMetadata",
+        "EnumerationMemberMetadata", "SCHEMA_VERSION", "SCHEMA_TYPE",
+        "SCHEMA_TYPES", "SCHEMA_PROPERTIES", "model_config", "model_fields",
     })
 
     def __init__(self, subjects: Iterable[Subject], *, naming=None):
@@ -32,6 +33,8 @@ class Vocabulary:
         for subject in self.subjects:
             if subject.uri in self._by_uri:
                 raise ValidationError(f"Duplicate schema URI {subject.uri}")
+            if subject.type_is("Class") and subject.type_is("Property"):
+                raise ValidationError(f"Schema subject {subject.uri} is both a class and property")
             self._by_uri[subject.uri] = subject
         self.classes = tuple(sorted((s for s in self.subjects if s.type_is("Class")), key=lambda s: s.name))
         self.properties = tuple(sorted((s for s in self.subjects if s.type_is("Property")), key=lambda s: s.name))
@@ -62,46 +65,59 @@ class Vocabulary:
         uris = sorted({str(item) for item in graph.subjects() if _is_schema_uri(item)})
         for uri in uris:
             subject = URIRef(uri)
-            values = lambda *predicates: tuple(
-                sorted(
-                    {item for predicate in predicates for item in graph.objects(subject, predicate)},
+
+            def objects(*predicates: URIRef) -> tuple[object, ...]:
+                return tuple(sorted(
+                    (item for predicate in predicates for item in graph.objects(subject, predicate)),
                     key=str,
-                )
-            )
-            types = tuple(_term(value) for value in values(RDF.type))
-            parents = tuple(_term(value) for value in values(RDFS.subClassOf, *_schema_values("subClassOf")))
-            domains = tuple(_term(value) for value in values(*_schema_values("domainIncludes")))
-            ranges = tuple(_term(value) for value in values(*_schema_values("rangeIncludes")))
-            inverse_values = values(*_schema_values("inverseOf"))
-            superseded_values = values(*_schema_values("supersededBy"))
-            equivalent_class = tuple(_term(value) for value in values(OWL.equivalentClass))
-            equivalent_property_values = values(OWL.equivalentProperty)
-            same_as_values = values(OWL.sameAs, *_schema_values("sameAs"))
-            subproperty_values = values(RDFS.subPropertyOf, *_schema_values("subPropertyOf"))
-            labels = tuple(str(value) for value in values(RDFS.label))
-            comments = tuple(str(value) for value in values(RDFS.comment))
-            contributors = tuple(_term(value) for value in values(*_schema_values("contributor")))
-            sources = tuple(_term(value) for value in values(*_schema_values("source")))
+                ))
+
+            def uri_terms(name: str, *predicates: URIRef) -> tuple[str, ...]:
+                values = objects(*predicates)
+                if any(not isinstance(value, URIRef) for value in values):
+                    raise ValidationError(f"Schema subject {uri} has non-URI {name} value")
+                return tuple(_term(value) for value in values)
+
+            types = uri_terms("rdf:type", RDF.type)
             if not types:
                 raise ValidationError(f"Schema subject {uri} has no rdf:type")
             type_set = set(types)
             if "Class" in type_set and "Property" in type_set:
                 raise ValidationError(f"Schema subject {uri} is both a class and property")
-            if type_set & {"Class", "Property"} and not labels:
+            labels = objects(RDFS.label)
+            if any(not isinstance(value, Literal) for value in labels):
+                raise ValidationError(f"Schema subject {uri} has non-literal rdfs:label value")
+            if not labels:
                 raise ValidationError(f"Schema subject {uri} has no rdfs:label")
             if len(labels) > 1:
                 raise ValidationError(f"Schema subject {uri} has multiple rdfs:label values")
+            comments = objects(RDFS.comment)
+            if any(not isinstance(value, Literal) for value in comments):
+                raise ValidationError(f"Schema subject {uri} has non-literal rdfs:comment value")
             if len(comments) > 1:
                 raise ValidationError(f"Schema subject {uri} has multiple rdfs:comment values")
+            inverse_values = uri_terms("inverseOf", *_schema_values("inverseOf"))
+            superseded_values = uri_terms("supersededBy", *_schema_values("supersededBy"))
+            if len(inverse_values) > 1:
+                raise ValidationError(f"Schema subject {uri} has multiple inverseOf values")
+            if len(superseded_values) > 1:
+                raise ValidationError(f"Schema subject {uri} has multiple supersededBy values")
             subjects.append(Subject(
-                uri=uri, types=types, parents=parents, domains=domains, ranges=ranges,
-                inverse_of=_first_term(inverse_values), superseded_by=_first_term(superseded_values),
-                equivalent_class=equivalent_class,
-                equivalent_properties=tuple(_term(value) for value in equivalent_property_values),
-                same_as=tuple(_term(value) for value in same_as_values),
-                subproperty_of=tuple(_term(value) for value in subproperty_values),
-                label=labels[0] if labels else "", comment=comments[0] if comments else "",
-                contributors=contributors, sources=sources,
+                uri=uri,
+                types=types,
+                parents=uri_terms("subClassOf", RDFS.subClassOf, *_schema_values("subClassOf")),
+                domains=uri_terms("domainIncludes", *_schema_values("domainIncludes")),
+                ranges=uri_terms("rangeIncludes", *_schema_values("rangeIncludes")),
+                inverse_of=inverse_values[0] if inverse_values else None,
+                superseded_by=superseded_values[0] if superseded_values else None,
+                equivalent_class=uri_terms("equivalentClass", OWL.equivalentClass),
+                equivalent_properties=uri_terms("equivalentProperty", OWL.equivalentProperty),
+                same_as=uri_terms("sameAs", OWL.sameAs, *_schema_values("sameAs")),
+                subproperty_of=uri_terms("subPropertyOf", RDFS.subPropertyOf, *_schema_values("subPropertyOf")),
+                label=str(labels[0]),
+                comment=str(comments[0]) if comments else "",
+                contributors=uri_terms("contributor", *_schema_values("contributor")),
+                sources=uri_terms("source", *_schema_values("source")),
             ))
         return cls(subjects)
 
@@ -131,25 +147,21 @@ class Vocabulary:
         excluded = set(self.datatype_classes) | set(self.enumeration_classes)
         return tuple(s for s in self.classes if s not in excluded)
 
-    def term_name(self, value: str | Subject) -> str:
-        return value.name if isinstance(value, Subject) else schema_name(value) or str(value)
-
-    def schema_name(self, value: str) -> str | None:
-        return schema_name(value)
-
-    def schema_uri(self, name: str) -> str:
-        return schema_uri(name)
-
-    def schema_uri_p(self, value: str) -> bool:
-        return _is_schema_uri(value)
-
     def direct_parents(self, subject_or_name: Subject | str) -> tuple[str, ...]:
         subject = self._subject(subject_or_name)
         values = (*subject.parents, *subject.types)
-        return tuple(sorted({name for value in values if (name := schema_name(value)) in self._class_by_name and name not in {"Class", "Property"}}))
+        return tuple(sorted({
+            name for value in values
+            if (name := schema_name(value)) in self._class_by_name
+            and name not in {"Class", "Property"}
+        }))
+
     def external_parents(self, subject_or_name: Subject | str) -> tuple[str, ...]:
         subject = self._subject(subject_or_name)
-        return tuple(sorted({value for value in subject.parents if not schema_name(value)}))
+        return tuple(sorted({
+            _external_term(value) for value in subject.parents
+            if not schema_name(value) or schema_name(value) in {"Class", "Property"}
+        }))
 
     def ancestry(self, subject_or_name: Subject | str) -> tuple[str, ...]:
         queue = deque(self.direct_parents(subject_or_name))
@@ -172,19 +184,33 @@ class Vocabulary:
 
     def property_domains(self, property_: Subject | str) -> tuple[str, ...]:
         subject = self._property(property_)
-        return tuple(sorted({schema_name(value) for value in subject.domains if schema_name(value) in self._class_by_name}))
+        return tuple(sorted({
+            name for value in subject.domains
+            if (name := schema_name(value)) in self._class_by_name
+            and name not in {"Class", "Property"}
+        }))
 
     def property_external_domains(self, property_: Subject | str) -> tuple[str, ...]:
         subject = self._property(property_)
-        return tuple(sorted({value for value in subject.domains if not schema_name(value)}))
+        return tuple(sorted({
+            _external_term(value) for value in subject.domains
+            if not schema_name(value) or schema_name(value) in {"Class", "Property"}
+        }))
 
     def property_ranges(self, property_: Subject | str) -> tuple[str, ...]:
         subject = self._property(property_)
-        return tuple(sorted({schema_name(value) for value in subject.ranges if schema_name(value) in self._class_by_name}))
+        return tuple(sorted({
+            name for value in subject.ranges
+            if (name := schema_name(value)) in self._class_by_name
+            and name not in {"Class", "Property"}
+        }))
 
     def property_external_ranges(self, property_: Subject | str) -> tuple[str, ...]:
         subject = self._property(property_)
-        return tuple(sorted({value for value in subject.ranges if not schema_name(value)}))
+        return tuple(sorted({
+            _external_term(value) for value in subject.ranges
+            if not schema_name(value) or schema_name(value) in {"Class", "Property"}
+        }))
 
     def data_type(self, name: str) -> bool:
         return any(s.name == name for s in self.datatype_classes)
@@ -278,8 +304,16 @@ class Vocabulary:
             visit(subject.name, [])
 
     def _validate_names(self) -> None:
-        self._validate_name_set((s.name for s in self.classes), constant_name, "class", self.TOP_LEVEL_RESERVED_NAMES)
-        self._validate_name_set((s.name for s in self.classes), snake_name, "file")
+        class_names = [s.name for s in self.classes]
+        self._validate_name_set(class_names, constant_name, "class", self.TOP_LEVEL_RESERVED_NAMES)
+        self._validate_name_set(class_names, module_name, "module")
+        ordinary_names = [s.name for s in self.ordinary_classes]
+        self._validate_name_set(
+            [*ordinary_names, *(s.name for s in self.enumeration_classes)],
+            constant_name,
+            "root export",
+            self.TOP_LEVEL_RESERVED_NAMES,
+        )
         property_reserved = {
             "schema_id", "schema_type", "model_config", "model_fields",
             "model_dump", "model_validate", "to_jsonld", "to_jsonld_json",
@@ -296,8 +330,16 @@ class Vocabulary:
     def _validate_name_set(names: Iterable[str], mapper, kind: str, reserved=frozenset()) -> None:
         groups: dict[str, list[str]] = {}
         for name in names:
-            groups.setdefault(mapper(name), []).append(name)
-        collisions = [f"{', '.join(values)} ({mapped})" for mapped, values in sorted(groups.items()) if len(values) > 1 or mapped in reserved]
+            try:
+                mapped = mapper(name)
+            except (TypeError, ValueError) as error:
+                raise ValidationError(f"Invalid Python {kind} name for {name}: {error}") from error
+            groups.setdefault(mapped, []).append(name)
+        collisions = [
+            f"{', '.join(values)} ({mapped})"
+            for mapped, values in sorted(groups.items())
+            if len(values) > 1 or mapped in reserved
+        ]
         if collisions:
             raise ValidationError(f"Python {kind} collision for {'; '.join(collisions)}")
 
@@ -314,6 +356,11 @@ def _term(value: object) -> str:
     if text == str(RDF.Property):
         return "Property"
     return text
+
+
+def _external_term(value: str) -> str:
+    name = schema_name(value)
+    return name if name in {"Class", "Property"} else value
 
 
 def _schema(name: str) -> URIRef:

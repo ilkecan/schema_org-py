@@ -1,6 +1,5 @@
 # schema_org_release: v30.0
 # schema_org_source: https://schema.org/version/30.0/schemaorg-all-https.ttl
-# schema_org_source_sha256: 7784da44bfa147e7c5e3f6eb710cb6e314077e885f3ff28cf954a8c734ee2086
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix cmns-cls: <https://www.omg.org/spec/Commons/Classifiers/> .
 @prefix cmns-col: <https://www.omg.org/spec/Commons/Collections/> .

@@ -10,7 +10,6 @@ from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
-from schema_org.enums import Enumeration
 from schema_org.models.intangible import Intangible
 
 class Class(Intangible):
@@ -30,9 +29,7 @@ class Class(Intangible):
         PropertyMetadata(name='potential_action', schema_name='potentialAction', schema_url='https://schema.org/potentialAction', ranges=('Action',), external_ranges=(), inverse_of=None, superseded_by=None, supersedes=None, equivalent_properties=(), subproperty_of=(), domains=('Thing',), external_domains=(), comment="Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.", label='potentialAction', contributors=(), sources=()),
         PropertyMetadata(name='same_as', schema_name='sameAs', schema_url='https://schema.org/sameAs', ranges=('URL',), external_ranges=(), inverse_of=None, superseded_by=None, supersedes=None, equivalent_properties=(), subproperty_of=(), domains=('Thing',), external_domains=(), comment="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.", label='sameAs', contributors=(), sources=()),
         PropertyMetadata(name='subject_of', schema_name='subjectOf', schema_url='https://schema.org/subjectOf', ranges=('CreativeWork', 'Event'), external_ranges=(), inverse_of='about', superseded_by=None, supersedes=None, equivalent_properties=(), subproperty_of=(), domains=('Thing',), external_domains=(), comment='A CreativeWork or Event about this Thing.', label='subjectOf', contributors=(), sources=('https://github.com/schemaorg/schemaorg/issues/1670',)),
-        PropertyMetadata(name='superseded_by', schema_name='supersededBy', schema_url='https://schema.org/supersededBy', ranges=('Class', 'Enumeration', 'Property'), external_ranges=(), inverse_of=None, superseded_by=None, supersedes=None, equivalent_properties=(), subproperty_of=(), domains=('Class', 'Enumeration', 'Property'), external_domains=(), comment='Relates a term (i.e. a property, class or enumeration) to one that supersedes it.', label='supersededBy', contributors=(), sources=()),
         PropertyMetadata(name='url', schema_name='url', schema_url='https://schema.org/url', ranges=('URL',), external_ranges=(), inverse_of=None, superseded_by=None, supersedes=None, equivalent_properties=('http://ogp.me/ns#url',), subproperty_of=(), domains=('Thing',), external_domains=(), comment='URL of the item.', label='url', contributors=(), sources=()),
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['Class'] = Field(default='Class', alias='@type', frozen=True)
-    superseded_by: Class | Enumeration | list[Class | Enumeration] | None = Field(default=None, alias='supersededBy', description='Relates a term (i.e. a property, class or enumeration) to one that supersedes it.')

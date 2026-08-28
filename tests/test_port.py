@@ -156,7 +156,6 @@ def _fixture_schema(statements: str) -> str:
     return (
         "# schema_org_release: v1.0\n"
         "# schema_org_source: https://schema.org/version/1.0/schemaorg-all-https.ttl\n"
-        "# schema_org_source_sha256: " + "0" * 64 + "\n"
         + statements
     )
 

@@ -6,16 +6,14 @@ import re
 
 from .vocabulary import ValidationError
 
-_RELEASE = re.compile(r"# schema_org_release: (v\d+\.\d+)\n")
-_SOURCE = re.compile(r"# schema_org_source: (https://schema\.org/version/(\d+\.\d+)/schemaorg-all-https\.ttl)\n")
-_SOURCE_SHA256 = re.compile(r"# schema_org_source_sha256: ([0-9a-f]{64})\n")
+_RELEASE = re.compile(r"# schema_org_release: (v\d+\.\d+)")
+_SOURCE = re.compile(r"# schema_org_source: (https://schema\.org/version/(\d+\.\d+)/schemaorg-all-https\.ttl)")
 
 
 @dataclass(frozen=True, slots=True)
 class SchemaVersion:
     schema_version: str
     schema_source: str
-    source_sha256: str | None = None
 
     @property
     def version(self) -> str:
@@ -24,18 +22,13 @@ class SchemaVersion:
     @classmethod
     def current(cls, schema_file: str | Path) -> "SchemaVersion":
         try:
-            content = Path(schema_file).read_text(encoding="utf-8")
+            lines = Path(schema_file).read_text(encoding="utf-8").splitlines()
         except OSError as error:
             raise ValidationError(f"Unable to read schema file: {schema_file}") from error
-        release = _RELEASE.match(content)
-        source = _SOURCE.match(content, release.end() if release else 0)
-        if not release or not source:
-            raise ValidationError("Schema file must begin with release and source headers in order")
-        if content.count("schema_org_release:") != 1 or content.count("schema_org_source:") != 1:
-            raise ValidationError("Schema release and source headers must be unique")
-        if release.group(1).removeprefix("v") != source.group(2):
-            raise ValidationError("Schema release and source versions do not match")
-        source_sha = _SOURCE_SHA256.match(content, source.end())
-        if source_sha is not None and content.count("schema_org_source_sha256:") != 1:
-            raise ValidationError("Schema source hash header must be unique")
-        return cls(release.group(1), source.group(1), source_sha.group(1) if source_sha else None)
+        release = _RELEASE.fullmatch(lines[0]) if lines else None
+        source = _SOURCE.fullmatch(lines[1]) if len(lines) > 1 else None
+        if not release or not source or release.group(1).removeprefix("v") != source.group(2):
+            raise ValidationError("Schema file must begin with matching release and source headers")
+        if any(_RELEASE.fullmatch(line) or _SOURCE.fullmatch(line) for line in lines[2:]):
+            raise ValidationError("Schema file contains duplicate release/source headers")
+        return cls(release.group(1), source.group(1))
