@@ -22,7 +22,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work_series import CreativeWorkSeries
 
 class VideoGameSeries(CreativeWorkSeries):
-    __doc__ = 'A video game series.'
+    __doc__ = 'https://schema.org/VideoGameSeries\n\nA video game series.'
     SCHEMA_TYPE: ClassVar[str] = 'VideoGameSeries'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('VideoGameSeries', 'CreativeWorkSeries', 'CreativeWork', 'Series', 'Thing', 'Intangible')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -183,15 +183,15 @@ class VideoGameSeries(CreativeWorkSeries):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['VideoGameSeries'] = Field(default='VideoGameSeries', alias='@type', frozen=True)
-    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.')
-    actors: Person | list[Person] | None = Field(default=None, alias='actors', description='An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip.')
+    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `actors`.')
+    actors: Person | list[Person] | None = Field(default=None, alias='actors', description='An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip.\n\nSuperseded by `actor`.')
     character_attribute: Thing | list[Thing] | None = Field(default=None, alias='characterAttribute', description='A piece of data that represents a particular aspect of a fictional character (skill, power, character points, advantage, disadvantage).')
     cheat_code: CreativeWork | list[CreativeWork] | None = Field(default=None, alias='cheatCode', description='Cheat codes to the game.')
-    contains_season: CreativeWorkSeason | list[CreativeWorkSeason] | None = Field(default=None, alias='containsSeason', description='A season that is part of the media series.')
-    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.')
-    directors: Person | list[Person] | None = Field(default=None, alias='directors', description='A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip.')
-    episode: Episode | list[Episode] | None = Field(default=None, alias='episode', description='An episode of a TV, radio or game media within a series or season.')
-    episodes: Episode | list[Episode] | None = Field(default=None, alias='episodes', description='An episode of a TV/radio series or season.')
+    contains_season: CreativeWorkSeason | list[CreativeWorkSeason] | None = Field(default=None, alias='containsSeason', description='A season that is part of the media series.\n\nSupersedes `season`.')
+    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `directors`.')
+    directors: Person | list[Person] | None = Field(default=None, alias='directors', description='A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip.\n\nSuperseded by `director`.')
+    episode: Episode | list[Episode] | None = Field(default=None, alias='episode', description='An episode of a TV, radio or game media within a series or season.\n\nSupersedes `episodes`.')
+    episodes: Episode | list[Episode] | None = Field(default=None, alias='episodes', description='An episode of a TV/radio series or season.\n\nSuperseded by `episode`.')
     game_item: Thing | list[Thing] | None = Field(default=None, alias='gameItem', description='An item is an object within the game world that can be collected by a player or, occasionally, a non-player character.')
     game_location: Place | PostalAddress | URL | list[Place | PostalAddress | URL] | None = Field(default=None, alias='gameLocation', description='Real or fictional location of the game (or part of game).')
     game_platform: Text | Thing | URL | list[Text | Thing | URL] | None = Field(default=None, alias='gamePlatform', description='The electronic systems used to play <a href="http://en.wikipedia.org/wiki/Category:Video_game_platforms">video games</a>.')
@@ -202,6 +202,6 @@ class VideoGameSeries(CreativeWorkSeries):
     play_mode: GamePlayMode | list[GamePlayMode] | None = Field(default=None, alias='playMode', description='Indicates whether this game is multi-player, co-op or single-player.  The game can be marked as multi-player, co-op and single-player at the same time.')
     production_company: Organization | list[Organization] | None = Field(default=None, alias='productionCompany', description='The production company or studio responsible for the item, e.g. series, video game, episode etc.')
     quest: Thing | list[Thing] | None = Field(default=None, alias='quest', description='The task that a player-controlled character, or group of characters may complete in order to gain a reward.')
-    season: CreativeWorkSeason | URL | list[CreativeWorkSeason | URL] | None = Field(default=None, alias='season', description='A season in a media series.')
-    seasons: CreativeWorkSeason | list[CreativeWorkSeason] | None = Field(default=None, alias='seasons', description='A season in a media series.')
+    season: CreativeWorkSeason | URL | list[CreativeWorkSeason | URL] | None = Field(default=None, alias='season', description='A season in a media series.\n\nSupersedes `seasons`.\n\nSuperseded by `containsSeason`.')
+    seasons: CreativeWorkSeason | list[CreativeWorkSeason] | None = Field(default=None, alias='seasons', description='A season in a media series.\n\nSuperseded by `season`.')
     trailer: VideoObject | list[VideoObject] | None = Field(default=None, alias='trailer', description='The trailer of a movie or TV/radio series, season, episode, etc.')

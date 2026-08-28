@@ -18,7 +18,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_condition import MedicalCondition
 
 class MedicalSignOrSymptom(MedicalCondition):
-    __doc__ = 'Any feature associated or not with a medical condition. In medicine a symptom is generally subjective while a sign is objective.'
+    __doc__ = 'https://schema.org/MedicalSignOrSymptom\n\nAny feature associated or not with a medical condition. In medicine a symptom is generally subjective while a sign is objective.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalSignOrSymptom'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalSignOrSymptom', 'MedicalCondition', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

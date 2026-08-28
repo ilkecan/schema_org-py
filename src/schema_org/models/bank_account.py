@@ -16,7 +16,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.financial_product import FinancialProduct
 
 class BankAccount(FinancialProduct):
-    __doc__ = 'A product or service offered by a bank whereby one may deposit, withdraw or transfer money and in some cases be paid interest.'
+    __doc__ = 'https://schema.org/BankAccount\n\nA product or service offered by a bank whereby one may deposit, withdraw or transfer money and in some cases be paid interest.'
     SCHEMA_TYPE: ClassVar[str] = 'BankAccount'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BankAccount', 'FinancialProduct', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

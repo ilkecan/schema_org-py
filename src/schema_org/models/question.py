@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.comment import Comment
 
 class Question(Comment):
-    __doc__ = 'A specific question - e.g. from a user seeking answers online, or collected in a Frequently Asked Questions (FAQ) document.'
+    __doc__ = 'https://schema.org/Question\n\nA specific question - e.g. from a user seeking answers online, or collected in a Frequently Asked Questions (FAQ) document.'
     SCHEMA_TYPE: ClassVar[str] = 'Question'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Question', 'Comment', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

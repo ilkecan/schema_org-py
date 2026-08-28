@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.landform import Landform
 
 class Continent(Landform):
-    __doc__ = 'One of the continents (for example, Europe or Africa).'
+    __doc__ = 'https://schema.org/Continent\n\nOne of the continents (for example, Europe or Africa).'
     SCHEMA_TYPE: ClassVar[str] = 'Continent'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Continent', 'Landform', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

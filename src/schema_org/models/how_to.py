@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class HowTo(CreativeWork):
-    __doc__ = 'Instructions that explain how to achieve a result by performing a sequence of steps.'
+    __doc__ = 'https://schema.org/HowTo\n\nInstructions that explain how to achieve a result by performing a sequence of steps.'
     SCHEMA_TYPE: ClassVar[str] = 'HowTo'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('HowTo', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -169,8 +169,8 @@ class HowTo(CreativeWork):
     estimated_cost: MonetaryAmount | Text | list[MonetaryAmount | Text] | None = Field(default=None, alias='estimatedCost', description='The estimated cost of the supply or supplies consumed when performing instructions.')
     perform_time: Duration | list[Duration] | None = Field(default=None, alias='performTime', description='The length of time it takes to perform instructions or a direction (not including time to prepare the supplies), in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).')
     prep_time: Duration | list[Duration] | None = Field(default=None, alias='prepTime', description='The length of time it takes to prepare the items to be used in instructions or a direction, in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).')
-    step: CreativeWork | HowToSection | HowToStep | Text | list[CreativeWork | HowToSection | HowToStep | Text] | None = Field(default=None, alias='step', description='A single step item (as HowToStep, text, document, video, etc.) or a HowToSection.')
-    steps: CreativeWork | ItemList | Text | list[CreativeWork | ItemList | Text] | None = Field(default=None, alias='steps', description="A single step item (as HowToStep, text, document, video, etc.) or a HowToSection (originally misnamed 'steps'; 'step' is preferred).")
+    step: CreativeWork | HowToSection | HowToStep | Text | list[CreativeWork | HowToSection | HowToStep | Text] | None = Field(default=None, alias='step', description='A single step item (as HowToStep, text, document, video, etc.) or a HowToSection.\n\nSupersedes `steps`.')
+    steps: CreativeWork | ItemList | Text | list[CreativeWork | ItemList | Text] | None = Field(default=None, alias='steps', description="A single step item (as HowToStep, text, document, video, etc.) or a HowToSection (originally misnamed 'steps'; 'step' is preferred).\n\nSuperseded by `step`.")
     supply: HowToSupply | Text | list[HowToSupply | Text] | None = Field(default=None, alias='supply', description='A sub-property of instrument. A supply consumed when performing instructions or a direction.')
     tool: HowToTool | Text | list[HowToTool | Text] | None = Field(default=None, alias='tool', description='A sub property of instrument. An object used (but not consumed) when performing instructions or a direction.')
     total_time: Duration | list[Duration] | None = Field(default=None, alias='totalTime', description='The total time required to perform instructions or a direction (including time to prepare the supplies), in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).')

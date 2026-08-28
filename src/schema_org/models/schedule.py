@@ -19,7 +19,7 @@ from schema_org.enums import DayOfWeek
 from schema_org.models.intangible import Intangible
 
 class Schedule(Intangible):
-    __doc__ = 'A schedule defines a repeating time period used to describe a regularly occurring [[Event]]. At a minimum a schedule will specify [[repeatFrequency]] which describes the interval between occurrences of the event. Additional information can be provided to specify the schedule more precisely.\n      This includes identifying the day(s) of the week or month when the recurring event will take place, in addition to its start and end time. Schedules may also\n      have start and end dates to indicate when they are active, e.g. to define a limited calendar of events.'
+    __doc__ = 'https://schema.org/Schedule\n\nA schedule defines a repeating time period used to describe a regularly occurring [[Event]]. At a minimum a schedule will specify [[repeatFrequency]] which describes the interval between occurrences of the event. Additional information can be provided to specify the schedule more precisely.\n      This includes identifying the day(s) of the week or month when the recurring event will take place, in addition to its start and end time. Schedules may also\n      have start and end dates to indicate when they are active, e.g. to define a limited calendar of events.'
     SCHEMA_TYPE: ClassVar[str] = 'Schedule'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Schedule', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

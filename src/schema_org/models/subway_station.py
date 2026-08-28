@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.civic_structure import CivicStructure
 
 class SubwayStation(CivicStructure):
-    __doc__ = 'A subway station.'
+    __doc__ = 'https://schema.org/SubwayStation\n\nA subway station.'
     SCHEMA_TYPE: ClassVar[str] = 'SubwayStation'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SubwayStation', 'CivicStructure', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

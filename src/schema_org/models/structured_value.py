@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class StructuredValue(Intangible):
-    __doc__ = 'Structured values are used when the value of a property has a more complex structure than simply being a textual value or a reference to another thing.'
+    __doc__ = 'https://schema.org/StructuredValue\n\nStructured values are used when the value of a property has a more complex structure than simply being a textual value or a reference to another thing.'
     SCHEMA_TYPE: ClassVar[str] = 'StructuredValue'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

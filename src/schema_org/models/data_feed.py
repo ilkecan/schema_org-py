@@ -22,7 +22,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.dataset import Dataset
 
 class DataFeed(Dataset):
-    __doc__ = 'A single feed providing structured information about one or more entities or topics.'
+    __doc__ = 'https://schema.org/DataFeed\n\nA single feed providing structured information about one or more entities or topics.'
     SCHEMA_TYPE: ClassVar[str] = 'DataFeed'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DataFeed', 'Dataset', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

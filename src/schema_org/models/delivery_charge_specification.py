@@ -18,7 +18,7 @@ from schema_org.enums import DeliveryMethod
 from schema_org.models.price_specification import PriceSpecification
 
 class DeliveryChargeSpecification(PriceSpecification):
-    __doc__ = 'The price for the delivery of an offer using a particular delivery method.'
+    __doc__ = 'https://schema.org/DeliveryChargeSpecification\n\nThe price for the delivery of an offer using a particular delivery method.'
     SCHEMA_TYPE: ClassVar[str] = 'DeliveryChargeSpecification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DeliveryChargeSpecification', 'PriceSpecification', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -54,6 +54,6 @@ class DeliveryChargeSpecification(PriceSpecification):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['DeliveryChargeSpecification'] = Field(default='DeliveryChargeSpecification', alias='@type', frozen=True)
     applies_to_delivery_method: DeliveryMethod | list[DeliveryMethod] | None = Field(default=None, alias='appliesToDeliveryMethod', description='The delivery method(s) to which the delivery charge or payment charge specification applies.')
-    area_served: AdministrativeArea | GeoShape | Place | Text | list[AdministrativeArea | GeoShape | Place | Text] | None = Field(default=None, alias='areaServed', description='The geographic area where a service or offered item is provided.')
+    area_served: AdministrativeArea | GeoShape | Place | Text | list[AdministrativeArea | GeoShape | Place | Text] | None = Field(default=None, alias='areaServed', description='The geographic area where a service or offered item is provided.\n\nSupersedes `serviceArea`.')
     eligible_region: GeoShape | Place | Text | list[GeoShape | Place | Text] | None = Field(default=None, alias='eligibleRegion', description='The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is valid.\\n\\nSee also [[ineligibleRegion]].\n    ')
     ineligible_region: GeoShape | Place | Text | list[GeoShape | Place | Text] | None = Field(default=None, alias='ineligibleRegion', description='The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is not valid, e.g. a region where the transaction is not allowed.\\n\\nSee also [[eligibleRegion]].\n      ')

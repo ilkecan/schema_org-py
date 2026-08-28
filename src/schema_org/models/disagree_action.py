@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.react_action import ReactAction
 
 class DisagreeAction(ReactAction):
-    __doc__ = 'The act of expressing a difference of opinion with the object. An agent disagrees to/about an object (a proposition, topic or theme) with participants.'
+    __doc__ = 'https://schema.org/DisagreeAction\n\nThe act of expressing a difference of opinion with the object. An agent disagrees to/about an object (a proposition, topic or theme) with participants.'
     SCHEMA_TYPE: ClassVar[str] = 'DisagreeAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DisagreeAction', 'ReactAction', 'AssessAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

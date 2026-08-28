@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.health_and_beauty_business import HealthAndBeautyBusiness
 
 class TattooParlor(HealthAndBeautyBusiness):
-    __doc__ = 'A tattoo parlor.'
+    __doc__ = 'https://schema.org/TattooParlor\n\nA tattoo parlor.'
     SCHEMA_TYPE: ClassVar[str] = 'TattooParlor'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('TattooParlor', 'HealthAndBeautyBusiness', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

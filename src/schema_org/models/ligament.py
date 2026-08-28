@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.anatomical_structure import AnatomicalStructure
 
 class Ligament(AnatomicalStructure):
-    __doc__ = 'A short band of tough, flexible, fibrous connective tissue that functions to connect multiple bones, cartilages, and structurally support joints.'
+    __doc__ = 'https://schema.org/Ligament\n\nA short band of tough, flexible, fibrous connective tissue that functions to connect multiple bones, cartilages, and structurally support joints.'
     SCHEMA_TYPE: ClassVar[str] = 'Ligament'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Ligament', 'AnatomicalStructure', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

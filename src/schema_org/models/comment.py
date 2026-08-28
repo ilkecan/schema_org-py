@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Comment(CreativeWork):
-    __doc__ = "A comment on an item - for example, a comment on a blog post. The comment's content is expressed via the [[text]] property, and its topic via [[about]], properties shared with all CreativeWorks."
+    __doc__ = "https://schema.org/Comment\n\nA comment on an item - for example, a comment on a blog post. The comment's content is expressed via the [[text]] property, and its topic via [[about]], properties shared with all CreativeWorks."
     SCHEMA_TYPE: ClassVar[str] = 'Comment'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Comment', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -24,7 +24,7 @@ from schema_org.enums import ReturnMethodEnumeration
 from schema_org.models.intangible import Intangible
 
 class MerchantReturnPolicy(Intangible):
-    __doc__ = 'A MerchantReturnPolicy provides information about product return policies associated with an [[Organization]], [[Product]], or [[Offer]].'
+    __doc__ = 'https://schema.org/MerchantReturnPolicy\n\nA MerchantReturnPolicy provides information about product return policies associated with an [[Organization]], [[Product]], or [[Offer]].\n\nSupersedes `ProductReturnPolicy`.'
     SCHEMA_TYPE: ClassVar[str] = 'MerchantReturnPolicy'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MerchantReturnPolicy', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -76,8 +76,8 @@ class MerchantReturnPolicy(Intangible):
     item_defect_return_fees: ReturnFeesEnumeration | list[ReturnFeesEnumeration] | None = Field(default=None, alias='itemDefectReturnFees', description='The type of return fees for returns of defect products.')
     item_defect_return_label_source: ReturnLabelSourceEnumeration | list[ReturnLabelSourceEnumeration] | None = Field(default=None, alias='itemDefectReturnLabelSource', description='The method (from an enumeration) by which the customer obtains a return shipping label for a defect product.')
     item_defect_return_shipping_fees_amount: MonetaryAmount | list[MonetaryAmount] | None = Field(default=None, alias='itemDefectReturnShippingFeesAmount', description='Amount of shipping costs for defect product returns. Applicable when property [[itemDefectReturnFees]] equals [[ReturnShippingFees]].')
-    merchant_return_days: Date | DateTime | Integer | list[Date | DateTime | Integer] | None = Field(default=None, alias='merchantReturnDays', description='Specifies either a fixed return date or the number of days (from the delivery date) that a product can be returned. Used when the [[returnPolicyCategory]] property is specified as [[MerchantReturnFiniteReturnWindow]].')
-    merchant_return_link: URL | list[URL] | None = Field(default=None, alias='merchantReturnLink', description='Specifies a Web page or service by URL, for product returns.')
+    merchant_return_days: Date | DateTime | Integer | list[Date | DateTime | Integer] | None = Field(default=None, alias='merchantReturnDays', description='Specifies either a fixed return date or the number of days (from the delivery date) that a product can be returned. Used when the [[returnPolicyCategory]] property is specified as [[MerchantReturnFiniteReturnWindow]].\n\nSupersedes `productReturnDays`.')
+    merchant_return_link: URL | list[URL] | None = Field(default=None, alias='merchantReturnLink', description='Specifies a Web page or service by URL, for product returns.\n\nSupersedes `productReturnLink`.')
     refund_type: RefundTypeEnumeration | list[RefundTypeEnumeration] | None = Field(default=None, alias='refundType', description='A refund type, from an enumerated list.')
     restocking_fee: MonetaryAmount | Number | list[MonetaryAmount | Number] | None = Field(default=None, alias='restockingFee', description='Use [[MonetaryAmount]] to specify a fixed restocking fee for product returns, or use [[Number]] to specify a percentage of the product price paid by the customer.')
     return_fees: ReturnFeesEnumeration | list[ReturnFeesEnumeration] | None = Field(default=None, alias='returnFees', description='The type of return fees for purchased products (for any return reason).')

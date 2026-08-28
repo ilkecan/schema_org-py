@@ -15,7 +15,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.organization import Organization
 
 class PoliticalParty(Organization):
-    __doc__ = 'Organization: Political Party.'
+    __doc__ = 'https://schema.org/PoliticalParty\n\nOrganization: Political Party.'
     SCHEMA_TYPE: ClassVar[str] = 'PoliticalParty'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PoliticalParty', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.interact_action import InteractAction
 
 class MarryAction(InteractAction):
-    __doc__ = 'The act of marrying a person.'
+    __doc__ = 'https://schema.org/MarryAction\n\nThe act of marrying a person.'
     SCHEMA_TYPE: ClassVar[str] = 'MarryAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MarryAction', 'InteractAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

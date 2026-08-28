@@ -24,7 +24,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.media_object import MediaObject
 
 class DataDownload(MediaObject):
-    __doc__ = 'All or part of a [[Dataset]] in downloadable form. '
+    __doc__ = 'https://schema.org/DataDownload\n\nAll or part of a [[Dataset]] in downloadable form. '
     SCHEMA_TYPE: ClassVar[str] = 'DataDownload'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DataDownload', 'MediaObject', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -17,7 +17,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.lifestyle_modification import LifestyleModification
 
 class PhysicalActivity(LifestyleModification):
-    __doc__ = 'Any bodily activity that enhances or maintains physical fitness and overall health and wellness. Includes activity that is part of daily living and routine, structured exercise, and exercise prescribed as part of a medical treatment or recovery plan.'
+    __doc__ = 'https://schema.org/PhysicalActivity\n\nAny bodily activity that enhances or maintains physical fitness and overall health and wellness. Includes activity that is part of daily living and routine, structured exercise, and exercise prescribed as part of a medical treatment or recovery plan.'
     SCHEMA_TYPE: ClassVar[str] = 'PhysicalActivity'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PhysicalActivity', 'LifestyleModification', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

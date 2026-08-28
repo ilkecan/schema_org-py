@@ -27,7 +27,7 @@ from schema_org.models.collection import Collection
 from schema_org.models.product import Product
 
 class ProductCollection(Collection, Product):
-    __doc__ = 'A set of products (either [[ProductGroup]]s or specific variants) that are listed together e.g. in an [[Offer]].'
+    __doc__ = 'https://schema.org/ProductCollection\n\nA set of products (either [[ProductGroup]]s or specific variants) that are listed together e.g. in an [[Offer]].'
     SCHEMA_TYPE: ClassVar[str] = 'ProductCollection'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ProductCollection', 'Collection', 'Product', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

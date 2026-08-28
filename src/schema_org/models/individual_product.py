@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.product import Product
 
 class IndividualProduct(Product):
-    __doc__ = 'A single, identifiable product instance (e.g. a laptop with a particular serial number).'
+    __doc__ = 'https://schema.org/IndividualProduct\n\nA single, identifiable product instance (e.g. a laptop with a particular serial number).'
     SCHEMA_TYPE: ClassVar[str] = 'IndividualProduct'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('IndividualProduct', 'Product', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

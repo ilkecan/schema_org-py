@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.thing import Thing
 
 class StupidType(Thing):
-    __doc__ = 'A StupidType for testing.'
+    __doc__ = 'https://schema.org/StupidType\n\nA StupidType for testing.'
     SCHEMA_TYPE: ClassVar[str] = 'StupidType'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('StupidType', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

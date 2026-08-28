@@ -18,7 +18,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_entity import MedicalEntity
 
 class MedicalGuideline(MedicalEntity):
-    __doc__ = 'Any recommendation made by a standard society (e.g. ACC/AHA) or consensus statement that denotes how to diagnose and treat a particular condition. Note: this type should be used to tag the actual guideline recommendation; if the guideline recommendation occurs in a larger scholarly article, use MedicalScholarlyArticle to tag the overall article, not this type. Note also: the organization making the recommendation should be captured in the recognizingAuthority base property of MedicalEntity.'
+    __doc__ = 'https://schema.org/MedicalGuideline\n\nAny recommendation made by a standard society (e.g. ACC/AHA) or consensus statement that denotes how to diagnose and treat a particular condition. Note: this type should be used to tag the actual guideline recommendation; if the guideline recommendation occurs in a larger scholarly article, use MedicalScholarlyArticle to tag the overall article, not this type. Note also: the organization making the recommendation should be captured in the recognizingAuthority base property of MedicalEntity.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalGuideline'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalGuideline', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

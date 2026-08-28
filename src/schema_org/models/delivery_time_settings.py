@@ -14,7 +14,7 @@ from schema_org.datatypes import URL
 from schema_org.models.structured_value import StructuredValue
 
 class DeliveryTimeSettings(StructuredValue):
-    __doc__ = 'A DeliveryTimeSettings represents re-usable pieces of shipping information, relating to timing. It is designed for publication on an URL that may be referenced via the [[shippingSettingsLink]] property of an [[OfferShippingDetails]]. Several occurrences can be published, distinguished (and identified/referenced) by their different values for [[transitTimeLabel]].'
+    __doc__ = 'https://schema.org/DeliveryTimeSettings\n\nA DeliveryTimeSettings represents re-usable pieces of shipping information, relating to timing. It is designed for publication on an URL that may be referenced via the [[shippingSettingsLink]] property of an [[OfferShippingDetails]]. Several occurrences can be published, distinguished (and identified/referenced) by their different values for [[transitTimeLabel]].\n\nSuperseded by `ShippingConditions`.'
     SCHEMA_TYPE: ClassVar[str] = 'DeliveryTimeSettings'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DeliveryTimeSettings', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

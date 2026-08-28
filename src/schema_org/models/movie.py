@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Movie(CreativeWork):
-    __doc__ = 'A movie.'
+    __doc__ = 'https://schema.org/Movie\n\nA movie.'
     SCHEMA_TYPE: ClassVar[str] = 'Movie'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Movie', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -167,11 +167,11 @@ class Movie(CreativeWork):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['Movie'] = Field(default='Movie', alias='@type', frozen=True)
-    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.')
-    actors: Person | list[Person] | None = Field(default=None, alias='actors', description='An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip.')
+    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `actors`.')
+    actors: Person | list[Person] | None = Field(default=None, alias='actors', description='An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip.\n\nSuperseded by `actor`.')
     country_of_origin: Country | list[Country] | None = Field(default=None, alias='countryOfOrigin', description='The country of origin of something, including products as well as creative  works such as movie and TV content.\n\nIn the case of TV and movie, this would be the country of the principle offices of the production company or individual responsible for the movie. For other kinds of [[CreativeWork]] it is difficult to provide fully general guidance, and properties such as [[contentLocation]] and [[locationCreated]] may be more applicable.\n\nIn the case of products, the country of origin of the product. The exact interpretation of this may vary by context and product type, and cannot be fully enumerated here.')
-    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.')
-    directors: Person | list[Person] | None = Field(default=None, alias='directors', description='A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip.')
+    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `directors`.')
+    directors: Person | list[Person] | None = Field(default=None, alias='directors', description='A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip.\n\nSuperseded by `director`.')
     duration: Duration | QuantitativeValue | list[Duration | QuantitativeValue] | None = Field(default=None, alias='duration', description='The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).')
     music_by: MusicGroup | Person | list[MusicGroup | Person] | None = Field(default=None, alias='musicBy', description='The composer of the soundtrack.')
     production_company: Organization | list[Organization] | None = Field(default=None, alias='productionCompany', description='The production company or studio responsible for the item, e.g. series, video game, episode etc.')

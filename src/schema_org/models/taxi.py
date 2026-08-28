@@ -15,7 +15,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.service import Service
 
 class Taxi(Service):
-    __doc__ = 'A taxi.'
+    __doc__ = 'https://schema.org/Taxi\n\nA taxi.\n\nSuperseded by `TaxiService`.'
     SCHEMA_TYPE: ClassVar[str] = 'Taxi'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Taxi', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

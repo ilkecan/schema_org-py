@@ -16,7 +16,7 @@ from schema_org.enums import ReservationStatusType
 from schema_org.models.reservation import Reservation
 
 class RentalCarReservation(Reservation):
-    __doc__ = 'A reservation for a rental car.\\n\\nNote: This type is for information about actual reservations, e.g. in confirmation emails or HTML pages with individual confirmations of reservations.'
+    __doc__ = 'https://schema.org/RentalCarReservation\n\nA reservation for a rental car.\\n\\nNote: This type is for information about actual reservations, e.g. in confirmation emails or HTML pages with individual confirmations of reservations.'
     SCHEMA_TYPE: ClassVar[str] = 'RentalCarReservation'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('RentalCarReservation', 'Reservation', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

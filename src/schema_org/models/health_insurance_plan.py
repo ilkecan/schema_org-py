@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class HealthInsurancePlan(Intangible):
-    __doc__ = 'A US-style health insurance plan, including PPOs, EPOs, and HMOs.'
+    __doc__ = 'https://schema.org/HealthInsurancePlan\n\nA US-style health insurance plan, including PPOs, EPOs, and HMOs.'
     SCHEMA_TYPE: ClassVar[str] = 'HealthInsurancePlan'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('HealthInsurancePlan', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -43,7 +43,7 @@ class HealthInsurancePlan(Intangible):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['HealthInsurancePlan'] = Field(default='HealthInsurancePlan', alias='@type', frozen=True)
     benefits_summary_url: URL | list[URL] | None = Field(default=None, alias='benefitsSummaryUrl', description='The URL that goes directly to the summary of benefits and coverage for the specific standard plan or plan variation.')
-    contact_point: ContactPoint | list[ContactPoint] | None = Field(default=None, alias='contactPoint', description='A contact point for a person or organization.')
+    contact_point: ContactPoint | list[ContactPoint] | None = Field(default=None, alias='contactPoint', description='A contact point for a person or organization.\n\nSupersedes `contactPoints`.')
     health_plan_drug_option: Text | list[Text] | None = Field(default=None, alias='healthPlanDrugOption', description='TODO.')
     health_plan_drug_tier: Text | list[Text] | None = Field(default=None, alias='healthPlanDrugTier', description='The tier(s) of drugs offered by this formulary or insurance plan.')
     health_plan_id: Text | list[Text] | None = Field(default=None, alias='healthPlanId', description='The 14-character, HIOS-generated Plan ID number. (Plan IDs must be unique, even across different markets.)')

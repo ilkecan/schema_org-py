@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.review import Review
 
 class ClaimReview(Review):
-    __doc__ = 'A fact-checking review of claims made (or reported) in some creative work (referenced via itemReviewed).'
+    __doc__ = 'https://schema.org/ClaimReview\n\nA fact-checking review of claims made (or reported) in some creative work (referenced via itemReviewed).'
     SCHEMA_TYPE: ClassVar[str] = 'ClaimReview'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ClaimReview', 'Review', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

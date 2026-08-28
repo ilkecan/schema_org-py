@@ -15,7 +15,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.organization import Organization
 
 class OnlineBusiness(Organization):
-    __doc__ = 'A particular online business, either standalone or the online part of a broader organization. Examples include an eCommerce site, an online travel booking site, an online learning site, an online logistics and shipping provider, an online (virtual) doctor, etc.'
+    __doc__ = 'https://schema.org/OnlineBusiness\n\nA particular online business, either standalone or the online part of a broader organization. Examples include an eCommerce site, an online travel booking site, an online learning site, an online logistics and shipping provider, an online (virtual) doctor, etc.'
     SCHEMA_TYPE: ClassVar[str] = 'OnlineBusiness'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('OnlineBusiness', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

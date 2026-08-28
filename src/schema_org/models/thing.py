@@ -12,7 +12,7 @@ from schema_org.datatypes import Text
 from schema_org.datatypes import URL
 
 class Thing(SchemaModel):
-    __doc__ = 'The most generic type of item.'
+    __doc__ = 'https://schema.org/Thing\n\nThe most generic type of item.'
     SCHEMA_TYPE: ClassVar[str] = 'Thing'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Thing',)
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -38,10 +38,10 @@ class Thing(SchemaModel):
     disambiguating_description: Text | list[Text] | None = Field(default=None, alias='disambiguatingDescription', description='A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.')
     identifier: PropertyValue | Text | URL | list[PropertyValue | Text | URL] | None = Field(default=None, alias='identifier', description='The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.\n        ')
     image: ImageObject | URL | list[ImageObject | URL] | None = Field(default=None, alias='image', description='An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].')
-    main_entity_of_page: CreativeWork | URL | list[CreativeWork | URL] | None = Field(default=None, alias='mainEntityOfPage', description='Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.')
+    main_entity_of_page: CreativeWork | URL | list[CreativeWork | URL] | None = Field(default=None, alias='mainEntityOfPage', description='Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.\n\nInverse-property: `mainEntity`.')
     name: Text | list[Text] | None = Field(default=None, alias='name', description='The name of the item.')
-    owner: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='owner', description='A person or organization who owns this Thing.')
+    owner: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='owner', description='A person or organization who owns this Thing.\n\nInverse-property: `owns`.')
     potential_action: Action | list[Action] | None = Field(default=None, alias='potentialAction', description="Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.")
     same_as: URL | list[URL] | None = Field(default=None, alias='sameAs', description="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.")
-    subject_of: CreativeWork | Event | list[CreativeWork | Event] | None = Field(default=None, alias='subjectOf', description='A CreativeWork or Event about this Thing.')
+    subject_of: CreativeWork | Event | list[CreativeWork | Event] | None = Field(default=None, alias='subjectOf', description='A CreativeWork or Event about this Thing.\n\nInverse-property: `about`.')
     url: URL | list[URL] | None = Field(default=None, alias='url', description='URL of the item.')

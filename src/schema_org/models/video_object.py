@@ -23,7 +23,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.media_object import MediaObject
 
 class VideoObject(MediaObject):
-    __doc__ = 'A video file.'
+    __doc__ = 'https://schema.org/VideoObject\n\nA video file.'
     SCHEMA_TYPE: ClassVar[str] = 'VideoObject'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('VideoObject', 'MediaObject', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -187,11 +187,11 @@ class VideoObject(MediaObject):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['VideoObject'] = Field(default='VideoObject', alias='@type', frozen=True)
-    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.')
-    actors: Person | list[Person] | None = Field(default=None, alias='actors', description='An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip.')
+    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `actors`.')
+    actors: Person | list[Person] | None = Field(default=None, alias='actors', description='An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip.\n\nSuperseded by `actor`.')
     caption: MediaObject | Text | list[MediaObject | Text] | None = Field(default=None, alias='caption', description='The caption for this object. For downloadable machine formats (closed caption, subtitles etc.) use MediaObject and indicate the [[encodingFormat]].')
-    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.')
-    directors: Person | list[Person] | None = Field(default=None, alias='directors', description='A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip.')
+    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `directors`.')
+    directors: Person | list[Person] | None = Field(default=None, alias='directors', description='A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip.\n\nSuperseded by `director`.')
     embedded_text_caption: Text | list[Text] | None = Field(default=None, alias='embeddedTextCaption', description="Represents textual captioning from a [[MediaObject]], e.g. text of a 'meme'.")
     music_by: MusicGroup | Person | list[MusicGroup | Person] | None = Field(default=None, alias='musicBy', description='The composer of the soundtrack.')
     transcript: Text | list[Text] | None = Field(default=None, alias='transcript', description='If this MediaObject is an AudioObject or VideoObject, the transcript of that object.')

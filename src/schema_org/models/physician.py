@@ -20,7 +20,7 @@ from schema_org.models.medical_business import MedicalBusiness
 from schema_org.models.medical_organization import MedicalOrganization
 
 class Physician(MedicalBusiness, MedicalOrganization):
-    __doc__ = "An individual physician or a physician's office considered as a [[MedicalOrganization]]."
+    __doc__ = "https://schema.org/Physician\n\nAn individual physician or a physician's office considered as a [[MedicalOrganization]]."
     SCHEMA_TYPE: ClassVar[str] = 'Physician'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Physician', 'MedicalBusiness', 'MedicalOrganization', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

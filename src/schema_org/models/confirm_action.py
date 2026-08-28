@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.inform_action import InformAction
 
 class ConfirmAction(InformAction):
-    __doc__ = 'The act of notifying someone that a future event/action is going to happen as expected.\\n\\nRelated actions:\\n\\n* [[CancelAction]]: The antonym of ConfirmAction.'
+    __doc__ = 'https://schema.org/ConfirmAction\n\nThe act of notifying someone that a future event/action is going to happen as expected.\\n\\nRelated actions:\\n\\n* [[CancelAction]]: The antonym of ConfirmAction.'
     SCHEMA_TYPE: ClassVar[str] = 'ConfirmAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ConfirmAction', 'InformAction', 'CommunicateAction', 'InteractAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

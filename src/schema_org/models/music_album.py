@@ -23,7 +23,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.music_playlist import MusicPlaylist
 
 class MusicAlbum(MusicPlaylist):
-    __doc__ = 'A collection of music tracks.'
+    __doc__ = 'https://schema.org/MusicAlbum\n\nA collection of music tracks.'
     SCHEMA_TYPE: ClassVar[str] = 'MusicAlbum'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MusicAlbum', 'MusicPlaylist', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -167,6 +167,6 @@ class MusicAlbum(MusicPlaylist):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['MusicAlbum'] = Field(default='MusicAlbum', alias='@type', frozen=True)
     album_production_type: MusicAlbumProductionType | list[MusicAlbumProductionType] | None = Field(default=None, alias='albumProductionType', description='Classification of the album by its type of content: soundtrack, live album, studio album, etc.')
-    album_release: MusicRelease | list[MusicRelease] | None = Field(default=None, alias='albumRelease', description='A release of this album.')
+    album_release: MusicRelease | list[MusicRelease] | None = Field(default=None, alias='albumRelease', description='A release of this album.\n\nInverse-property: `releaseOf`.')
     album_release_type: MusicAlbumReleaseType | list[MusicAlbumReleaseType] | None = Field(default=None, alias='albumReleaseType', description='The kind of release which this album is: single, EP or album.')
     by_artist: MusicGroup | Person | list[MusicGroup | Person] | None = Field(default=None, alias='byArtist', description='The artist that performed this album or recording.')

@@ -15,7 +15,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.organization import Organization
 
 class WorkersUnion(Organization):
-    __doc__ = 'A Workers Union (also known as a Labor Union, Labour Union, or Trade Union) is an organization that promotes the interests of its worker members by collectively bargaining with management, organizing, and political lobbying.'
+    __doc__ = 'https://schema.org/WorkersUnion\n\nA Workers Union (also known as a Labor Union, Labour Union, or Trade Union) is an organization that promotes the interests of its worker members by collectively bargaining with management, organizing, and political lobbying.'
     SCHEMA_TYPE: ClassVar[str] = 'WorkersUnion'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('WorkersUnion', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

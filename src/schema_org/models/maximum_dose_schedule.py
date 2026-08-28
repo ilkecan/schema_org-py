@@ -18,7 +18,7 @@ from schema_org.enums import QualitativeValue
 from schema_org.models.dose_schedule import DoseSchedule
 
 class MaximumDoseSchedule(DoseSchedule):
-    __doc__ = "The maximum dosing schedule considered safe for a drug or supplement as recommended by an authority or by the drug/supplement's manufacturer. Capture the recommending authority in the recognizingAuthority property of MedicalEntity."
+    __doc__ = "https://schema.org/MaximumDoseSchedule\n\nThe maximum dosing schedule considered safe for a drug or supplement as recommended by an authority or by the drug/supplement's manufacturer. Capture the recommending authority in the recognizingAuthority property of MedicalEntity."
     SCHEMA_TYPE: ClassVar[str] = 'MaximumDoseSchedule'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MaximumDoseSchedule', 'DoseSchedule', 'MedicalIntangible', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -18,7 +18,7 @@ from schema_org.enums import BedType
 from schema_org.models.accommodation import Accommodation
 
 class House(Accommodation):
-    __doc__ = 'A house is a building or structure that has the ability to be occupied for habitation by humans or other creatures (source: Wikipedia, the free encyclopedia, see <a href="http://en.wikipedia.org/wiki/House">http://en.wikipedia.org/wiki/House</a>).'
+    __doc__ = 'https://schema.org/House\n\nA house is a building or structure that has the ability to be occupied for habitation by humans or other creatures (source: Wikipedia, the free encyclopedia, see <a href="http://en.wikipedia.org/wiki/House">http://en.wikipedia.org/wiki/House</a>).'
     SCHEMA_TYPE: ClassVar[str] = 'House'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('House', 'Accommodation', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -22,7 +22,7 @@ from schema_org.models.creative_work import CreativeWork
 from schema_org.models.list_item import ListItem
 
 class HowToDirection(CreativeWork, ListItem):
-    __doc__ = 'A direction indicating a single action to do in the instructions for how to achieve a result.'
+    __doc__ = 'https://schema.org/HowToDirection\n\nA direction indicating a single action to do in the instructions for how to achieve a result.'
     SCHEMA_TYPE: ClassVar[str] = 'HowToDirection'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('HowToDirection', 'CreativeWork', 'ListItem', 'Thing', 'Intangible')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

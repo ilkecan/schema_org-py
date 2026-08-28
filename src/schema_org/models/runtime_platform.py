@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.software_application import SoftwareApplication
 
 class RuntimePlatform(SoftwareApplication):
-    __doc__ = 'Specialized software environment that provides the essential infrastructure, libraries, and services required to execute a program.'
+    __doc__ = 'https://schema.org/RuntimePlatform\n\nSpecialized software environment that provides the essential infrastructure, libraries, and services required to execute a program.'
     SCHEMA_TYPE: ClassVar[str] = 'RuntimePlatform'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('RuntimePlatform', 'SoftwareApplication', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

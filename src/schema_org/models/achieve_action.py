@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.action import Action
 
 class AchieveAction(Action):
-    __doc__ = 'The act of accomplishing something via previous efforts. It is an instantaneous action rather than an ongoing process.'
+    __doc__ = 'https://schema.org/AchieveAction\n\nThe act of accomplishing something via previous efforts. It is an instantaneous action rather than an ongoing process.'
     SCHEMA_TYPE: ClassVar[str] = 'AchieveAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AchieveAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

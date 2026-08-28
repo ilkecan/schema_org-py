@@ -13,10 +13,11 @@ from schema_org.datatypes import Number
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
 from schema_org.enums import GenderType
+from schema_org.models.audience import Audience
 from schema_org.models.people_audience import PeopleAudience
 
-class MedicalAudience(PeopleAudience):
-    __doc__ = 'Target audiences for medical web pages.'
+class MedicalAudience(PeopleAudience, Audience):
+    __doc__ = 'https://schema.org/MedicalAudience\n\nTarget audiences for medical web pages.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalAudience'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalAudience', 'Audience', 'PeopleAudience', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

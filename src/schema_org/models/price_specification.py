@@ -17,7 +17,7 @@ from schema_org.datatypes import URL
 from schema_org.models.structured_value import StructuredValue
 
 class PriceSpecification(StructuredValue):
-    __doc__ = 'A structured value representing a price or price range. Typically, only the subclasses of this type are used for markup. It is recommended to use [[MonetaryAmount]] to describe independent amounts of money such as a salary, credit card limits, etc.'
+    __doc__ = 'https://schema.org/PriceSpecification\n\nA structured value representing a price or price range. Typically, only the subclasses of this type are used for markup. It is recommended to use [[MonetaryAmount]] to describe independent amounts of money such as a salary, credit card limits, etc.'
     SCHEMA_TYPE: ClassVar[str] = 'PriceSpecification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PriceSpecification', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

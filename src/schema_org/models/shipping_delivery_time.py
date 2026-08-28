@@ -15,7 +15,7 @@ from schema_org.enums import DayOfWeek
 from schema_org.models.structured_value import StructuredValue
 
 class ShippingDeliveryTime(StructuredValue):
-    __doc__ = 'ShippingDeliveryTime provides various pieces of information about delivery times for shipping.'
+    __doc__ = 'https://schema.org/ShippingDeliveryTime\n\nShippingDeliveryTime provides various pieces of information about delivery times for shipping.'
     SCHEMA_TYPE: ClassVar[str] = 'ShippingDeliveryTime'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ShippingDeliveryTime', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

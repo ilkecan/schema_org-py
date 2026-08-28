@@ -14,7 +14,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class ListItem(Intangible):
-    __doc__ = 'An list item, e.g. a step in a checklist or how-to description.'
+    __doc__ = 'https://schema.org/ListItem\n\nAn list item, e.g. a step in a checklist or how-to description.'
     SCHEMA_TYPE: ClassVar[str] = 'ListItem'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ListItem', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

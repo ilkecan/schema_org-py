@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.action import Action
 
 class ConsumeAction(Action):
-    __doc__ = 'The act of ingesting information/resources/food.'
+    __doc__ = 'https://schema.org/ConsumeAction\n\nThe act of ingesting information/resources/food.'
     SCHEMA_TYPE: ClassVar[str] = 'ConsumeAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ConsumeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

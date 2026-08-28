@@ -14,7 +14,7 @@ from schema_org.enums import FulfillmentTypeEnumeration
 from schema_org.models.structured_value import StructuredValue
 
 class ShippingService(StructuredValue):
-    __doc__ = 'ShippingService represents the criteria used to determine if and how an offer could be shipped to a customer.'
+    __doc__ = 'https://schema.org/ShippingService\n\nShippingService represents the criteria used to determine if and how an offer could be shipped to a customer.'
     SCHEMA_TYPE: ClassVar[str] = 'ShippingService'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ShippingService', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -15,7 +15,7 @@ from schema_org.enums import ItemListOrderType
 from schema_org.models.item_list import ItemList
 
 class OfferCatalog(ItemList):
-    __doc__ = 'An OfferCatalog is an ItemList that contains related Offers and/or further OfferCatalogs that are offeredBy the same provider.'
+    __doc__ = 'https://schema.org/OfferCatalog\n\nAn OfferCatalog is an ItemList that contains related Offers and/or further OfferCatalogs that are offeredBy the same provider.'
     SCHEMA_TYPE: ClassVar[str] = 'OfferCatalog'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('OfferCatalog', 'ItemList', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

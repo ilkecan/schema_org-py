@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_entity import MedicalEntity
 
 class LifestyleModification(MedicalEntity):
-    __doc__ = 'A process of care involving exercise, changes to diet, fitness routines, and other lifestyle changes aimed at improving a health condition.'
+    __doc__ = 'https://schema.org/LifestyleModification\n\nA process of care involving exercise, changes to diet, fitness routines, and other lifestyle changes aimed at improving a health condition.'
     SCHEMA_TYPE: ClassVar[str] = 'LifestyleModification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('LifestyleModification', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -19,7 +19,7 @@ from schema_org.models.financial_product import FinancialProduct
 from schema_org.models.payment_method import PaymentMethod
 
 class PaymentCard(FinancialProduct, PaymentMethod):
-    __doc__ = 'A payment method using a credit, debit, store or other card to associate the payment with an account.'
+    __doc__ = 'https://schema.org/PaymentCard\n\nA payment method using a credit, debit, store or other card to associate the payment with an account.'
     SCHEMA_TYPE: ClassVar[str] = 'PaymentCard'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PaymentCard', 'FinancialProduct', 'PaymentMethod', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

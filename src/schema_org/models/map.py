@@ -22,7 +22,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Map(CreativeWork):
-    __doc__ = 'A map.'
+    __doc__ = 'https://schema.org/Map\n\nA map.'
     SCHEMA_TYPE: ClassVar[str] = 'Map'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Map', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

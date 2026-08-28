@@ -17,7 +17,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.trade_action import TradeAction
 
 class TipAction(TradeAction):
-    __doc__ = 'The act of giving money voluntarily to a beneficiary in recognition of services rendered.'
+    __doc__ = 'https://schema.org/TipAction\n\nThe act of giving money voluntarily to a beneficiary in recognition of services rendered.'
     SCHEMA_TYPE: ClassVar[str] = 'TipAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('TipAction', 'TradeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

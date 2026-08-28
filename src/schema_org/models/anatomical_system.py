@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_entity import MedicalEntity
 
 class AnatomicalSystem(MedicalEntity):
-    __doc__ = 'An anatomical system is a group of anatomical structures that work together to perform a certain task. Anatomical systems, such as organ systems, are one organizing principle of anatomy, and can include circulatory, digestive, endocrine, integumentary, immune, lymphatic, muscular, nervous, reproductive, respiratory, skeletal, urinary, vestibular, and other systems.'
+    __doc__ = 'https://schema.org/AnatomicalSystem\n\nAn anatomical system is a group of anatomical structures that work together to perform a certain task. Anatomical systems, such as organ systems, are one organizing principle of anatomy, and can include circulatory, digestive, endocrine, integumentary, immune, lymphatic, muscular, nervous, reproductive, respiratory, skeletal, urinary, vestibular, and other systems.'
     SCHEMA_TYPE: ClassVar[str] = 'AnatomicalSystem'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AnatomicalSystem', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

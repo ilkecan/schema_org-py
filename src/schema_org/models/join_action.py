@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.interact_action import InteractAction
 
 class JoinAction(InteractAction):
-    __doc__ = "An agent joins an event/group with participants/friends at a location.\\n\\nRelated actions:\\n\\n* [[RegisterAction]]: Unlike RegisterAction, JoinAction refers to joining a group/team of people.\\n* [[SubscribeAction]]: Unlike SubscribeAction, JoinAction does not imply that you'll be receiving updates.\\n* [[FollowAction]]: Unlike FollowAction, JoinAction does not imply that you'll be polling for updates."
+    __doc__ = "https://schema.org/JoinAction\n\nAn agent joins an event/group with participants/friends at a location.\\n\\nRelated actions:\\n\\n* [[RegisterAction]]: Unlike RegisterAction, JoinAction refers to joining a group/team of people.\\n* [[SubscribeAction]]: Unlike SubscribeAction, JoinAction does not imply that you'll be receiving updates.\\n* [[FollowAction]]: Unlike FollowAction, JoinAction does not imply that you'll be polling for updates."
     SCHEMA_TYPE: ClassVar[str] = 'JoinAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('JoinAction', 'InteractAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -50,4 +50,4 @@ class JoinAction(InteractAction):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['JoinAction'] = Field(default='JoinAction', alias='@type', frozen=True)
-    event: Event | list[Event] | None = Field(default=None, alias='event', description='Upcoming or past event associated with this place, organization, or action.')
+    event: Event | list[Event] | None = Field(default=None, alias='event', description='Upcoming or past event associated with this place, organization, or action.\n\nSupersedes `events`.')

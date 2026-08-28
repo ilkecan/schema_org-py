@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.communicate_action import CommunicateAction
 
 class InviteAction(CommunicateAction):
-    __doc__ = 'The act of asking someone to attend an event. Reciprocal of RsvpAction.'
+    __doc__ = 'https://schema.org/InviteAction\n\nThe act of asking someone to attend an event. Reciprocal of RsvpAction.'
     SCHEMA_TYPE: ClassVar[str] = 'InviteAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('InviteAction', 'CommunicateAction', 'InteractAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -54,4 +54,4 @@ class InviteAction(CommunicateAction):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['InviteAction'] = Field(default='InviteAction', alias='@type', frozen=True)
-    event: Event | list[Event] | None = Field(default=None, alias='event', description='Upcoming or past event associated with this place, organization, or action.')
+    event: Event | list[Event] | None = Field(default=None, alias='event', description='Upcoming or past event associated with this place, organization, or action.\n\nSupersedes `events`.')

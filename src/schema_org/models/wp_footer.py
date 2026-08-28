@@ -23,7 +23,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.web_page_element import WebPageElement
 
 class WPFooter(WebPageElement):
-    __doc__ = 'The footer section of the page.'
+    __doc__ = 'https://schema.org/WPFooter\n\nThe footer section of the page.'
     SCHEMA_TYPE: ClassVar[str] = 'WPFooter'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('WPFooter', 'WebPageElement', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

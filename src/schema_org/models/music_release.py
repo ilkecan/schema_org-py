@@ -22,7 +22,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.music_playlist import MusicPlaylist
 
 class MusicRelease(MusicPlaylist):
-    __doc__ = 'A MusicRelease is a specific release of a music album.'
+    __doc__ = 'https://schema.org/MusicRelease\n\nA MusicRelease is a specific release of a music album.'
     SCHEMA_TYPE: ClassVar[str] = 'MusicRelease'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MusicRelease', 'MusicPlaylist', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -172,4 +172,4 @@ class MusicRelease(MusicPlaylist):
     duration: Duration | QuantitativeValue | list[Duration | QuantitativeValue] | None = Field(default=None, alias='duration', description='The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).')
     music_release_format: MusicReleaseFormatType | list[MusicReleaseFormatType] | None = Field(default=None, alias='musicReleaseFormat', description='Format of this release (the type of recording media used, i.e. compact disc, digital media, LP, etc.).')
     record_label: Organization | list[Organization] | None = Field(default=None, alias='recordLabel', description='The label that issued the release.')
-    release_of: MusicAlbum | list[MusicAlbum] | None = Field(default=None, alias='releaseOf', description='The album this is a release of.')
+    release_of: MusicAlbum | list[MusicAlbum] | None = Field(default=None, alias='releaseOf', description='The album this is a release of.\n\nInverse-property: `albumRelease`.')

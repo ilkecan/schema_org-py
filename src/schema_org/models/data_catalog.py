@@ -22,7 +22,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class DataCatalog(CreativeWork):
-    __doc__ = 'A collection of datasets.'
+    __doc__ = 'https://schema.org/DataCatalog\n\nA collection of datasets.'
     SCHEMA_TYPE: ClassVar[str] = 'DataCatalog'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DataCatalog', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -161,6 +161,6 @@ class DataCatalog(CreativeWork):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['DataCatalog'] = Field(default='DataCatalog', alias='@type', frozen=True)
-    dataset: Dataset | list[Dataset] | None = Field(default=None, alias='dataset', description='A dataset contained in this catalog.')
+    dataset: Dataset | list[Dataset] | None = Field(default=None, alias='dataset', description='A dataset contained in this catalog.\n\nInverse-property: `includedInDataCatalog`.')
     measurement_method: DefinedTerm | MeasurementMethodEnum | Text | URL | list[DefinedTerm | MeasurementMethodEnum | Text | URL] | None = Field(default=None, alias='measurementMethod', description='A subproperty of [[measurementTechnique]] that can be used for specifying specific methods, in particular via [[MeasurementMethodEnum]].')
     measurement_technique: DefinedTerm | MeasurementMethodEnum | Text | URL | list[DefinedTerm | MeasurementMethodEnum | Text | URL] | None = Field(default=None, alias='measurementTechnique', description='A technique, method or technology used in an [[Observation]], [[StatisticalVariable]] or [[Dataset]] (or [[DataDownload]], [[DataCatalog]]), corresponding to the method used for measuring the corresponding variable(s) (for datasets, described using [[variableMeasured]]; for [[Observation]], a [[StatisticalVariable]]). Often but not necessarily each [[variableMeasured]] will have an explicit representation as (or mapping to) an property such as those defined in Schema.org, or other RDF vocabularies and "knowledge graphs". In that case the subproperty of [[variableMeasured]] called [[measuredProperty]] is applicable.\n    \nThe [[measurementTechnique]] property helps when extra clarification is needed about how a [[measuredProperty]] was measured. This is oriented towards scientific and scholarly dataset publication but may have broader applicability; it is not intended as a full representation of measurement, but can often serve as a high level summary for dataset discovery. \n\nFor example, if [[variableMeasured]] is: molecule concentration, [[measurementTechnique]] could be: "mass spectrometry" or "nmr spectroscopy" or "colorimetry" or "immunofluorescence". If the [[variableMeasured]] is "depression rating", the [[measurementTechnique]] could be "Zung Scale" or "HAM-D" or "Beck Depression Inventory". \n\nIf there are several [[variableMeasured]] properties recorded for some given data object, use a [[PropertyValue]] for each [[variableMeasured]] and attach the corresponding [[measurementTechnique]]. The value can also be from an enumeration, organized as a [[MeasurementMethodEnum]].')

@@ -16,7 +16,7 @@ from schema_org.enums import StatusEnumeration
 from schema_org.models.instantaneous_event import InstantaneousEvent
 
 class Error(InstantaneousEvent):
-    __doc__ = 'Representation of an Error.'
+    __doc__ = 'https://schema.org/Error\n\nRepresentation of an Error.'
     SCHEMA_TYPE: ClassVar[str] = 'Error'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Error', 'InstantaneousEvent', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

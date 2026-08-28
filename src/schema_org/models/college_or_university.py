@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.educational_organization import EducationalOrganization
 
 class CollegeOrUniversity(EducationalOrganization):
-    __doc__ = 'A college, university, or other third-level educational institution.'
+    __doc__ = 'https://schema.org/CollegeOrUniversity\n\nA college, university, or other third-level educational institution.'
     SCHEMA_TYPE: ClassVar[str] = 'CollegeOrUniversity'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CollegeOrUniversity', 'EducationalOrganization', 'CivicStructure', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

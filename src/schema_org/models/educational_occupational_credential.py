@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.credential import Credential
 
 class EducationalOccupationalCredential(Credential):
-    __doc__ = 'An educational or occupational credential. A diploma, academic degree, certification, qualification, badge, etc., that may be awarded to a person or other entity that meets the requirements defined by the credentialer.'
+    __doc__ = 'https://schema.org/EducationalOccupationalCredential\n\nAn educational or occupational credential. A diploma, academic degree, certification, qualification, badge, etc., that may be awarded to a person or other entity that meets the requirements defined by the credentialer.'
     SCHEMA_TYPE: ClassVar[str] = 'EducationalOccupationalCredential'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('EducationalOccupationalCredential', 'Credential', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

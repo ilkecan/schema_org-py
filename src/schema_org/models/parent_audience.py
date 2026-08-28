@@ -16,7 +16,7 @@ from schema_org.enums import GenderType
 from schema_org.models.people_audience import PeopleAudience
 
 class ParentAudience(PeopleAudience):
-    __doc__ = 'A set of characteristics describing parents, who can be interested in viewing some content.'
+    __doc__ = 'https://schema.org/ParentAudience\n\nA set of characteristics describing parents, who can be interested in viewing some content.'
     SCHEMA_TYPE: ClassVar[str] = 'ParentAudience'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ParentAudience', 'PeopleAudience', 'Audience', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

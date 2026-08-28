@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.defined_term_set import DefinedTermSet
 
 class CategoryCodeSet(DefinedTermSet):
-    __doc__ = 'A set of Category Code values.'
+    __doc__ = 'https://schema.org/CategoryCodeSet\n\nA set of Category Code values.'
     SCHEMA_TYPE: ClassVar[str] = 'CategoryCodeSet'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CategoryCodeSet', 'DefinedTermSet', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

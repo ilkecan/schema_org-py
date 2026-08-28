@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Episode(CreativeWork):
-    __doc__ = 'A media episode (e.g. TV, radio, video game) which can be part of a series or season.'
+    __doc__ = 'https://schema.org/Episode\n\nA media episode (e.g. TV, radio, video game) which can be part of a series or season.'
     SCHEMA_TYPE: ClassVar[str] = 'Episode'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Episode', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -168,14 +168,14 @@ class Episode(CreativeWork):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['Episode'] = Field(default='Episode', alias='@type', frozen=True)
-    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.')
-    actors: Person | list[Person] | None = Field(default=None, alias='actors', description='An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip.')
-    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.')
-    directors: Person | list[Person] | None = Field(default=None, alias='directors', description='A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip.')
+    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `actors`.')
+    actors: Person | list[Person] | None = Field(default=None, alias='actors', description='An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip.\n\nSuperseded by `actor`.')
+    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `directors`.')
+    directors: Person | list[Person] | None = Field(default=None, alias='directors', description='A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip.\n\nSuperseded by `director`.')
     duration: Duration | QuantitativeValue | list[Duration | QuantitativeValue] | None = Field(default=None, alias='duration', description='The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).')
     episode_number: Integer | Text | list[Integer | Text] | None = Field(default=None, alias='episodeNumber', description='Position of the episode within an ordered group of episodes.')
     music_by: MusicGroup | Person | list[MusicGroup | Person] | None = Field(default=None, alias='musicBy', description='The composer of the soundtrack.')
     part_of_season: CreativeWorkSeason | list[CreativeWorkSeason] | None = Field(default=None, alias='partOfSeason', description='The season to which this episode belongs.')
-    part_of_series: CreativeWorkSeries | list[CreativeWorkSeries] | None = Field(default=None, alias='partOfSeries', description='The series to which this episode or season belongs.')
+    part_of_series: CreativeWorkSeries | list[CreativeWorkSeries] | None = Field(default=None, alias='partOfSeries', description='The series to which this episode or season belongs.\n\nSupersedes `partOfTVSeries`.')
     production_company: Organization | list[Organization] | None = Field(default=None, alias='productionCompany', description='The production company or studio responsible for the item, e.g. series, video game, episode etc.')
     trailer: VideoObject | list[VideoObject] | None = Field(default=None, alias='trailer', description='The trailer of a movie or TV/radio series, season, episode, etc.')

@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.audience import Audience
 
 class EducationalAudience(Audience):
-    __doc__ = 'An EducationalAudience.'
+    __doc__ = 'https://schema.org/EducationalAudience\n\nAn EducationalAudience.'
     SCHEMA_TYPE: ClassVar[str] = 'EducationalAudience'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('EducationalAudience', 'Audience', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

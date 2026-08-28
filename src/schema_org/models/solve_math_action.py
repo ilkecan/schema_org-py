@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.action import Action
 
 class SolveMathAction(Action):
-    __doc__ = 'The action that takes in a math expression and directs users to a page potentially capable of solving/simplifying that expression.'
+    __doc__ = 'https://schema.org/SolveMathAction\n\nThe action that takes in a math expression and directs users to a page potentially capable of solving/simplifying that expression.'
     SCHEMA_TYPE: ClassVar[str] = 'SolveMathAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SolveMathAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -18,7 +18,7 @@ from schema_org.enums import DeliveryMethod
 from schema_org.models.price_specification import PriceSpecification
 
 class PaymentChargeSpecification(PriceSpecification):
-    __doc__ = 'The costs of settling the payment using a particular payment method.'
+    __doc__ = 'https://schema.org/PaymentChargeSpecification\n\nThe costs of settling the payment using a particular payment method.'
     SCHEMA_TYPE: ClassVar[str] = 'PaymentChargeSpecification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PaymentChargeSpecification', 'PriceSpecification', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

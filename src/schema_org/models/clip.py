@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Clip(CreativeWork):
-    __doc__ = 'A short TV or radio program or a segment/part of a program.'
+    __doc__ = 'https://schema.org/Clip\n\nA short TV or radio program or a segment/part of a program.'
     SCHEMA_TYPE: ClassVar[str] = 'Clip'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Clip', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -168,14 +168,14 @@ class Clip(CreativeWork):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['Clip'] = Field(default='Clip', alias='@type', frozen=True)
-    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.')
-    actors: Person | list[Person] | None = Field(default=None, alias='actors', description='An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip.')
+    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `actors`.')
+    actors: Person | list[Person] | None = Field(default=None, alias='actors', description='An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip.\n\nSuperseded by `actor`.')
     clip_number: Integer | Text | list[Integer | Text] | None = Field(default=None, alias='clipNumber', description='Position of the clip within an ordered group of clips.')
-    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.')
-    directors: Person | list[Person] | None = Field(default=None, alias='directors', description='A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip.')
+    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `directors`.')
+    directors: Person | list[Person] | None = Field(default=None, alias='directors', description='A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip.\n\nSuperseded by `director`.')
     end_offset: HyperTocEntry | Number | list[HyperTocEntry | Number] | None = Field(default=None, alias='endOffset', description='The end time of the clip expressed as the number of seconds from the beginning of the work.')
     music_by: MusicGroup | Person | list[MusicGroup | Person] | None = Field(default=None, alias='musicBy', description='The composer of the soundtrack.')
     part_of_episode: Episode | list[Episode] | None = Field(default=None, alias='partOfEpisode', description='The episode to which this clip belongs.')
     part_of_season: CreativeWorkSeason | list[CreativeWorkSeason] | None = Field(default=None, alias='partOfSeason', description='The season to which this episode belongs.')
-    part_of_series: CreativeWorkSeries | list[CreativeWorkSeries] | None = Field(default=None, alias='partOfSeries', description='The series to which this episode or season belongs.')
+    part_of_series: CreativeWorkSeries | list[CreativeWorkSeries] | None = Field(default=None, alias='partOfSeries', description='The series to which this episode or season belongs.\n\nSupersedes `partOfTVSeries`.')
     start_offset: HyperTocEntry | Number | list[HyperTocEntry | Number] | None = Field(default=None, alias='startOffset', description='The start time of the clip expressed as the number of seconds from the beginning of the work.')

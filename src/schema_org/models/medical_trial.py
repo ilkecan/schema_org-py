@@ -19,7 +19,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_study import MedicalStudy
 
 class MedicalTrial(MedicalStudy):
-    __doc__ = 'A medical trial is a type of medical study that uses a scientific process to compare the safety and efficacy of medical therapies or medical procedures. In general, medical trials are controlled and subjects are allocated at random to the different treatment and/or control groups.'
+    __doc__ = 'https://schema.org/MedicalTrial\n\nA medical trial is a type of medical study that uses a scientific process to compare the safety and efficacy of medical therapies or medical procedures. In general, medical trials are controlled and subjects are allocated at random to the different treatment and/or control groups.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalTrial'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalTrial', 'MedicalStudy', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

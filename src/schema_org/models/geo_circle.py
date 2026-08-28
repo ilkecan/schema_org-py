@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.geo_shape import GeoShape
 
 class GeoCircle(GeoShape):
-    __doc__ = "A GeoCircle is a GeoShape representing a circular geographic area. As it is a GeoShape\n          it provides the simple textual property 'circle', but also allows the combination of postalCode alongside geoRadius.\n          The center of the circle can be indicated via the 'geoMidpoint' property, or more approximately using 'address', 'postalCode'.\n       "
+    __doc__ = "https://schema.org/GeoCircle\n\nA GeoCircle is a GeoShape representing a circular geographic area. As it is a GeoShape\n          it provides the simple textual property 'circle', but also allows the combination of postalCode alongside geoRadius.\n          The center of the circle can be indicated via the 'geoMidpoint' property, or more approximately using 'address', 'postalCode'.\n       "
     SCHEMA_TYPE: ClassVar[str] = 'GeoCircle'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('GeoCircle', 'GeoShape', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

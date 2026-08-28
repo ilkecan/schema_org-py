@@ -17,7 +17,7 @@ from schema_org.enums import GameAvailabilityEnumeration
 from schema_org.models.consume_action import ConsumeAction
 
 class PlayGameAction(ConsumeAction):
-    __doc__ = 'The act of playing a video game.'
+    __doc__ = 'https://schema.org/PlayGameAction\n\nThe act of playing a video game.'
     SCHEMA_TYPE: ClassVar[str] = 'PlayGameAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PlayGameAction', 'ConsumeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

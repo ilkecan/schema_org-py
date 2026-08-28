@@ -17,7 +17,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.transfer_action import TransferAction
 
 class MoneyTransfer(TransferAction):
-    __doc__ = 'The act of transferring money from one place to another place. This may occur electronically or physically.'
+    __doc__ = 'https://schema.org/MoneyTransfer\n\nThe act of transferring money from one place to another place. This may occur electronically or physically.'
     SCHEMA_TYPE: ClassVar[str] = 'MoneyTransfer'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MoneyTransfer', 'TransferAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

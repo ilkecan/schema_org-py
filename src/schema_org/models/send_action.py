@@ -17,7 +17,7 @@ from schema_org.enums import DeliveryMethod
 from schema_org.models.transfer_action import TransferAction
 
 class SendAction(TransferAction):
-    __doc__ = "The act of physically/electronically dispatching an object for transfer from an origin to a destination. Related actions:\\n\\n* [[ReceiveAction]]: The reciprocal of SendAction.\\n* [[GiveAction]]: Unlike GiveAction, SendAction does not imply the transfer of ownership (e.g. I can send you my laptop, but I'm not necessarily giving it to you)."
+    __doc__ = "https://schema.org/SendAction\n\nThe act of physically/electronically dispatching an object for transfer from an origin to a destination. Related actions:\\n\\n* [[ReceiveAction]]: The reciprocal of SendAction.\\n* [[GiveAction]]: Unlike GiveAction, SendAction does not imply the transfer of ownership (e.g. I can send you my laptop, but I'm not necessarily giving it to you)."
     SCHEMA_TYPE: ClassVar[str] = 'SendAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SendAction', 'TransferAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

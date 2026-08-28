@@ -16,7 +16,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.investment_or_deposit import InvestmentOrDeposit
 
 class BrokerageAccount(InvestmentOrDeposit):
-    __doc__ = 'An account that allows an investor to deposit funds and place investment orders with a licensed broker or brokerage firm.'
+    __doc__ = 'https://schema.org/BrokerageAccount\n\nAn account that allows an investor to deposit funds and place investment orders with a licensed broker or brokerage firm.'
     SCHEMA_TYPE: ClassVar[str] = 'BrokerageAccount'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BrokerageAccount', 'InvestmentOrDeposit', 'FinancialProduct', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

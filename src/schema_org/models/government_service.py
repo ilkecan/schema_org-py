@@ -15,7 +15,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.service import Service
 
 class GovernmentService(Service):
-    __doc__ = 'A service provided by a government organization, e.g. food stamps, veterans benefits, etc.'
+    __doc__ = 'https://schema.org/GovernmentService\n\nA service provided by a government organization, e.g. food stamps, veterans benefits, etc.'
     SCHEMA_TYPE: ClassVar[str] = 'GovernmentService'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('GovernmentService', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

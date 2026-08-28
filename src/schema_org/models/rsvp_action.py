@@ -18,7 +18,7 @@ from schema_org.enums import RsvpResponseType
 from schema_org.models.inform_action import InformAction
 
 class RsvpAction(InformAction):
-    __doc__ = 'The act of notifying an event organizer as to whether you expect to attend the event.'
+    __doc__ = 'https://schema.org/RsvpAction\n\nThe act of notifying an event organizer as to whether you expect to attend the event.'
     SCHEMA_TYPE: ClassVar[str] = 'RsvpAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('RsvpAction', 'InformAction', 'CommunicateAction', 'InteractAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

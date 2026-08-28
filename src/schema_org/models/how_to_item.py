@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.list_item import ListItem
 
 class HowToItem(ListItem):
-    __doc__ = 'An item used as either a tool or supply when performing the instructions for how to achieve a result.'
+    __doc__ = 'https://schema.org/HowToItem\n\nAn item used as either a tool or supply when performing the instructions for how to achieve a result.'
     SCHEMA_TYPE: ClassVar[str] = 'HowToItem'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('HowToItem', 'ListItem', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

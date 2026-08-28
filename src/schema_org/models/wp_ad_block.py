@@ -23,7 +23,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.web_page_element import WebPageElement
 
 class WPAdBlock(WebPageElement):
-    __doc__ = 'An advertising section of the page.'
+    __doc__ = 'https://schema.org/WPAdBlock\n\nAn advertising section of the page.'
     SCHEMA_TYPE: ClassVar[str] = 'WPAdBlock'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('WPAdBlock', 'WebPageElement', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

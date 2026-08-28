@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.local_business import LocalBusiness
 
 class SelfStorage(LocalBusiness):
-    __doc__ = 'A self-storage facility.'
+    __doc__ = 'https://schema.org/SelfStorage\n\nA self-storage facility.'
     SCHEMA_TYPE: ClassVar[str] = 'SelfStorage'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SelfStorage', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

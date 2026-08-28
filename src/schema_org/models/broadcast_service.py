@@ -15,7 +15,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.service import Service
 
 class BroadcastService(Service):
-    __doc__ = 'A delivery service through which content is provided via broadcast over the air or online.'
+    __doc__ = 'https://schema.org/BroadcastService\n\nA delivery service through which content is provided via broadcast over the air or online.'
     SCHEMA_TYPE: ClassVar[str] = 'BroadcastService'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BroadcastService', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -71,14 +71,14 @@ class BroadcastService(Service):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['BroadcastService'] = Field(default='BroadcastService', alias='@type', frozen=True)
-    area: Place | list[Place] | None = Field(default=None, alias='area', description='The area within which users can expect to reach the broadcast service.')
+    area: Place | list[Place] | None = Field(default=None, alias='area', description='The area within which users can expect to reach the broadcast service.\n\nSuperseded by `serviceArea`.')
     broadcast_affiliate_of: Organization | list[Organization] | None = Field(default=None, alias='broadcastAffiliateOf', description='The media network(s) whose content is broadcast on this station.')
     broadcast_display_name: Text | list[Text] | None = Field(default=None, alias='broadcastDisplayName', description='The name displayed in the channel guide. For many US affiliates, it is the network name.')
     broadcast_frequency: BroadcastFrequencySpecification | Text | list[BroadcastFrequencySpecification | Text] | None = Field(default=None, alias='broadcastFrequency', description='The frequency used for over-the-air broadcasts. Numeric values or simple ranges, e.g. 87-99. In addition a shortcut idiom is supported for frequencies of AM and FM radio channels, e.g. "87 FM".')
     broadcast_timezone: Text | list[Text] | None = Field(default=None, alias='broadcastTimezone', description='The timezone in [ISO 8601 format](http://en.wikipedia.org/wiki/ISO_8601) for which the service bases its broadcasts.')
     broadcaster: Organization | list[Organization] | None = Field(default=None, alias='broadcaster', description='The organization owning or operating the broadcast service.')
     call_sign: Text | list[Text] | None = Field(default=None, alias='callSign', description='A [callsign](https://en.wikipedia.org/wiki/Call_sign), as used in broadcasting and radio communications to identify people, radio and TV stations, or vehicles.')
-    has_broadcast_channel: BroadcastChannel | list[BroadcastChannel] | None = Field(default=None, alias='hasBroadcastChannel', description='A broadcast channel of a broadcast service.')
-    in_language: Language | Text | list[Language | Text] | None = Field(default=None, alias='inLanguage', description='The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].')
+    has_broadcast_channel: BroadcastChannel | list[BroadcastChannel] | None = Field(default=None, alias='hasBroadcastChannel', description='A broadcast channel of a broadcast service.\n\nInverse-property: `providesBroadcastService`.')
+    in_language: Language | Text | list[Language | Text] | None = Field(default=None, alias='inLanguage', description='The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].\n\nSupersedes `language`.')
     parent_service: BroadcastService | list[BroadcastService] | None = Field(default=None, alias='parentService', description='A broadcast service to which the broadcast service may belong to such as regional variations of a national channel.')
     video_format: Text | list[Text] | None = Field(default=None, alias='videoFormat', description='The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD, etc.).')

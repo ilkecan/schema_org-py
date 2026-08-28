@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.blog_posting import BlogPosting
 
 class LiveBlogPosting(BlogPosting):
-    __doc__ = 'A [[LiveBlogPosting]] is a [[BlogPosting]] intended to provide a rolling textual coverage of an ongoing event through continuous updates.'
+    __doc__ = 'https://schema.org/LiveBlogPosting\n\nA [[LiveBlogPosting]] is a [[BlogPosting]] intended to provide a rolling textual coverage of an ongoing event through continuous updates.'
     SCHEMA_TYPE: ClassVar[str] = 'LiveBlogPosting'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('LiveBlogPosting', 'BlogPosting', 'SocialMediaPosting', 'Article', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

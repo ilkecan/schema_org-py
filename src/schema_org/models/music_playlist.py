@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class MusicPlaylist(CreativeWork):
-    __doc__ = 'A collection of music tracks in playlist form.'
+    __doc__ = 'https://schema.org/MusicPlaylist\n\nA collection of music tracks in playlist form.'
     SCHEMA_TYPE: ClassVar[str] = 'MusicPlaylist'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MusicPlaylist', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -161,5 +161,5 @@ class MusicPlaylist(CreativeWork):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['MusicPlaylist'] = Field(default='MusicPlaylist', alias='@type', frozen=True)
     num_tracks: Integer | list[Integer] | None = Field(default=None, alias='numTracks', description='The number of tracks in this album or playlist.')
-    track: ItemList | MusicRecording | list[ItemList | MusicRecording] | None = Field(default=None, alias='track', description='A music recording (track)&#x2014;usually a single song. If an ItemList is given, the list should contain items of type MusicRecording.')
-    tracks: MusicRecording | list[MusicRecording] | None = Field(default=None, alias='tracks', description='A music recording (track)&#x2014;usually a single song.')
+    track: ItemList | MusicRecording | list[ItemList | MusicRecording] | None = Field(default=None, alias='track', description='A music recording (track)&#x2014;usually a single song. If an ItemList is given, the list should contain items of type MusicRecording.\n\nSupersedes `tracks`.')
+    tracks: MusicRecording | list[MusicRecording] | None = Field(default=None, alias='tracks', description='A music recording (track)&#x2014;usually a single song.\n\nSuperseded by `track`.')

@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work_series import CreativeWorkSeries
 
 class BookSeries(CreativeWorkSeries):
-    __doc__ = 'A series of books. Included books can be indicated with the hasPart property.'
+    __doc__ = 'https://schema.org/BookSeries\n\nA series of books. Included books can be indicated with the hasPart property.'
     SCHEMA_TYPE: ClassVar[str] = 'BookSeries'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BookSeries', 'CreativeWorkSeries', 'CreativeWork', 'Series', 'Thing', 'Intangible')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

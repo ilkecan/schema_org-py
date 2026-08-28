@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.update_action import UpdateAction
 
 class AddAction(UpdateAction):
-    __doc__ = 'The act of editing by adding an object to a collection.'
+    __doc__ = 'https://schema.org/AddAction\n\nThe act of editing by adding an object to a collection.'
     SCHEMA_TYPE: ClassVar[str] = 'AddAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AddAction', 'UpdateAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

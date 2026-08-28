@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Atlas(CreativeWork):
-    __doc__ = 'A collection or bound volume of maps, charts, plates or tables, physical or in media form illustrating any subject.'
+    __doc__ = 'https://schema.org/Atlas\n\nA collection or bound volume of maps, charts, plates or tables, physical or in media form illustrating any subject.'
     SCHEMA_TYPE: ClassVar[str] = 'Atlas'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Atlas', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

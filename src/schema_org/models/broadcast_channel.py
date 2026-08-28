@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class BroadcastChannel(Intangible):
-    __doc__ = 'A unique instance of a BroadcastService on a CableOrSatelliteService lineup.'
+    __doc__ = 'https://schema.org/BroadcastChannel\n\nA unique instance of a BroadcastService on a CableOrSatelliteService lineup.'
     SCHEMA_TYPE: ClassVar[str] = 'BroadcastChannel'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BroadcastChannel', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -44,4 +44,4 @@ class BroadcastChannel(Intangible):
     broadcast_service_tier: Text | list[Text] | None = Field(default=None, alias='broadcastServiceTier', description='The type of service required to have access to the channel (e.g. Standard or Premium).')
     genre: DefinedTerm | Text | URL | list[DefinedTerm | Text | URL] | None = Field(default=None, alias='genre', description='Genre of the creative work, broadcast channel or group.')
     in_broadcast_lineup: CableOrSatelliteService | list[CableOrSatelliteService] | None = Field(default=None, alias='inBroadcastLineup', description='The CableOrSatelliteService offering the channel.')
-    provides_broadcast_service: BroadcastService | list[BroadcastService] | None = Field(default=None, alias='providesBroadcastService', description='The BroadcastService offered on this channel.')
+    provides_broadcast_service: BroadcastService | list[BroadcastService] | None = Field(default=None, alias='providesBroadcastService', description='The BroadcastService offered on this channel.\n\nInverse-property: `hasBroadcastChannel`.')

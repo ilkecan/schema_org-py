@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.react_action import ReactAction
 
 class EndorseAction(ReactAction):
-    __doc__ = 'An agent approves/certifies/likes/supports/sanctions an object.'
+    __doc__ = 'https://schema.org/EndorseAction\n\nAn agent approves/certifies/likes/supports/sanctions an object.'
     SCHEMA_TYPE: ClassVar[str] = 'EndorseAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('EndorseAction', 'ReactAction', 'AssessAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

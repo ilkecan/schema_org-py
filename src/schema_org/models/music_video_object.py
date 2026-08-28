@@ -23,7 +23,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.media_object import MediaObject
 
 class MusicVideoObject(MediaObject):
-    __doc__ = 'A music video file.'
+    __doc__ = 'https://schema.org/MusicVideoObject\n\nA music video file.'
     SCHEMA_TYPE: ClassVar[str] = 'MusicVideoObject'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MusicVideoObject', 'MediaObject', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

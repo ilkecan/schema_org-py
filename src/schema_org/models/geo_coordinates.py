@@ -14,7 +14,7 @@ from schema_org.datatypes import URL
 from schema_org.models.structured_value import StructuredValue
 
 class GeoCoordinates(StructuredValue):
-    __doc__ = 'The geographic coordinates of a place or event.'
+    __doc__ = 'https://schema.org/GeoCoordinates\n\nThe geographic coordinates of a place or event.'
     SCHEMA_TYPE: ClassVar[str] = 'GeoCoordinates'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('GeoCoordinates', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

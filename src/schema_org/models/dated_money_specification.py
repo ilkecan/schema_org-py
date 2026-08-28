@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.structured_value import StructuredValue
 
 class DatedMoneySpecification(StructuredValue):
-    __doc__ = "A DatedMoneySpecification represents monetary values with optional start and end dates. For example, this could represent an employee's salary over a specific period of time. __Note:__ This type has been superseded by [[MonetaryAmount]], use of that type is recommended."
+    __doc__ = "https://schema.org/DatedMoneySpecification\n\nA DatedMoneySpecification represents monetary values with optional start and end dates. For example, this could represent an employee's salary over a specific period of time. __Note:__ This type has been superseded by [[MonetaryAmount]], use of that type is recommended.\n\nSuperseded by `MonetaryAmount`."
     SCHEMA_TYPE: ClassVar[str] = 'DatedMoneySpecification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DatedMoneySpecification', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

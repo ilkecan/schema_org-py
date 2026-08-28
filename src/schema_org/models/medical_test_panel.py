@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_test import MedicalTest
 
 class MedicalTestPanel(MedicalTest):
-    __doc__ = 'Any collection of tests commonly ordered together.'
+    __doc__ = 'https://schema.org/MedicalTestPanel\n\nAny collection of tests commonly ordered together.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalTestPanel'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalTestPanel', 'MedicalTest', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

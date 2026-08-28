@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class ComicStory(CreativeWork):
-    __doc__ = 'The term "story" is any indivisible, re-printable\n    \tunit of a comic, including the interior stories, covers, and backmatter. Most\n    \tcomics have at least two stories: a cover (ComicCoverArt) and an interior story.'
+    __doc__ = 'https://schema.org/ComicStory\n\nThe term "story" is any indivisible, re-printable\n    \tunit of a comic, including the interior stories, covers, and backmatter. Most\n    \tcomics have at least two stories: a cover (ComicCoverArt) and an interior story.'
     SCHEMA_TYPE: ClassVar[str] = 'ComicStory'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ComicStory', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

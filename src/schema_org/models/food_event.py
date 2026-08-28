@@ -21,7 +21,7 @@ from schema_org.enums import EventStatusType
 from schema_org.models.event import Event
 
 class FoodEvent(Event):
-    __doc__ = 'Event type: Food event.'
+    __doc__ = 'https://schema.org/FoodEvent\n\nEvent type: Food event.'
     SCHEMA_TYPE: ClassVar[str] = 'FoodEvent'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('FoodEvent', 'Event', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

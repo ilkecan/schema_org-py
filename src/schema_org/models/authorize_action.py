@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.allocate_action import AllocateAction
 
 class AuthorizeAction(AllocateAction):
-    __doc__ = 'The act of granting permission to an object.'
+    __doc__ = 'https://schema.org/AuthorizeAction\n\nThe act of granting permission to an object.'
     SCHEMA_TYPE: ClassVar[str] = 'AuthorizeAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AuthorizeAction', 'AllocateAction', 'OrganizeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

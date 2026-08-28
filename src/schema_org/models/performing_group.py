@@ -15,7 +15,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.organization import Organization
 
 class PerformingGroup(Organization):
-    __doc__ = 'A performance group, such as a band, an orchestra, or a circus.'
+    __doc__ = 'https://schema.org/PerformingGroup\n\nA performance group, such as a band, an orchestra, or a circus.'
     SCHEMA_TYPE: ClassVar[str] = 'PerformingGroup'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PerformingGroup', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

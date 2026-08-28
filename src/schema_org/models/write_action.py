@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.create_action import CreateAction
 
 class WriteAction(CreateAction):
-    __doc__ = 'The act of authoring written creative content.'
+    __doc__ = 'https://schema.org/WriteAction\n\nThe act of authoring written creative content.'
     SCHEMA_TYPE: ClassVar[str] = 'WriteAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('WriteAction', 'CreateAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -51,5 +51,5 @@ class WriteAction(CreateAction):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['WriteAction'] = Field(default='WriteAction', alias='@type', frozen=True)
-    in_language: Language | Text | list[Language | Text] | None = Field(default=None, alias='inLanguage', description='The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].')
-    language: Language | list[Language] | None = Field(default=None, alias='language', description='A sub property of instrument. The language used on this action.')
+    in_language: Language | Text | list[Language | Text] | None = Field(default=None, alias='inLanguage', description='The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].\n\nSupersedes `language`.')
+    language: Language | list[Language] | None = Field(default=None, alias='language', description='A sub property of instrument. The language used on this action.\n\nSuperseded by `inLanguage`.')

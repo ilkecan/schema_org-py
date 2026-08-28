@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.episode import Episode
 
 class PodcastEpisode(Episode):
-    __doc__ = 'A single episode of a podcast series.'
+    __doc__ = 'https://schema.org/PodcastEpisode\n\nA single episode of a podcast series.'
     SCHEMA_TYPE: ClassVar[str] = 'PodcastEpisode'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PodcastEpisode', 'Episode', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

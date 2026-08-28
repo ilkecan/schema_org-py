@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Collection(CreativeWork):
-    __doc__ = 'A collection of items, e.g. creative works or products.'
+    __doc__ = 'https://schema.org/Collection\n\nA collection of items, e.g. creative works or products.'
     SCHEMA_TYPE: ClassVar[str] = 'Collection'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Collection', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

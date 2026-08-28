@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.article import Article
 
 class SatiricalArticle(Article):
-    __doc__ = 'An [[Article]] whose content is primarily [[satirical]](https://en.wikipedia.org/wiki/Satire) in nature, i.e. unlikely to be literally true. A satirical article is sometimes but not necessarily also a [[NewsArticle]]. [[ScholarlyArticle]]s are also sometimes satirized.'
+    __doc__ = 'https://schema.org/SatiricalArticle\n\nAn [[Article]] whose content is primarily [[satirical]](https://en.wikipedia.org/wiki/Satire) in nature, i.e. unlikely to be literally true. A satirical article is sometimes but not necessarily also a [[NewsArticle]]. [[ScholarlyArticle]]s are also sometimes satirized.'
     SCHEMA_TYPE: ClassVar[str] = 'SatiricalArticle'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SatiricalArticle', 'Article', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

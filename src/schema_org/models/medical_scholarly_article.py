@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.scholarly_article import ScholarlyArticle
 
 class MedicalScholarlyArticle(ScholarlyArticle):
-    __doc__ = 'A scholarly article in the medical domain.'
+    __doc__ = 'https://schema.org/MedicalScholarlyArticle\n\nA scholarly article in the medical domain.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalScholarlyArticle'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalScholarlyArticle', 'ScholarlyArticle', 'Article', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

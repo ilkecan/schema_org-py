@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.tech_article import TechArticle
 
 class APIReference(TechArticle):
-    __doc__ = 'Reference documentation for application programming interfaces (APIs).'
+    __doc__ = 'https://schema.org/APIReference\n\nReference documentation for application programming interfaces (APIs).'
     SCHEMA_TYPE: ClassVar[str] = 'APIReference'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('APIReference', 'TechArticle', 'Article', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -171,8 +171,8 @@ class APIReference(TechArticle):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['APIReference'] = Field(default='APIReference', alias='@type', frozen=True)
-    assembly: Text | list[Text] | None = Field(default=None, alias='assembly', description='Library file name, e.g., mscorlib.dll, system.web.dll.')
+    assembly: Text | list[Text] | None = Field(default=None, alias='assembly', description='Library file name, e.g., mscorlib.dll, system.web.dll.\n\nSuperseded by `executableLibraryName`.')
     assembly_version: Text | list[Text] | None = Field(default=None, alias='assemblyVersion', description='Associated product/technology version. E.g., .NET Framework 4.5.')
-    executable_library_name: Text | list[Text] | None = Field(default=None, alias='executableLibraryName', description='Library file name, e.g., mscorlib.dll, system.web.dll.')
+    executable_library_name: Text | list[Text] | None = Field(default=None, alias='executableLibraryName', description='Library file name, e.g., mscorlib.dll, system.web.dll.\n\nSupersedes `assembly`.')
     programming_model: Text | list[Text] | None = Field(default=None, alias='programmingModel', description='Indicates whether API is managed or unmanaged.')
     target_platform: Text | list[Text] | None = Field(default=None, alias='targetPlatform', description='Type of app development: phone, Metro style, desktop, XBox, etc.')

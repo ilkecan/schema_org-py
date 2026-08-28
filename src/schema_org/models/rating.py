@@ -14,7 +14,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class Rating(Intangible):
-    __doc__ = 'A rating is an evaluation on a numeric scale, such as 1 to 5 stars.'
+    __doc__ = 'https://schema.org/Rating\n\nA rating is an evaluation on a numeric scale, such as 1 to 5 stars.'
     SCHEMA_TYPE: ClassVar[str] = 'Rating'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Rating', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

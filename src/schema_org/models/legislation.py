@@ -22,7 +22,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Legislation(CreativeWork):
-    __doc__ = 'A legal document such as an act, decree, bill, etc. (enforceable or not) or a component of a legal act (like an article).'
+    __doc__ = 'https://schema.org/Legislation\n\nA legal document such as an act, decree, bill, etc. (enforceable or not) or a component of a legal act (like an article).'
     SCHEMA_TYPE: ClassVar[str] = 'Legislation'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Legislation', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

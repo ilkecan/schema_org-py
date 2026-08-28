@@ -18,7 +18,7 @@ from schema_org.enums import BedType
 from schema_org.models.room import Room
 
 class MeetingRoom(Room):
-    __doc__ = 'A meeting room, conference room, or conference hall is a room provided for singular events such as business conferences and meetings (source: Wikipedia, the free encyclopedia, see <a href="http://en.wikipedia.org/wiki/Conference_hall">http://en.wikipedia.org/wiki/Conference_hall</a>).\n<br /><br />\nSee also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.\n'
+    __doc__ = 'https://schema.org/MeetingRoom\n\nA meeting room, conference room, or conference hall is a room provided for singular events such as business conferences and meetings (source: Wikipedia, the free encyclopedia, see <a href="http://en.wikipedia.org/wiki/Conference_hall">http://en.wikipedia.org/wiki/Conference_hall</a>).\n<br /><br />\nSee also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.\n'
     SCHEMA_TYPE: ClassVar[str] = 'MeetingRoom'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MeetingRoom', 'Room', 'Accommodation', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -15,7 +15,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.project import Project
 
 class ResearchProject(Project):
-    __doc__ = 'A Research project.'
+    __doc__ = 'https://schema.org/ResearchProject\n\nA Research project.'
     SCHEMA_TYPE: ClassVar[str] = 'ResearchProject'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ResearchProject', 'Project', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

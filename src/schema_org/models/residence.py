@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.place import Place
 
 class Residence(Place):
-    __doc__ = 'The place where a person lives.'
+    __doc__ = 'https://schema.org/Residence\n\nThe place where a person lives.'
     SCHEMA_TYPE: ClassVar[str] = 'Residence'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Residence', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

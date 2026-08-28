@@ -14,7 +14,7 @@ from schema_org.enums import ContactPointOption
 from schema_org.models.contact_point import ContactPoint
 
 class PostalAddress(ContactPoint):
-    __doc__ = 'The mailing address.'
+    __doc__ = 'https://schema.org/PostalAddress\n\nThe mailing address.'
     SCHEMA_TYPE: ClassVar[str] = 'PostalAddress'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PostalAddress', 'ContactPoint', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -17,7 +17,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.action import Action
 
 class SeekToAction(Action):
-    __doc__ = 'This is the [[Action]] of navigating to a specific [[startOffset]] timestamp within a [[VideoObject]], typically represented with a URL template structure.'
+    __doc__ = 'https://schema.org/SeekToAction\n\nThis is the [[Action]] of navigating to a specific [[startOffset]] timestamp within a [[VideoObject]], typically represented with a URL template structure.'
     SCHEMA_TYPE: ClassVar[str] = 'SeekToAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SeekToAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

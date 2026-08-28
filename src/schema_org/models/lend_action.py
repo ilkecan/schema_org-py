@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.transfer_action import TransferAction
 
 class LendAction(TransferAction):
-    __doc__ = 'The act of providing an object under an agreement that it will be returned at a later date. Reciprocal of BorrowAction.\\n\\nRelated actions:\\n\\n* [[BorrowAction]]: Reciprocal of LendAction.'
+    __doc__ = 'https://schema.org/LendAction\n\nThe act of providing an object under an agreement that it will be returned at a later date. Reciprocal of BorrowAction.\\n\\nRelated actions:\\n\\n* [[BorrowAction]]: Reciprocal of LendAction.'
     SCHEMA_TYPE: ClassVar[str] = 'LendAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('LendAction', 'TransferAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

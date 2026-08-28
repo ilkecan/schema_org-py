@@ -23,7 +23,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class WebPageElement(CreativeWork):
-    __doc__ = 'A web page element, like a table or an image.'
+    __doc__ = 'https://schema.org/WebPageElement\n\nA web page element, like a table or an image.'
     SCHEMA_TYPE: ClassVar[str] = 'WebPageElement'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('WebPageElement', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

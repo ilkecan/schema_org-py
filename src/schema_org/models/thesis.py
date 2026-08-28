@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Thesis(CreativeWork):
-    __doc__ = 'A thesis or dissertation document submitted in support of candidature for an academic degree or professional qualification.'
+    __doc__ = 'https://schema.org/Thesis\n\nA thesis or dissertation document submitted in support of candidature for an academic degree or professional qualification.'
     SCHEMA_TYPE: ClassVar[str] = 'Thesis'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Thesis', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

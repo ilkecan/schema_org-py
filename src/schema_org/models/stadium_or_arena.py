@@ -19,7 +19,7 @@ from schema_org.models.civic_structure import CivicStructure
 from schema_org.models.sports_activity_location import SportsActivityLocation
 
 class StadiumOrArena(CivicStructure, SportsActivityLocation):
-    __doc__ = 'A stadium.'
+    __doc__ = 'https://schema.org/StadiumOrArena\n\nA stadium.'
     SCHEMA_TYPE: ClassVar[str] = 'StadiumOrArena'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('StadiumOrArena', 'CivicStructure', 'SportsActivityLocation', 'Place', 'LocalBusiness', 'Thing', 'Organization')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

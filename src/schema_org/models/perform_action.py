@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.play_action import PlayAction
 
 class PerformAction(PlayAction):
-    __doc__ = 'The act of participating in performance arts.'
+    __doc__ = 'https://schema.org/PerformAction\n\nThe act of participating in performance arts.'
     SCHEMA_TYPE: ClassVar[str] = 'PerformAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PerformAction', 'PlayAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

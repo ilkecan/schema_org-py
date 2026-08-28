@@ -25,7 +25,7 @@ from schema_org.models.product import Product
 from schema_org.models.substance import Substance
 
 class DietarySupplement(Product, Substance):
-    __doc__ = 'A product taken by mouth that contains a dietary ingredient intended to supplement the diet. Dietary ingredients may include vitamins, minerals, herbs or other botanicals, amino acids, and substances such as enzymes, organ tissues, glandulars and metabolites.'
+    __doc__ = 'https://schema.org/DietarySupplement\n\nA product taken by mouth that contains a dietary ingredient intended to supplement the diet. Dietary ingredients may include vitamins, minerals, herbs or other botanicals, amino acids, and substances such as enzymes, organ tissues, glandulars and metabolites.'
     SCHEMA_TYPE: ClassVar[str] = 'DietarySupplement'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DietarySupplement', 'Product', 'Substance', 'Thing', 'MedicalEntity')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

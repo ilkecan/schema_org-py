@@ -15,7 +15,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.service import Service
 
 class WebAPI(Service):
-    __doc__ = 'An application programming interface accessible over Web/Internet technologies.'
+    __doc__ = 'https://schema.org/WebAPI\n\nAn application programming interface accessible over Web/Internet technologies.'
     SCHEMA_TYPE: ClassVar[str] = 'WebAPI'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('WebAPI', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

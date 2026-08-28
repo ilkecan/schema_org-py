@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Blog(CreativeWork):
-    __doc__ = 'A [blog](https://en.wikipedia.org/wiki/Blog), sometimes known as a "weblog". Note that the individual posts ([[BlogPosting]]s) in a [[Blog]] are often colloquially referred to by the same term.'
+    __doc__ = 'https://schema.org/Blog\n\nA [blog](https://en.wikipedia.org/wiki/Blog), sometimes known as a "weblog". Note that the individual posts ([[BlogPosting]]s) in a [[Blog]] are often colloquially referred to by the same term.'
     SCHEMA_TYPE: ClassVar[str] = 'Blog'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Blog', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -160,6 +160,6 @@ class Blog(CreativeWork):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['Blog'] = Field(default='Blog', alias='@type', frozen=True)
-    blog_post: BlogPosting | list[BlogPosting] | None = Field(default=None, alias='blogPost', description='A posting that is part of this blog.')
-    blog_posts: BlogPosting | list[BlogPosting] | None = Field(default=None, alias='blogPosts', description='Indicates a post that is part of a [[Blog]]. Note that historically, what we term a "Blog" was once known as a "weblog", and that what we term a "BlogPosting" is now often colloquially referred to as a "blog".')
+    blog_post: BlogPosting | list[BlogPosting] | None = Field(default=None, alias='blogPost', description='A posting that is part of this blog.\n\nSupersedes `blogPosts`.')
+    blog_posts: BlogPosting | list[BlogPosting] | None = Field(default=None, alias='blogPosts', description='Indicates a post that is part of a [[Blog]]. Note that historically, what we term a "Blog" was once known as a "weblog", and that what we term a "BlogPosting" is now often colloquially referred to as a "blog".\n\nSuperseded by `blogPost`.')
     issn: Text | list[Text] | None = Field(default=None, alias='issn', description='The International Standard Serial Number (ISSN) that identifies this serial publication. You can repeat this property to identify different formats of, or the linking ISSN (ISSN-L) for, this serial publication.')

@@ -19,7 +19,7 @@ from schema_org.models.civic_structure import CivicStructure
 from schema_org.models.organization import Organization
 
 class EducationalOrganization(CivicStructure, Organization):
-    __doc__ = 'An educational organization.'
+    __doc__ = 'https://schema.org/EducationalOrganization\n\nAn educational organization.'
     SCHEMA_TYPE: ClassVar[str] = 'EducationalOrganization'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('EducationalOrganization', 'CivicStructure', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -149,4 +149,4 @@ class EducationalOrganization(CivicStructure, Organization):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['EducationalOrganization'] = Field(default='EducationalOrganization', alias='@type', frozen=True)
-    alumni: Person | list[Person] | None = Field(default=None, alias='alumni', description='Alumni of an organization.')
+    alumni: Person | list[Person] | None = Field(default=None, alias='alumni', description='Alumni of an organization.\n\nInverse-property: `alumniOf`.')

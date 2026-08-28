@@ -24,7 +24,7 @@ from schema_org.models.item_list import ItemList
 from schema_org.models.list_item import ListItem
 
 class HowToSection(CreativeWork, ItemList, ListItem):
-    __doc__ = 'A sub-grouping of steps in the instructions for how to achieve a result (e.g. steps for making a pie crust within a pie recipe).'
+    __doc__ = 'https://schema.org/HowToSection\n\nA sub-grouping of steps in the instructions for how to achieve a result (e.g. steps for making a pie crust within a pie recipe).'
     SCHEMA_TYPE: ClassVar[str] = 'HowToSection'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('HowToSection', 'CreativeWork', 'ItemList', 'ListItem', 'Thing', 'Intangible')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -168,4 +168,4 @@ class HowToSection(CreativeWork, ItemList, ListItem):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['HowToSection'] = Field(default='HowToSection', alias='@type', frozen=True)
-    steps: CreativeWork | ItemList | Text | list[CreativeWork | ItemList | Text] | None = Field(default=None, alias='steps', description="A single step item (as HowToStep, text, document, video, etc.) or a HowToSection (originally misnamed 'steps'; 'step' is preferred).")
+    steps: CreativeWork | ItemList | Text | list[CreativeWork | ItemList | Text] | None = Field(default=None, alias='steps', description="A single step item (as HowToStep, text, document, video, etc.) or a HowToSection (originally misnamed 'steps'; 'step' is preferred).\n\nSuperseded by `step`.")

@@ -17,7 +17,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.transfer_action import TransferAction
 
 class DonateAction(TransferAction):
-    __doc__ = 'The act of providing goods, services, or money without compensation, often for philanthropic reasons.'
+    __doc__ = 'https://schema.org/DonateAction\n\nThe act of providing goods, services, or money without compensation, often for philanthropic reasons.'
     SCHEMA_TYPE: ClassVar[str] = 'DonateAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DonateAction', 'TransferAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.structured_value import StructuredValue
 
 class NutritionInformation(StructuredValue):
-    __doc__ = 'Nutritional information about the recipe.'
+    __doc__ = 'https://schema.org/NutritionInformation\n\nNutritional information about the recipe.'
     SCHEMA_TYPE: ClassVar[str] = 'NutritionInformation'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('NutritionInformation', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

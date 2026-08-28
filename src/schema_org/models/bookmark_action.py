@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.organize_action import OrganizeAction
 
 class BookmarkAction(OrganizeAction):
-    __doc__ = 'An agent bookmarks/flags/labels/tags/marks an object.'
+    __doc__ = 'https://schema.org/BookmarkAction\n\nAn agent bookmarks/flags/labels/tags/marks an object.'
     SCHEMA_TYPE: ClassVar[str] = 'BookmarkAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BookmarkAction', 'OrganizeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

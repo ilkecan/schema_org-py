@@ -21,7 +21,7 @@ from schema_org.enums import EventStatusType
 from schema_org.models.event import Event
 
 class PerformingArtsEvent(Event):
-    __doc__ = 'Live performance <a class="localLink" href="http://schema.org/Event">Event of the performing arts (music, theatre, dance, acrobatics, spoken word), including performance art and performative sports (e.g. choreographed forms of martial arts, figure skating, competitive ballroom dancing).<br/><br/>Note: Use <a class="localLink" href="http://schema.org/additionalType">additionalType</a> to differentiate between productions / shows (PerformanceWork, EventSeries), tours (EventSeries), and individual performances.'
+    __doc__ = 'https://schema.org/PerformingArtsEvent\n\nLive performance <a class="localLink" href="http://schema.org/Event">Event of the performing arts (music, theatre, dance, acrobatics, spoken word), including performance art and performative sports (e.g. choreographed forms of martial arts, figure skating, competitive ballroom dancing).<br/><br/>Note: Use <a class="localLink" href="http://schema.org/additionalType">additionalType</a> to differentiate between productions / shows (PerformanceWork, EventSeries), tours (EventSeries), and individual performances.'
     SCHEMA_TYPE: ClassVar[str] = 'PerformingArtsEvent'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PerformingArtsEvent', 'Event', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

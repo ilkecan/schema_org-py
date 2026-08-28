@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.communicate_action import CommunicateAction
 
 class ReplyAction(CommunicateAction):
-    __doc__ = 'The act of responding to a question/message asked/sent by the object. Related to [[AskAction]].\\n\\nRelated actions:\\n\\n* [[AskAction]]: Appears generally as an origin of a ReplyAction.'
+    __doc__ = 'https://schema.org/ReplyAction\n\nThe act of responding to a question/message asked/sent by the object. Related to [[AskAction]].\\n\\nRelated actions:\\n\\n* [[AskAction]]: Appears generally as an origin of a ReplyAction.'
     SCHEMA_TYPE: ClassVar[str] = 'ReplyAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ReplyAction', 'CommunicateAction', 'InteractAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

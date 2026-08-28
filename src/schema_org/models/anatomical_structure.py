@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_entity import MedicalEntity
 
 class AnatomicalStructure(MedicalEntity):
-    __doc__ = 'Any part of the human body, typically a component of an anatomical system. Organs, tissues, and cells are all anatomical structures.'
+    __doc__ = 'https://schema.org/AnatomicalStructure\n\nAny part of the human body, typically a component of an anatomical system. Organs, tissues, and cells are all anatomical structures.'
     SCHEMA_TYPE: ClassVar[str] = 'AnatomicalStructure'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AnatomicalStructure', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

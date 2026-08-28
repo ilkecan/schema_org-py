@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.achieve_action import AchieveAction
 
 class TieAction(AchieveAction):
-    __doc__ = 'The act of reaching a draw in a competitive activity.'
+    __doc__ = 'https://schema.org/TieAction\n\nThe act of reaching a draw in a competitive activity.'
     SCHEMA_TYPE: ClassVar[str] = 'TieAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('TieAction', 'AchieveAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

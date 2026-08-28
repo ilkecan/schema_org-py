@@ -18,7 +18,7 @@ from schema_org.enums import PriceTypeEnumeration
 from schema_org.models.price_specification import PriceSpecification
 
 class CompoundPriceSpecification(PriceSpecification):
-    __doc__ = 'A compound price specification is one that bundles multiple prices that all apply in combination for different dimensions of consumption. Use the name property of the attached unit price specification for indicating the dimension of a price component (e.g. "electricity" or "final cleaning").'
+    __doc__ = 'https://schema.org/CompoundPriceSpecification\n\nA compound price specification is one that bundles multiple prices that all apply in combination for different dimensions of consumption. Use the name property of the attached unit price specification for indicating the dimension of a price component (e.g. "electricity" or "final cleaning").'
     SCHEMA_TYPE: ClassVar[str] = 'CompoundPriceSpecification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CompoundPriceSpecification', 'PriceSpecification', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

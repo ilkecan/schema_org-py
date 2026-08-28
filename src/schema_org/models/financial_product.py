@@ -16,7 +16,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.service import Service
 
 class FinancialProduct(Service):
-    __doc__ = 'A product provided to consumers and businesses by financial institutions such as banks, insurance companies, brokerage firms, consumer finance companies, and investment companies which comprise the financial services industry.'
+    __doc__ = 'https://schema.org/FinancialProduct\n\nA product provided to consumers and businesses by financial institutions such as banks, insurance companies, brokerage firms, consumer finance companies, and investment companies which comprise the financial services industry.'
     SCHEMA_TYPE: ClassVar[str] = 'FinancialProduct'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('FinancialProduct', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

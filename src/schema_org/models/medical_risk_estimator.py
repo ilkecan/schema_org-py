@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_entity import MedicalEntity
 
 class MedicalRiskEstimator(MedicalEntity):
-    __doc__ = 'Any rule set or interactive tool for estimating the risk of developing a complication or condition.'
+    __doc__ = 'https://schema.org/MedicalRiskEstimator\n\nAny rule set or interactive tool for estimating the risk of developing a complication or condition.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalRiskEstimator'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalRiskEstimator', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.software_application import SoftwareApplication
 
 class WebApplication(SoftwareApplication):
-    __doc__ = 'Web applications.'
+    __doc__ = 'https://schema.org/WebApplication\n\nWeb applications.'
     SCHEMA_TYPE: ClassVar[str] = 'WebApplication'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('WebApplication', 'SoftwareApplication', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

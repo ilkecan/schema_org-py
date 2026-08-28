@@ -16,7 +16,7 @@ from schema_org.enums import DeliveryMethod
 from schema_org.models.intangible import Intangible
 
 class ParcelDelivery(Intangible):
-    __doc__ = 'The delivery of a parcel either via the postal service or a commercial service.'
+    __doc__ = 'https://schema.org/ParcelDelivery\n\nThe delivery of a parcel either via the postal service or a commercial service.'
     SCHEMA_TYPE: ClassVar[str] = 'ParcelDelivery'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ParcelDelivery', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -48,7 +48,7 @@ class ParcelDelivery(Intangible):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['ParcelDelivery'] = Field(default='ParcelDelivery', alias='@type', frozen=True)
-    carrier: Organization | list[Organization] | None = Field(default=None, alias='carrier', description="'carrier' is an out-dated term indicating the 'provider' for parcel delivery and flights.")
+    carrier: Organization | list[Organization] | None = Field(default=None, alias='carrier', description="'carrier' is an out-dated term indicating the 'provider' for parcel delivery and flights.\n\nSuperseded by `provider`.")
     delivery_address: PostalAddress | list[PostalAddress] | None = Field(default=None, alias='deliveryAddress', description='Destination address.')
     delivery_status: DeliveryEvent | list[DeliveryEvent] | None = Field(default=None, alias='deliveryStatus', description='New entry added as the package passes through each leg of its journey (from shipment to final delivery).')
     expected_arrival_from: Date | DateTime | list[Date | DateTime] | None = Field(default=None, alias='expectedArrivalFrom', description='The earliest date the package may arrive.')
@@ -57,6 +57,6 @@ class ParcelDelivery(Intangible):
     item_shipped: Product | list[Product] | None = Field(default=None, alias='itemShipped', description='Item(s) being shipped.')
     origin_address: PostalAddress | list[PostalAddress] | None = Field(default=None, alias='originAddress', description="Shipper's address.")
     part_of_order: Order | list[Order] | None = Field(default=None, alias='partOfOrder', description='The overall order the items in this delivery were included in.')
-    provider: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='provider', description='The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.')
+    provider: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='provider', description='The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.\n\nSupersedes `carrier`.')
     tracking_number: Text | list[Text] | None = Field(default=None, alias='trackingNumber', description='Shipper tracking number.')
     tracking_url: URL | list[URL] | None = Field(default=None, alias='trackingUrl', description='Tracking url for the parcel delivery.')

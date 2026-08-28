@@ -18,7 +18,7 @@ from schema_org.enums import BoardingPolicyType
 from schema_org.models.trip import Trip
 
 class Flight(Trip):
-    __doc__ = 'An airline flight.'
+    __doc__ = 'https://schema.org/Flight\n\nAn airline flight.'
     SCHEMA_TYPE: ClassVar[str] = 'Flight'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Flight', 'Trip', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -66,7 +66,7 @@ class Flight(Trip):
     arrival_gate: Text | list[Text] | None = Field(default=None, alias='arrivalGate', description="Identifier of the flight's arrival gate.")
     arrival_terminal: Text | list[Text] | None = Field(default=None, alias='arrivalTerminal', description="Identifier of the flight's arrival terminal.")
     boarding_policy: BoardingPolicyType | list[BoardingPolicyType] | None = Field(default=None, alias='boardingPolicy', description='The type of boarding policy used by the airline (e.g. zone-based or group-based).')
-    carrier: Organization | list[Organization] | None = Field(default=None, alias='carrier', description="'carrier' is an out-dated term indicating the 'provider' for parcel delivery and flights.")
+    carrier: Organization | list[Organization] | None = Field(default=None, alias='carrier', description="'carrier' is an out-dated term indicating the 'provider' for parcel delivery and flights.\n\nSuperseded by `provider`.")
     departure_airport: Airport | list[Airport] | None = Field(default=None, alias='departureAirport', description='The airport where the flight originates.')
     departure_gate: Text | list[Text] | None = Field(default=None, alias='departureGate', description="Identifier of the flight's departure gate.")
     departure_terminal: Text | list[Text] | None = Field(default=None, alias='departureTerminal', description="Identifier of the flight's departure terminal.")
@@ -74,5 +74,5 @@ class Flight(Trip):
     flight_distance: Distance | Text | list[Distance | Text] | None = Field(default=None, alias='flightDistance', description='The distance of the flight.')
     flight_number: Text | list[Text] | None = Field(default=None, alias='flightNumber', description="The unique identifier for a flight including the airline IATA code. For example, if describing United flight 110, where the IATA code for United is 'UA', the flightNumber is 'UA110'.")
     meal_service: Text | list[Text] | None = Field(default=None, alias='mealService', description='Description of the meals that will be provided or available for purchase.')
-    seller: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='seller', description='An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.')
+    seller: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='seller', description='An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.\n\nSupersedes `merchant`.')
     web_checkin_time: DateTime | list[DateTime] | None = Field(default=None, alias='webCheckinTime', description='The time when a passenger can check into the flight online.')

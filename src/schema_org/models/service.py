@@ -15,7 +15,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.intangible import Intangible
 
 class Service(Intangible):
-    __doc__ = 'A service provided by an organization, e.g. delivery service, print services, etc.'
+    __doc__ = 'https://schema.org/Service\n\nA service provided by an organization, e.g. delivery service, print services, etc.'
     SCHEMA_TYPE: ClassVar[str] = 'Service'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -61,12 +61,12 @@ class Service(Intangible):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['Service'] = Field(default='Service', alias='@type', frozen=True)
     aggregate_rating: AggregateRating | list[AggregateRating] | None = Field(default=None, alias='aggregateRating', description='The overall rating, based on a collection of reviews or ratings, of the item.')
-    area_served: AdministrativeArea | GeoShape | Place | Text | list[AdministrativeArea | GeoShape | Place | Text] | None = Field(default=None, alias='areaServed', description='The geographic area where a service or offered item is provided.')
-    audience: Audience | list[Audience] | None = Field(default=None, alias='audience', description='An intended audience, i.e. a group for whom something was created.')
+    area_served: AdministrativeArea | GeoShape | Place | Text | list[AdministrativeArea | GeoShape | Place | Text] | None = Field(default=None, alias='areaServed', description='The geographic area where a service or offered item is provided.\n\nSupersedes `serviceArea`.')
+    audience: Audience | list[Audience] | None = Field(default=None, alias='audience', description='An intended audience, i.e. a group for whom something was created.\n\nSupersedes `serviceAudience`.')
     available_channel: ServiceChannel | list[ServiceChannel] | None = Field(default=None, alias='availableChannel', description='A means of accessing the service (e.g. a phone bank, a web site, a location, etc.).')
-    award: Text | list[Text] | None = Field(default=None, alias='award', description='An award won by or for this item.')
+    award: Text | list[Text] | None = Field(default=None, alias='award', description='An award won by or for this item.\n\nSupersedes `awards`.')
     brand: Brand | Organization | list[Brand | Organization] | None = Field(default=None, alias='brand', description='The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.')
-    broker: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='broker', description='An entity that arranges for an exchange between a buyer and a seller.  In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.  If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred.')
+    broker: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='broker', description='An entity that arranges for an exchange between a buyer and a seller.  In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.  If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred.\n\nSupersedes `bookingAgent`.')
     category: CategoryCode | PhysicalActivityCategory | Text | Thing | URL | list[CategoryCode | PhysicalActivityCategory | Text | Thing | URL] | None = Field(default=None, alias='category', description='A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.')
     has_certification: Certification | list[Certification] | None = Field(default=None, alias='hasCertification', description='Certification information about a product, organization, service, place, or person.')
     has_offer_catalog: OfferCatalog | list[OfferCatalog] | None = Field(default=None, alias='hasOfferCatalog', description='Indicates an OfferCatalog listing for this Organization, Person, or Service.')
@@ -74,14 +74,14 @@ class Service(Intangible):
     is_related_to: Product | Service | list[Product | Service] | None = Field(default=None, alias='isRelatedTo', description='A pointer to another, somehow related product (or multiple products).')
     is_similar_to: Product | Service | list[Product | Service] | None = Field(default=None, alias='isSimilarTo', description='A pointer to another, functionally similar product (or multiple products).')
     logo: ImageObject | URL | list[ImageObject | URL] | None = Field(default=None, alias='logo', description='An associated logo.')
-    offers: Demand | Offer | list[Demand | Offer] | None = Field(default=None, alias='offers', description='An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.\n      ')
-    produces: Thing | list[Thing] | None = Field(default=None, alias='produces', description='The tangible thing generated by the service, e.g. a passport, permit, etc.')
-    provider: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='provider', description='The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.')
+    offers: Demand | Offer | list[Demand | Offer] | None = Field(default=None, alias='offers', description='An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.\n      \n\nInverse-property: `itemOffered`.')
+    produces: Thing | list[Thing] | None = Field(default=None, alias='produces', description='The tangible thing generated by the service, e.g. a passport, permit, etc.\n\nSuperseded by `serviceOutput`.')
+    provider: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='provider', description='The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.\n\nSupersedes `carrier`.')
     provider_mobility: Text | list[Text] | None = Field(default=None, alias='providerMobility', description="Indicates the mobility of a provided service (e.g. 'static', 'dynamic').")
-    review: Review | list[Review] | None = Field(default=None, alias='review', description='A review of the item.')
-    service_area: AdministrativeArea | GeoShape | Place | list[AdministrativeArea | GeoShape | Place] | None = Field(default=None, alias='serviceArea', description='The geographic area where the service is provided.')
-    service_audience: Audience | list[Audience] | None = Field(default=None, alias='serviceAudience', description='The audience eligible for this service.')
-    service_output: Thing | list[Thing] | None = Field(default=None, alias='serviceOutput', description='The tangible thing generated by the service, e.g. a passport, permit, etc.')
+    review: Review | list[Review] | None = Field(default=None, alias='review', description='A review of the item.\n\nSupersedes `reviews`.')
+    service_area: AdministrativeArea | GeoShape | Place | list[AdministrativeArea | GeoShape | Place] | None = Field(default=None, alias='serviceArea', description='The geographic area where the service is provided.\n\nSupersedes `area`.\n\nSuperseded by `areaServed`.')
+    service_audience: Audience | list[Audience] | None = Field(default=None, alias='serviceAudience', description='The audience eligible for this service.\n\nSuperseded by `audience`.')
+    service_output: Thing | list[Thing] | None = Field(default=None, alias='serviceOutput', description='The tangible thing generated by the service, e.g. a passport, permit, etc.\n\nSupersedes `produces`.')
     service_type: GovernmentBenefitsType | Text | list[GovernmentBenefitsType | Text] | None = Field(default=None, alias='serviceType', description="The type of service being offered, e.g. veterans' benefits, emergency relief, etc.")
     slogan: Text | list[Text] | None = Field(default=None, alias='slogan', description='A slogan or motto associated with the item.')
     terms_of_service: Text | URL | list[Text | URL] | None = Field(default=None, alias='termsOfService', description='Human-readable terms of service documentation.')

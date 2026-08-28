@@ -23,7 +23,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.media_object import MediaObject
 
 class ImageObject(MediaObject):
-    __doc__ = 'An image file.'
+    __doc__ = 'https://schema.org/ImageObject\n\nAn image file.'
     SCHEMA_TYPE: ClassVar[str] = 'ImageObject'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ImageObject', 'MediaObject', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

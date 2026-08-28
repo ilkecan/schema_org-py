@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Chapter(CreativeWork):
-    __doc__ = 'One of the sections into which a book is divided. A chapter usually has a section number or a name.'
+    __doc__ = 'https://schema.org/Chapter\n\nOne of the sections into which a book is divided. A chapter usually has a section number or a name.'
     SCHEMA_TYPE: ClassVar[str] = 'Chapter'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Chapter', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

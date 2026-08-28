@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.government_office import GovernmentOffice
 
 class PostOffice(GovernmentOffice):
-    __doc__ = 'A post office.'
+    __doc__ = 'https://schema.org/PostOffice\n\nA post office.'
     SCHEMA_TYPE: ClassVar[str] = 'PostOffice'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PostOffice', 'GovernmentOffice', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

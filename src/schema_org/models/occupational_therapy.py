@@ -19,7 +19,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_therapy import MedicalTherapy
 
 class OccupationalTherapy(MedicalTherapy):
-    __doc__ = 'A treatment of people with physical, emotional, or social problems, using purposeful activity to help them overcome or learn to deal with their problems.'
+    __doc__ = 'https://schema.org/OccupationalTherapy\n\nA treatment of people with physical, emotional, or social problems, using purposeful activity to help them overcome or learn to deal with their problems.'
     SCHEMA_TYPE: ClassVar[str] = 'OccupationalTherapy'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('OccupationalTherapy', 'MedicalTherapy', 'TherapeuticProcedure', 'MedicalProcedure', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

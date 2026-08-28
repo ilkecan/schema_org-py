@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Message(CreativeWork):
-    __doc__ = 'A single message from a sender to one or more organizations or people.'
+    __doc__ = 'https://schema.org/Message\n\nA single message from a sender to one or more organizations or people.'
     SCHEMA_TYPE: ClassVar[str] = 'Message'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Message', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

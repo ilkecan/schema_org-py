@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.trip import Trip
 
 class TouristTrip(Trip):
-    __doc__ = 'A tourist trip. A created itinerary of visits to one or more places of interest ([[TouristAttraction]]/[[TouristDestination]]) often linked by a similar theme, geographic area, or interest to a particular [[touristType]]. The [UNWTO](http://www2.unwto.org/) defines tourism trip as the Trip taken by visitors.\n  (See examples below.)'
+    __doc__ = 'https://schema.org/TouristTrip\n\nA tourist trip. A created itinerary of visits to one or more places of interest ([[TouristAttraction]]/[[TouristDestination]]) often linked by a similar theme, geographic area, or interest to a particular [[touristType]]. The [UNWTO](http://www2.unwto.org/) defines tourism trip as the Trip taken by visitors.\n  (See examples below.)'
     SCHEMA_TYPE: ClassVar[str] = 'TouristTrip'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('TouristTrip', 'Trip', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

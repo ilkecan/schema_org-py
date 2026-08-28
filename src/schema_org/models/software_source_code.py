@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class SoftwareSourceCode(CreativeWork):
-    __doc__ = 'Computer programming source code. Example: Full (compile ready) solutions, code snippet samples, scripts, templates.'
+    __doc__ = 'https://schema.org/SoftwareSourceCode\n\nComputer programming source code. Example: Full (compile ready) solutions, code snippet samples, scripts, templates.\n\nSupersedes `Code`.'
     SCHEMA_TYPE: ClassVar[str] = 'SoftwareSourceCode'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SoftwareSourceCode', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -165,9 +165,9 @@ class SoftwareSourceCode(CreativeWork):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['SoftwareSourceCode'] = Field(default='SoftwareSourceCode', alias='@type', frozen=True)
     code_repository: URL | list[URL] | None = Field(default=None, alias='codeRepository', description='Link to the repository where the un-compiled, human readable code and related code is located (SVN, GitHub, CodePlex).')
-    code_sample_type: Text | list[Text] | None = Field(default=None, alias='codeSampleType', description='What type of code sample: full (compile ready) solution, code snippet, inline code, scripts, template.')
+    code_sample_type: Text | list[Text] | None = Field(default=None, alias='codeSampleType', description='What type of code sample: full (compile ready) solution, code snippet, inline code, scripts, template.\n\nSupersedes `sampleType`.')
     programming_language: ComputerLanguage | Text | list[ComputerLanguage | Text] | None = Field(default=None, alias='programmingLanguage', description='The computer programming language.')
-    runtime: Text | list[Text] | None = Field(default=None, alias='runtime', description='Runtime platform or script interpreter dependencies (example: Java v1, Python 2.3, .NET Framework 3.0).')
-    runtime_platform: RuntimePlatform | Text | list[RuntimePlatform | Text] | None = Field(default=None, alias='runtimePlatform', description='Runtime platform or script interpreter dependencies (example: Java v1, Python 2.3, .NET Framework 3.0).')
-    sample_type: Text | list[Text] | None = Field(default=None, alias='sampleType', description='What type of code sample: full (compile ready) solution, code snippet, inline code, scripts, template.')
+    runtime: Text | list[Text] | None = Field(default=None, alias='runtime', description='Runtime platform or script interpreter dependencies (example: Java v1, Python 2.3, .NET Framework 3.0).\n\nSuperseded by `runtimePlatform`.')
+    runtime_platform: RuntimePlatform | Text | list[RuntimePlatform | Text] | None = Field(default=None, alias='runtimePlatform', description='Runtime platform or script interpreter dependencies (example: Java v1, Python 2.3, .NET Framework 3.0).\n\nSupersedes `runtime`.')
+    sample_type: Text | list[Text] | None = Field(default=None, alias='sampleType', description='What type of code sample: full (compile ready) solution, code snippet, inline code, scripts, template.\n\nSuperseded by `codeSampleType`.')
     target_product: SoftwareApplication | list[SoftwareApplication] | None = Field(default=None, alias='targetProduct', description='Target Operating System / Product to which the code applies.  If applies to several versions, just the product name can be used.')

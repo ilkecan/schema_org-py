@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class GeospatialGeometry(Intangible):
-    __doc__ = '(Eventually to be defined as) a supertype of GeoShape designed to accommodate definitions from Geo-Spatial best practices.'
+    __doc__ = 'https://schema.org/GeospatialGeometry\n\n(Eventually to be defined as) a supertype of GeoShape designed to accommodate definitions from Geo-Spatial best practices.'
     SCHEMA_TYPE: ClassVar[str] = 'GeospatialGeometry'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('GeospatialGeometry', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

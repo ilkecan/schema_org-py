@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class Role(Intangible):
-    __doc__ = "Represents additional information about a relationship or property. For example a Role can be used to say that a 'member' role linking some SportsTeam to a player occurred during a particular time period. Or that a Person's 'actor' role in a Movie was for some particular characterName. Such properties can be attached to a Role entity, which is then associated with the main entities using ordinary properties like 'member' or 'actor'.\\n\\nSee also [blog post](https://blog.schema.org/2014/06/16/introducing-role/)."
+    __doc__ = "https://schema.org/Role\n\nRepresents additional information about a relationship or property. For example a Role can be used to say that a 'member' role linking some SportsTeam to a player occurred during a particular time period. Or that a Person's 'actor' role in a Movie was for some particular characterName. Such properties can be attached to a Role entity, which is then associated with the main entities using ordinary properties like 'member' or 'actor'.\\n\\nSee also [blog post](https://blog.schema.org/2014/06/16/introducing-role/)."
     SCHEMA_TYPE: ClassVar[str] = 'Role'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Role', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -40,6 +40,6 @@ class Role(Intangible):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['Role'] = Field(default='Role', alias='@type', frozen=True)
     end_date: Date | DateTime | list[Date | DateTime] | None = Field(default=None, alias='endDate', description='The end date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).')
-    named_position: Text | URL | list[Text | URL] | None = Field(default=None, alias='namedPosition', description="A position played, performed or filled by a person or organization, as part of an organization. For example, an athlete in a SportsTeam might play in the position named 'Quarterback'.")
-    role_name: Text | URL | list[Text | URL] | None = Field(default=None, alias='roleName', description="A role played, performed or filled by a person or organization. For example, the team of creators for a comic book might fill the roles named 'inker', 'penciller', and 'letterer'; or an athlete in a SportsTeam might play in the position named 'Quarterback'.")
+    named_position: Text | URL | list[Text | URL] | None = Field(default=None, alias='namedPosition', description="A position played, performed or filled by a person or organization, as part of an organization. For example, an athlete in a SportsTeam might play in the position named 'Quarterback'.\n\nSuperseded by `roleName`.")
+    role_name: Text | URL | list[Text | URL] | None = Field(default=None, alias='roleName', description="A role played, performed or filled by a person or organization. For example, the team of creators for a comic book might fill the roles named 'inker', 'penciller', and 'letterer'; or an athlete in a SportsTeam might play in the position named 'Quarterback'.\n\nSupersedes `namedPosition`.")
     start_date: Date | DateTime | list[Date | DateTime] | None = Field(default=None, alias='startDate', description='The start date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).')

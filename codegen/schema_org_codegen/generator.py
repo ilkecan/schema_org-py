@@ -7,10 +7,10 @@ import shutil
 import tempfile
 from typing import Iterable
 
-from .naming import constant_name, enum_member_name, module_name, property_name, snake_name
+from .naming import constant_name, enum_member_name, module_name, property_name
 from .parser import parse
 from .schema_version import SchemaVersion
-from .vocabulary import Vocabulary
+from .vocabulary import ValidationError, Vocabulary
 
 ROOT = Path(__file__).resolve().parents[2]
 PRIMITIVE_ALIASES = {
@@ -31,6 +31,7 @@ def generate(
     schema_file = Path(schema_file)
     version = SchemaVersion.current(schema_file)
     vocabulary = parse(schema_file)
+    _preflight_mro(vocabulary)
     with tempfile.TemporaryDirectory(prefix="schema-org-generated-", dir=project_root) as temporary:
         staged_package = Path(temporary) / "src/schema_org"
         staged_package.mkdir(parents=True)
@@ -65,8 +66,7 @@ def _generated(content: str) -> str:
     )
 def _render_model(vocabulary: Vocabulary, name: str) -> str:
     subject = next(s for s in vocabulary.ordinary_classes if s.name == name)
-    direct_parents = [parent for parent in vocabulary.direct_parents(name) if parent in {s.name for s in vocabulary.ordinary_classes}]
-    parents = [parent for parent in direct_parents if not any(parent != other and parent in vocabulary.ancestry(other) for other in direct_parents)]
+    parents = _ordered_direct_parents(vocabulary, name)
     bases = ", ".join(constant_name(parent) for parent in parents) or "SchemaModel"
     effective = _effective_properties(vocabulary, name)
     lines = [
@@ -80,7 +80,7 @@ def _render_model(vocabulary: Vocabulary, name: str) -> str:
     imports = _model_imports(vocabulary, effective, parents, name)
     lines.extend(imports)
     lines.extend(["", f"class {constant_name(name)}({bases}):"])
-    lines.append(f"    __doc__ = {subject.comment!r}" if subject.comment else "    pass")
+    lines.append(f"    __doc__ = {_class_description(vocabulary, name)!r}")
     lines.extend([
         f"    SCHEMA_TYPE: ClassVar[str] = {name!r}",
         f"    SCHEMA_TYPES: ClassVar[tuple[str, ...]] = {(name, *vocabulary.ancestry(name))!r}",
@@ -104,11 +104,75 @@ def _render_model(vocabulary: Vocabulary, name: str) -> str:
     for property_name_ in sorted(vocabulary.direct_properties(name), key=lambda item: item.name):
         definition = vocabulary.property_definition(property_name_.name)
         annotation = _annotation(vocabulary, definition)
-        description = f", description={definition.comment!r}" if definition.comment else ""
-        lines.append(f"    {property_name(definition.name)}: {annotation} = Field(default=None, alias={definition.name!r}{description})")
+        description = _description(definition.comment, definition.superseded_by, definition.supersedes, definition.inverse_of)
+        field_description = f", description={description!r}" if description else ""
+        lines.append(f"    {property_name(definition.name)}: {annotation} = Field(default=None, alias={definition.name!r}{field_description})")
     lines.append("")
     return "\n".join(lines)
 
+
+def _description(comment: str, superseded_by: str | None, supersedes: str | None, inverse_of: str | None) -> str:
+    parts = [comment] if comment else []
+    if supersedes:
+        parts.append(f"Supersedes `{supersedes}`.")
+    if superseded_by:
+        parts.append(f"Superseded by `{superseded_by}`.")
+    if inverse_of:
+        parts.append(f"Inverse-property: `{inverse_of}`.")
+    return "\n\n".join(parts)
+
+
+def _class_description(vocabulary: Vocabulary, name: str) -> str:
+    definition = vocabulary.class_definition(name)
+    return _description(
+        f"{definition.uri}\n\n{definition.comment}" if definition.comment else definition.uri,
+        definition.superseded_by,
+        definition.supersedes,
+        None,
+    )
+
+
+def _ordered_direct_parents(vocabulary: Vocabulary, name: str) -> tuple[str, ...]:
+    ordinary = {subject.name for subject in vocabulary.ordinary_classes}
+    remaining = set(vocabulary.direct_parents(name)) & ordinary
+    ordered: list[str] = []
+    while remaining:
+        available = sorted(
+            candidate for candidate in remaining
+            if not any(candidate != other and vocabulary.descendant(other, candidate) for other in remaining)
+        )
+        if not available:
+            raise ValidationError(f"Unable to order direct parents for {name}: {sorted(remaining)!r}")
+        selected = available[0]
+        ordered.append(selected)
+        remaining.remove(selected)
+    return tuple(ordered)
+
+
+def _preflight_mro(vocabulary: Vocabulary) -> None:
+    cache: dict[str, tuple[str, ...]] = {}
+
+    def linearize(name: str) -> tuple[str, ...]:
+        if name in cache:
+            return cache[name]
+        parents = _ordered_direct_parents(vocabulary, name)
+        sequences = [list(linearize(parent)) for parent in parents]
+        sequences.append(list(parents))
+        result = [name]
+        while any(sequences):
+            candidate = next(
+                (sequence[0] for sequence in sequences if sequence and all(sequence[0] not in other[1:] for other in sequences)),
+                None,
+            )
+            if candidate is None:
+                raise ValidationError(f"Invalid C3 MRO for {name} with direct parents {list(parents)!r}")
+            result.append(candidate)
+            sequences = [sequence[1:] if sequence and sequence[0] == candidate else sequence for sequence in sequences]
+        cache[name] = tuple(result)
+        return cache[name]
+
+    for subject in vocabulary.ordinary_classes:
+        linearize(subject.name)
 
 def _model_imports(vocabulary: Vocabulary, properties: Iterable[str], parents: Iterable[str], current_name: str) -> list[str]:
     imports: set[str] = set()
@@ -155,9 +219,15 @@ def _effective_properties(vocabulary: Vocabulary, name: str) -> tuple[str, ...]:
 def _render_models_init(models) -> str:
     lines = [
         "from importlib import import_module",
+        "from typing import TYPE_CHECKING",
+        "",
+        "if TYPE_CHECKING:",
+    ]
+    lines.extend(f"    from .{module_name(subject.name)} import {constant_name(subject.name)}" for subject in models)
+    lines.extend([
         "",
         "_MODEL_MODULES = {",
-    ]
+    ])
     lines.extend(f"    {constant_name(subject.name)!r}: {module_name(subject.name)!r}," for subject in models)
     lines.extend([
         "}",
@@ -215,7 +285,7 @@ def _render_registry(vocabulary: Vocabulary, version: SchemaVersion) -> str:
         "from importlib import import_module",
         "from collections.abc import Iterator, Mapping",
         "from types import MappingProxyType",
-        "from schema_org.base import PropertyMetadata",
+        "from schema_org.base import ClassMetadata, EnumerationMemberMetadata, PropertyMetadata",
     ]
     lines.append("_MODEL_MODULES = MappingProxyType({")
     lines.extend(f"    {s.name!r}: {module_name(s.name)!r}," for s in ordinary)
@@ -236,9 +306,12 @@ def _render_registry(vocabulary: Vocabulary, version: SchemaVersion) -> str:
     for subject in sorted(vocabulary.classes, key=lambda item: item.name):
         definition = vocabulary.class_definition(subject.name)
         lines.append(
-            f"    {definition.name!r}: ({definition.uri!r}, {definition.label!r}, {definition.comment!r}, "
-            f"{definition.parents!r}, {definition.external_parents!r}, {definition.equivalent_classes!r}, "
-            f"{definition.superseded_by!r}, {definition.supersedes!r}, {definition.contributors!r}, {definition.sources!r}),"
+            f"    {definition.name!r}: ClassMetadata(name={definition.name!r}, uri={definition.uri!r}, "
+            f"parents={definition.parents!r}, external_parents={definition.external_parents!r}, "
+            f"equivalent_classes={definition.equivalent_classes!r}, superseded_by={definition.superseded_by!r}, "
+            f"supersedes={definition.supersedes!r}, label={definition.label!r}, comment={definition.comment!r}, "
+            f"contributors={definition.contributors!r}, sources={definition.sources!r}, properties={definition.properties!r}, "
+            f"is_datatype={definition.is_datatype!r}, is_enumeration={definition.is_enumeration!r}),"
         )
     lines.append("})")
     lines.append("PROPERTY_BY_SCHEMA = MappingProxyType({")
@@ -253,6 +326,21 @@ def _render_registry(vocabulary: Vocabulary, version: SchemaVersion) -> str:
             f"domains={definition.domains!r}, external_domains={definition.external_domains!r}, "
             f"comment={definition.comment!r}, label={definition.label!r}, contributors={definition.contributors!r}, sources={definition.sources!r}),"
         )
+    lines.append("})")
+    lines.append("ENUM_MEMBER_METADATA = MappingProxyType({")
+    for member in vocabulary.enumeration_members:
+        lines.append(
+            f"    {member.name!r}: EnumerationMemberMetadata(name={member.name!r}, uri={member.uri!r}, "
+            f"types={member.types!r}, label={member.label!r}, comment={member.comment!r}),"
+        )
+    lines.append("})")
+    lines.append("ENUM_DIRECT_MEMBERS = MappingProxyType({")
+    for enum in vocabulary.enumeration_classes:
+        members = tuple(sorted(
+            member.name for member in vocabulary.enumeration_members
+            if enum.name in member.types
+        ))
+        lines.append(f"    {enum.name!r}: {members!r},")
     lines.append("})")
     lines.append("ENUM_PARENTS = MappingProxyType({")
     lines.extend(f"    {s.name!r}: {vocabulary.direct_parents(s.name)!r}," for s in vocabulary.enumeration_classes)
@@ -344,12 +432,18 @@ def _render_root_init(vocabulary: Vocabulary) -> str:
     ordinary = sorted(vocabulary.ordinary_classes, key=lambda item: item.name)
     lines = [
         "from importlib import import_module",
+        "from typing import TYPE_CHECKING",
         "",
-        "from .base import CircularReferenceError, JsonValue, PropertyMetadata, SchemaEnum, SchemaModel, SchemaScalar, SchemaValue",
+        "from .base import CircularReferenceError, ClassMetadata, EnumerationMemberMetadata, JsonValue, PropertyMetadata, SchemaEnum, SchemaModel, SchemaScalar, SchemaValue",
         "from .schema_version import SCHEMA_VERSION",
         "",
-        "_MODEL_MODULES = {",
+        "if TYPE_CHECKING:",
     ]
+    lines.extend(f"    from .models.{module_name(s.name)} import {constant_name(s.name)}" for s in ordinary)
+    lines.extend([
+        "",
+        "_MODEL_MODULES = {",
+    ])
     lines.extend(f"    {constant_name(s.name)!r}: {module_name(s.name)!r}," for s in ordinary)
     lines.extend([
         "}",
@@ -375,7 +469,8 @@ def _render_root_init(vocabulary: Vocabulary) -> str:
     lines.extend(f"    {constant_name(s.name)!r}," for s in ordinary)
     lines.extend(f"    {constant_name(s.name)!r}," for s in vocabulary.enumeration_classes)
     lines.extend([
-        "    'SCHEMA_VERSION',", "    'SchemaModel',", "    'SchemaEnum',",
+        "    'SCHEMA_VERSION',", "    'ClassMetadata',", "    'EnumerationMemberMetadata',",
+        "    'SchemaModel',", "    'SchemaEnum',",
         "    'CircularReferenceError',",
         "]",
     ])

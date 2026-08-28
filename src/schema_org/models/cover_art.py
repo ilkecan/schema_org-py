@@ -23,7 +23,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.visual_artwork import VisualArtwork
 
 class CoverArt(VisualArtwork):
-    __doc__ = 'The artwork on the outer surface of a CreativeWork.'
+    __doc__ = 'https://schema.org/CoverArt\n\nThe artwork on the outer surface of a CreativeWork.'
     SCHEMA_TYPE: ClassVar[str] = 'CoverArt'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CoverArt', 'VisualArtwork', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

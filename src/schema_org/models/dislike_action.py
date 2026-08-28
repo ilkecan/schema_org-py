@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.react_action import ReactAction
 
 class DislikeAction(ReactAction):
-    __doc__ = 'The act of expressing a negative sentiment about the object. An agent dislikes an object (a proposition, topic or theme) with participants.'
+    __doc__ = 'https://schema.org/DislikeAction\n\nThe act of expressing a negative sentiment about the object. An agent dislikes an object (a proposition, topic or theme) with participants.'
     SCHEMA_TYPE: ClassVar[str] = 'DislikeAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DislikeAction', 'ReactAction', 'AssessAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

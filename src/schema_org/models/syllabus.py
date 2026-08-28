@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.learning_resource import LearningResource
 
 class Syllabus(LearningResource):
-    __doc__ = 'A syllabus that describes the material covered in a course, often with several such sections per [[Course]] so that a distinct [[timeRequired]] can be provided for that section of the [[Course]].'
+    __doc__ = 'https://schema.org/Syllabus\n\nA syllabus that describes the material covered in a course, often with several such sections per [[Course]] so that a distinct [[timeRequired]] can be provided for that section of the [[Course]].'
     SCHEMA_TYPE: ClassVar[str] = 'Syllabus'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Syllabus', 'LearningResource', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

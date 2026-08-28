@@ -17,7 +17,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_test import MedicalTest
 
 class ImagingTest(MedicalTest):
-    __doc__ = 'Any medical imaging modality typically used for diagnostic purposes.'
+    __doc__ = 'https://schema.org/ImagingTest\n\nAny medical imaging modality typically used for diagnostic purposes.'
     SCHEMA_TYPE: ClassVar[str] = 'ImagingTest'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ImagingTest', 'MedicalTest', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

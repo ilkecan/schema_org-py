@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.communicate_action import CommunicateAction
 
 class ShareAction(CommunicateAction):
-    __doc__ = 'The act of distributing content to people for their amusement or edification.'
+    __doc__ = 'https://schema.org/ShareAction\n\nThe act of distributing content to people for their amusement or edification.'
     SCHEMA_TYPE: ClassVar[str] = 'ShareAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ShareAction', 'CommunicateAction', 'InteractAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.local_business import LocalBusiness
 
 class MedicalBusiness(LocalBusiness):
-    __doc__ = 'A particular physical or virtual business of an organization for medical purposes. Examples of MedicalBusiness include different businesses run by health professionals.'
+    __doc__ = 'https://schema.org/MedicalBusiness\n\nA particular physical or virtual business of an organization for medical purposes. Examples of MedicalBusiness include different businesses run by health professionals.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalBusiness'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalBusiness', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

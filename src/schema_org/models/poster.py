@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Poster(CreativeWork):
-    __doc__ = 'A large, usually printed placard, bill, or announcement, often illustrated, that is posted to advertise or publicize something.'
+    __doc__ = 'https://schema.org/Poster\n\nA large, usually printed placard, bill, or announcement, often illustrated, that is posted to advertise or publicize something.'
     SCHEMA_TYPE: ClassVar[str] = 'Poster'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Poster', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -26,7 +26,7 @@ from schema_org.models.legislation import Legislation
 from schema_org.models.media_object import MediaObject
 
 class LegislationObject(Legislation, MediaObject):
-    __doc__ = 'A specific object or file containing a Legislation. Note that the same Legislation can be published in multiple files. For example, a digitally signed PDF, a plain PDF and an HTML version.'
+    __doc__ = 'https://schema.org/LegislationObject\n\nA specific object or file containing a Legislation. Note that the same Legislation can be published in multiple files. For example, a digitally signed PDF, a plain PDF and an HTML version.'
     SCHEMA_TYPE: ClassVar[str] = 'LegislationObject'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('LegislationObject', 'Legislation', 'MediaObject', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.react_action import ReactAction
 
 class LikeAction(ReactAction):
-    __doc__ = 'The act of expressing a positive sentiment about the object. An agent likes an object (a proposition, topic or theme) with participants.'
+    __doc__ = 'https://schema.org/LikeAction\n\nThe act of expressing a positive sentiment about the object. An agent likes an object (a proposition, topic or theme) with participants.'
     SCHEMA_TYPE: ClassVar[str] = 'LikeAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('LikeAction', 'ReactAction', 'AssessAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

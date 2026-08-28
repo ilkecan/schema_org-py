@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class CreativeWorkSeason(CreativeWork):
-    __doc__ = 'A media season, e.g. TV, radio, video game etc.'
+    __doc__ = 'https://schema.org/CreativeWorkSeason\n\nA media season, e.g. TV, radio, video game etc.\n\nSupersedes `Season`.'
     SCHEMA_TYPE: ClassVar[str] = 'CreativeWorkSeason'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CreativeWorkSeason', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -168,13 +168,13 @@ class CreativeWorkSeason(CreativeWork):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['CreativeWorkSeason'] = Field(default='CreativeWorkSeason', alias='@type', frozen=True)
-    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.')
-    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.')
+    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `actors`.')
+    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `directors`.')
     end_date: Date | DateTime | list[Date | DateTime] | None = Field(default=None, alias='endDate', description='The end date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).')
-    episode: Episode | list[Episode] | None = Field(default=None, alias='episode', description='An episode of a TV, radio or game media within a series or season.')
-    episodes: Episode | list[Episode] | None = Field(default=None, alias='episodes', description='An episode of a TV/radio series or season.')
+    episode: Episode | list[Episode] | None = Field(default=None, alias='episode', description='An episode of a TV, radio or game media within a series or season.\n\nSupersedes `episodes`.')
+    episodes: Episode | list[Episode] | None = Field(default=None, alias='episodes', description='An episode of a TV/radio series or season.\n\nSuperseded by `episode`.')
     number_of_episodes: Integer | list[Integer] | None = Field(default=None, alias='numberOfEpisodes', description='The number of episodes in this season or series.')
-    part_of_series: CreativeWorkSeries | list[CreativeWorkSeries] | None = Field(default=None, alias='partOfSeries', description='The series to which this episode or season belongs.')
+    part_of_series: CreativeWorkSeries | list[CreativeWorkSeries] | None = Field(default=None, alias='partOfSeries', description='The series to which this episode or season belongs.\n\nSupersedes `partOfTVSeries`.')
     production_company: Organization | list[Organization] | None = Field(default=None, alias='productionCompany', description='The production company or studio responsible for the item, e.g. series, video game, episode etc.')
     season_number: Integer | Text | list[Integer | Text] | None = Field(default=None, alias='seasonNumber', description='Position of the season within an ordered group of seasons.')
     start_date: Date | DateTime | list[Date | DateTime] | None = Field(default=None, alias='startDate', description='The start date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).')

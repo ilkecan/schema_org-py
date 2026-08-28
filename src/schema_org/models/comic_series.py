@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.periodical import Periodical
 
 class ComicSeries(Periodical):
-    __doc__ = 'A sequential publication of comic stories under a\n    \tunifying title, for example "The Amazing Spider-Man" or "Groo the\n    \tWanderer".'
+    __doc__ = 'https://schema.org/ComicSeries\n\nA sequential publication of comic stories under a\n    \tunifying title, for example "The Amazing Spider-Man" or "Groo the\n    \tWanderer".'
     SCHEMA_TYPE: ClassVar[str] = 'ComicSeries'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ComicSeries', 'Periodical', 'CreativeWorkSeries', 'CreativeWork', 'Series', 'Thing', 'Intangible')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

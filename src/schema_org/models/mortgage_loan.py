@@ -18,7 +18,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.loan_or_credit import LoanOrCredit
 
 class MortgageLoan(LoanOrCredit):
-    __doc__ = 'A loan in which property or real estate is used as collateral. (A loan securitized against some real estate.)'
+    __doc__ = 'https://schema.org/MortgageLoan\n\nA loan in which property or real estate is used as collateral. (A loan securitized against some real estate.)'
     SCHEMA_TYPE: ClassVar[str] = 'MortgageLoan'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MortgageLoan', 'LoanOrCredit', 'FinancialProduct', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

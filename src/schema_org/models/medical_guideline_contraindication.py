@@ -18,7 +18,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_guideline import MedicalGuideline
 
 class MedicalGuidelineContraindication(MedicalGuideline):
-    __doc__ = 'A guideline contraindication that designates a process as harmful and where quality of the data supporting the contraindication is sound.'
+    __doc__ = 'https://schema.org/MedicalGuidelineContraindication\n\nA guideline contraindication that designates a process as harmful and where quality of the data supporting the contraindication is sound.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalGuidelineContraindication'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalGuidelineContraindication', 'MedicalGuideline', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

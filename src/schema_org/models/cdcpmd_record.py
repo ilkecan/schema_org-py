@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.structured_value import StructuredValue
 
 class CDCPMDRecord(StructuredValue):
-    __doc__ = 'A CDCPMDRecord is a data structure representing a record in a CDC tabular data format\n      used for hospital data reporting. See [documentation](/docs/cdc-covid.html) for details, and the linked CDC materials for authoritative\n      definitions used as the source here.\n      '
+    __doc__ = 'https://schema.org/CDCPMDRecord\n\nA CDCPMDRecord is a data structure representing a record in a CDC tabular data format\n      used for hospital data reporting. See [documentation](/docs/cdc-covid.html) for details, and the linked CDC materials for authoritative\n      definitions used as the source here.\n      '
     SCHEMA_TYPE: ClassVar[str] = 'CDCPMDRecord'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CDCPMDRecord', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

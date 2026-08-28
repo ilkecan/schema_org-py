@@ -14,7 +14,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class ProductReturnPolicy(Intangible):
-    __doc__ = 'A ProductReturnPolicy provides information about product return policies associated with an [[Organization]] or [[Product]].'
+    __doc__ = 'https://schema.org/ProductReturnPolicy\n\nA ProductReturnPolicy provides information about product return policies associated with an [[Organization]] or [[Product]].\n\nSuperseded by `MerchantReturnPolicy`.'
     SCHEMA_TYPE: ClassVar[str] = 'ProductReturnPolicy'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ProductReturnPolicy', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -36,5 +36,5 @@ class ProductReturnPolicy(Intangible):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['ProductReturnPolicy'] = Field(default='ProductReturnPolicy', alias='@type', frozen=True)
-    product_return_days: Integer | list[Integer] | None = Field(default=None, alias='productReturnDays', description='The productReturnDays property indicates the number of days (from purchase) within which relevant product return policy is applicable.')
-    product_return_link: URL | list[URL] | None = Field(default=None, alias='productReturnLink', description='Indicates a Web page or service by URL, for product return.')
+    product_return_days: Integer | list[Integer] | None = Field(default=None, alias='productReturnDays', description='The productReturnDays property indicates the number of days (from purchase) within which relevant product return policy is applicable.\n\nSuperseded by `merchantReturnDays`.')
+    product_return_link: URL | list[URL] | None = Field(default=None, alias='productReturnLink', description='Indicates a Web page or service by URL, for product return.\n\nSuperseded by `merchantReturnLink`.')

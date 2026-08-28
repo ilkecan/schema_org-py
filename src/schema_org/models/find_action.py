@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.action import Action
 
 class FindAction(Action):
-    __doc__ = 'The act of finding an object.\\n\\nRelated actions:\\n\\n* [[SearchAction]]: FindAction is generally lead by a SearchAction, but not necessarily.'
+    __doc__ = 'https://schema.org/FindAction\n\nThe act of finding an object.\\n\\nRelated actions:\\n\\n* [[SearchAction]]: FindAction is generally lead by a SearchAction, but not necessarily.'
     SCHEMA_TYPE: ClassVar[str] = 'FindAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('FindAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

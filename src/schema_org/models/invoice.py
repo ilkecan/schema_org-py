@@ -18,7 +18,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.intangible import Intangible
 
 class Invoice(Intangible):
-    __doc__ = 'A statement of the money due for goods or services; a bill.'
+    __doc__ = 'https://schema.org/Invoice\n\nA statement of the money due for goods or services; a bill.'
     SCHEMA_TYPE: ClassVar[str] = 'Invoice'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Invoice', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -56,17 +56,17 @@ class Invoice(Intangible):
     schema_type: Literal['Invoice'] = Field(default='Invoice', alias='@type', frozen=True)
     account_id: Text | list[Text] | None = Field(default=None, alias='accountId', description='The identifier for the account the payment will be applied to.')
     billing_period: Duration | list[Duration] | None = Field(default=None, alias='billingPeriod', description='The time interval used to compute the invoice.')
-    broker: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='broker', description='An entity that arranges for an exchange between a buyer and a seller.  In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.  If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred.')
+    broker: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='broker', description='An entity that arranges for an exchange between a buyer and a seller.  In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.  If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred.\n\nSupersedes `bookingAgent`.')
     category: CategoryCode | PhysicalActivityCategory | Text | Thing | URL | list[CategoryCode | PhysicalActivityCategory | Text | Thing | URL] | None = Field(default=None, alias='category', description='A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.')
     confirmation_number: Text | list[Text] | None = Field(default=None, alias='confirmationNumber', description='A number that confirms the given order or payment has been received.')
     customer: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='customer', description='Party placing the order or paying the invoice.')
     minimum_payment_due: MonetaryAmount | PriceSpecification | list[MonetaryAmount | PriceSpecification] | None = Field(default=None, alias='minimumPaymentDue', description='The minimum payment required at this time.')
-    payment_due: DateTime | list[DateTime] | None = Field(default=None, alias='paymentDue', description='The date that payment is due.')
-    payment_due_date: Date | DateTime | list[Date | DateTime] | None = Field(default=None, alias='paymentDueDate', description='The date that payment is due.')
+    payment_due: DateTime | list[DateTime] | None = Field(default=None, alias='paymentDue', description='The date that payment is due.\n\nSuperseded by `paymentDueDate`.')
+    payment_due_date: Date | DateTime | list[Date | DateTime] | None = Field(default=None, alias='paymentDueDate', description='The date that payment is due.\n\nSupersedes `paymentDue`.')
     payment_method: PaymentMethod | Text | list[PaymentMethod | Text] | None = Field(default=None, alias='paymentMethod', description='The name of the credit card or other method of payment for the order.')
     payment_method_id: Text | list[Text] | None = Field(default=None, alias='paymentMethodId', description='An identifier for the method of payment used (e.g. the last 4 digits of the credit card).')
     payment_status: PaymentStatusType | Text | list[PaymentStatusType | Text] | None = Field(default=None, alias='paymentStatus', description='The status of payment; whether the invoice has been paid or not.')
-    provider: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='provider', description='The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.')
+    provider: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='provider', description='The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.\n\nSupersedes `carrier`.')
     references_order: Order | list[Order] | None = Field(default=None, alias='referencesOrder', description='The Order(s) related to this Invoice. One or more Orders may be combined into a single Invoice.')
     scheduled_payment_date: Date | list[Date] | None = Field(default=None, alias='scheduledPaymentDate', description='The date the invoice is scheduled to be paid.')
     total_payment_due: MonetaryAmount | PriceSpecification | list[MonetaryAmount | PriceSpecification] | None = Field(default=None, alias='totalPaymentDue', description='The total amount due.')

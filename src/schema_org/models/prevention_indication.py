@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_indication import MedicalIndication
 
 class PreventionIndication(MedicalIndication):
-    __doc__ = 'An indication for preventing an underlying condition, symptom, etc.'
+    __doc__ = 'https://schema.org/PreventionIndication\n\nAn indication for preventing an underlying condition, symptom, etc.'
     SCHEMA_TYPE: ClassVar[str] = 'PreventionIndication'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PreventionIndication', 'MedicalIndication', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

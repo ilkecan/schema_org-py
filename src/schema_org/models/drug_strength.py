@@ -17,7 +17,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_intangible import MedicalIntangible
 
 class DrugStrength(MedicalIntangible):
-    __doc__ = 'A specific strength in which a medical drug is available in a specific country.'
+    __doc__ = 'https://schema.org/DrugStrength\n\nA specific strength in which a medical drug is available in a specific country.'
     SCHEMA_TYPE: ClassVar[str] = 'DrugStrength'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DrugStrength', 'MedicalIntangible', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -14,7 +14,7 @@ from schema_org.datatypes import URL
 from schema_org.models.structured_value import StructuredValue
 
 class InstantaneousEvent(StructuredValue):
-    __doc__ = 'An event with no duration, like for instance a computer log entry.'
+    __doc__ = 'https://schema.org/InstantaneousEvent\n\nAn event with no duration, like for instance a computer log entry.'
     SCHEMA_TYPE: ClassVar[str] = 'InstantaneousEvent'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('InstantaneousEvent', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

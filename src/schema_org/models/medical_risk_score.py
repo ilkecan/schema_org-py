@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_risk_estimator import MedicalRiskEstimator
 
 class MedicalRiskScore(MedicalRiskEstimator):
-    __doc__ = 'A simple system that adds up the number of risk factors to yield a score that is associated with prognosis, e.g. CHAD score, TIMI risk score.'
+    __doc__ = 'https://schema.org/MedicalRiskScore\n\nA simple system that adds up the number of risk factors to yield a score that is associated with prognosis, e.g. CHAD score, TIMI risk score.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalRiskScore'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalRiskScore', 'MedicalRiskEstimator', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -14,7 +14,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class ProgramMembership(Intangible):
-    __doc__ = 'Used to describe membership in a loyalty programs (e.g. "StarAliance"), traveler clubs (e.g. "AAA"), purchase clubs ("Safeway Club"), etc.'
+    __doc__ = 'https://schema.org/ProgramMembership\n\nUsed to describe membership in a loyalty programs (e.g. "StarAliance"), traveler clubs (e.g. "AAA"), purchase clubs ("Safeway Club"), etc.'
     SCHEMA_TYPE: ClassVar[str] = 'ProgramMembership'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ProgramMembership', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -42,8 +42,8 @@ class ProgramMembership(Intangible):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['ProgramMembership'] = Field(default='ProgramMembership', alias='@type', frozen=True)
     hosting_organization: Organization | list[Organization] | None = Field(default=None, alias='hostingOrganization', description="The Organization (airline, travelers' club, retailer, etc.) the membership is made with or which offers the  MemberProgram.")
-    member: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='member', description='A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals.')
-    members: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='members', description='A member of this organization.')
+    member: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='member', description='A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals.\n\nSupersedes `members`.\n\nInverse-property: `memberOf`.')
+    members: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='members', description='A member of this organization.\n\nSuperseded by `member`.')
     membership_number: Text | list[Text] | None = Field(default=None, alias='membershipNumber', description='A unique identifier for the membership.')
     membership_points_earned: Number | QuantitativeValue | list[Number | QuantitativeValue] | None = Field(default=None, alias='membershipPointsEarned', description='The number of membership points earned by the member. If necessary, the unitText can be used to express the units the points are issued in. (E.g. stars, miles, etc.)')
     program: MemberProgram | list[MemberProgram] | None = Field(default=None, alias='program', description='The [MemberProgram](https://schema.org/MemberProgram) associated with a [ProgramMembership](https://schema.org/ProgramMembership).')

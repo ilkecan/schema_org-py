@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.food_establishment import FoodEstablishment
 
 class Brewery(FoodEstablishment):
-    __doc__ = 'Brewery.'
+    __doc__ = 'https://schema.org/Brewery\n\nBrewery.'
     SCHEMA_TYPE: ClassVar[str] = 'Brewery'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Brewery', 'FoodEstablishment', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

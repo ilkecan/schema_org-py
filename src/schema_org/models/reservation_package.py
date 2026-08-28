@@ -16,7 +16,7 @@ from schema_org.enums import ReservationStatusType
 from schema_org.models.reservation import Reservation
 
 class ReservationPackage(Reservation):
-    __doc__ = 'A group of multiple reservations with common values for all sub-reservations.'
+    __doc__ = 'https://schema.org/ReservationPackage\n\nA group of multiple reservations with common values for all sub-reservations.'
     SCHEMA_TYPE: ClassVar[str] = 'ReservationPackage'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ReservationPackage', 'Reservation', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

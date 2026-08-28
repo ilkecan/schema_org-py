@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_entity import MedicalEntity
 
 class Substance(MedicalEntity):
-    __doc__ = 'Any matter of defined composition that has discrete existence, whose origin may be biological, mineral or chemical.'
+    __doc__ = 'https://schema.org/Substance\n\nAny matter of defined composition that has discrete existence, whose origin may be biological, mineral or chemical.'
     SCHEMA_TYPE: ClassVar[str] = 'Substance'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Substance', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

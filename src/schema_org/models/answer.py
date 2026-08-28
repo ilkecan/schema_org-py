@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.comment import Comment
 
 class Answer(Comment):
-    __doc__ = 'An answer offered to a question; perhaps correct, perhaps opinionated or wrong.'
+    __doc__ = 'https://schema.org/Answer\n\nAn answer offered to a question; perhaps correct, perhaps opinionated or wrong.'
     SCHEMA_TYPE: ClassVar[str] = 'Answer'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Answer', 'Comment', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

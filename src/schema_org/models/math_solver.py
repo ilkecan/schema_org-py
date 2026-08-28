@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class MathSolver(CreativeWork):
-    __doc__ = 'A math solver which is capable of solving a subset of mathematical problems.'
+    __doc__ = 'https://schema.org/MathSolver\n\nA math solver which is capable of solving a subset of mathematical problems.'
     SCHEMA_TYPE: ClassVar[str] = 'MathSolver'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MathSolver', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

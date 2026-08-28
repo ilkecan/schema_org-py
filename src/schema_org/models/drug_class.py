@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_entity import MedicalEntity
 
 class DrugClass(MedicalEntity):
-    __doc__ = 'A class of medical drugs, e.g., statins. Classes can represent general pharmacological class, common mechanisms of action, common physiological effects, etc.'
+    __doc__ = 'https://schema.org/DrugClass\n\nA class of medical drugs, e.g., statins. Classes can represent general pharmacological class, common mechanisms of action, common physiological effects, etc.'
     SCHEMA_TYPE: ClassVar[str] = 'DrugClass'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DrugClass', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

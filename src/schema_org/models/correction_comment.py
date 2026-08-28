@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.comment import Comment
 
 class CorrectionComment(Comment):
-    __doc__ = 'A [[comment]] that corrects [[CreativeWork]].'
+    __doc__ = 'https://schema.org/CorrectionComment\n\nA [[comment]] that corrects [[CreativeWork]].'
     SCHEMA_TYPE: ClassVar[str] = 'CorrectionComment'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CorrectionComment', 'Comment', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

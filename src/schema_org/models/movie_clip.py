@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.clip import Clip
 
 class MovieClip(Clip):
-    __doc__ = 'A short segment/part of a movie.'
+    __doc__ = 'https://schema.org/MovieClip\n\nA short segment/part of a movie.'
     SCHEMA_TYPE: ClassVar[str] = 'MovieClip'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MovieClip', 'Clip', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

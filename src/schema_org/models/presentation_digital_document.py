@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.digital_document import DigitalDocument
 
 class PresentationDigitalDocument(DigitalDocument):
-    __doc__ = 'A file containing slides or used for a presentation.'
+    __doc__ = 'https://schema.org/PresentationDigitalDocument\n\nA file containing slides or used for a presentation.'
     SCHEMA_TYPE: ClassVar[str] = 'PresentationDigitalDocument'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PresentationDigitalDocument', 'DigitalDocument', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

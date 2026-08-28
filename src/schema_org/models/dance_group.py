@@ -15,7 +15,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.performing_group import PerformingGroup
 
 class DanceGroup(PerformingGroup):
-    __doc__ = 'A dance group&#x2014;for example, the Alvin Ailey Dance Theater or Riverdance.'
+    __doc__ = 'https://schema.org/DanceGroup\n\nA dance group&#x2014;for example, the Alvin Ailey Dance Theater or Riverdance.'
     SCHEMA_TYPE: ClassVar[str] = 'DanceGroup'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DanceGroup', 'PerformingGroup', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

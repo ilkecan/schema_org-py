@@ -17,7 +17,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.plan_action import PlanAction
 
 class ReserveAction(PlanAction):
-    __doc__ = 'Reserving a concrete object.\\n\\nRelated actions:\\n\\n* [[ScheduleAction]]: Unlike ScheduleAction, ReserveAction reserves concrete objects (e.g. a table, a hotel) towards a time slot / spatial allocation.'
+    __doc__ = 'https://schema.org/ReserveAction\n\nReserving a concrete object.\\n\\nRelated actions:\\n\\n* [[ScheduleAction]]: Unlike ScheduleAction, ReserveAction reserves concrete objects (e.g. a table, a hotel) towards a time slot / spatial allocation.'
     SCHEMA_TYPE: ClassVar[str] = 'ReserveAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ReserveAction', 'PlanAction', 'OrganizeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

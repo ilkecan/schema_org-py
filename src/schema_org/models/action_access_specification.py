@@ -18,7 +18,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.intangible import Intangible
 
 class ActionAccessSpecification(Intangible):
-    __doc__ = 'A set of requirements that must be fulfilled in order to perform an Action.'
+    __doc__ = 'https://schema.org/ActionAccessSpecification\n\nA set of requirements that must be fulfilled in order to perform an Action.'
     SCHEMA_TYPE: ClassVar[str] = 'ActionAccessSpecification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ActionAccessSpecification', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

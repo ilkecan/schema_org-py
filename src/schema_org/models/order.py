@@ -18,7 +18,7 @@ from schema_org.enums import OrderStatus
 from schema_org.models.intangible import Intangible
 
 class Order(Intangible):
-    __doc__ = 'An order is a confirmation of a transaction (a receipt), which can contain multiple line items, each represented by an Offer that has been accepted by the customer.'
+    __doc__ = 'https://schema.org/Order\n\nAn order is a confirmation of a transaction (a receipt), which can contain multiple line items, each represented by an Offer that has been accepted by the customer.'
     SCHEMA_TYPE: ClassVar[str] = 'Order'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Order', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -62,23 +62,23 @@ class Order(Intangible):
     schema_type: Literal['Order'] = Field(default='Order', alias='@type', frozen=True)
     accepted_offer: Offer | list[Offer] | None = Field(default=None, alias='acceptedOffer', description='The offer(s) -- e.g., product, quantity and price combinations -- included in the order.')
     billing_address: PostalAddress | list[PostalAddress] | None = Field(default=None, alias='billingAddress', description='The billing address for the order.')
-    broker: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='broker', description='An entity that arranges for an exchange between a buyer and a seller.  In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.  If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred.')
+    broker: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='broker', description='An entity that arranges for an exchange between a buyer and a seller.  In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.  If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred.\n\nSupersedes `bookingAgent`.')
     confirmation_number: Text | list[Text] | None = Field(default=None, alias='confirmationNumber', description='A number that confirms the given order or payment has been received.')
     customer: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='customer', description='Party placing the order or paying the invoice.')
     discount: Number | Text | list[Number | Text] | None = Field(default=None, alias='discount', description='Any discount applied (to an Order).')
     discount_code: Text | list[Text] | None = Field(default=None, alias='discountCode', description='Code used to redeem a discount.')
     discount_currency: Text | list[Text] | None = Field(default=None, alias='discountCurrency', description='The currency of the discount.\\n\\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types, e.g. "Ithaca HOUR".')
     is_gift: Boolean | list[Boolean] | None = Field(default=None, alias='isGift', description='Indicates whether the offer was accepted as a gift for someone other than the buyer.')
-    merchant: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='merchant', description="'merchant' is an out-dated term for 'seller'.")
+    merchant: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='merchant', description="'merchant' is an out-dated term for 'seller'.\n\nSuperseded by `seller`.")
     order_date: Date | DateTime | list[Date | DateTime] | None = Field(default=None, alias='orderDate', description='Date order was placed.')
     order_delivery: ParcelDelivery | list[ParcelDelivery] | None = Field(default=None, alias='orderDelivery', description='The delivery of the parcel related to this order or order item.')
     order_number: Text | list[Text] | None = Field(default=None, alias='orderNumber', description='The identifier of the transaction.')
     order_status: OrderStatus | list[OrderStatus] | None = Field(default=None, alias='orderStatus', description='The current status of the order.')
     ordered_item: OrderItem | Product | Service | list[OrderItem | Product | Service] | None = Field(default=None, alias='orderedItem', description='The item ordered.')
     part_of_invoice: Invoice | list[Invoice] | None = Field(default=None, alias='partOfInvoice', description='The order is being paid as part of the referenced Invoice.')
-    payment_due: DateTime | list[DateTime] | None = Field(default=None, alias='paymentDue', description='The date that payment is due.')
-    payment_due_date: Date | DateTime | list[Date | DateTime] | None = Field(default=None, alias='paymentDueDate', description='The date that payment is due.')
+    payment_due: DateTime | list[DateTime] | None = Field(default=None, alias='paymentDue', description='The date that payment is due.\n\nSuperseded by `paymentDueDate`.')
+    payment_due_date: Date | DateTime | list[Date | DateTime] | None = Field(default=None, alias='paymentDueDate', description='The date that payment is due.\n\nSupersedes `paymentDue`.')
     payment_method: PaymentMethod | Text | list[PaymentMethod | Text] | None = Field(default=None, alias='paymentMethod', description='The name of the credit card or other method of payment for the order.')
     payment_method_id: Text | list[Text] | None = Field(default=None, alias='paymentMethodId', description='An identifier for the method of payment used (e.g. the last 4 digits of the credit card).')
     payment_url: URL | list[URL] | None = Field(default=None, alias='paymentUrl', description='The URL for sending a payment.')
-    seller: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='seller', description='An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.')
+    seller: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='seller', description='An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.\n\nSupersedes `merchant`.')

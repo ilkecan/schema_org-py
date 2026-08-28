@@ -24,7 +24,7 @@ from schema_org.models.item_list import ItemList
 from schema_org.models.list_item import ListItem
 
 class HowToStep(CreativeWork, ItemList, ListItem):
-    __doc__ = 'A step in the instructions for how to achieve a result. It is an ordered list with HowToDirection and/or HowToTip items.'
+    __doc__ = 'https://schema.org/HowToStep\n\nA step in the instructions for how to achieve a result. It is an ordered list with HowToDirection and/or HowToTip items.'
     SCHEMA_TYPE: ClassVar[str] = 'HowToStep'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('HowToStep', 'CreativeWork', 'ItemList', 'ListItem', 'Thing', 'Intangible')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

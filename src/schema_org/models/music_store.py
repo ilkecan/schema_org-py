@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.store import Store
 
 class MusicStore(Store):
-    __doc__ = 'A music store.'
+    __doc__ = 'https://schema.org/MusicStore\n\nA music store.'
     SCHEMA_TYPE: ClassVar[str] = 'MusicStore'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MusicStore', 'Store', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

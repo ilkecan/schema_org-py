@@ -19,7 +19,7 @@ from schema_org.models.civic_structure import CivicStructure
 from schema_org.models.emergency_service import EmergencyService
 
 class PoliceStation(CivicStructure, EmergencyService):
-    __doc__ = 'A police station.'
+    __doc__ = 'https://schema.org/PoliceStation\n\nA police station.'
     SCHEMA_TYPE: ClassVar[str] = 'PoliceStation'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PoliceStation', 'CivicStructure', 'EmergencyService', 'Place', 'LocalBusiness', 'Thing', 'Organization')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

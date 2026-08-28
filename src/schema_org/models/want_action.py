@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.react_action import ReactAction
 
 class WantAction(ReactAction):
-    __doc__ = 'The act of expressing a desire about the object. An agent wants an object.'
+    __doc__ = 'https://schema.org/WantAction\n\nThe act of expressing a desire about the object. An agent wants an object.'
     SCHEMA_TYPE: ClassVar[str] = 'WantAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('WantAction', 'ReactAction', 'AssessAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

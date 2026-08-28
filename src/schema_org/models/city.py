@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.administrative_area import AdministrativeArea
 
 class City(AdministrativeArea):
-    __doc__ = 'A city or town.'
+    __doc__ = 'https://schema.org/City\n\nA city or town.'
     SCHEMA_TYPE: ClassVar[str] = 'City'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('City', 'AdministrativeArea', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

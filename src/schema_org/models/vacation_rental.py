@@ -20,7 +20,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.lodging_business import LodgingBusiness
 
 class VacationRental(LodgingBusiness):
-    __doc__ = 'A kind of lodging business that focuses on renting single properties for limited time.'
+    __doc__ = 'https://schema.org/VacationRental\n\nA kind of lodging business that focuses on renting single properties for limited time.'
     SCHEMA_TYPE: ClassVar[str] = 'VacationRental'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('VacationRental', 'LodgingBusiness', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -18,7 +18,7 @@ from schema_org.enums import DeliveryMethod
 from schema_org.models.trade_action import TradeAction
 
 class OrderAction(TradeAction):
-    __doc__ = 'An agent orders an object/product/service to be delivered/sent.'
+    __doc__ = 'https://schema.org/OrderAction\n\nAn agent orders an object/product/service to be delivered/sent.'
     SCHEMA_TYPE: ClassVar[str] = 'OrderAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('OrderAction', 'TradeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

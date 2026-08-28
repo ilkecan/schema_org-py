@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.structured_value import StructuredValue
 
 class PostalCodeRangeSpecification(StructuredValue):
-    __doc__ = 'Indicates a range of postal codes, usually defined as the set of valid codes between [[postalCodeBegin]] and [[postalCodeEnd]], inclusively.'
+    __doc__ = 'https://schema.org/PostalCodeRangeSpecification\n\nIndicates a range of postal codes, usually defined as the set of valid codes between [[postalCodeBegin]] and [[postalCodeEnd]], inclusively.'
     SCHEMA_TYPE: ClassVar[str] = 'PostalCodeRangeSpecification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PostalCodeRangeSpecification', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

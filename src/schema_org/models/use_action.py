@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.consume_action import ConsumeAction
 
 class UseAction(ConsumeAction):
-    __doc__ = 'The act of applying an object to its intended purpose.'
+    __doc__ = 'https://schema.org/UseAction\n\nThe act of applying an object to its intended purpose.'
     SCHEMA_TYPE: ClassVar[str] = 'UseAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('UseAction', 'ConsumeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

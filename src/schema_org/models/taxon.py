@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.thing import Thing
 
 class Taxon(Thing):
-    __doc__ = 'A set of organisms asserted to represent a natural cohesive biological unit.'
+    __doc__ = 'https://schema.org/Taxon\n\nA set of organisms asserted to represent a natural cohesive biological unit.'
     SCHEMA_TYPE: ClassVar[str] = 'Taxon'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Taxon', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -37,7 +37,7 @@ class Taxon(Thing):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['Taxon'] = Field(default='Taxon', alias='@type', frozen=True)
-    child_taxon: Taxon | Text | URL | list[Taxon | Text | URL] | None = Field(default=None, alias='childTaxon', description='Closest child taxa of the taxon in question.')
+    child_taxon: Taxon | Text | URL | list[Taxon | Text | URL] | None = Field(default=None, alias='childTaxon', description='Closest child taxa of the taxon in question.\n\nInverse-property: `parentTaxon`.')
     has_defined_term: DefinedTerm | list[DefinedTerm] | None = Field(default=None, alias='hasDefinedTerm', description='A Defined Term contained in this term set.')
-    parent_taxon: Taxon | Text | URL | list[Taxon | Text | URL] | None = Field(default=None, alias='parentTaxon', description='Closest parent taxon of the taxon in question.')
+    parent_taxon: Taxon | Text | URL | list[Taxon | Text | URL] | None = Field(default=None, alias='parentTaxon', description='Closest parent taxon of the taxon in question.\n\nInverse-property: `childTaxon`.')
     taxon_rank: PropertyValue | Text | URL | list[PropertyValue | Text | URL] | None = Field(default=None, alias='taxonRank', description='The taxonomic rank of this taxon given preferably as a URI from a controlled vocabulary – typically the ranks from TDWG TaxonRank ontology or equivalent Wikidata URIs.')

@@ -24,7 +24,7 @@ from schema_org.models.comic_story import ComicStory
 from schema_org.models.cover_art import CoverArt
 
 class ComicCoverArt(ComicStory, CoverArt):
-    __doc__ = 'The artwork on the cover of a comic.'
+    __doc__ = 'https://schema.org/ComicCoverArt\n\nThe artwork on the cover of a comic.'
     SCHEMA_TYPE: ClassVar[str] = 'ComicCoverArt'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ComicCoverArt', 'ComicStory', 'CoverArt', 'CreativeWork', 'VisualArtwork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

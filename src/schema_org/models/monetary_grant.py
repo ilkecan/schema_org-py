@@ -14,7 +14,7 @@ from schema_org.datatypes import URL
 from schema_org.models.grant import Grant
 
 class MonetaryGrant(Grant):
-    __doc__ = 'A monetary grant.'
+    __doc__ = 'https://schema.org/MonetaryGrant\n\nA monetary grant.'
     SCHEMA_TYPE: ClassVar[str] = 'MonetaryGrant'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MonetaryGrant', 'Grant', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

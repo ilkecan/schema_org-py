@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.rating import Rating
 
 class AggregateRating(Rating):
-    __doc__ = 'The average rating based on multiple ratings or reviews.'
+    __doc__ = 'https://schema.org/AggregateRating\n\nThe average rating based on multiple ratings or reviews.'
     SCHEMA_TYPE: ClassVar[str] = 'AggregateRating'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AggregateRating', 'Rating', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

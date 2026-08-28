@@ -17,7 +17,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.trade_action import TradeAction
 
 class RentAction(TradeAction):
-    __doc__ = 'The act of giving money in return for temporary use, but not ownership, of an object such as a vehicle or property. For example, an agent rents a property from a landlord in exchange for a periodic payment.'
+    __doc__ = 'https://schema.org/RentAction\n\nThe act of giving money in return for temporary use, but not ownership, of an object such as a vehicle or property. For example, an agent rents a property from a landlord in exchange for a periodic payment.'
     SCHEMA_TYPE: ClassVar[str] = 'RentAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('RentAction', 'TradeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

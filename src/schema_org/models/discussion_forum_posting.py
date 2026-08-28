@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.social_media_posting import SocialMediaPosting
 
 class DiscussionForumPosting(SocialMediaPosting):
-    __doc__ = 'A posting to a discussion forum.'
+    __doc__ = 'https://schema.org/DiscussionForumPosting\n\nA posting to a discussion forum.'
     SCHEMA_TYPE: ClassVar[str] = 'DiscussionForumPosting'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DiscussionForumPosting', 'SocialMediaPosting', 'Article', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

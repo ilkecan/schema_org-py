@@ -19,7 +19,7 @@ from schema_org.models.civic_structure import CivicStructure
 from schema_org.models.entertainment_business import EntertainmentBusiness
 
 class MovieTheater(CivicStructure, EntertainmentBusiness):
-    __doc__ = 'A movie theater.'
+    __doc__ = 'https://schema.org/MovieTheater\n\nA movie theater.'
     SCHEMA_TYPE: ClassVar[str] = 'MovieTheater'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MovieTheater', 'CivicStructure', 'EntertainmentBusiness', 'Place', 'LocalBusiness', 'Thing', 'Organization')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -23,7 +23,7 @@ from schema_org.models.game import Game
 from schema_org.models.software_application import SoftwareApplication
 
 class VideoGame(Game, SoftwareApplication):
-    __doc__ = 'A video game is an electronic game that involves human interaction with a user interface to generate visual feedback on a video device.'
+    __doc__ = 'https://schema.org/VideoGame\n\nA video game is an electronic game that involves human interaction with a user interface to generate visual feedback on a video device.'
     SCHEMA_TYPE: ClassVar[str] = 'VideoGame'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('VideoGame', 'Game', 'SoftwareApplication', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -201,14 +201,14 @@ class VideoGame(Game, SoftwareApplication):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['VideoGame'] = Field(default='VideoGame', alias='@type', frozen=True)
-    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.')
-    actors: Person | list[Person] | None = Field(default=None, alias='actors', description='An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip.')
+    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `actors`.')
+    actors: Person | list[Person] | None = Field(default=None, alias='actors', description='An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip.\n\nSuperseded by `actor`.')
     cheat_code: CreativeWork | list[CreativeWork] | None = Field(default=None, alias='cheatCode', description='Cheat codes to the game.')
-    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.')
-    directors: Person | list[Person] | None = Field(default=None, alias='directors', description='A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip.')
+    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `directors`.')
+    directors: Person | list[Person] | None = Field(default=None, alias='directors', description='A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip.\n\nSuperseded by `director`.')
     game_edition: Text | list[Text] | None = Field(default=None, alias='gameEdition', description='The edition of a video game.')
     game_platform: Text | Thing | URL | list[Text | Thing | URL] | None = Field(default=None, alias='gamePlatform', description='The electronic systems used to play <a href="http://en.wikipedia.org/wiki/Category:Video_game_platforms">video games</a>.')
-    game_server: GameServer | list[GameServer] | None = Field(default=None, alias='gameServer', description='The server on which  it is possible to play the game.')
+    game_server: GameServer | list[GameServer] | None = Field(default=None, alias='gameServer', description='The server on which  it is possible to play the game.\n\nInverse-property: `game`.')
     game_tip: CreativeWork | list[CreativeWork] | None = Field(default=None, alias='gameTip', description='Links to tips, tactics, etc.')
     music_by: MusicGroup | Person | list[MusicGroup | Person] | None = Field(default=None, alias='musicBy', description='The composer of the soundtrack.')
     play_mode: GamePlayMode | list[GamePlayMode] | None = Field(default=None, alias='playMode', description='Indicates whether this game is multi-player, co-op or single-player.  The game can be marked as multi-player, co-op and single-player at the same time.')

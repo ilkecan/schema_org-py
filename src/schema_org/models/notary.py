@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.legal_service import LegalService
 
 class Notary(LegalService):
-    __doc__ = 'A notary.'
+    __doc__ = 'https://schema.org/Notary\n\nA notary.'
     SCHEMA_TYPE: ClassVar[str] = 'Notary'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Notary', 'LegalService', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

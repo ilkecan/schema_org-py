@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.interact_action import InteractAction
 
 class UnRegisterAction(InteractAction):
-    __doc__ = 'The act of un-registering from a service.\\n\\nRelated actions:\\n\\n* [[RegisterAction]]: antonym of UnRegisterAction.\\n* [[LeaveAction]]: Unlike LeaveAction, UnRegisterAction implies that you are unregistering from a service you were previously registered, rather than leaving a team/group of people.'
+    __doc__ = 'https://schema.org/UnRegisterAction\n\nThe act of un-registering from a service.\\n\\nRelated actions:\\n\\n* [[RegisterAction]]: antonym of UnRegisterAction.\\n* [[LeaveAction]]: Unlike LeaveAction, UnRegisterAction implies that you are unregistering from a service you were previously registered, rather than leaving a team/group of people.'
     SCHEMA_TYPE: ClassVar[str] = 'UnRegisterAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('UnRegisterAction', 'InteractAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

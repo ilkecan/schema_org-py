@@ -15,7 +15,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.service import Service
 
 class CableOrSatelliteService(Service):
-    __doc__ = 'A service which provides access to media programming like TV or radio. Access may be via cable or satellite.'
+    __doc__ = 'https://schema.org/CableOrSatelliteService\n\nA service which provides access to media programming like TV or radio. Access may be via cable or satellite.'
     SCHEMA_TYPE: ClassVar[str] = 'CableOrSatelliteService'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CableOrSatelliteService', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

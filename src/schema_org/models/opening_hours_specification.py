@@ -17,7 +17,7 @@ from schema_org.enums import DayOfWeek
 from schema_org.models.structured_value import StructuredValue
 
 class OpeningHoursSpecification(StructuredValue):
-    __doc__ = 'A structured value providing information about the opening hours of a place or a certain service inside a place.\\n\\n\nThe place is __open__ if the [[opens]] property is specified, and __closed__ otherwise.\\n\\nIf the value for the [[closes]] property is less than the value for the [[opens]] property then the hour range is assumed to span over the next day.\n      '
+    __doc__ = 'https://schema.org/OpeningHoursSpecification\n\nA structured value providing information about the opening hours of a place or a certain service inside a place.\\n\\n\nThe place is __open__ if the [[opens]] property is specified, and __closed__ otherwise.\\n\\nIf the value for the [[closes]] property is less than the value for the [[opens]] property then the hour range is assumed to span over the next day.\n      '
     SCHEMA_TYPE: ClassVar[str] = 'OpeningHoursSpecification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('OpeningHoursSpecification', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -19,7 +19,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_condition import MedicalCondition
 
 class InfectiousDisease(MedicalCondition):
-    __doc__ = 'An infectious disease is a clinically evident human disease resulting from the presence of pathogenic microbial agents, like pathogenic viruses, pathogenic bacteria, fungi, protozoa, multicellular parasites, and prions. To be considered an infectious disease, such pathogens are known to be able to cause this disease.'
+    __doc__ = 'https://schema.org/InfectiousDisease\n\nAn infectious disease is a clinically evident human disease resulting from the presence of pathogenic microbial agents, like pathogenic viruses, pathogenic bacteria, fungi, protozoa, multicellular parasites, and prions. To be considered an infectious disease, such pathogens are known to be able to cause this disease.'
     SCHEMA_TYPE: ClassVar[str] = 'InfectiousDisease'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('InfectiousDisease', 'MedicalCondition', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

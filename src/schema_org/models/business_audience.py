@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.audience import Audience
 
 class BusinessAudience(Audience):
-    __doc__ = "A set of characteristics belonging to businesses, e.g. who compose an item's target audience."
+    __doc__ = "https://schema.org/BusinessAudience\n\nA set of characteristics belonging to businesses, e.g. who compose an item's target audience."
     SCHEMA_TYPE: ClassVar[str] = 'BusinessAudience'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BusinessAudience', 'Audience', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

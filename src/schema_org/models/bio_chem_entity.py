@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.thing import Thing
 
 class BioChemEntity(Thing):
-    __doc__ = 'Any biological, chemical, or biochemical thing. For example: a protein; a gene; a chemical; a synthetic chemical.'
+    __doc__ = 'https://schema.org/BioChemEntity\n\nAny biological, chemical, or biochemical thing. For example: a protein; a gene; a chemical; a synthetic chemical.'
     SCHEMA_TYPE: ClassVar[str] = 'BioChemEntity'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BioChemEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -50,12 +50,12 @@ class BioChemEntity(Thing):
     bio_chem_interaction: BioChemEntity | list[BioChemEntity] | None = Field(default=None, alias='bioChemInteraction', description='A BioChemEntity that is known to interact with this item.')
     bio_chem_similarity: BioChemEntity | list[BioChemEntity] | None = Field(default=None, alias='bioChemSimilarity', description='A similar BioChemEntity, e.g., obtained by fingerprint similarity algorithms.')
     biological_role: DefinedTerm | list[DefinedTerm] | None = Field(default=None, alias='biologicalRole', description='A role played by the BioChemEntity within a biological context.')
-    funding: Grant | list[Grant] | None = Field(default=None, alias='funding', description='A [[Grant]] that directly or indirectly provide funding or sponsorship for this item. See also [[ownershipFundingInfo]].')
-    has_bio_chem_entity_part: BioChemEntity | list[BioChemEntity] | None = Field(default=None, alias='hasBioChemEntityPart', description='Indicates a BioChemEntity that (in some sense) has this BioChemEntity as a part. ')
+    funding: Grant | list[Grant] | None = Field(default=None, alias='funding', description='A [[Grant]] that directly or indirectly provide funding or sponsorship for this item. See also [[ownershipFundingInfo]].\n\nInverse-property: `fundedItem`.')
+    has_bio_chem_entity_part: BioChemEntity | list[BioChemEntity] | None = Field(default=None, alias='hasBioChemEntityPart', description='Indicates a BioChemEntity that (in some sense) has this BioChemEntity as a part. \n\nInverse-property: `isPartOfBioChemEntity`.')
     has_molecular_function: DefinedTerm | PropertyValue | URL | list[DefinedTerm | PropertyValue | URL] | None = Field(default=None, alias='hasMolecularFunction', description='Molecular function performed by this BioChemEntity; please use PropertyValue if you want to include any evidence.')
     has_representation: PropertyValue | Text | URL | list[PropertyValue | Text | URL] | None = Field(default=None, alias='hasRepresentation', description='A common representation such as a protein sequence or chemical structure for this entity. For images use schema.org/image.')
-    is_encoded_by_bio_chem_entity: Gene | list[Gene] | None = Field(default=None, alias='isEncodedByBioChemEntity', description='Another BioChemEntity encoding by this one.')
+    is_encoded_by_bio_chem_entity: Gene | list[Gene] | None = Field(default=None, alias='isEncodedByBioChemEntity', description='Another BioChemEntity encoding by this one.\n\nInverse-property: `encodesBioChemEntity`.')
     is_involved_in_biological_process: DefinedTerm | PropertyValue | URL | list[DefinedTerm | PropertyValue | URL] | None = Field(default=None, alias='isInvolvedInBiologicalProcess', description='Biological process this BioChemEntity is involved in; please use PropertyValue if you want to include any evidence.')
     is_located_in_subcellular_location: DefinedTerm | PropertyValue | URL | list[DefinedTerm | PropertyValue | URL] | None = Field(default=None, alias='isLocatedInSubcellularLocation', description='Subcellular location where this BioChemEntity is located; please use PropertyValue if you want to include any evidence.')
-    is_part_of_bio_chem_entity: BioChemEntity | list[BioChemEntity] | None = Field(default=None, alias='isPartOfBioChemEntity', description='Indicates a BioChemEntity that is (in some sense) a part of this BioChemEntity. ')
+    is_part_of_bio_chem_entity: BioChemEntity | list[BioChemEntity] | None = Field(default=None, alias='isPartOfBioChemEntity', description='Indicates a BioChemEntity that is (in some sense) a part of this BioChemEntity. \n\nInverse-property: `hasBioChemEntityPart`.')
     taxonomic_range: DefinedTerm | Taxon | Text | URL | list[DefinedTerm | Taxon | Text | URL] | None = Field(default=None, alias='taxonomicRange', description='The taxonomic grouping of the organism that expresses, encodes, or in some way related to the BioChemEntity.')

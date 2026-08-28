@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.article import Article
 
 class AdvertiserContentArticle(Article):
-    __doc__ = 'An [[Article]] that an external entity has paid to place or to produce to its specifications. Includes [advertorials](https://en.wikipedia.org/wiki/Advertorial), sponsored content, native advertising and other paid content.'
+    __doc__ = 'https://schema.org/AdvertiserContentArticle\n\nAn [[Article]] that an external entity has paid to place or to produce to its specifications. Includes [advertorials](https://en.wikipedia.org/wiki/Advertorial), sponsored content, native advertising and other paid content.'
     SCHEMA_TYPE: ClassVar[str] = 'AdvertiserContentArticle'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AdvertiserContentArticle', 'Article', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

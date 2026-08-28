@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.action import Action
 
 class OrganizeAction(Action):
-    __doc__ = 'The act of manipulating/administering/supervising/controlling one or more objects.'
+    __doc__ = 'https://schema.org/OrganizeAction\n\nThe act of manipulating/administering/supervising/controlling one or more objects.'
     SCHEMA_TYPE: ClassVar[str] = 'OrganizeAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('OrganizeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

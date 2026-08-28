@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.news_article import NewsArticle
 
 class OpinionNewsArticle(NewsArticle):
-    __doc__ = 'An [[OpinionNewsArticle]] is a [[NewsArticle]] that primarily expresses opinions rather than journalistic reporting of news and events. For example, a [[NewsArticle]] consisting of a column or [[Blog]]/[[BlogPosting]] entry in the Opinions section of a news publication. '
+    __doc__ = 'https://schema.org/OpinionNewsArticle\n\nAn [[OpinionNewsArticle]] is a [[NewsArticle]] that primarily expresses opinions rather than journalistic reporting of news and events. For example, a [[NewsArticle]] consisting of a column or [[Blog]]/[[BlogPosting]] entry in the Opinions section of a news publication. '
     SCHEMA_TYPE: ClassVar[str] = 'OpinionNewsArticle'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('OpinionNewsArticle', 'NewsArticle', 'Article', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

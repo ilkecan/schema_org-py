@@ -19,7 +19,7 @@ from schema_org.enums import ReservationStatusType
 from schema_org.models.reservation import Reservation
 
 class LodgingReservation(Reservation):
-    __doc__ = 'A reservation for lodging at a hotel, motel, inn, etc.\\n\\nNote: This type is for information about actual reservations, e.g. in confirmation emails or HTML pages with individual confirmations of reservations.'
+    __doc__ = 'https://schema.org/LodgingReservation\n\nA reservation for lodging at a hotel, motel, inn, etc.\\n\\nNote: This type is for information about actual reservations, e.g. in confirmation emails or HTML pages with individual confirmations of reservations.'
     SCHEMA_TYPE: ClassVar[str] = 'LodgingReservation'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('LodgingReservation', 'Reservation', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

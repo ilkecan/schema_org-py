@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.communicate_action import CommunicateAction
 
 class CommentAction(CommunicateAction):
-    __doc__ = 'The act of generating a comment about a subject.'
+    __doc__ = 'https://schema.org/CommentAction\n\nThe act of generating a comment about a subject.'
     SCHEMA_TYPE: ClassVar[str] = 'CommentAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CommentAction', 'CommunicateAction', 'InteractAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

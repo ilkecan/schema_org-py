@@ -17,7 +17,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.organize_action import OrganizeAction
 
 class PlanAction(OrganizeAction):
-    __doc__ = 'The act of planning the execution of an event/task/action/reservation/plan to a future date.'
+    __doc__ = 'https://schema.org/PlanAction\n\nThe act of planning the execution of an event/task/action/reservation/plan to a future date.'
     SCHEMA_TYPE: ClassVar[str] = 'PlanAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PlanAction', 'OrganizeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

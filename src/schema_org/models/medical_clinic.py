@@ -20,7 +20,7 @@ from schema_org.models.medical_business import MedicalBusiness
 from schema_org.models.medical_organization import MedicalOrganization
 
 class MedicalClinic(MedicalBusiness, MedicalOrganization):
-    __doc__ = 'A facility, often associated with a hospital or medical school, that is devoted to the specific diagnosis and/or healthcare. Previously limited to outpatients but with evolution it may be open to inpatients as well.'
+    __doc__ = 'https://schema.org/MedicalClinic\n\nA facility, often associated with a hospital or medical school, that is devoted to the specific diagnosis and/or healthcare. Previously limited to outpatients but with evolution it may be open to inpatients as well.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalClinic'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalClinic', 'MedicalBusiness', 'MedicalOrganization', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

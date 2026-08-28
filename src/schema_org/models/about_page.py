@@ -22,7 +22,7 @@ from schema_org.enums import Specialty
 from schema_org.models.web_page import WebPage
 
 class AboutPage(WebPage):
-    __doc__ = 'Web page type: About page.'
+    __doc__ = 'https://schema.org/AboutPage\n\nWeb page type: About page.'
     SCHEMA_TYPE: ClassVar[str] = 'AboutPage'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AboutPage', 'WebPage', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

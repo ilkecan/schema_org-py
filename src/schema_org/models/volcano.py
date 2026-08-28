@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.landform import Landform
 
 class Volcano(Landform):
-    __doc__ = 'A volcano, like Fujisan.'
+    __doc__ = 'https://schema.org/Volcano\n\nA volcano, like Fujisan.'
     SCHEMA_TYPE: ClassVar[str] = 'Volcano'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Volcano', 'Landform', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

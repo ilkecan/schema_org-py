@@ -27,7 +27,7 @@ from schema_org.models.creative_work import CreativeWork
 from schema_org.models.physical_activity import PhysicalActivity
 
 class ExercisePlan(CreativeWork, PhysicalActivity):
-    __doc__ = 'Fitness-related activity designed for a specific health-related purpose, including defined exercise routines as well as activity prescribed by a clinician.'
+    __doc__ = 'https://schema.org/ExercisePlan\n\nFitness-related activity designed for a specific health-related purpose, including defined exercise routines as well as activity prescribed by a clinician.'
     SCHEMA_TYPE: ClassVar[str] = 'ExercisePlan'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ExercisePlan', 'CreativeWork', 'PhysicalActivity', 'Thing', 'LifestyleModification', 'MedicalEntity')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

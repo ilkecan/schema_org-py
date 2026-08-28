@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.interact_action import InteractAction
 
 class CommunicateAction(InteractAction):
-    __doc__ = 'The act of conveying information to another person via a communication medium (instrument) such as speech, email, or telephone conversation.'
+    __doc__ = 'https://schema.org/CommunicateAction\n\nThe act of conveying information to another person via a communication medium (instrument) such as speech, email, or telephone conversation.'
     SCHEMA_TYPE: ClassVar[str] = 'CommunicateAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CommunicateAction', 'InteractAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -53,7 +53,7 @@ class CommunicateAction(InteractAction):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['CommunicateAction'] = Field(default='CommunicateAction', alias='@type', frozen=True)
-    about: Thing | list[Thing] | None = Field(default=None, alias='about', description='The subject matter of an object.')
-    in_language: Language | Text | list[Language | Text] | None = Field(default=None, alias='inLanguage', description='The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].')
-    language: Language | list[Language] | None = Field(default=None, alias='language', description='A sub property of instrument. The language used on this action.')
+    about: Thing | list[Thing] | None = Field(default=None, alias='about', description='The subject matter of an object.\n\nInverse-property: `subjectOf`.')
+    in_language: Language | Text | list[Language | Text] | None = Field(default=None, alias='inLanguage', description='The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].\n\nSupersedes `language`.')
+    language: Language | list[Language] | None = Field(default=None, alias='language', description='A sub property of instrument. The language used on this action.\n\nSuperseded by `inLanguage`.')
     recipient: Audience | ContactPoint | Organization | Person | list[Audience | ContactPoint | Organization | Person] | None = Field(default=None, alias='recipient', description='A sub property of participant. The participant who is at the receiving end of the action.')

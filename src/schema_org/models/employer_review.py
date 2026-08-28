@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.review import Review
 
 class EmployerReview(Review):
-    __doc__ = 'An [[EmployerReview]] is a review of an [[Organization]] regarding its role as an employer, written by a current or former employee of that organization.'
+    __doc__ = 'https://schema.org/EmployerReview\n\nAn [[EmployerReview]] is a review of an [[Organization]] regarding its role as an employer, written by a current or former employee of that organization.'
     SCHEMA_TYPE: ClassVar[str] = 'EmployerReview'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('EmployerReview', 'Review', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

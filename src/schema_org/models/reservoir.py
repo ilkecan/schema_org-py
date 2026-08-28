@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.body_of_water import BodyOfWater
 
 class Reservoir(BodyOfWater):
-    __doc__ = 'A reservoir of water, typically an artificially created lake, like the Lake Kariba reservoir.'
+    __doc__ = 'https://schema.org/Reservoir\n\nA reservoir of water, typically an artificially created lake, like the Lake Kariba reservoir.'
     SCHEMA_TYPE: ClassVar[str] = 'Reservoir'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Reservoir', 'BodyOfWater', 'Landform', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

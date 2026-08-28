@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class Permit(Intangible):
-    __doc__ = 'A permit issued by an organization, e.g. a parking pass.'
+    __doc__ = 'https://schema.org/Permit\n\nA permit issued by an organization, e.g. a parking pass.'
     SCHEMA_TYPE: ClassVar[str] = 'Permit'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Permit', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

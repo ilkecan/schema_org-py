@@ -26,7 +26,7 @@ from schema_org.enums import SteeringPositionValue
 from schema_org.models.vehicle import Vehicle
 
 class BusOrCoach(Vehicle):
-    __doc__ = 'A bus (also omnibus or autobus) is a road vehicle designed to carry passengers. Coaches are luxury buses, usually in service for long distance travel.'
+    __doc__ = 'https://schema.org/BusOrCoach\n\nA bus (also omnibus or autobus) is a road vehicle designed to carry passengers. Coaches are luxury buses, usually in service for long distance travel.'
     SCHEMA_TYPE: ClassVar[str] = 'BusOrCoach'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BusOrCoach', 'Vehicle', 'Product', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

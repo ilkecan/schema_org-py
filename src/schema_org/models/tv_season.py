@@ -18,10 +18,11 @@ from schema_org.datatypes import Text
 from schema_org.datatypes import URL
 from schema_org.enums import IPTCDigitalSourceEnumeration
 from schema_org.enums import SizeSpecification
+from schema_org.models.creative_work import CreativeWork
 from schema_org.models.creative_work_season import CreativeWorkSeason
 
-class TVSeason(CreativeWorkSeason):
-    __doc__ = 'Season dedicated to TV broadcast and associated online delivery.'
+class TVSeason(CreativeWorkSeason, CreativeWork):
+    __doc__ = 'https://schema.org/TVSeason\n\nSeason dedicated to TV broadcast and associated online delivery.'
     SCHEMA_TYPE: ClassVar[str] = 'TVSeason'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('TVSeason', 'CreativeWork', 'CreativeWorkSeason', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -171,5 +172,5 @@ class TVSeason(CreativeWorkSeason):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['TVSeason'] = Field(default='TVSeason', alias='@type', frozen=True)
     country_of_origin: Country | list[Country] | None = Field(default=None, alias='countryOfOrigin', description='The country of origin of something, including products as well as creative  works such as movie and TV content.\n\nIn the case of TV and movie, this would be the country of the principle offices of the production company or individual responsible for the movie. For other kinds of [[CreativeWork]] it is difficult to provide fully general guidance, and properties such as [[contentLocation]] and [[locationCreated]] may be more applicable.\n\nIn the case of products, the country of origin of the product. The exact interpretation of this may vary by context and product type, and cannot be fully enumerated here.')
-    part_of_tv_series: TVSeries | list[TVSeries] | None = Field(default=None, alias='partOfTVSeries', description='The TV series to which this episode or season belongs.')
+    part_of_tv_series: TVSeries | list[TVSeries] | None = Field(default=None, alias='partOfTVSeries', description='The TV series to which this episode or season belongs.\n\nSuperseded by `partOfSeries`.')
     title_eidr: Text | URL | list[Text | URL] | None = Field(default=None, alias='titleEIDR', description='An [EIDR](https://eidr.org/) (Entertainment Identifier Registry) [[identifier]] representing at the most general/abstract level, a work of film or television.\n\nFor example, the motion picture known as "Ghostbusters" has a titleEIDR of  "10.5240/7EC7-228A-510A-053E-CBB8-J". This title (or work) may have several variants, which EIDR calls "edits". See [[editEIDR]].\n\nSince schema.org types like [[Movie]], [[TVEpisode]], [[TVSeason]], and [[TVSeries]] can be used for both works and their multiple expressions, it is possible to use [[titleEIDR]] alone (for a general description), or alongside [[editEIDR]] for a more edit-specific description.\n')

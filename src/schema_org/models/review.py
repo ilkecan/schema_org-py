@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Review(CreativeWork):
-    __doc__ = 'A review of an item - for example, of a restaurant, movie, or store.'
+    __doc__ = 'https://schema.org/Review\n\nA review of an item - for example, of a restaurant, movie, or store.'
     SCHEMA_TYPE: ClassVar[str] = 'Review'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Review', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

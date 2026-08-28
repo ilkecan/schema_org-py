@@ -18,7 +18,7 @@ from schema_org.enums import QualitativeValue
 from schema_org.models.structured_value import StructuredValue
 
 class QuantitativeValue(StructuredValue):
-    __doc__ = ' A point value or interval for product characteristics and other purposes.'
+    __doc__ = 'https://schema.org/QuantitativeValue\n\n A point value or interval for product characteristics and other purposes.'
     SCHEMA_TYPE: ClassVar[str] = 'QuantitativeValue'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('QuantitativeValue', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

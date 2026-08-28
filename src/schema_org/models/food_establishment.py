@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.local_business import LocalBusiness
 
 class FoodEstablishment(LocalBusiness):
-    __doc__ = 'A food-related business.'
+    __doc__ = 'https://schema.org/FoodEstablishment\n\nA food-related business.'
     SCHEMA_TYPE: ClassVar[str] = 'FoodEstablishment'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('FoodEstablishment', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -159,7 +159,7 @@ class FoodEstablishment(LocalBusiness):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['FoodEstablishment'] = Field(default='FoodEstablishment', alias='@type', frozen=True)
     accepts_reservations: Boolean | Text | URL | list[Boolean | Text | URL] | None = Field(default=None, alias='acceptsReservations', description='Indicates whether a FoodEstablishment accepts reservations. Values can be Boolean, an URL at which reservations can be made or (for backwards compatibility) the strings ```Yes``` or ```No```.')
-    has_menu: Menu | Text | URL | list[Menu | Text | URL] | None = Field(default=None, alias='hasMenu', description='Either the actual menu as a structured representation, as text, or a URL of the menu.')
-    menu: Menu | Text | URL | list[Menu | Text | URL] | None = Field(default=None, alias='menu', description='Either the actual menu as a structured representation, as text, or a URL of the menu.')
+    has_menu: Menu | Text | URL | list[Menu | Text | URL] | None = Field(default=None, alias='hasMenu', description='Either the actual menu as a structured representation, as text, or a URL of the menu.\n\nSupersedes `menu`.')
+    menu: Menu | Text | URL | list[Menu | Text | URL] | None = Field(default=None, alias='menu', description='Either the actual menu as a structured representation, as text, or a URL of the menu.\n\nSuperseded by `hasMenu`.')
     serves_cuisine: Text | list[Text] | None = Field(default=None, alias='servesCuisine', description='The cuisine of the restaurant.')
     star_rating: Rating | list[Rating] | None = Field(default=None, alias='starRating', description='An official rating for a lodging business or food establishment, e.g. from national associations or standards bodies. Use the author property to indicate the rating organization, e.g. as an Organization with name such as (e.g. HOTREC, DEHOGA, WHR, or Hotelstars).')

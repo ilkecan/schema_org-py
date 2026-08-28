@@ -25,7 +25,7 @@ from schema_org.models.audio_object import AudioObject
 from schema_org.models.book import Book
 
 class Audiobook(AudioObject, Book):
-    __doc__ = 'An audiobook.'
+    __doc__ = 'https://schema.org/Audiobook\n\nAn audiobook.'
     SCHEMA_TYPE: ClassVar[str] = 'Audiobook'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Audiobook', 'AudioObject', 'Book', 'MediaObject', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

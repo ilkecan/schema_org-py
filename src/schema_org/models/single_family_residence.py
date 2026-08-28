@@ -18,7 +18,7 @@ from schema_org.enums import BedType
 from schema_org.models.house import House
 
 class SingleFamilyResidence(House):
-    __doc__ = 'Residence type: Single-family home.'
+    __doc__ = 'https://schema.org/SingleFamilyResidence\n\nResidence type: Single-family home.'
     SCHEMA_TYPE: ClassVar[str] = 'SingleFamilyResidence'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SingleFamilyResidence', 'House', 'Accommodation', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

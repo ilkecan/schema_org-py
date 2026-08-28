@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.product import Product
 
 class SomeProducts(Product):
-    __doc__ = 'A placeholder for multiple similar products of the same kind.'
+    __doc__ = 'https://schema.org/SomeProducts\n\nA placeholder for multiple similar products of the same kind.'
     SCHEMA_TYPE: ClassVar[str] = 'SomeProducts'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SomeProducts', 'Product', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

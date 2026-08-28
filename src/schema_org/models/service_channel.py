@@ -14,7 +14,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class ServiceChannel(Intangible):
-    __doc__ = 'A means for accessing a service, e.g. a government office location, web site, or phone number.'
+    __doc__ = 'https://schema.org/ServiceChannel\n\nA means for accessing a service, e.g. a government office location, web site, or phone number.'
     SCHEMA_TYPE: ClassVar[str] = 'ServiceChannel'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ServiceChannel', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

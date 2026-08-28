@@ -23,7 +23,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.media_object import MediaObject
 
 class TextObject(MediaObject):
-    __doc__ = 'A text file. The text can be unformatted or contain markup, html, etc.'
+    __doc__ = 'https://schema.org/TextObject\n\nA text file. The text can be unformatted or contain markup, html, etc.'
     SCHEMA_TYPE: ClassVar[str] = 'TextObject'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('TextObject', 'MediaObject', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

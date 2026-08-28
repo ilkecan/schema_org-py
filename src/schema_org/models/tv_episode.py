@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.episode import Episode
 
 class TVEpisode(Episode):
-    __doc__ = 'A TV episode which can be part of a series or season.'
+    __doc__ = 'https://schema.org/TVEpisode\n\nA TV episode which can be part of a series or season.'
     SCHEMA_TYPE: ClassVar[str] = 'TVEpisode'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('TVEpisode', 'Episode', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -172,6 +172,6 @@ class TVEpisode(Episode):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['TVEpisode'] = Field(default='TVEpisode', alias='@type', frozen=True)
     country_of_origin: Country | list[Country] | None = Field(default=None, alias='countryOfOrigin', description='The country of origin of something, including products as well as creative  works such as movie and TV content.\n\nIn the case of TV and movie, this would be the country of the principle offices of the production company or individual responsible for the movie. For other kinds of [[CreativeWork]] it is difficult to provide fully general guidance, and properties such as [[contentLocation]] and [[locationCreated]] may be more applicable.\n\nIn the case of products, the country of origin of the product. The exact interpretation of this may vary by context and product type, and cannot be fully enumerated here.')
-    part_of_tv_series: TVSeries | list[TVSeries] | None = Field(default=None, alias='partOfTVSeries', description='The TV series to which this episode or season belongs.')
+    part_of_tv_series: TVSeries | list[TVSeries] | None = Field(default=None, alias='partOfTVSeries', description='The TV series to which this episode or season belongs.\n\nSuperseded by `partOfSeries`.')
     subtitle_language: Language | Text | list[Language | Text] | None = Field(default=None, alias='subtitleLanguage', description='Languages in which subtitles/captions are available, in [IETF BCP 47 standard format](http://tools.ietf.org/html/bcp47).')
     title_eidr: Text | URL | list[Text | URL] | None = Field(default=None, alias='titleEIDR', description='An [EIDR](https://eidr.org/) (Entertainment Identifier Registry) [[identifier]] representing at the most general/abstract level, a work of film or television.\n\nFor example, the motion picture known as "Ghostbusters" has a titleEIDR of  "10.5240/7EC7-228A-510A-053E-CBB8-J". This title (or work) may have several variants, which EIDR calls "edits". See [[editEIDR]].\n\nSince schema.org types like [[Movie]], [[TVEpisode]], [[TVSeason]], and [[TVSeries]] can be used for both works and their multiple expressions, it is possible to use [[titleEIDR]] alone (for a general description), or alongside [[editEIDR]] for a more edit-specific description.\n')

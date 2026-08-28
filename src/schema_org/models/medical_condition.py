@@ -18,7 +18,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_entity import MedicalEntity
 
 class MedicalCondition(MedicalEntity):
-    __doc__ = 'Any condition of the human body that affects the normal functioning of a person, whether physically or mentally. Includes diseases, injuries, disabilities, disorders, syndromes, etc.'
+    __doc__ = 'https://schema.org/MedicalCondition\n\nAny condition of the human body that affects the normal functioning of a person, whether physically or mentally. Includes diseases, injuries, disabilities, disorders, syndromes, etc.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalCondition'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalCondition', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -64,7 +64,7 @@ class MedicalCondition(MedicalEntity):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['MedicalCondition'] = Field(default='MedicalCondition', alias='@type', frozen=True)
     associated_anatomy: AnatomicalStructure | AnatomicalSystem | SuperficialAnatomy | list[AnatomicalStructure | AnatomicalSystem | SuperficialAnatomy] | None = Field(default=None, alias='associatedAnatomy', description='The anatomy of the underlying organ system or structures associated with this entity.')
-    cause: MedicalCause | list[MedicalCause] | None = Field(default=None, alias='cause', description='The cause of a medical condition.')
+    cause: MedicalCause | list[MedicalCause] | None = Field(default=None, alias='cause', description='The cause of a medical condition.\n\nInverse-property: `causeOf`.')
     differential_diagnosis: DDxElement | list[DDxElement] | None = Field(default=None, alias='differentialDiagnosis', description='One of a set of differential diagnoses for the condition. Specifically, a closely-related or competing diagnosis typically considered later in the cognitive process whereby this medical condition is distinguished from others most likely responsible for a similar collection of signs and symptoms to reach the most parsimonious diagnosis or diagnoses in a patient.')
     drug: Drug | list[Drug] | None = Field(default=None, alias='drug', description='Specifying a drug or medicine used in a medication procedure.')
     epidemiology: Text | list[Text] | None = Field(default=None, alias='epidemiology', description='The characteristics of associated patients, such as age, gender, race etc.')

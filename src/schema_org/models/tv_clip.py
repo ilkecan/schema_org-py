@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.clip import Clip
 
 class TVClip(Clip):
-    __doc__ = 'A short TV program or a segment/part of a TV program.'
+    __doc__ = 'https://schema.org/TVClip\n\nA short TV program or a segment/part of a TV program.'
     SCHEMA_TYPE: ClassVar[str] = 'TVClip'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('TVClip', 'Clip', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -169,4 +169,4 @@ class TVClip(Clip):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['TVClip'] = Field(default='TVClip', alias='@type', frozen=True)
-    part_of_tv_series: TVSeries | list[TVSeries] | None = Field(default=None, alias='partOfTVSeries', description='The TV series to which this episode or season belongs.')
+    part_of_tv_series: TVSeries | list[TVSeries] | None = Field(default=None, alias='partOfTVSeries', description='The TV series to which this episode or season belongs.\n\nSuperseded by `partOfSeries`.')

@@ -16,7 +16,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.financial_product import FinancialProduct
 
 class InvestmentOrDeposit(FinancialProduct):
-    __doc__ = 'A type of financial product that typically requires the client to transfer funds to a financial service in return for potential beneficial financial return.'
+    __doc__ = 'https://schema.org/InvestmentOrDeposit\n\nA type of financial product that typically requires the client to transfer funds to a financial service in return for potential beneficial financial return.'
     SCHEMA_TYPE: ClassVar[str] = 'InvestmentOrDeposit'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('InvestmentOrDeposit', 'FinancialProduct', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.role import Role
 
 class LinkRole(Role):
-    __doc__ = "A Role that represents a Web link, e.g. as expressed via the 'url' property. Its linkRelationship property can indicate URL-based and plain textual link types, e.g. those in IANA link registry or others such as 'amphtml'. This structure provides a placeholder where details from HTML's link element can be represented outside of HTML, e.g. in JSON-LD feeds."
+    __doc__ = "https://schema.org/LinkRole\n\nA Role that represents a Web link, e.g. as expressed via the 'url' property. Its linkRelationship property can indicate URL-based and plain textual link types, e.g. those in IANA link registry or others such as 'amphtml'. This structure provides a placeholder where details from HTML's link element can be represented outside of HTML, e.g. in JSON-LD feeds."
     SCHEMA_TYPE: ClassVar[str] = 'LinkRole'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('LinkRole', 'Role', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -41,5 +41,5 @@ class LinkRole(Role):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['LinkRole'] = Field(default='LinkRole', alias='@type', frozen=True)
-    in_language: Language | Text | list[Language | Text] | None = Field(default=None, alias='inLanguage', description='The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].')
+    in_language: Language | Text | list[Language | Text] | None = Field(default=None, alias='inLanguage', description='The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].\n\nSupersedes `language`.')
     link_relationship: Text | list[Text] | None = Field(default=None, alias='linkRelationship', description='Indicates the relationship type of a Web link. ')

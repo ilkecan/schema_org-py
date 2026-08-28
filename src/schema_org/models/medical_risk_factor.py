@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_entity import MedicalEntity
 
 class MedicalRiskFactor(MedicalEntity):
-    __doc__ = "A risk factor is anything that increases a person's likelihood of developing or contracting a disease, medical condition, or complication."
+    __doc__ = "https://schema.org/MedicalRiskFactor\n\nA risk factor is anything that increases a person's likelihood of developing or contracting a disease, medical condition, or complication."
     SCHEMA_TYPE: ClassVar[str] = 'MedicalRiskFactor'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalRiskFactor', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.allocate_action import AllocateAction
 
 class AcceptAction(AllocateAction):
-    __doc__ = 'The act of committing to/adopting an object.\\n\\nRelated actions:\\n\\n* [[RejectAction]]: The antonym of AcceptAction.'
+    __doc__ = 'https://schema.org/AcceptAction\n\nThe act of committing to/adopting an object.\\n\\nRelated actions:\\n\\n* [[RejectAction]]: The antonym of AcceptAction.'
     SCHEMA_TYPE: ClassVar[str] = 'AcceptAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AcceptAction', 'AllocateAction', 'OrganizeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

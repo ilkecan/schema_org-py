@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.create_action import CreateAction
 
 class FilmAction(CreateAction):
-    __doc__ = 'The act of capturing sound and moving images on film, video, or digitally.'
+    __doc__ = 'https://schema.org/FilmAction\n\nThe act of capturing sound and moving images on film, video, or digitally.'
     SCHEMA_TYPE: ClassVar[str] = 'FilmAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('FilmAction', 'CreateAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.structured_value import StructuredValue
 
 class QuantitativeValueDistribution(StructuredValue):
-    __doc__ = 'A statistical distribution of values.'
+    __doc__ = 'https://schema.org/QuantitativeValueDistribution\n\nA statistical distribution of values.'
     SCHEMA_TYPE: ClassVar[str] = 'QuantitativeValueDistribution'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('QuantitativeValueDistribution', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

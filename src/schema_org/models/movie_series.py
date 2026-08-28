@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work_series import CreativeWorkSeries
 
 class MovieSeries(CreativeWorkSeries):
-    __doc__ = 'A series of movies. Included movies can be indicated with the hasPart property.'
+    __doc__ = 'https://schema.org/MovieSeries\n\nA series of movies. Included movies can be indicated with the hasPart property.'
     SCHEMA_TYPE: ClassVar[str] = 'MovieSeries'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MovieSeries', 'CreativeWorkSeries', 'CreativeWork', 'Series', 'Thing', 'Intangible')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -167,10 +167,10 @@ class MovieSeries(CreativeWorkSeries):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['MovieSeries'] = Field(default='MovieSeries', alias='@type', frozen=True)
-    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.')
-    actors: Person | list[Person] | None = Field(default=None, alias='actors', description='An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip.')
-    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.')
-    directors: Person | list[Person] | None = Field(default=None, alias='directors', description='A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip.')
+    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `actors`.')
+    actors: Person | list[Person] | None = Field(default=None, alias='actors', description='An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip.\n\nSuperseded by `actor`.')
+    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `directors`.')
+    directors: Person | list[Person] | None = Field(default=None, alias='directors', description='A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip.\n\nSuperseded by `director`.')
     music_by: MusicGroup | Person | list[MusicGroup | Person] | None = Field(default=None, alias='musicBy', description='The composer of the soundtrack.')
     production_company: Organization | list[Organization] | None = Field(default=None, alias='productionCompany', description='The production company or studio responsible for the item, e.g. series, video game, episode etc.')
     trailer: VideoObject | list[VideoObject] | None = Field(default=None, alias='trailer', description='The trailer of a movie or TV/radio series, season, episode, etc.')

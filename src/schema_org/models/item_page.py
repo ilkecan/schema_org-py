@@ -22,7 +22,7 @@ from schema_org.enums import Specialty
 from schema_org.models.web_page import WebPage
 
 class ItemPage(WebPage):
-    __doc__ = 'A page devoted to a single item, such as a particular product or hotel.'
+    __doc__ = 'https://schema.org/ItemPage\n\nA page devoted to a single item, such as a particular product or hotel.'
     SCHEMA_TYPE: ClassVar[str] = 'ItemPage'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ItemPage', 'WebPage', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.control_action import ControlAction
 
 class AuthenticateAction(ControlAction):
-    __doc__ = 'The action of authenticating into a device or application.'
+    __doc__ = 'https://schema.org/AuthenticateAction\n\nThe action of authenticating into a device or application.'
     SCHEMA_TYPE: ClassVar[str] = 'AuthenticateAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AuthenticateAction', 'ControlAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

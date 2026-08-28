@@ -19,7 +19,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.physician import Physician
 
 class IndividualPhysician(Physician):
-    __doc__ = 'An individual medical practitioner. For their official address use [[address]], for affiliations to hospitals use [[hospitalAffiliation]]. \nThe [[practicesAt]] property can be used to indicate [[MedicalOrganization]] hospitals, clinics, pharmacies etc. where this physician practices.'
+    __doc__ = 'https://schema.org/IndividualPhysician\n\nAn individual medical practitioner. For their official address use [[address]], for affiliations to hospitals use [[hospitalAffiliation]]. \nThe [[practicesAt]] property can be used to indicate [[MedicalOrganization]] hospitals, clinics, pharmacies etc. where this physician practices.'
     SCHEMA_TYPE: ClassVar[str] = 'IndividualPhysician'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('IndividualPhysician', 'Physician', 'MedicalBusiness', 'MedicalOrganization', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

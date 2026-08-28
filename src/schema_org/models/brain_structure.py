@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.anatomical_structure import AnatomicalStructure
 
 class BrainStructure(AnatomicalStructure):
-    __doc__ = 'Any anatomical structure which pertains to the soft nervous tissue functioning as the coordinating center of sensation and intellectual and nervous activity.'
+    __doc__ = 'https://schema.org/BrainStructure\n\nAny anatomical structure which pertains to the soft nervous tissue functioning as the coordinating center of sensation and intellectual and nervous activity.'
     SCHEMA_TYPE: ClassVar[str] = 'BrainStructure'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BrainStructure', 'AnatomicalStructure', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

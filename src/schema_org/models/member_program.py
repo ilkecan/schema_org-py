@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class MemberProgram(Intangible):
-    __doc__ = 'A MemberProgram defines a loyalty (or membership) program that provides its members with certain benefits, for example better pricing, free shipping or returns, or the ability to earn loyalty points. Member programs may have multiple tiers, for example silver and gold members, each with different benefits.'
+    __doc__ = 'https://schema.org/MemberProgram\n\nA MemberProgram defines a loyalty (or membership) program that provides its members with certain benefits, for example better pricing, free shipping or returns, or the ability to earn loyalty points. Member programs may have multiple tiers, for example silver and gold members, each with different benefits.'
     SCHEMA_TYPE: ClassVar[str] = 'MemberProgram'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MemberProgram', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -35,5 +35,5 @@ class MemberProgram(Intangible):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['MemberProgram'] = Field(default='MemberProgram', alias='@type', frozen=True)
-    has_tiers: MemberProgramTier | list[MemberProgramTier] | None = Field(default=None, alias='hasTiers', description='The tiers of a member program.')
+    has_tiers: MemberProgramTier | list[MemberProgramTier] | None = Field(default=None, alias='hasTiers', description='The tiers of a member program.\n\nInverse-property: `isTierOf`.')
     hosting_organization: Organization | list[Organization] | None = Field(default=None, alias='hostingOrganization', description="The Organization (airline, travelers' club, retailer, etc.) the membership is made with or which offers the  MemberProgram.")

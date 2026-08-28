@@ -15,7 +15,7 @@ from schema_org.enums import OrderStatus
 from schema_org.models.structured_value import StructuredValue
 
 class OrderItem(StructuredValue):
-    __doc__ = 'An order item is a line of an order. It includes the quantity and shipping details of a bought offer.'
+    __doc__ = 'https://schema.org/OrderItem\n\nAn order item is a line of an order. It includes the quantity and shipping details of a bought offer.'
     SCHEMA_TYPE: ClassVar[str] = 'OrderItem'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('OrderItem', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

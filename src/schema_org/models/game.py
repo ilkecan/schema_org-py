@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Game(CreativeWork):
-    __doc__ = 'The Game type represents things which are games. These are typically rule-governed recreational activities, e.g. role-playing games in which players assume the role of characters in a fictional setting.'
+    __doc__ = 'https://schema.org/Game\n\nThe Game type represents things which are games. These are typically rule-governed recreational activities, e.g. role-playing games in which players assume the role of characters in a fictional setting.'
     SCHEMA_TYPE: ClassVar[str] = 'Game'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Game', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -14,7 +14,7 @@ from schema_org.enums import WarrantyScope
 from schema_org.models.structured_value import StructuredValue
 
 class WarrantyPromise(StructuredValue):
-    __doc__ = 'A structured value representing the duration and scope of services that will be provided to a customer free of charge in case of a defect or malfunction of a product.'
+    __doc__ = 'https://schema.org/WarrantyPromise\n\nA structured value representing the duration and scope of services that will be provided to a customer free of charge in case of a defect or malfunction of a product.'
     SCHEMA_TYPE: ClassVar[str] = 'WarrantyPromise'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('WarrantyPromise', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

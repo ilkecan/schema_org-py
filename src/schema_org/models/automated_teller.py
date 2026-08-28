@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.financial_service import FinancialService
 
 class AutomatedTeller(FinancialService):
-    __doc__ = 'ATM/cash machine.'
+    __doc__ = 'https://schema.org/AutomatedTeller\n\nATM/cash machine.'
     SCHEMA_TYPE: ClassVar[str] = 'AutomatedTeller'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AutomatedTeller', 'FinancialService', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

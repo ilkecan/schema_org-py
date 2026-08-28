@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.digital_document import DigitalDocument
 
 class SpreadsheetDigitalDocument(DigitalDocument):
-    __doc__ = 'A spreadsheet file.'
+    __doc__ = 'https://schema.org/SpreadsheetDigitalDocument\n\nA spreadsheet file.'
     SCHEMA_TYPE: ClassVar[str] = 'SpreadsheetDigitalDocument'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SpreadsheetDigitalDocument', 'DigitalDocument', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

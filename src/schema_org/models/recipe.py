@@ -22,7 +22,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.how_to import HowTo
 
 class Recipe(HowTo):
-    __doc__ = 'A recipe. For dietary restrictions covered by the recipe, a few common restrictions are enumerated via [[suitableForDiet]]. The [[keywords]] property can also be used to add more detail.'
+    __doc__ = 'https://schema.org/Recipe\n\nA recipe. For dietary restrictions covered by the recipe, a few common restrictions are enumerated via [[suitableForDiet]]. The [[keywords]] property can also be used to add more detail.'
     SCHEMA_TYPE: ClassVar[str] = 'Recipe'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Recipe', 'HowTo', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -179,11 +179,11 @@ class Recipe(HowTo):
     schema_type: Literal['Recipe'] = Field(default='Recipe', alias='@type', frozen=True)
     cook_time: Duration | list[Duration] | None = Field(default=None, alias='cookTime', description='The time it takes to actually cook the dish, in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).')
     cooking_method: Text | list[Text] | None = Field(default=None, alias='cookingMethod', description='The method of cooking, such as Frying, Steaming, ...')
-    ingredients: Text | list[Text] | None = Field(default=None, alias='ingredients', description='A single ingredient used in the recipe, e.g. sugar, flour or garlic.')
+    ingredients: Text | list[Text] | None = Field(default=None, alias='ingredients', description='A single ingredient used in the recipe, e.g. sugar, flour or garlic.\n\nSuperseded by `recipeIngredient`.')
     nutrition: NutritionInformation | list[NutritionInformation] | None = Field(default=None, alias='nutrition', description='Nutrition information about the recipe or menu item.')
     recipe_category: Text | list[Text] | None = Field(default=None, alias='recipeCategory', description='The category of the recipe—for example, appetizer, entree, etc.')
     recipe_cuisine: Text | list[Text] | None = Field(default=None, alias='recipeCuisine', description='The cuisine of the recipe (for example, French or Ethiopian).')
-    recipe_ingredient: ItemList | PropertyValue | Text | list[ItemList | PropertyValue | Text] | None = Field(default=None, alias='recipeIngredient', description='An ingredient or ordered list of ingredients and potentially quantities used in the recipe, e.g. 1 cup of sugar, flour or garlic.  The ingredients can be represented as free text or more structured values.')
+    recipe_ingredient: ItemList | PropertyValue | Text | list[ItemList | PropertyValue | Text] | None = Field(default=None, alias='recipeIngredient', description='An ingredient or ordered list of ingredients and potentially quantities used in the recipe, e.g. 1 cup of sugar, flour or garlic.  The ingredients can be represented as free text or more structured values.\n\nSupersedes `ingredients`.')
     recipe_instructions: CreativeWork | ItemList | Text | list[CreativeWork | ItemList | Text] | None = Field(default=None, alias='recipeInstructions', description='A step in making the recipe, in the form of a single item (document, video, etc.) or an ordered list with HowToStep and/or HowToSection items.')
     recipe_yield: QuantitativeValue | Text | list[QuantitativeValue | Text] | None = Field(default=None, alias='recipeYield', description='The quantity produced by the recipe (for example, number of people served, number of servings, etc).')
     suitable_for_diet: Diet | RestrictedDiet | list[Diet | RestrictedDiet] | None = Field(default=None, alias='suitableForDiet', description='Indicates a dietary restriction or guideline for which this recipe or menu item is suitable, e.g. diabetic, halal etc.')

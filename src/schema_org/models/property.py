@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class Property(Intangible):
-    __doc__ = 'A property, used to indicate attributes and relationships of some Thing; equivalent to rdf:Property.'
+    __doc__ = 'https://schema.org/Property\n\nA property, used to indicate attributes and relationships of some Thing; equivalent to rdf:Property.'
     SCHEMA_TYPE: ClassVar[str] = 'Property'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Property', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

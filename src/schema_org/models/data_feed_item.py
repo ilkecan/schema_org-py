@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class DataFeedItem(Intangible):
-    __doc__ = 'A single item within a larger data feed.'
+    __doc__ = 'https://schema.org/DataFeedItem\n\nA single item within a larger data feed.'
     SCHEMA_TYPE: ClassVar[str] = 'DataFeedItem'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DataFeedItem', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

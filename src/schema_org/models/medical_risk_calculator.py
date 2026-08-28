@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_risk_estimator import MedicalRiskEstimator
 
 class MedicalRiskCalculator(MedicalRiskEstimator):
-    __doc__ = 'A complex mathematical calculation requiring an online calculator, used to assess prognosis. Note: use the url property of Thing to record any URLs for online calculators.'
+    __doc__ = 'https://schema.org/MedicalRiskCalculator\n\nA complex mathematical calculation requiring an online calculator, used to assess prognosis. Note: use the url property of Thing to record any URLs for online calculators.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalRiskCalculator'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalRiskCalculator', 'MedicalRiskEstimator', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

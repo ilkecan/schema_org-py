@@ -18,10 +18,11 @@ from schema_org.datatypes import Text
 from schema_org.datatypes import URL
 from schema_org.enums import IPTCDigitalSourceEnumeration
 from schema_org.enums import SizeSpecification
+from schema_org.models.creative_work import CreativeWork
 from schema_org.models.learning_resource import LearningResource
 
-class Course(LearningResource):
-    __doc__ = 'A description of an educational course which may be offered as distinct instances which take place at different times or take place at different locations, or be offered through different media or modes of study. An educational course is a sequence of one or more educational events and/or creative works which aims to build knowledge, competence or ability of learners.'
+class Course(LearningResource, CreativeWork):
+    __doc__ = 'https://schema.org/Course\n\nA description of an educational course which may be offered as distinct instances which take place at different times or take place at different locations, or be offered through different media or modes of study. An educational course is a sequence of one or more educational events and/or creative works which aims to build knowledge, competence or ability of learners.'
     SCHEMA_TYPE: ClassVar[str] = 'Course'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Course', 'CreativeWork', 'LearningResource', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

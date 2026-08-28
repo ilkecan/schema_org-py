@@ -20,7 +20,7 @@ from schema_org.enums import PriceTypeEnumeration
 from schema_org.models.price_specification import PriceSpecification
 
 class UnitPriceSpecification(PriceSpecification):
-    __doc__ = 'The price asked for a given offer by the respective organization or person.'
+    __doc__ = 'https://schema.org/UnitPriceSpecification\n\nThe price asked for a given offer by the respective organization or person.'
     SCHEMA_TYPE: ClassVar[str] = 'UnitPriceSpecification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('UnitPriceSpecification', 'PriceSpecification', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

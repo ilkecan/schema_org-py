@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.insert_action import InsertAction
 
 class AppendAction(InsertAction):
-    __doc__ = 'The act of inserting at the end if an ordered collection.'
+    __doc__ = 'https://schema.org/AppendAction\n\nThe act of inserting at the end if an ordered collection.'
     SCHEMA_TYPE: ClassVar[str] = 'AppendAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AppendAction', 'InsertAction', 'AddAction', 'UpdateAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.digital_document import DigitalDocument
 
 class NoteDigitalDocument(DigitalDocument):
-    __doc__ = 'A file containing a note, primarily for the author.'
+    __doc__ = 'https://schema.org/NoteDigitalDocument\n\nA file containing a note, primarily for the author.'
     SCHEMA_TYPE: ClassVar[str] = 'NoteDigitalDocument'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('NoteDigitalDocument', 'DigitalDocument', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

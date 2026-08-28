@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.automotive_business import AutomotiveBusiness
 
 class AutoRepair(AutomotiveBusiness):
-    __doc__ = 'Car repair business.'
+    __doc__ = 'https://schema.org/AutoRepair\n\nCar repair business.'
     SCHEMA_TYPE: ClassVar[str] = 'AutoRepair'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AutoRepair', 'AutomotiveBusiness', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

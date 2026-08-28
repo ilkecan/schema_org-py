@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.action import Action
 
 class CreateAction(Action):
-    __doc__ = 'The act of deliberately creating/producing/generating/building a result out of the agent.'
+    __doc__ = 'https://schema.org/CreateAction\n\nThe act of deliberately creating/producing/generating/building a result out of the agent.'
     SCHEMA_TYPE: ClassVar[str] = 'CreateAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CreateAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

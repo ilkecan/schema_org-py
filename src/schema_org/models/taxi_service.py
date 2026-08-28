@@ -15,7 +15,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.service import Service
 
 class TaxiService(Service):
-    __doc__ = 'A service for a vehicle for hire with a driver for local travel. Fares are usually calculated based on distance traveled.'
+    __doc__ = 'https://schema.org/TaxiService\n\nA service for a vehicle for hire with a driver for local travel. Fares are usually calculated based on distance traveled.\n\nSupersedes `Taxi`.'
     SCHEMA_TYPE: ClassVar[str] = 'TaxiService'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('TaxiService', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

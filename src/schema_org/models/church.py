@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.place_of_worship import PlaceOfWorship
 
 class Church(PlaceOfWorship):
-    __doc__ = 'A church.'
+    __doc__ = 'https://schema.org/Church\n\nA church.'
     SCHEMA_TYPE: ClassVar[str] = 'Church'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Church', 'PlaceOfWorship', 'CivicStructure', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

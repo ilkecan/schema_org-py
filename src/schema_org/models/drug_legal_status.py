@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_intangible import MedicalIntangible
 
 class DrugLegalStatus(MedicalIntangible):
-    __doc__ = 'The legal availability status of a medical drug.'
+    __doc__ = 'https://schema.org/DrugLegalStatus\n\nThe legal availability status of a medical drug.'
     SCHEMA_TYPE: ClassVar[str] = 'DrugLegalStatus'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DrugLegalStatus', 'MedicalIntangible', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

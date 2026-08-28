@@ -15,7 +15,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.broadcast_service import BroadcastService
 
 class RadioBroadcastService(BroadcastService):
-    __doc__ = 'A delivery service through which radio content is provided via broadcast over the air or online.'
+    __doc__ = 'https://schema.org/RadioBroadcastService\n\nA delivery service through which radio content is provided via broadcast over the air or online.'
     SCHEMA_TYPE: ClassVar[str] = 'RadioBroadcastService'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('RadioBroadcastService', 'BroadcastService', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

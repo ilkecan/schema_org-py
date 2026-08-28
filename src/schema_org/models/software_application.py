@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class SoftwareApplication(CreativeWork):
-    __doc__ = 'A software application.'
+    __doc__ = 'https://schema.org/SoftwareApplication\n\nA software application.'
     SCHEMA_TYPE: ClassVar[str] = 'SoftwareApplication'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SoftwareApplication', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -185,10 +185,10 @@ class SoftwareApplication(CreativeWork):
     application_category: Text | URL | list[Text | URL] | None = Field(default=None, alias='applicationCategory', description="Type of software application, e.g. 'Game, Multimedia'.")
     application_sub_category: Text | URL | list[Text | URL] | None = Field(default=None, alias='applicationSubCategory', description="Subcategory of the application, e.g. 'Arcade Game'.")
     application_suite: Text | list[Text] | None = Field(default=None, alias='applicationSuite', description='The name of the application suite to which the application belongs (e.g. Excel belongs to Office).')
-    available_on_device: Text | list[Text] | None = Field(default=None, alias='availableOnDevice', description='Device required to run the application. Used in cases where a specific make/model is required to run the application.')
+    available_on_device: Text | list[Text] | None = Field(default=None, alias='availableOnDevice', description='Device required to run the application. Used in cases where a specific make/model is required to run the application.\n\nSupersedes `device`.')
     countries_not_supported: Text | list[Text] | None = Field(default=None, alias='countriesNotSupported', description='Countries for which the application is not supported. You can also provide the two-letter ISO 3166-1 alpha-2 country code.')
     countries_supported: Text | list[Text] | None = Field(default=None, alias='countriesSupported', description='Countries for which the application is supported. You can also provide the two-letter ISO 3166-1 alpha-2 country code.')
-    device: Text | list[Text] | None = Field(default=None, alias='device', description='Device required to run the application. Used in cases where a specific make/model is required to run the application.')
+    device: Text | list[Text] | None = Field(default=None, alias='device', description='Device required to run the application. Used in cases where a specific make/model is required to run the application.\n\nSuperseded by `availableOnDevice`.')
     download_url: URL | list[URL] | None = Field(default=None, alias='downloadUrl', description='If the file can be downloaded, URL to download the binary.')
     feature_list: Text | URL | list[Text | URL] | None = Field(default=None, alias='featureList', description='Features or modules provided by this application (and possibly required by other applications).')
     file_size: Text | list[Text] | None = Field(default=None, alias='fileSize', description='Size of the application / package (e.g. 18MB). In the absence of a unit (MB, KB etc.), KB will be assumed.')
@@ -198,12 +198,12 @@ class SoftwareApplication(CreativeWork):
     permissions: Text | list[Text] | None = Field(default=None, alias='permissions', description='Permission(s) required to run the app (for example, a mobile app may require full internet access or may run only on wifi).')
     processor_requirements: Text | list[Text] | None = Field(default=None, alias='processorRequirements', description='Processor architecture required to run the application (e.g. IA64).')
     release_notes: Text | URL | list[Text | URL] | None = Field(default=None, alias='releaseNotes', description='Description of what changed in this version.')
-    requirements: Text | URL | list[Text | URL] | None = Field(default=None, alias='requirements', description='Component dependency requirements for application. This includes runtime environments and shared libraries that are not included in the application distribution package, but required to run the application (examples: DirectX, Java or .NET runtime).')
-    runtime_platform: RuntimePlatform | Text | list[RuntimePlatform | Text] | None = Field(default=None, alias='runtimePlatform', description='Runtime platform or script interpreter dependencies (example: Java v1, Python 2.3, .NET Framework 3.0).')
+    requirements: Text | URL | list[Text | URL] | None = Field(default=None, alias='requirements', description='Component dependency requirements for application. This includes runtime environments and shared libraries that are not included in the application distribution package, but required to run the application (examples: DirectX, Java or .NET runtime).\n\nSuperseded by `softwareRequirements`.')
+    runtime_platform: RuntimePlatform | Text | list[RuntimePlatform | Text] | None = Field(default=None, alias='runtimePlatform', description='Runtime platform or script interpreter dependencies (example: Java v1, Python 2.3, .NET Framework 3.0).\n\nSupersedes `runtime`.')
     screenshot: ImageObject | URL | list[ImageObject | URL] | None = Field(default=None, alias='screenshot', description='A link to a screenshot image of the app.')
     software_add_on: SoftwareApplication | list[SoftwareApplication] | None = Field(default=None, alias='softwareAddOn', description='Additional content for a software application.')
     software_help: CreativeWork | list[CreativeWork] | None = Field(default=None, alias='softwareHelp', description='Software application help.')
-    software_requirements: SoftwareApplication | Text | URL | list[SoftwareApplication | Text | URL] | None = Field(default=None, alias='softwareRequirements', description='Component dependency requirements for application. This includes runtime environments and shared libraries that are not included in the application distribution package, but required to run the application (examples: DirectX, Java or .NET runtime).')
+    software_requirements: SoftwareApplication | Text | URL | list[SoftwareApplication | Text | URL] | None = Field(default=None, alias='softwareRequirements', description='Component dependency requirements for application. This includes runtime environments and shared libraries that are not included in the application distribution package, but required to run the application (examples: DirectX, Java or .NET runtime).\n\nSupersedes `requirements`.')
     software_version: Text | list[Text] | None = Field(default=None, alias='softwareVersion', description='Version of the software instance.')
     storage_requirements: Text | URL | list[Text | URL] | None = Field(default=None, alias='storageRequirements', description='Storage requirements (free space required).')
     supporting_data: DataFeed | list[DataFeed] | None = Field(default=None, alias='supportingData', description='Supporting data for a SoftwareApplication.')

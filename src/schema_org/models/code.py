@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Code(CreativeWork):
-    __doc__ = 'Computer programming source code. Example: Full (compile ready) solutions, code snippet samples, scripts, templates.'
+    __doc__ = 'https://schema.org/Code\n\nComputer programming source code. Example: Full (compile ready) solutions, code snippet samples, scripts, templates.\n\nSuperseded by `SoftwareSourceCode`.'
     SCHEMA_TYPE: ClassVar[str] = 'Code'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Code', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

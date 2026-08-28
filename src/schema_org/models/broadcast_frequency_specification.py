@@ -15,7 +15,7 @@ from schema_org.enums import QualitativeValue
 from schema_org.models.intangible import Intangible
 
 class BroadcastFrequencySpecification(Intangible):
-    __doc__ = 'The frequency in MHz and the modulation used for a particular BroadcastService.'
+    __doc__ = 'https://schema.org/BroadcastFrequencySpecification\n\nThe frequency in MHz and the modulation used for a particular BroadcastService.'
     SCHEMA_TYPE: ClassVar[str] = 'BroadcastFrequencySpecification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BroadcastFrequencySpecification', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

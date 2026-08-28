@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.defined_term import DefinedTerm
 
 class CategoryCode(DefinedTerm):
-    __doc__ = 'A Category Code.'
+    __doc__ = 'https://schema.org/CategoryCode\n\nA Category Code.'
     SCHEMA_TYPE: ClassVar[str] = 'CategoryCode'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CategoryCode', 'DefinedTerm', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

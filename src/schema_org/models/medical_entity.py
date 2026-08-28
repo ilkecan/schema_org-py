@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.thing import Thing
 
 class MedicalEntity(Thing):
-    __doc__ = 'The most generic type of entity related to health and the practice of medicine.'
+    __doc__ = 'https://schema.org/MedicalEntity\n\nThe most generic type of entity related to health and the practice of medicine.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalEntity'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -45,7 +45,7 @@ class MedicalEntity(Thing):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['MedicalEntity'] = Field(default='MedicalEntity', alias='@type', frozen=True)
     code: MedicalCode | list[MedicalCode] | None = Field(default=None, alias='code', description='A medical code for the entity, taken from a controlled vocabulary or ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.')
-    funding: Grant | list[Grant] | None = Field(default=None, alias='funding', description='A [[Grant]] that directly or indirectly provide funding or sponsorship for this item. See also [[ownershipFundingInfo]].')
+    funding: Grant | list[Grant] | None = Field(default=None, alias='funding', description='A [[Grant]] that directly or indirectly provide funding or sponsorship for this item. See also [[ownershipFundingInfo]].\n\nInverse-property: `fundedItem`.')
     guideline: MedicalGuideline | list[MedicalGuideline] | None = Field(default=None, alias='guideline', description='A medical guideline related to this entity.')
     legal_status: DrugLegalStatus | MedicalEnumeration | Text | list[DrugLegalStatus | MedicalEnumeration | Text] | None = Field(default=None, alias='legalStatus', description="The drug or supplement's legal status, including any controlled substance schedules that apply.")
     medicine_system: MedicineSystem | list[MedicineSystem] | None = Field(default=None, alias='medicineSystem', description="The system of medicine that includes this MedicalEntity, for example 'evidence-based', 'homeopathic', 'chiropractic', etc.")

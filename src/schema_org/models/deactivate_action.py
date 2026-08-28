@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.control_action import ControlAction
 
 class DeactivateAction(ControlAction):
-    __doc__ = 'The act of stopping or deactivating a device or application (e.g. stopping a timer or turning off a flashlight).'
+    __doc__ = 'https://schema.org/DeactivateAction\n\nThe act of stopping or deactivating a device or application (e.g. stopping a timer or turning off a flashlight).'
     SCHEMA_TYPE: ClassVar[str] = 'DeactivateAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DeactivateAction', 'ControlAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

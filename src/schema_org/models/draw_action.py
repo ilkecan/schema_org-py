@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.create_action import CreateAction
 
 class DrawAction(CreateAction):
-    __doc__ = 'The act of producing a visual/graphical representation of an object, typically with a pen/pencil and paper as instruments.'
+    __doc__ = 'https://schema.org/DrawAction\n\nThe act of producing a visual/graphical representation of an object, typically with a pen/pencil and paper as instruments.'
     SCHEMA_TYPE: ClassVar[str] = 'DrawAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DrawAction', 'CreateAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.vessel import Vessel
 
 class Vein(Vessel):
-    __doc__ = 'A type of blood vessel that specifically carries blood to the heart.'
+    __doc__ = 'https://schema.org/Vein\n\nA type of blood vessel that specifically carries blood to the heart.'
     SCHEMA_TYPE: ClassVar[str] = 'Vein'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Vein', 'Vessel', 'AnatomicalStructure', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

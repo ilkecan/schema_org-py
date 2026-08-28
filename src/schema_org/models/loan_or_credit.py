@@ -18,7 +18,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.financial_product import FinancialProduct
 
 class LoanOrCredit(FinancialProduct):
-    __doc__ = 'A financial product for the loaning of an amount of money, or line of credit, under agreed terms and charges.'
+    __doc__ = 'https://schema.org/LoanOrCredit\n\nA financial product for the loaning of an amount of money, or line of credit, under agreed terms and charges.'
     SCHEMA_TYPE: ClassVar[str] = 'LoanOrCredit'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('LoanOrCredit', 'FinancialProduct', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

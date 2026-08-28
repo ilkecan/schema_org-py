@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class Class(Intangible):
-    __doc__ = "A class, also often called a 'Type'; equivalent to rdfs:Class."
+    __doc__ = "https://schema.org/Class\n\nA class, also often called a 'Type'; equivalent to rdfs:Class."
     SCHEMA_TYPE: ClassVar[str] = 'Class'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Class', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

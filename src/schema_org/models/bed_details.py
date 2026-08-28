@@ -15,7 +15,7 @@ from schema_org.enums import BedType
 from schema_org.models.intangible import Intangible
 
 class BedDetails(Intangible):
-    __doc__ = 'An entity holding detailed information about the available bed types, e.g. the quantity of twin beds for a hotel room. For the single case of just one bed of a certain type, you can use bed directly with a text. See also [[BedType]] (under development).'
+    __doc__ = 'https://schema.org/BedDetails\n\nAn entity holding detailed information about the available bed types, e.g. the quantity of twin beds for a hotel room. For the single case of just one bed of a certain type, you can use bed directly with a text. See also [[BedType]] (under development).'
     SCHEMA_TYPE: ClassVar[str] = 'BedDetails'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BedDetails', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

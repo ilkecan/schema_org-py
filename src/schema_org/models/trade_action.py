@@ -17,7 +17,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.action import Action
 
 class TradeAction(Action):
-    __doc__ = 'The act of participating in an exchange of goods and services for monetary compensation. An agent trades an object, product or service with a participant in exchange for a one time or periodic payment.'
+    __doc__ = 'https://schema.org/TradeAction\n\nThe act of participating in an exchange of goods and services for monetary compensation. An agent trades an object, product or service with a participant in exchange for a one time or periodic payment.'
     SCHEMA_TYPE: ClassVar[str] = 'TradeAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('TradeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

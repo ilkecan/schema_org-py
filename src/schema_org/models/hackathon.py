@@ -21,7 +21,7 @@ from schema_org.enums import EventStatusType
 from schema_org.models.event import Event
 
 class Hackathon(Event):
-    __doc__ = 'A [hackathon](https://en.wikipedia.org/wiki/Hackathon) event.'
+    __doc__ = 'https://schema.org/Hackathon\n\nA [hackathon](https://en.wikipedia.org/wiki/Hackathon) event.'
     SCHEMA_TYPE: ClassVar[str] = 'Hackathon'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Hackathon', 'Event', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.assess_action import AssessAction
 
 class IgnoreAction(AssessAction):
-    __doc__ = 'The act of intentionally disregarding the object. An agent ignores an object.'
+    __doc__ = 'https://schema.org/IgnoreAction\n\nThe act of intentionally disregarding the object. An agent ignores an object.'
     SCHEMA_TYPE: ClassVar[str] = 'IgnoreAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('IgnoreAction', 'AssessAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

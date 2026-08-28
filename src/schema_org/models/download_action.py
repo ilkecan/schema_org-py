@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.transfer_action import TransferAction
 
 class DownloadAction(TransferAction):
-    __doc__ = 'The act of downloading an object.'
+    __doc__ = 'https://schema.org/DownloadAction\n\nThe act of downloading an object.'
     SCHEMA_TYPE: ClassVar[str] = 'DownloadAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DownloadAction', 'TransferAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

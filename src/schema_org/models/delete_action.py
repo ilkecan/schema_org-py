@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.update_action import UpdateAction
 
 class DeleteAction(UpdateAction):
-    __doc__ = 'The act of editing a recipient by removing one of its objects.'
+    __doc__ = 'https://schema.org/DeleteAction\n\nThe act of editing a recipient by removing one of its objects.'
     SCHEMA_TYPE: ClassVar[str] = 'DeleteAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DeleteAction', 'UpdateAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

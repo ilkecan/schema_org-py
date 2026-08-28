@@ -27,7 +27,7 @@ from schema_org.models.product import Product
 from schema_org.models.substance import Substance
 
 class Drug(Product, Substance):
-    __doc__ = 'A chemical or biologic substance, used as a medical therapy, that has a physiological effect on an organism. Here the term drug is used interchangeably with the term medicine although clinical knowledge makes a clear difference between them.'
+    __doc__ = 'https://schema.org/Drug\n\nA chemical or biologic substance, used as a medical therapy, that has a physiological effect on an organism. Here the term drug is used interchangeably with the term medicine although clinical knowledge makes a clear difference between them.'
     SCHEMA_TYPE: ClassVar[str] = 'Drug'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Drug', 'Product', 'Substance', 'Thing', 'MedicalEntity')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -148,8 +148,8 @@ class Drug(Product, Substance):
     alcohol_warning: Text | list[Text] | None = Field(default=None, alias='alcoholWarning', description='Any precaution, guidance, contraindication, etc. related to consumption of alcohol while taking this drug.')
     available_strength: DrugStrength | list[DrugStrength] | None = Field(default=None, alias='availableStrength', description='An available dosage strength for the drug.')
     breastfeeding_warning: Text | list[Text] | None = Field(default=None, alias='breastfeedingWarning', description="Any precaution, guidance, contraindication, etc. related to this drug's use by breastfeeding mothers.")
-    clincal_pharmacology: Text | list[Text] | None = Field(default=None, alias='clincalPharmacology', description='Description of the absorption and elimination of drugs, including their concentration (pharmacokinetics, pK) and biological effects (pharmacodynamics, pD).')
-    clinical_pharmacology: Text | list[Text] | None = Field(default=None, alias='clinicalPharmacology', description='Description of the absorption and elimination of drugs, including their concentration (pharmacokinetics, pK) and biological effects (pharmacodynamics, pD).')
+    clincal_pharmacology: Text | list[Text] | None = Field(default=None, alias='clincalPharmacology', description='Description of the absorption and elimination of drugs, including their concentration (pharmacokinetics, pK) and biological effects (pharmacodynamics, pD).\n\nSuperseded by `clinicalPharmacology`.')
+    clinical_pharmacology: Text | list[Text] | None = Field(default=None, alias='clinicalPharmacology', description='Description of the absorption and elimination of drugs, including their concentration (pharmacokinetics, pK) and biological effects (pharmacodynamics, pD).\n\nSupersedes `clincalPharmacology`.')
     dosage_form: Text | list[Text] | None = Field(default=None, alias='dosageForm', description="A dosage form in which this drug/supplement is available, e.g. 'tablet', 'suspension', 'injection'.")
     dose_schedule: DoseSchedule | list[DoseSchedule] | None = Field(default=None, alias='doseSchedule', description='A dosing schedule for the drug for a given population, either observed, recommended, or maximum dose based on the type used.')
     drug_class: DrugClass | list[DrugClass] | None = Field(default=None, alias='drugClass', description='The class of drug this belongs to (e.g., statins).')

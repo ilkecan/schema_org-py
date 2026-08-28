@@ -19,7 +19,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.therapeutic_procedure import TherapeuticProcedure
 
 class MedicalTherapy(TherapeuticProcedure):
-    __doc__ = 'Any medical intervention designed to prevent, treat, and cure human diseases and medical conditions, including both curative and palliative therapies. Medical therapies are typically processes of care relying upon pharmacotherapy, behavioral therapy, supportive therapy (with fluid or nutrition for example), or detoxification (e.g. hemodialysis) aimed at improving or preventing a health condition.'
+    __doc__ = 'https://schema.org/MedicalTherapy\n\nAny medical intervention designed to prevent, treat, and cure human diseases and medical conditions, including both curative and palliative therapies. Medical therapies are typically processes of care relying upon pharmacotherapy, behavioral therapy, supportive therapy (with fluid or nutrition for example), or detoxification (e.g. hemodialysis) aimed at improving or preventing a health condition.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalTherapy'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalTherapy', 'TherapeuticProcedure', 'MedicalProcedure', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

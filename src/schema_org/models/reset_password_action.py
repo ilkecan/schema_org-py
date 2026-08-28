@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.control_action import ControlAction
 
 class ResetPasswordAction(ControlAction):
-    __doc__ = 'The action of resetting the password of a device or application.'
+    __doc__ = 'https://schema.org/ResetPasswordAction\n\nThe action of resetting the password of a device or application.'
     SCHEMA_TYPE: ClassVar[str] = 'ResetPasswordAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ResetPasswordAction', 'ControlAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

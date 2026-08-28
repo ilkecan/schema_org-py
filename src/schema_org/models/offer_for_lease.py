@@ -26,7 +26,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.offer import Offer
 
 class OfferForLease(Offer):
-    __doc__ = 'An [[OfferForLease]] in Schema.org represents an [[Offer]] to lease out something, i.e. an [[Offer]] whose\n  [[businessFunction]] is [lease out](http://purl.org/goodrelations/v1#LeaseOut.). See [Good Relations](https://en.wikipedia.org/wiki/GoodRelations) for\n  background on the underlying concepts.\n  '
+    __doc__ = 'https://schema.org/OfferForLease\n\nAn [[OfferForLease]] in Schema.org represents an [[Offer]] to lease out something, i.e. an [[Offer]] whose\n  [[businessFunction]] is [lease out](http://purl.org/goodrelations/v1#LeaseOut.). See [Good Relations](https://en.wikipedia.org/wiki/GoodRelations) for\n  background on the underlying concepts.\n  '
     SCHEMA_TYPE: ClassVar[str] = 'OfferForLease'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('OfferForLease', 'Offer', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

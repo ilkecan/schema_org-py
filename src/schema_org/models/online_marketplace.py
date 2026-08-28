@@ -15,7 +15,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.online_store import OnlineStore
 
 class OnlineMarketplace(OnlineStore):
-    __doc__ = 'An eCommerce marketplace.'
+    __doc__ = 'https://schema.org/OnlineMarketplace\n\nAn eCommerce marketplace.'
     SCHEMA_TYPE: ClassVar[str] = 'OnlineMarketplace'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('OnlineMarketplace', 'OnlineStore', 'OnlineBusiness', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

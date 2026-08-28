@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class MediaReviewItem(CreativeWork):
-    __doc__ = 'Represents an item or group of closely related items treated as a unit for the sake of evaluation in a [[MediaReview]]. Authorship etc. apply to the items rather than to the curation/grouping or reviewing party.'
+    __doc__ = 'https://schema.org/MediaReviewItem\n\nRepresents an item or group of closely related items treated as a unit for the sake of evaluation in a [[MediaReview]]. Authorship etc. apply to the items rather than to the curation/grouping or reviewing party.'
     SCHEMA_TYPE: ClassVar[str] = 'MediaReviewItem'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MediaReviewItem', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

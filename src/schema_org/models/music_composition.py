@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class MusicComposition(CreativeWork):
-    __doc__ = 'A musical composition.'
+    __doc__ = 'https://schema.org/MusicComposition\n\nA musical composition.'
     SCHEMA_TYPE: ClassVar[str] = 'MusicComposition'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MusicComposition', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -176,4 +176,4 @@ class MusicComposition(CreativeWork):
     music_arrangement: MusicComposition | list[MusicComposition] | None = Field(default=None, alias='musicArrangement', description='An arrangement derived from the composition.')
     music_composition_form: Text | list[Text] | None = Field(default=None, alias='musicCompositionForm', description='The type of composition (e.g. overture, sonata, symphony, etc.).')
     musical_key: Text | list[Text] | None = Field(default=None, alias='musicalKey', description='The key, mode, or scale this composition uses.')
-    recorded_as: MusicRecording | list[MusicRecording] | None = Field(default=None, alias='recordedAs', description='An audio recording of the work.')
+    recorded_as: MusicRecording | list[MusicRecording] | None = Field(default=None, alias='recordedAs', description='An audio recording of the work.\n\nInverse-property: `recordingOf`.')

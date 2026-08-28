@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.software_application import SoftwareApplication
 
 class MobileApplication(SoftwareApplication):
-    __doc__ = 'A software application designed specifically to work well on a mobile device such as a telephone.'
+    __doc__ = 'https://schema.org/MobileApplication\n\nA software application designed specifically to work well on a mobile device such as a telephone.'
     SCHEMA_TYPE: ClassVar[str] = 'MobileApplication'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MobileApplication', 'SoftwareApplication', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

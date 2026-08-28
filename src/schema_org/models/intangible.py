@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.thing import Thing
 
 class Intangible(Thing):
-    __doc__ = "A utility class that serves as the umbrella for a number of 'intangible' things such as quantities, structured values, etc."
+    __doc__ = "https://schema.org/Intangible\n\nA utility class that serves as the umbrella for a number of 'intangible' things such as quantities, structured values, etc."
     SCHEMA_TYPE: ClassVar[str] = 'Intangible'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

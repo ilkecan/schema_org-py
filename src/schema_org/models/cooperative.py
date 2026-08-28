@@ -15,7 +15,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.organization import Organization
 
 class Cooperative(Organization):
-    __doc__ = 'An organization that is a joint project of multiple organizations or persons.'
+    __doc__ = 'https://schema.org/Cooperative\n\nAn organization that is a joint project of multiple organizations or persons.'
     SCHEMA_TYPE: ClassVar[str] = 'Cooperative'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Cooperative', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.action import Action
 
 class UpdateAction(Action):
-    __doc__ = 'The act of managing by changing/editing the state of the object.'
+    __doc__ = 'https://schema.org/UpdateAction\n\nThe act of managing by changing/editing the state of the object.'
     SCHEMA_TYPE: ClassVar[str] = 'UpdateAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('UpdateAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -51,5 +51,5 @@ class UpdateAction(Action):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['UpdateAction'] = Field(default='UpdateAction', alias='@type', frozen=True)
-    collection: Thing | list[Thing] | None = Field(default=None, alias='collection', description='A sub property of object. The collection target of the action.')
-    target_collection: Thing | list[Thing] | None = Field(default=None, alias='targetCollection', description='A sub property of object. The collection target of the action.')
+    collection: Thing | list[Thing] | None = Field(default=None, alias='collection', description='A sub property of object. The collection target of the action.\n\nSuperseded by `targetCollection`.')
+    target_collection: Thing | list[Thing] | None = Field(default=None, alias='targetCollection', description='A sub property of object. The collection target of the action.\n\nSupersedes `collection`.')

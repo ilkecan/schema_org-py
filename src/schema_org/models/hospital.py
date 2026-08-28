@@ -21,7 +21,7 @@ from schema_org.models.emergency_service import EmergencyService
 from schema_org.models.medical_organization import MedicalOrganization
 
 class Hospital(CivicStructure, EmergencyService, MedicalOrganization):
-    __doc__ = 'A hospital.'
+    __doc__ = 'https://schema.org/Hospital\n\nA hospital.'
     SCHEMA_TYPE: ClassVar[str] = 'Hospital'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Hospital', 'CivicStructure', 'EmergencyService', 'MedicalOrganization', 'Place', 'LocalBusiness', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

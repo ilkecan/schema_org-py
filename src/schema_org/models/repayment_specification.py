@@ -14,7 +14,7 @@ from schema_org.datatypes import URL
 from schema_org.models.structured_value import StructuredValue
 
 class RepaymentSpecification(StructuredValue):
-    __doc__ = 'A structured value representing repayment.'
+    __doc__ = 'https://schema.org/RepaymentSpecification\n\nA structured value representing repayment.'
     SCHEMA_TYPE: ClassVar[str] = 'RepaymentSpecification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('RepaymentSpecification', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

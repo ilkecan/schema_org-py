@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.anatomical_structure import AnatomicalStructure
 
 class Joint(AnatomicalStructure):
-    __doc__ = 'The anatomical location at which two or more bones make contact.'
+    __doc__ = 'https://schema.org/Joint\n\nThe anatomical location at which two or more bones make contact.'
     SCHEMA_TYPE: ClassVar[str] = 'Joint'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Joint', 'AnatomicalStructure', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

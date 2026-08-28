@@ -14,7 +14,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class Occupation(Intangible):
-    __doc__ = 'A profession, may involve prolonged training and/or a formal qualification.'
+    __doc__ = 'https://schema.org/Occupation\n\nA profession, may involve prolonged training and/or a formal qualification.'
     SCHEMA_TYPE: ClassVar[str] = 'Occupation'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Occupation', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

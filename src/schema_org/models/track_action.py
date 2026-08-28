@@ -17,7 +17,7 @@ from schema_org.enums import DeliveryMethod
 from schema_org.models.find_action import FindAction
 
 class TrackAction(FindAction):
-    __doc__ = 'An agent tracks an object for updates.\\n\\nRelated actions:\\n\\n* [[FollowAction]]: Unlike FollowAction, TrackAction refers to the interest on the location of innanimates objects.\\n* [[SubscribeAction]]: Unlike SubscribeAction, TrackAction refers to  the interest on the location of innanimate objects.'
+    __doc__ = 'https://schema.org/TrackAction\n\nAn agent tracks an object for updates.\\n\\nRelated actions:\\n\\n* [[FollowAction]]: Unlike FollowAction, TrackAction refers to the interest on the location of innanimates objects.\\n* [[SubscribeAction]]: Unlike SubscribeAction, TrackAction refers to  the interest on the location of innanimate objects.'
     SCHEMA_TYPE: ClassVar[str] = 'TrackAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('TrackAction', 'FindAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

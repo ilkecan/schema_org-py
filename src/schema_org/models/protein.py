@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.bio_chem_entity import BioChemEntity
 
 class Protein(BioChemEntity):
-    __doc__ = 'Protein is here used in its widest possible definition, as classes of amino acid based molecules. Amyloid-beta Protein in human (UniProt P05067), eukaryota (e.g. an OrthoDB group) or even a single molecule that one can point to are all of type :Protein. A protein can thus be a subclass of another protein, e.g. :Protein as a UniProt record can have multiple isoforms inside it which would also be :Protein. They can be imagined, synthetic, hypothetical or naturally occurring.'
+    __doc__ = 'https://schema.org/Protein\n\nProtein is here used in its widest possible definition, as classes of amino acid based molecules. Amyloid-beta Protein in human (UniProt P05067), eukaryota (e.g. an OrthoDB group) or even a single molecule that one can point to are all of type :Protein. A protein can thus be a subclass of another protein, e.g. :Protein as a UniProt record can have multiple isoforms inside it which would also be :Protein. They can be imagined, synthetic, hypothetical or naturally occurring.'
     SCHEMA_TYPE: ClassVar[str] = 'Protein'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Protein', 'BioChemEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

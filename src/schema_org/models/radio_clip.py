@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.clip import Clip
 
 class RadioClip(Clip):
-    __doc__ = 'A short radio program or a segment/part of a radio program.'
+    __doc__ = 'https://schema.org/RadioClip\n\nA short radio program or a segment/part of a radio program.'
     SCHEMA_TYPE: ClassVar[str] = 'RadioClip'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('RadioClip', 'Clip', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

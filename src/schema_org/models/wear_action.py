@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.use_action import UseAction
 
 class WearAction(UseAction):
-    __doc__ = 'The act of dressing oneself in clothing.'
+    __doc__ = 'https://schema.org/WearAction\n\nThe act of dressing oneself in clothing.'
     SCHEMA_TYPE: ClassVar[str] = 'WearAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('WearAction', 'UseAction', 'ConsumeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -17,7 +17,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.trade_action import TradeAction
 
 class SellAction(TradeAction):
-    __doc__ = 'The act of taking money from a buyer in exchange for goods or services rendered. An agent sells an object, product, or service to a buyer for a price. Reciprocal of BuyAction.'
+    __doc__ = 'https://schema.org/SellAction\n\nThe act of taking money from a buyer in exchange for goods or services rendered. An agent sells an object, product, or service to a buyer for a price. Reciprocal of BuyAction.'
     SCHEMA_TYPE: ClassVar[str] = 'SellAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SellAction', 'TradeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -56,4 +56,4 @@ class SellAction(TradeAction):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['SellAction'] = Field(default='SellAction', alias='@type', frozen=True)
     buyer: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='buyer', description='A sub property of participant. The participant/person/organization that bought the object.')
-    warranty_promise: WarrantyPromise | list[WarrantyPromise] | None = Field(default=None, alias='warrantyPromise', description='The warranty promise(s) included in the offer.')
+    warranty_promise: WarrantyPromise | list[WarrantyPromise] | None = Field(default=None, alias='warrantyPromise', description='The warranty promise(s) included in the offer.\n\nSuperseded by `warranty`.')

@@ -23,7 +23,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.web_page_element import WebPageElement
 
 class WPHeader(WebPageElement):
-    __doc__ = 'The header section of the page.'
+    __doc__ = 'https://schema.org/WPHeader\n\nThe header section of the page.'
     SCHEMA_TYPE: ClassVar[str] = 'WPHeader'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('WPHeader', 'WebPageElement', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

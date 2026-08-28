@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.action import Action
 
 class MoveAction(Action):
-    __doc__ = 'The act of an agent relocating to a place.\\n\\nRelated actions:\\n\\n* [[TransferAction]]: Unlike TransferAction, the subject of the move is a living Person or Organization rather than an inanimate object.'
+    __doc__ = 'https://schema.org/MoveAction\n\nThe act of an agent relocating to a place.\\n\\nRelated actions:\\n\\n* [[TransferAction]]: Unlike TransferAction, the subject of the move is a living Person or Organization rather than an inanimate object.'
     SCHEMA_TYPE: ClassVar[str] = 'MoveAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MoveAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

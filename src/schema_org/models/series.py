@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class Series(Intangible):
-    __doc__ = 'A Series in schema.org is a group of related items, typically but not necessarily of the same kind. See also [[CreativeWorkSeries]], [[EventSeries]].'
+    __doc__ = 'https://schema.org/Series\n\nA Series in schema.org is a group of related items, typically but not necessarily of the same kind. See also [[CreativeWorkSeries]], [[EventSeries]].'
     SCHEMA_TYPE: ClassVar[str] = 'Series'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Series', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

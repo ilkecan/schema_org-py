@@ -15,7 +15,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.organization import Organization
 
 class Consortium(Organization):
-    __doc__ = 'A Consortium is a membership [[Organization]] whose members are typically Organizations.'
+    __doc__ = 'https://schema.org/Consortium\n\nA Consortium is a membership [[Organization]] whose members are typically Organizations.'
     SCHEMA_TYPE: ClassVar[str] = 'Consortium'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Consortium', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

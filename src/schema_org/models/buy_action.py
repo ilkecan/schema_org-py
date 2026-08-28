@@ -17,7 +17,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.trade_action import TradeAction
 
 class BuyAction(TradeAction):
-    __doc__ = 'The act of giving money to a seller in exchange for goods or services rendered. An agent buys an object, product, or service from a seller for a price. Reciprocal of SellAction.'
+    __doc__ = 'https://schema.org/BuyAction\n\nThe act of giving money to a seller in exchange for goods or services rendered. An agent buys an object, product, or service from a seller for a price. Reciprocal of SellAction.'
     SCHEMA_TYPE: ClassVar[str] = 'BuyAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BuyAction', 'TradeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -56,6 +56,6 @@ class BuyAction(TradeAction):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['BuyAction'] = Field(default='BuyAction', alias='@type', frozen=True)
-    seller: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='seller', description='An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.')
-    vendor: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='vendor', description="'vendor' is an earlier term for 'seller'.")
-    warranty_promise: WarrantyPromise | list[WarrantyPromise] | None = Field(default=None, alias='warrantyPromise', description='The warranty promise(s) included in the offer.')
+    seller: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='seller', description='An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.\n\nSupersedes `merchant`.')
+    vendor: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='vendor', description="'vendor' is an earlier term for 'seller'.\n\nSuperseded by `seller`.")
+    warranty_promise: WarrantyPromise | list[WarrantyPromise] | None = Field(default=None, alias='warrantyPromise', description='The warranty promise(s) included in the offer.\n\nSuperseded by `warranty`.')

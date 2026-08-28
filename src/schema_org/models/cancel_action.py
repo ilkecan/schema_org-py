@@ -17,7 +17,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.plan_action import PlanAction
 
 class CancelAction(PlanAction):
-    __doc__ = 'The act of asserting that a future event/action is no longer going to happen.\\n\\nRelated actions:\\n\\n* [[ConfirmAction]]: The antonym of CancelAction.'
+    __doc__ = 'https://schema.org/CancelAction\n\nThe act of asserting that a future event/action is no longer going to happen.\\n\\nRelated actions:\\n\\n* [[ConfirmAction]]: The antonym of CancelAction.'
     SCHEMA_TYPE: ClassVar[str] = 'CancelAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CancelAction', 'PlanAction', 'OrganizeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

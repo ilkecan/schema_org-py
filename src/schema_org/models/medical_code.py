@@ -17,7 +17,7 @@ from schema_org.models.category_code import CategoryCode
 from schema_org.models.medical_intangible import MedicalIntangible
 
 class MedicalCode(CategoryCode, MedicalIntangible):
-    __doc__ = 'A code for a medical entity.'
+    __doc__ = 'https://schema.org/MedicalCode\n\nA code for a medical entity.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalCode'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalCode', 'CategoryCode', 'MedicalIntangible', 'DefinedTerm', 'MedicalEntity', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

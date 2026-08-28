@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.product import Product
 
 class ProductModel(Product):
-    __doc__ = 'A datasheet or vendor specification of a product (in the sense of a prototypical description).'
+    __doc__ = 'https://schema.org/ProductModel\n\nA datasheet or vendor specification of a product (in the sense of a prototypical description).'
     SCHEMA_TYPE: ClassVar[str] = 'ProductModel'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ProductModel', 'Product', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -103,6 +103,6 @@ class ProductModel(Product):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['ProductModel'] = Field(default='ProductModel', alias='@type', frozen=True)
-    is_variant_of: ProductGroup | ProductModel | list[ProductGroup | ProductModel] | None = Field(default=None, alias='isVariantOf', description='Indicates the kind of product that this is a variant of. In the case of [[ProductModel]], this is a pointer (from a ProductModel) to a base product from which this product is a variant. It is safe to infer that the variant inherits all product features from the base model, unless defined locally. This is not transitive. In the case of a [[ProductGroup]], the group description also serves as a template, representing a set of Products that vary on explicitly defined, specific dimensions only (so it defines both a set of variants, as well as which values distinguish amongst those variants). When used with [[ProductGroup]], this property can apply to any [[Product]] included in the group.')
+    is_variant_of: ProductGroup | ProductModel | list[ProductGroup | ProductModel] | None = Field(default=None, alias='isVariantOf', description='Indicates the kind of product that this is a variant of. In the case of [[ProductModel]], this is a pointer (from a ProductModel) to a base product from which this product is a variant. It is safe to infer that the variant inherits all product features from the base model, unless defined locally. This is not transitive. In the case of a [[ProductGroup]], the group description also serves as a template, representing a set of Products that vary on explicitly defined, specific dimensions only (so it defines both a set of variants, as well as which values distinguish amongst those variants). When used with [[ProductGroup]], this property can apply to any [[Product]] included in the group.\n\nInverse-property: `hasVariant`.')
     predecessor_of: ProductModel | list[ProductModel] | None = Field(default=None, alias='predecessorOf', description='A pointer from a previous, often discontinued variant of the product to its newer variant.')
     successor_of: ProductModel | list[ProductModel] | None = Field(default=None, alias='successorOf', description='A pointer from a newer variant of a product  to its previous, often discontinued predecessor.')

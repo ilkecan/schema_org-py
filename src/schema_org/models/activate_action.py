@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.control_action import ControlAction
 
 class ActivateAction(ControlAction):
-    __doc__ = 'The act of starting or activating a device or application (e.g. starting a timer or turning on a flashlight).'
+    __doc__ = 'https://schema.org/ActivateAction\n\nThe act of starting or activating a device or application (e.g. starting a timer or turning on a flashlight).'
     SCHEMA_TYPE: ClassVar[str] = 'ActivateAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ActivateAction', 'ControlAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

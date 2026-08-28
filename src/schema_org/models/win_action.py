@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.achieve_action import AchieveAction
 
 class WinAction(AchieveAction):
-    __doc__ = 'The act of achieving victory in a competitive activity.'
+    __doc__ = 'https://schema.org/WinAction\n\nThe act of achieving victory in a competitive activity.'
     SCHEMA_TYPE: ClassVar[str] = 'WinAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('WinAction', 'AchieveAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

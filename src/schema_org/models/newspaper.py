@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.periodical import Periodical
 
 class Newspaper(Periodical):
-    __doc__ = 'A publication containing information about varied topics that are pertinent to general information, a geographic area, or a specific subject matter (i.e. business, culture, education). Often published daily.'
+    __doc__ = 'https://schema.org/Newspaper\n\nA publication containing information about varied topics that are pertinent to general information, a geographic area, or a specific subject matter (i.e. business, culture, education). Often published daily.'
     SCHEMA_TYPE: ClassVar[str] = 'Newspaper'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Newspaper', 'Periodical', 'CreativeWorkSeries', 'CreativeWork', 'Series', 'Thing', 'Intangible')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -15,7 +15,7 @@ from schema_org.enums import GameServerStatus
 from schema_org.models.intangible import Intangible
 
 class GameServer(Intangible):
-    __doc__ = 'Server that provides game interaction in a multiplayer game.'
+    __doc__ = 'https://schema.org/GameServer\n\nServer that provides game interaction in a multiplayer game.'
     SCHEMA_TYPE: ClassVar[str] = 'GameServer'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('GameServer', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -38,6 +38,6 @@ class GameServer(Intangible):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['GameServer'] = Field(default='GameServer', alias='@type', frozen=True)
-    game: VideoGame | list[VideoGame] | None = Field(default=None, alias='game', description='Video game which is played on this server.')
+    game: VideoGame | list[VideoGame] | None = Field(default=None, alias='game', description='Video game which is played on this server.\n\nInverse-property: `gameServer`.')
     players_online: Integer | list[Integer] | None = Field(default=None, alias='playersOnline', description='Number of players on the server.')
     server_status: GameServerStatus | list[GameServerStatus] | None = Field(default=None, alias='serverStatus', description='Status of a game server.')

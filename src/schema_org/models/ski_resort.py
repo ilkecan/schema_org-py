@@ -21,7 +21,7 @@ from schema_org.models.resort import Resort
 from schema_org.models.sports_activity_location import SportsActivityLocation
 
 class SkiResort(Resort, SportsActivityLocation):
-    __doc__ = 'A ski resort.'
+    __doc__ = 'https://schema.org/SkiResort\n\nA ski resort.'
     SCHEMA_TYPE: ClassVar[str] = 'SkiResort'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SkiResort', 'Resort', 'SportsActivityLocation', 'LodgingBusiness', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

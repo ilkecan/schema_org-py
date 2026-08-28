@@ -26,7 +26,7 @@ from schema_org.enums import SteeringPositionValue
 from schema_org.models.vehicle import Vehicle
 
 class Car(Vehicle):
-    __doc__ = 'A car is a wheeled, self-powered motor vehicle used for transportation.'
+    __doc__ = 'https://schema.org/Car\n\nA car is a wheeled, self-powered motor vehicle used for transportation.'
     SCHEMA_TYPE: ClassVar[str] = 'Car'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Car', 'Vehicle', 'Product', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

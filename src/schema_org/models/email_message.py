@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.message import Message
 
 class EmailMessage(Message):
-    __doc__ = 'An email message.'
+    __doc__ = 'https://schema.org/EmailMessage\n\nAn email message.'
     SCHEMA_TYPE: ClassVar[str] = 'EmailMessage'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('EmailMessage', 'Message', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

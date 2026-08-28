@@ -18,10 +18,11 @@ from schema_org.datatypes import Text
 from schema_org.datatypes import URL
 from schema_org.enums import IPTCDigitalSourceEnumeration
 from schema_org.enums import SizeSpecification
+from schema_org.models.creative_work import CreativeWork
 from schema_org.models.creative_work_series import CreativeWorkSeries
 
-class TVSeries(CreativeWorkSeries):
-    __doc__ = 'CreativeWorkSeries dedicated to TV broadcast and associated online delivery.'
+class TVSeries(CreativeWorkSeries, CreativeWork):
+    __doc__ = 'https://schema.org/TVSeries\n\nCreativeWorkSeries dedicated to TV broadcast and associated online delivery.'
     SCHEMA_TYPE: ClassVar[str] = 'TVSeries'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('TVSeries', 'CreativeWork', 'CreativeWorkSeries', 'Thing', 'Series', 'Intangible')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -175,19 +176,19 @@ class TVSeries(CreativeWorkSeries):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['TVSeries'] = Field(default='TVSeries', alias='@type', frozen=True)
-    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.')
-    actors: Person | list[Person] | None = Field(default=None, alias='actors', description='An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip.')
-    contains_season: CreativeWorkSeason | list[CreativeWorkSeason] | None = Field(default=None, alias='containsSeason', description='A season that is part of the media series.')
+    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `actors`.')
+    actors: Person | list[Person] | None = Field(default=None, alias='actors', description='An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip.\n\nSuperseded by `actor`.')
+    contains_season: CreativeWorkSeason | list[CreativeWorkSeason] | None = Field(default=None, alias='containsSeason', description='A season that is part of the media series.\n\nSupersedes `season`.')
     country_of_origin: Country | list[Country] | None = Field(default=None, alias='countryOfOrigin', description='The country of origin of something, including products as well as creative  works such as movie and TV content.\n\nIn the case of TV and movie, this would be the country of the principle offices of the production company or individual responsible for the movie. For other kinds of [[CreativeWork]] it is difficult to provide fully general guidance, and properties such as [[contentLocation]] and [[locationCreated]] may be more applicable.\n\nIn the case of products, the country of origin of the product. The exact interpretation of this may vary by context and product type, and cannot be fully enumerated here.')
-    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.')
-    directors: Person | list[Person] | None = Field(default=None, alias='directors', description='A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip.')
-    episode: Episode | list[Episode] | None = Field(default=None, alias='episode', description='An episode of a TV, radio or game media within a series or season.')
-    episodes: Episode | list[Episode] | None = Field(default=None, alias='episodes', description='An episode of a TV/radio series or season.')
+    director: Person | list[Person] | None = Field(default=None, alias='director', description='A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `directors`.')
+    directors: Person | list[Person] | None = Field(default=None, alias='directors', description='A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip.\n\nSuperseded by `director`.')
+    episode: Episode | list[Episode] | None = Field(default=None, alias='episode', description='An episode of a TV, radio or game media within a series or season.\n\nSupersedes `episodes`.')
+    episodes: Episode | list[Episode] | None = Field(default=None, alias='episodes', description='An episode of a TV/radio series or season.\n\nSuperseded by `episode`.')
     music_by: MusicGroup | Person | list[MusicGroup | Person] | None = Field(default=None, alias='musicBy', description='The composer of the soundtrack.')
     number_of_episodes: Integer | list[Integer] | None = Field(default=None, alias='numberOfEpisodes', description='The number of episodes in this season or series.')
     number_of_seasons: Integer | list[Integer] | None = Field(default=None, alias='numberOfSeasons', description='The number of seasons in this series.')
     production_company: Organization | list[Organization] | None = Field(default=None, alias='productionCompany', description='The production company or studio responsible for the item, e.g. series, video game, episode etc.')
-    season: CreativeWorkSeason | URL | list[CreativeWorkSeason | URL] | None = Field(default=None, alias='season', description='A season in a media series.')
-    seasons: CreativeWorkSeason | list[CreativeWorkSeason] | None = Field(default=None, alias='seasons', description='A season in a media series.')
+    season: CreativeWorkSeason | URL | list[CreativeWorkSeason | URL] | None = Field(default=None, alias='season', description='A season in a media series.\n\nSupersedes `seasons`.\n\nSuperseded by `containsSeason`.')
+    seasons: CreativeWorkSeason | list[CreativeWorkSeason] | None = Field(default=None, alias='seasons', description='A season in a media series.\n\nSuperseded by `season`.')
     title_eidr: Text | URL | list[Text | URL] | None = Field(default=None, alias='titleEIDR', description='An [EIDR](https://eidr.org/) (Entertainment Identifier Registry) [[identifier]] representing at the most general/abstract level, a work of film or television.\n\nFor example, the motion picture known as "Ghostbusters" has a titleEIDR of  "10.5240/7EC7-228A-510A-053E-CBB8-J". This title (or work) may have several variants, which EIDR calls "edits". See [[editEIDR]].\n\nSince schema.org types like [[Movie]], [[TVEpisode]], [[TVSeason]], and [[TVSeries]] can be used for both works and their multiple expressions, it is possible to use [[titleEIDR]] alone (for a general description), or alongside [[editEIDR]] for a more edit-specific description.\n')
     trailer: VideoObject | list[VideoObject] | None = Field(default=None, alias='trailer', description='The trailer of a movie or TV/radio series, season, episode, etc.')

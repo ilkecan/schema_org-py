@@ -17,7 +17,7 @@ from schema_org.datatypes import URL
 from schema_org.models.structured_value import StructuredValue
 
 class MonetaryAmount(StructuredValue):
-    __doc__ = 'A monetary value or range. This type can be used to describe an amount of money such as $50 USD, or a range as in describing a bank account being suitable for a balance between £1,000 and £1,000,000 GBP, or the value of a salary, etc. It is recommended to use [[PriceSpecification]] Types to describe the price of an Offer, Invoice, etc.'
+    __doc__ = 'https://schema.org/MonetaryAmount\n\nA monetary value or range. This type can be used to describe an amount of money such as $50 USD, or a range as in describing a bank account being suitable for a balance between £1,000 and £1,000,000 GBP, or the value of a salary, etc. It is recommended to use [[PriceSpecification]] Types to describe the price of an Offer, Invoice, etc.\n\nSupersedes `DatedMoneySpecification`.'
     SCHEMA_TYPE: ClassVar[str] = 'MonetaryAmount'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MonetaryAmount', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

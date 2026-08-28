@@ -16,7 +16,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.financial_product import FinancialProduct
 
 class CurrencyConversionService(FinancialProduct):
-    __doc__ = 'A service to convert funds from one currency to another currency.'
+    __doc__ = 'https://schema.org/CurrencyConversionService\n\nA service to convert funds from one currency to another currency.'
     SCHEMA_TYPE: ClassVar[str] = 'CurrencyConversionService'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CurrencyConversionService', 'FinancialProduct', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -40,6 +40,33 @@ class PropertyMetadata:
     contributors: tuple[str, ...] = ()
     sources: tuple[str, ...] = ()
 
+
+@dataclass(frozen=True, slots=True)
+class ClassMetadata:
+    name: str
+    uri: str
+    parents: tuple[str, ...] = ()
+    external_parents: tuple[str, ...] = ()
+    equivalent_classes: tuple[str, ...] = ()
+    superseded_by: str | None = None
+    supersedes: str | None = None
+    label: str = ""
+    comment: str = ""
+    contributors: tuple[str, ...] = ()
+    sources: tuple[str, ...] = ()
+    properties: tuple[str, ...] = ()
+    is_datatype: bool = False
+    is_enumeration: bool = False
+
+
+@dataclass(frozen=True, slots=True)
+class EnumerationMemberMetadata:
+    name: str
+    uri: str
+    types: tuple[str, ...] = ()
+    label: str = ""
+    comment: str = ""
+
 class SchemaModel(BaseModel):
     model_config = ConfigDict(strict=True, extra="forbid", validate_assignment=True, populate_by_name=True)
 

@@ -15,7 +15,7 @@ from schema_org.datatypes import XPathType
 from schema_org.models.intangible import Intangible
 
 class SpeakableSpecification(Intangible):
-    __doc__ = 'A SpeakableSpecification indicates (typically via [[xpath]] or [[cssSelector]]) sections of a document that are highlighted as particularly [[speakable]]. Instances of this type are expected to be used primarily as values of the [[speakable]] property.'
+    __doc__ = 'https://schema.org/SpeakableSpecification\n\nA SpeakableSpecification indicates (typically via [[xpath]] or [[cssSelector]]) sections of a document that are highlighted as particularly [[speakable]]. Instances of this type are expected to be used primarily as values of the [[speakable]] property.'
     SCHEMA_TYPE: ClassVar[str] = 'SpeakableSpecification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SpeakableSpecification', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

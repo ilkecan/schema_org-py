@@ -15,7 +15,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.organization import Organization
 
 class LibrarySystem(Organization):
-    __doc__ = 'A [[LibrarySystem]] is a collaborative system amongst several libraries.'
+    __doc__ = 'https://schema.org/LibrarySystem\n\nA [[LibrarySystem]] is a collaborative system amongst several libraries.'
     SCHEMA_TYPE: ClassVar[str] = 'LibrarySystem'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('LibrarySystem', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

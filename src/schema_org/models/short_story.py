@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class ShortStory(CreativeWork):
-    __doc__ = 'Short story or tale. A brief work of literature, usually written in narrative prose.'
+    __doc__ = 'https://schema.org/ShortStory\n\nShort story or tale. A brief work of literature, usually written in narrative prose.'
     SCHEMA_TYPE: ClassVar[str] = 'ShortStory'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ShortStory', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

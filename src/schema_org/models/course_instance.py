@@ -21,7 +21,7 @@ from schema_org.enums import EventStatusType
 from schema_org.models.event import Event
 
 class CourseInstance(Event):
-    __doc__ = 'An instance of a [[Course]] which is distinct from other instances because it is offered at a different time or location or through different media or modes of study or to a specific section of students.'
+    __doc__ = 'https://schema.org/CourseInstance\n\nAn instance of a [[Course]] which is distinct from other instances because it is offered at a different time or location or through different media or modes of study or to a specific section of students.'
     SCHEMA_TYPE: ClassVar[str] = 'CourseInstance'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CourseInstance', 'Event', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

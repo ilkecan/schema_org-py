@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.learning_resource import LearningResource
 
 class Quiz(LearningResource):
-    __doc__ = 'Quiz: A test of knowledge, skills and abilities.'
+    __doc__ = 'https://schema.org/Quiz\n\nQuiz: A test of knowledge, skills and abilities.'
     SCHEMA_TYPE: ClassVar[str] = 'Quiz'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Quiz', 'LearningResource', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

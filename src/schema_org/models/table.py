@@ -23,7 +23,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.web_page_element import WebPageElement
 
 class Table(WebPageElement):
-    __doc__ = 'A table on a Web page.'
+    __doc__ = 'https://schema.org/Table\n\nA table on a Web page.'
     SCHEMA_TYPE: ClassVar[str] = 'Table'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Table', 'WebPageElement', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

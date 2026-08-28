@@ -14,7 +14,7 @@ from schema_org.datatypes import URL
 from schema_org.models.structured_value import StructuredValue
 
 class OwnershipInfo(StructuredValue):
-    __doc__ = 'A structured value providing information about when a certain organization or person owned a certain product.'
+    __doc__ = 'https://schema.org/OwnershipInfo\n\nA structured value providing information about when a certain organization or person owned a certain product.'
     SCHEMA_TYPE: ClassVar[str] = 'OwnershipInfo'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('OwnershipInfo', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

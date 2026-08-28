@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.trip import Trip
 
 class BoatTrip(Trip):
-    __doc__ = 'A trip on a commercial ferry line.'
+    __doc__ = 'https://schema.org/BoatTrip\n\nA trip on a commercial ferry line.'
     SCHEMA_TYPE: ClassVar[str] = 'BoatTrip'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BoatTrip', 'Trip', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

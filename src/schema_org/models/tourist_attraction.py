@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.place import Place
 
 class TouristAttraction(Place):
-    __doc__ = 'A tourist attraction.  In principle any Thing can be a [[TouristAttraction]], from a [[Mountain]] and [[LandmarksOrHistoricalBuildings]] to a [[LocalBusiness]].  This Type can be used on its own to describe a general [[TouristAttraction]], or be used as an [[additionalType]] to add tourist attraction properties to any other type.  (See examples below)'
+    __doc__ = 'https://schema.org/TouristAttraction\n\nA tourist attraction.  In principle any Thing can be a [[TouristAttraction]], from a [[Mountain]] and [[LandmarksOrHistoricalBuildings]] to a [[LocalBusiness]].  This Type can be used on its own to describe a general [[TouristAttraction]], or be used as an [[additionalType]] to add tourist attraction properties to any other type.  (See examples below)'
     SCHEMA_TYPE: ClassVar[str] = 'TouristAttraction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('TouristAttraction', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

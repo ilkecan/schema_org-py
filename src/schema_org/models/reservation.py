@@ -16,7 +16,7 @@ from schema_org.enums import ReservationStatusType
 from schema_org.models.intangible import Intangible
 
 class Reservation(Intangible):
-    __doc__ = 'Describes a reservation for travel, dining or an event. Some reservations require tickets. \\n\\nNote: This type is for information about actual reservations, e.g. in confirmation emails or HTML pages with individual confirmations of reservations. For offers of tickets, restaurant reservations, flights, or rental cars, use [[Offer]].'
+    __doc__ = 'https://schema.org/Reservation\n\nDescribes a reservation for travel, dining or an event. Some reservations require tickets. \\n\\nNote: This type is for information about actual reservations, e.g. in confirmation emails or HTML pages with individual confirmations of reservations. For offers of tickets, restaurant reservations, flights, or rental cars, use [[Offer]].'
     SCHEMA_TYPE: ClassVar[str] = 'Reservation'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Reservation', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -49,13 +49,13 @@ class Reservation(Intangible):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['Reservation'] = Field(default='Reservation', alias='@type', frozen=True)
-    booking_agent: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='bookingAgent', description="'bookingAgent' is an out-dated term indicating a 'broker' that serves as a booking agent.")
+    booking_agent: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='bookingAgent', description="'bookingAgent' is an out-dated term indicating a 'broker' that serves as a booking agent.\n\nSuperseded by `broker`.")
     booking_time: DateTime | list[DateTime] | None = Field(default=None, alias='bookingTime', description='The date and time the reservation was booked.')
-    broker: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='broker', description='An entity that arranges for an exchange between a buyer and a seller.  In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.  If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred.')
+    broker: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='broker', description='An entity that arranges for an exchange between a buyer and a seller.  In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.  If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred.\n\nSupersedes `bookingAgent`.')
     modified_time: DateTime | list[DateTime] | None = Field(default=None, alias='modifiedTime', description='The date and time the reservation was modified.')
     price_currency: Text | list[Text] | None = Field(default=None, alias='priceCurrency', description='The currency of the price, or a price component when attached to [[PriceSpecification]] and its subtypes.\\n\\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types, e.g. "Ithaca HOUR".')
     program_membership_used: ProgramMembership | list[ProgramMembership] | None = Field(default=None, alias='programMembershipUsed', description='Any membership in a frequent flyer, hotel loyalty program, etc. being applied to the reservation.')
-    provider: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='provider', description='The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.')
+    provider: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='provider', description='The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.\n\nSupersedes `carrier`.')
     reservation_for: Thing | list[Thing] | None = Field(default=None, alias='reservationFor', description='The thing -- flight, event, restaurant, etc. being reserved.')
     reservation_id: Text | list[Text] | None = Field(default=None, alias='reservationId', description='A unique identifier for the reservation.')
     reservation_status: ReservationStatusType | list[ReservationStatusType] | None = Field(default=None, alias='reservationStatus', description='The current status of the reservation.')

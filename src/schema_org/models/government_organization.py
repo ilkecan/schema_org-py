@@ -15,7 +15,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.organization import Organization
 
 class GovernmentOrganization(Organization):
-    __doc__ = 'A governmental organization or agency.'
+    __doc__ = 'https://schema.org/GovernmentOrganization\n\nA governmental organization or agency.'
     SCHEMA_TYPE: ClassVar[str] = 'GovernmentOrganization'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('GovernmentOrganization', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

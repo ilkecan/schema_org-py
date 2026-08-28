@@ -18,7 +18,7 @@ from schema_org.enums import BedType
 from schema_org.models.room import Room
 
 class HotelRoom(Room):
-    __doc__ = 'A hotel room is a single room in a hotel.\n<br /><br />\nSee also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.\n'
+    __doc__ = 'https://schema.org/HotelRoom\n\nA hotel room is a single room in a hotel.\n<br /><br />\nSee also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.\n'
     SCHEMA_TYPE: ClassVar[str] = 'HotelRoom'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('HotelRoom', 'Room', 'Accommodation', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

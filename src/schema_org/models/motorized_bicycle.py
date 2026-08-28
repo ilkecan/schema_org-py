@@ -26,7 +26,7 @@ from schema_org.enums import SteeringPositionValue
 from schema_org.models.vehicle import Vehicle
 
 class MotorizedBicycle(Vehicle):
-    __doc__ = 'A motorized bicycle is a bicycle with an attached motor used to power the vehicle, or to assist with pedaling.'
+    __doc__ = 'https://schema.org/MotorizedBicycle\n\nA motorized bicycle is a bicycle with an attached motor used to power the vehicle, or to assist with pedaling.'
     SCHEMA_TYPE: ClassVar[str] = 'MotorizedBicycle'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MotorizedBicycle', 'Vehicle', 'Product', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

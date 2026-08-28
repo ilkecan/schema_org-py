@@ -15,7 +15,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.service import Service
 
 class FoodService(Service):
-    __doc__ = 'A food service, like breakfast, lunch, or dinner.'
+    __doc__ = 'https://schema.org/FoodService\n\nA food service, like breakfast, lunch, or dinner.'
     SCHEMA_TYPE: ClassVar[str] = 'FoodService'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('FoodService', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

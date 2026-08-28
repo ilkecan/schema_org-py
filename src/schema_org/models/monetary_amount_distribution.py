@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.quantitative_value_distribution import QuantitativeValueDistribution
 
 class MonetaryAmountDistribution(QuantitativeValueDistribution):
-    __doc__ = 'A statistical distribution of monetary amounts.'
+    __doc__ = 'https://schema.org/MonetaryAmountDistribution\n\nA statistical distribution of monetary amounts.'
     SCHEMA_TYPE: ClassVar[str] = 'MonetaryAmountDistribution'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MonetaryAmountDistribution', 'QuantitativeValueDistribution', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

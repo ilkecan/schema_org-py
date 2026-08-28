@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.organize_action import OrganizeAction
 
 class AllocateAction(OrganizeAction):
-    __doc__ = 'The act of organizing tasks/objects/events by associating resources to it.'
+    __doc__ = 'https://schema.org/AllocateAction\n\nThe act of organizing tasks/objects/events by associating resources to it.'
     SCHEMA_TYPE: ClassVar[str] = 'AllocateAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AllocateAction', 'OrganizeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

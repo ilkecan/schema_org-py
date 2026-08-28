@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.educational_organization import EducationalOrganization
 
 class MiddleSchool(EducationalOrganization):
-    __doc__ = 'A middle school (typically for children aged around 11-14, although this varies somewhat).'
+    __doc__ = 'https://schema.org/MiddleSchool\n\nA middle school (typically for children aged around 11-14, although this varies somewhat).'
     SCHEMA_TYPE: ClassVar[str] = 'MiddleSchool'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MiddleSchool', 'EducationalOrganization', 'CivicStructure', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

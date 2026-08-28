@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.how_to_item import HowToItem
 
 class HowToSupply(HowToItem):
-    __doc__ = 'A supply consumed when performing the instructions for how to achieve a result.'
+    __doc__ = 'https://schema.org/HowToSupply\n\nA supply consumed when performing the instructions for how to achieve a result.'
     SCHEMA_TYPE: ClassVar[str] = 'HowToSupply'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('HowToSupply', 'HowToItem', 'ListItem', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

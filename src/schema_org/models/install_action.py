@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.consume_action import ConsumeAction
 
 class InstallAction(ConsumeAction):
-    __doc__ = 'The act of installing an application.'
+    __doc__ = 'https://schema.org/InstallAction\n\nThe act of installing an application.'
     SCHEMA_TYPE: ClassVar[str] = 'InstallAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('InstallAction', 'ConsumeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

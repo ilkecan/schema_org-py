@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class Audience(Intangible):
-    __doc__ = 'Intended audience for an item, i.e. the group for whom the item was created.'
+    __doc__ = 'https://schema.org/Audience\n\nIntended audience for an item, i.e. the group for whom the item was created.'
     SCHEMA_TYPE: ClassVar[str] = 'Audience'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Audience', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

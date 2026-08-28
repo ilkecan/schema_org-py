@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class SheetMusic(CreativeWork):
-    __doc__ = 'Printed music, as opposed to performed or recorded music.'
+    __doc__ = 'https://schema.org/SheetMusic\n\nPrinted music, as opposed to performed or recorded music.'
     SCHEMA_TYPE: ClassVar[str] = 'SheetMusic'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SheetMusic', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

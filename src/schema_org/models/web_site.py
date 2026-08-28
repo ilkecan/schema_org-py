@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class WebSite(CreativeWork):
-    __doc__ = 'A WebSite is a set of related web pages and other items typically served from a single web domain and accessible via URLs.'
+    __doc__ = 'https://schema.org/WebSite\n\nA WebSite is a set of related web pages and other items typically served from a single web domain and accessible via URLs.'
     SCHEMA_TYPE: ClassVar[str] = 'WebSite'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('WebSite', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

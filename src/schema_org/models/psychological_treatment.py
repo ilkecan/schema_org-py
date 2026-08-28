@@ -19,7 +19,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.therapeutic_procedure import TherapeuticProcedure
 
 class PsychologicalTreatment(TherapeuticProcedure):
-    __doc__ = 'A process of care relying upon counseling, dialogue and communication  aimed at improving a mental health condition without use of drugs.'
+    __doc__ = 'https://schema.org/PsychologicalTreatment\n\nA process of care relying upon counseling, dialogue and communication  aimed at improving a mental health condition without use of drugs.'
     SCHEMA_TYPE: ClassVar[str] = 'PsychologicalTreatment'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PsychologicalTreatment', 'TherapeuticProcedure', 'MedicalProcedure', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -17,7 +17,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_intangible import MedicalIntangible
 
 class MedicalConditionStage(MedicalIntangible):
-    __doc__ = "A stage of a medical condition, such as 'Stage IIIa'."
+    __doc__ = "https://schema.org/MedicalConditionStage\n\nA stage of a medical condition, such as 'Stage IIIa'."
     SCHEMA_TYPE: ClassVar[str] = 'MedicalConditionStage'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalConditionStage', 'MedicalIntangible', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

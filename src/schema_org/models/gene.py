@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.bio_chem_entity import BioChemEntity
 
 class Gene(BioChemEntity):
-    __doc__ = 'A discrete unit of inheritance which affects one or more biological traits (Source: [https://en.wikipedia.org/wiki/Gene](https://en.wikipedia.org/wiki/Gene)). Examples include FOXP2 (Forkhead box protein P2), SCARNA21 (small Cajal body-specific RNA 21), A- (agouti genotype).'
+    __doc__ = 'https://schema.org/Gene\n\nA discrete unit of inheritance which affects one or more biological traits (Source: [https://en.wikipedia.org/wiki/Gene](https://en.wikipedia.org/wiki/Gene)). Examples include FOXP2 (Forkhead box protein P2), SCARNA21 (small Cajal body-specific RNA 21), A- (agouti genotype).'
     SCHEMA_TYPE: ClassVar[str] = 'Gene'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Gene', 'BioChemEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -51,6 +51,6 @@ class Gene(BioChemEntity):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['Gene'] = Field(default='Gene', alias='@type', frozen=True)
     alternative_of: Gene | list[Gene] | None = Field(default=None, alias='alternativeOf', description='Another gene which is a variation of this one.')
-    encodes_bio_chem_entity: BioChemEntity | list[BioChemEntity] | None = Field(default=None, alias='encodesBioChemEntity', description='Another BioChemEntity encoded by this one. ')
+    encodes_bio_chem_entity: BioChemEntity | list[BioChemEntity] | None = Field(default=None, alias='encodesBioChemEntity', description='Another BioChemEntity encoded by this one. \n\nInverse-property: `isEncodedByBioChemEntity`.')
     expressed_in: AnatomicalStructure | AnatomicalSystem | BioChemEntity | DefinedTerm | list[AnatomicalStructure | AnatomicalSystem | BioChemEntity | DefinedTerm] | None = Field(default=None, alias='expressedIn', description='Tissue, organ, biological sample, etc in which activity of this gene has been observed experimentally. For example brain, digestive system.')
     has_bio_polymer_sequence: Text | list[Text] | None = Field(default=None, alias='hasBioPolymerSequence', description='A symbolic representation of a BioChemEntity. For example, a nucleotide sequence of a Gene or an amino acid sequence of a Protein.')

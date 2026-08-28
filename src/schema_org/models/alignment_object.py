@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class AlignmentObject(Intangible):
-    __doc__ = 'An intangible item that describes an alignment between a learning resource and a node in an educational framework.\nShould not be used where the nature of the alignment can be described using a simple property, for example to express that a resource [[teaches]] or [[assesses]] a competency.'
+    __doc__ = 'https://schema.org/AlignmentObject\n\nAn intangible item that describes an alignment between a learning resource and a node in an educational framework.\nShould not be used where the nature of the alignment can be described using a simple property, for example to express that a resource [[teaches]] or [[assesses]] a competency.'
     SCHEMA_TYPE: ClassVar[str] = 'AlignmentObject'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AlignmentObject', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

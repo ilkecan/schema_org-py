@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.review import Review
 
 class UserReview(Review):
-    __doc__ = 'A review created by an end-user (e.g. consumer, purchaser, attendee etc.), in contrast with [[CriticReview]].'
+    __doc__ = 'https://schema.org/UserReview\n\nA review created by an end-user (e.g. consumer, purchaser, attendee etc.), in contrast with [[CriticReview]].'
     SCHEMA_TYPE: ClassVar[str] = 'UserReview'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('UserReview', 'Review', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

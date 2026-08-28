@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.find_action import FindAction
 
 class CheckAction(FindAction):
-    __doc__ = "An agent inspects, determines, investigates, inquires, or examines an object's accuracy, quality, condition, or state."
+    __doc__ = "https://schema.org/CheckAction\n\nAn agent inspects, determines, investigates, inquires, or examines an object's accuracy, quality, condition, or state."
     SCHEMA_TYPE: ClassVar[str] = 'CheckAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CheckAction', 'FindAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

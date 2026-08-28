@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class PropertyValueSpecification(Intangible):
-    __doc__ = 'A Property value specification.'
+    __doc__ = 'https://schema.org/PropertyValueSpecification\n\nA Property value specification.'
     SCHEMA_TYPE: ClassVar[str] = 'PropertyValueSpecification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PropertyValueSpecification', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

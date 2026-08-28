@@ -15,7 +15,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.organization import Organization
 
 class SportsOrganization(Organization):
-    __doc__ = 'Represents the collection of all sports organizations, including sports teams, governing bodies, and sports associations.'
+    __doc__ = 'https://schema.org/SportsOrganization\n\nRepresents the collection of all sports organizations, including sports teams, governing bodies, and sports associations.'
     SCHEMA_TYPE: ClassVar[str] = 'SportsOrganization'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SportsOrganization', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

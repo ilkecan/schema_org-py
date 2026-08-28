@@ -22,7 +22,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.review import Review
 
 class Recommendation(Review):
-    __doc__ = '[[Recommendation]] is a type of [[Review]] that suggests or proposes something as the best option or best course of action. Recommendations may be for products or services, or other concrete things, as in the case of a ranked list or product guide. A [[Guide]] may list multiple recommendations for different categories. For example, in a [[Guide]] about which TVs to buy, the author may have several [[Recommendation]]s.'
+    __doc__ = 'https://schema.org/Recommendation\n\n[[Recommendation]] is a type of [[Review]] that suggests or proposes something as the best option or best course of action. Recommendations may be for products or services, or other concrete things, as in the case of a ranked list or product guide. A [[Guide]] may list multiple recommendations for different categories. For example, in a [[Guide]] about which TVs to buy, the author may have several [[Recommendation]]s.'
     SCHEMA_TYPE: ClassVar[str] = 'Recommendation'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Recommendation', 'Review', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

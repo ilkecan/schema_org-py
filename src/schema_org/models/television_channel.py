@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.broadcast_channel import BroadcastChannel
 
 class TelevisionChannel(BroadcastChannel):
-    __doc__ = 'A unique instance of a television BroadcastService on a CableOrSatelliteService lineup.'
+    __doc__ = 'https://schema.org/TelevisionChannel\n\nA unique instance of a television BroadcastService on a CableOrSatelliteService lineup.'
     SCHEMA_TYPE: ClassVar[str] = 'TelevisionChannel'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('TelevisionChannel', 'BroadcastChannel', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

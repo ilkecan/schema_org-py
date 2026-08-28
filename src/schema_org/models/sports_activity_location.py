@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.local_business import LocalBusiness
 
 class SportsActivityLocation(LocalBusiness):
-    __doc__ = 'A sports location, such as a playing field.'
+    __doc__ = 'https://schema.org/SportsActivityLocation\n\nA sports location, such as a playing field.'
     SCHEMA_TYPE: ClassVar[str] = 'SportsActivityLocation'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SportsActivityLocation', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

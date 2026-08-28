@@ -22,7 +22,7 @@ from schema_org.enums import Specialty
 from schema_org.models.media_gallery import MediaGallery
 
 class ImageGallery(MediaGallery):
-    __doc__ = 'Web page type: Image gallery page.'
+    __doc__ = 'https://schema.org/ImageGallery\n\nWeb page type: Image gallery page.'
     SCHEMA_TYPE: ClassVar[str] = 'ImageGallery'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ImageGallery', 'MediaGallery', 'CollectionPage', 'WebPage', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

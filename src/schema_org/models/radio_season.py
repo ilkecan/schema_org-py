@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work_season import CreativeWorkSeason
 
 class RadioSeason(CreativeWorkSeason):
-    __doc__ = 'Season dedicated to radio broadcast and associated online delivery.'
+    __doc__ = 'https://schema.org/RadioSeason\n\nSeason dedicated to radio broadcast and associated online delivery.'
     SCHEMA_TYPE: ClassVar[str] = 'RadioSeason'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('RadioSeason', 'CreativeWorkSeason', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

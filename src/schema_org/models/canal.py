@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.body_of_water import BodyOfWater
 
 class Canal(BodyOfWater):
-    __doc__ = 'A canal, like the Panama Canal.'
+    __doc__ = 'https://schema.org/Canal\n\nA canal, like the Panama Canal.'
     SCHEMA_TYPE: ClassVar[str] = 'Canal'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Canal', 'BodyOfWater', 'Landform', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

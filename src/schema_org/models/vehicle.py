@@ -26,7 +26,7 @@ from schema_org.enums import SteeringPositionValue
 from schema_org.models.product import Product
 
 class Vehicle(Product):
-    __doc__ = 'A vehicle is a device that is designed or used to transport people or cargo over land, water, air, or through space.'
+    __doc__ = 'https://schema.org/Vehicle\n\nA vehicle is a device that is designed or used to transport people or cargo over land, water, air, or through space.'
     SCHEMA_TYPE: ClassVar[str] = 'Vehicle'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Vehicle', 'Product', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

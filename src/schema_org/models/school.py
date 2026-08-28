@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.educational_organization import EducationalOrganization
 
 class School(EducationalOrganization):
-    __doc__ = 'A school.'
+    __doc__ = 'https://schema.org/School\n\nA school.'
     SCHEMA_TYPE: ClassVar[str] = 'School'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('School', 'EducationalOrganization', 'CivicStructure', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

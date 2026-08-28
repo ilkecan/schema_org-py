@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.control_action import ControlAction
 
 class SuspendAction(ControlAction):
-    __doc__ = 'The act of momentarily pausing a device or application (e.g. pause music playback or pause a timer).'
+    __doc__ = 'https://schema.org/SuspendAction\n\nThe act of momentarily pausing a device or application (e.g. pause music playback or pause a timer).'
     SCHEMA_TYPE: ClassVar[str] = 'SuspendAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SuspendAction', 'ControlAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

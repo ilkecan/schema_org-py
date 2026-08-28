@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.aggregate_rating import AggregateRating
 
 class EmployerAggregateRating(AggregateRating):
-    __doc__ = 'An aggregate rating of an Organization related to its role as an employer.'
+    __doc__ = 'https://schema.org/EmployerAggregateRating\n\nAn aggregate rating of an Organization related to its role as an employer.'
     SCHEMA_TYPE: ClassVar[str] = 'EmployerAggregateRating'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('EmployerAggregateRating', 'AggregateRating', 'Rating', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

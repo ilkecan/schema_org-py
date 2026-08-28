@@ -19,7 +19,7 @@ from schema_org.enums import PhysicalExam
 from schema_org.models.medical_sign_or_symptom import MedicalSignOrSymptom
 
 class MedicalSign(MedicalSignOrSymptom):
-    __doc__ = "Any physical manifestation of a person's medical condition discoverable by objective diagnostic tests or physical examination."
+    __doc__ = "https://schema.org/MedicalSign\n\nAny physical manifestation of a person's medical condition discoverable by objective diagnostic tests or physical examination."
     SCHEMA_TYPE: ClassVar[str] = 'MedicalSign'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalSign', 'MedicalSignOrSymptom', 'MedicalCondition', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

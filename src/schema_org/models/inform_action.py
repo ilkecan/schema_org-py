@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.communicate_action import CommunicateAction
 
 class InformAction(CommunicateAction):
-    __doc__ = 'The act of notifying someone of information pertinent to them, with no expectation of a response.'
+    __doc__ = 'https://schema.org/InformAction\n\nThe act of notifying someone of information pertinent to them, with no expectation of a response.'
     SCHEMA_TYPE: ClassVar[str] = 'InformAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('InformAction', 'CommunicateAction', 'InteractAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -54,4 +54,4 @@ class InformAction(CommunicateAction):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['InformAction'] = Field(default='InformAction', alias='@type', frozen=True)
-    event: Event | list[Event] | None = Field(default=None, alias='event', description='Upcoming or past event associated with this place, organization, or action.')
+    event: Event | list[Event] | None = Field(default=None, alias='event', description='Upcoming or past event associated with this place, organization, or action.\n\nSupersedes `events`.')

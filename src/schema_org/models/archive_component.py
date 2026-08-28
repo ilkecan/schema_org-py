@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class ArchiveComponent(CreativeWork):
-    __doc__ = 'An intangible type to be applied to any archive content, carrying with it a set of properties required to describe archival items and collections.'
+    __doc__ = 'https://schema.org/ArchiveComponent\n\nAn intangible type to be applied to any archive content, carrying with it a set of properties required to describe archival items and collections.'
     SCHEMA_TYPE: ClassVar[str] = 'ArchiveComponent'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ArchiveComponent', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -159,5 +159,5 @@ class ArchiveComponent(CreativeWork):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['ArchiveComponent'] = Field(default='ArchiveComponent', alias='@type', frozen=True)
-    holding_archive: ArchiveOrganization | list[ArchiveOrganization] | None = Field(default=None, alias='holdingArchive', description='[[ArchiveOrganization]] that holds, keeps or maintains the [[ArchiveComponent]].')
+    holding_archive: ArchiveOrganization | list[ArchiveOrganization] | None = Field(default=None, alias='holdingArchive', description='[[ArchiveOrganization]] that holds, keeps or maintains the [[ArchiveComponent]].\n\nInverse-property: `archiveHeld`.')
     item_location: Place | PostalAddress | Text | list[Place | PostalAddress | Text] | None = Field(default=None, alias='itemLocation', description='Current location of the item.')

@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Drawing(CreativeWork):
-    __doc__ = 'A picture or diagram made with a pencil, pen, or crayon rather than paint.'
+    __doc__ = 'https://schema.org/Drawing\n\nA picture or diagram made with a pencil, pen, or crayon rather than paint.'
     SCHEMA_TYPE: ClassVar[str] = 'Drawing'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Drawing', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

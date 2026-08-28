@@ -16,11 +16,12 @@ from schema_org.datatypes import Text
 from schema_org.datatypes import URL
 from schema_org.enums import MedicalSpecialty
 from schema_org.enums import NonprofitType
+from schema_org.models.local_business import LocalBusiness
 from schema_org.models.medical_business import MedicalBusiness
 from schema_org.models.medical_organization import MedicalOrganization
 
-class Dentist(MedicalBusiness, MedicalOrganization):
-    __doc__ = 'A dentist.'
+class Dentist(MedicalBusiness, LocalBusiness, MedicalOrganization):
+    __doc__ = 'https://schema.org/Dentist\n\nA dentist.'
     SCHEMA_TYPE: ClassVar[str] = 'Dentist'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Dentist', 'LocalBusiness', 'MedicalBusiness', 'MedicalOrganization', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

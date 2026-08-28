@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_indication import MedicalIndication
 
 class ApprovedIndication(MedicalIndication):
-    __doc__ = 'An indication for a medical therapy that has been formally specified or approved by a regulatory body that regulates use of the therapy; for example, the US FDA approves indications for most drugs in the US.'
+    __doc__ = 'https://schema.org/ApprovedIndication\n\nAn indication for a medical therapy that has been formally specified or approved by a regulatory body that regulates use of the therapy; for example, the US FDA approves indications for most drugs in the US.'
     SCHEMA_TYPE: ClassVar[str] = 'ApprovedIndication'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ApprovedIndication', 'MedicalIndication', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

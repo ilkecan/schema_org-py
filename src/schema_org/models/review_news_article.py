@@ -22,7 +22,7 @@ from schema_org.models.critic_review import CriticReview
 from schema_org.models.news_article import NewsArticle
 
 class ReviewNewsArticle(CriticReview, NewsArticle):
-    __doc__ = "A [[NewsArticle]] and [[CriticReview]] providing a professional critic's assessment of a service, product, performance, or artistic or literary work."
+    __doc__ = "https://schema.org/ReviewNewsArticle\n\nA [[NewsArticle]] and [[CriticReview]] providing a professional critic's assessment of a service, product, performance, or artistic or literary work."
     SCHEMA_TYPE: ClassVar[str] = 'ReviewNewsArticle'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ReviewNewsArticle', 'CriticReview', 'NewsArticle', 'Review', 'Article', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

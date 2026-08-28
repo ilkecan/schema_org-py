@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.news_article import NewsArticle
 
 class AskPublicNewsArticle(NewsArticle):
-    __doc__ = 'A [[NewsArticle]] expressing an open call by a [[NewsMediaOrganization]] asking the public for input, insights, clarifications, anecdotes, documentation, etc., on an issue, for reporting purposes.'
+    __doc__ = 'https://schema.org/AskPublicNewsArticle\n\nA [[NewsArticle]] expressing an open call by a [[NewsMediaOrganization]] asking the public for input, insights, clarifications, anecdotes, documentation, etc., on an issue, for reporting purposes.'
     SCHEMA_TYPE: ClassVar[str] = 'AskPublicNewsArticle'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AskPublicNewsArticle', 'NewsArticle', 'Article', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

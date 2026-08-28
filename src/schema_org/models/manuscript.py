@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Manuscript(CreativeWork):
-    __doc__ = 'A book, document, or piece of music written by hand rather than typed or printed.'
+    __doc__ = 'https://schema.org/Manuscript\n\nA book, document, or piece of music written by hand rather than typed or printed.'
     SCHEMA_TYPE: ClassVar[str] = 'Manuscript'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Manuscript', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

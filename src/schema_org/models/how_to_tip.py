@@ -22,7 +22,7 @@ from schema_org.models.creative_work import CreativeWork
 from schema_org.models.list_item import ListItem
 
 class HowToTip(CreativeWork, ListItem):
-    __doc__ = "An explanation in the instructions for how to achieve a result. It provides supplementary information about a technique, supply, author's preference, etc. It can explain what could be done, or what should not be done, but doesn't specify what should be done (see HowToDirection)."
+    __doc__ = "https://schema.org/HowToTip\n\nAn explanation in the instructions for how to achieve a result. It provides supplementary information about a technique, supply, author's preference, etc. It can explain what could be done, or what should not be done, but doesn't specify what should be done (see HowToDirection)."
     SCHEMA_TYPE: ClassVar[str] = 'HowToTip'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('HowToTip', 'CreativeWork', 'ListItem', 'Thing', 'Intangible')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

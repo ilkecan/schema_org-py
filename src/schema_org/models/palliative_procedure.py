@@ -16,10 +16,11 @@ from schema_org.enums import MedicalProcedureType
 from schema_org.enums import MedicalSpecialty
 from schema_org.enums import MedicalStudyStatus
 from schema_org.enums import MedicineSystem
+from schema_org.models.medical_procedure import MedicalProcedure
 from schema_org.models.medical_therapy import MedicalTherapy
 
-class PalliativeProcedure(MedicalTherapy):
-    __doc__ = 'A medical procedure intended primarily for palliative purposes, aimed at relieving the symptoms of an underlying health condition.'
+class PalliativeProcedure(MedicalTherapy, MedicalProcedure):
+    __doc__ = 'https://schema.org/PalliativeProcedure\n\nA medical procedure intended primarily for palliative purposes, aimed at relieving the symptoms of an underlying health condition.'
     SCHEMA_TYPE: ClassVar[str] = 'PalliativeProcedure'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PalliativeProcedure', 'MedicalProcedure', 'MedicalTherapy', 'MedicalEntity', 'TherapeuticProcedure', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

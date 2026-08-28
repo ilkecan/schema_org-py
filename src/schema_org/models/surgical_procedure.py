@@ -19,7 +19,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_procedure import MedicalProcedure
 
 class SurgicalProcedure(MedicalProcedure):
-    __doc__ = 'A medical procedure involving an incision with instruments; performed for diagnose, or therapeutic purposes.'
+    __doc__ = 'https://schema.org/SurgicalProcedure\n\nA medical procedure involving an incision with instruments; performed for diagnose, or therapeutic purposes.'
     SCHEMA_TYPE: ClassVar[str] = 'SurgicalProcedure'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SurgicalProcedure', 'MedicalProcedure', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

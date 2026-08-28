@@ -21,7 +21,7 @@ from schema_org.enums import EventStatusType
 from schema_org.models.publication_event import PublicationEvent
 
 class OnDemandEvent(PublicationEvent):
-    __doc__ = 'A publication event, e.g. catch-up TV or radio podcast, during which a program is available on-demand.'
+    __doc__ = 'https://schema.org/OnDemandEvent\n\nA publication event, e.g. catch-up TV or radio podcast, during which a program is available on-demand.'
     SCHEMA_TYPE: ClassVar[str] = 'OnDemandEvent'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('OnDemandEvent', 'PublicationEvent', 'Event', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

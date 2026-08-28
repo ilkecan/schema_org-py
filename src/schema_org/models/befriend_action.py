@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.interact_action import InteractAction
 
 class BefriendAction(InteractAction):
-    __doc__ = 'The act of forming a personal connection with someone (object) mutually/bidirectionally/symmetrically.\\n\\nRelated actions:\\n\\n* [[FollowAction]]: Unlike FollowAction, BefriendAction implies that the connection is reciprocal.'
+    __doc__ = 'https://schema.org/BefriendAction\n\nThe act of forming a personal connection with someone (object) mutually/bidirectionally/symmetrically.\\n\\nRelated actions:\\n\\n* [[FollowAction]]: Unlike FollowAction, BefriendAction implies that the connection is reciprocal.'
     SCHEMA_TYPE: ClassVar[str] = 'BefriendAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BefriendAction', 'InteractAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

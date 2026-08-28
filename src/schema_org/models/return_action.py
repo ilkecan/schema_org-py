@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.transfer_action import TransferAction
 
 class ReturnAction(TransferAction):
-    __doc__ = 'The act of returning to the origin that which was previously received (concrete objects) or taken (ownership).'
+    __doc__ = 'https://schema.org/ReturnAction\n\nThe act of returning to the origin that which was previously received (concrete objects) or taken (ownership).'
     SCHEMA_TYPE: ClassVar[str] = 'ReturnAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ReturnAction', 'TransferAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

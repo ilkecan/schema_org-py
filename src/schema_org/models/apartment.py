@@ -18,7 +18,7 @@ from schema_org.enums import BedType
 from schema_org.models.accommodation import Accommodation
 
 class Apartment(Accommodation):
-    __doc__ = 'An apartment (in American English) or flat (in British English) is a self-contained housing unit (a type of residential real estate) that occupies only part of a building (source: Wikipedia, the free encyclopedia, see <a href="http://en.wikipedia.org/wiki/Apartment">http://en.wikipedia.org/wiki/Apartment</a>).'
+    __doc__ = 'https://schema.org/Apartment\n\nAn apartment (in American English) or flat (in British English) is a self-contained housing unit (a type of residential real estate) that occupies only part of a building (source: Wikipedia, the free encyclopedia, see <a href="http://en.wikipedia.org/wiki/Apartment">http://en.wikipedia.org/wiki/Apartment</a>).'
     SCHEMA_TYPE: ClassVar[str] = 'Apartment'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Apartment', 'Accommodation', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

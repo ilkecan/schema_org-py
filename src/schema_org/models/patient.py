@@ -20,7 +20,7 @@ from schema_org.models.medical_audience import MedicalAudience
 from schema_org.models.person import Person
 
 class Patient(MedicalAudience, Person):
-    __doc__ = 'A patient is any person recipient of health care services.'
+    __doc__ = 'https://schema.org/Patient\n\nA patient is any person recipient of health care services.'
     SCHEMA_TYPE: ClassVar[str] = 'Patient'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Patient', 'MedicalAudience', 'Person', 'Audience', 'PeopleAudience', 'Thing', 'Intangible')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

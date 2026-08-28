@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.software_application import SoftwareApplication
 
 class OperatingSystem(SoftwareApplication):
-    __doc__ = 'System software that manages computer hardware and software resources, and provides common services for computer programs.'
+    __doc__ = 'https://schema.org/OperatingSystem\n\nSystem software that manages computer hardware and software resources, and provides common services for computer programs.'
     SCHEMA_TYPE: ClassVar[str] = 'OperatingSystem'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('OperatingSystem', 'SoftwareApplication', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

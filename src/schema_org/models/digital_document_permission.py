@@ -14,7 +14,7 @@ from schema_org.enums import DigitalDocumentPermissionType
 from schema_org.models.intangible import Intangible
 
 class DigitalDocumentPermission(Intangible):
-    __doc__ = 'A permission for a particular person or group to access a particular file.'
+    __doc__ = 'https://schema.org/DigitalDocumentPermission\n\nA permission for a particular person or group to access a particular file.'
     SCHEMA_TYPE: ClassVar[str] = 'DigitalDocumentPermission'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DigitalDocumentPermission', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

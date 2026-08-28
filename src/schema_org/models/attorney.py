@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.legal_service import LegalService
 
 class Attorney(LegalService):
-    __doc__ = 'Professional service: Attorney. \\n\\nThis type is deprecated - [[LegalService]] is more inclusive and less ambiguous.'
+    __doc__ = 'https://schema.org/Attorney\n\nProfessional service: Attorney. \\n\\nThis type is deprecated - [[LegalService]] is more inclusive and less ambiguous.'
     SCHEMA_TYPE: ClassVar[str] = 'Attorney'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Attorney', 'LegalService', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

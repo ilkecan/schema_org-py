@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.store import Store
 
 class LiquorStore(Store):
-    __doc__ = 'A shop that sells alcoholic drinks such as wine, beer, whisky and other spirits.'
+    __doc__ = 'https://schema.org/LiquorStore\n\nA shop that sells alcoholic drinks such as wine, beer, whisky and other spirits.'
     SCHEMA_TYPE: ClassVar[str] = 'LiquorStore'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('LiquorStore', 'Store', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

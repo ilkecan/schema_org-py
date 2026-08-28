@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Menu(CreativeWork):
-    __doc__ = 'A structured representation of food or drink items available from a FoodEstablishment.'
+    __doc__ = 'https://schema.org/Menu\n\nA structured representation of food or drink items available from a FoodEstablishment.'
     SCHEMA_TYPE: ClassVar[str] = 'Menu'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Menu', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

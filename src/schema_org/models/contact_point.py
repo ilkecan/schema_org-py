@@ -14,7 +14,7 @@ from schema_org.enums import ContactPointOption
 from schema_org.models.structured_value import StructuredValue
 
 class ContactPoint(StructuredValue):
-    __doc__ = 'A contact point&#x2014;for example, a Customer Complaints department.'
+    __doc__ = 'https://schema.org/ContactPoint\n\nA contact point&#x2014;for example, a Customer Complaints department.'
     SCHEMA_TYPE: ClassVar[str] = 'ContactPoint'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ContactPoint', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -44,7 +44,7 @@ class ContactPoint(StructuredValue):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['ContactPoint'] = Field(default='ContactPoint', alias='@type', frozen=True)
-    area_served: AdministrativeArea | GeoShape | Place | Text | list[AdministrativeArea | GeoShape | Place | Text] | None = Field(default=None, alias='areaServed', description='The geographic area where a service or offered item is provided.')
+    area_served: AdministrativeArea | GeoShape | Place | Text | list[AdministrativeArea | GeoShape | Place | Text] | None = Field(default=None, alias='areaServed', description='The geographic area where a service or offered item is provided.\n\nSupersedes `serviceArea`.')
     available_language: Language | Text | list[Language | Text] | None = Field(default=None, alias='availableLanguage', description='A language someone may use with or at the item, service or place. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[inLanguage]].')
     contact_option: ContactPointOption | list[ContactPointOption] | None = Field(default=None, alias='contactOption', description='An option available on this contact point (e.g. a toll-free number or support for hearing-impaired callers).')
     contact_type: Text | list[Text] | None = Field(default=None, alias='contactType', description='A person or organization can have different contact points, for different purposes. For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.')
@@ -52,5 +52,5 @@ class ContactPoint(StructuredValue):
     fax_number: Text | list[Text] | None = Field(default=None, alias='faxNumber', description='The fax number.')
     hours_available: OpeningHoursSpecification | list[OpeningHoursSpecification] | None = Field(default=None, alias='hoursAvailable', description='The hours during which this service or contact is available.')
     product_supported: Product | Text | list[Product | Text] | None = Field(default=None, alias='productSupported', description='The product or service this support contact point is related to (such as product support for a particular product line). This can be a specific product or product line (e.g. "iPhone") or a general category of products or services (e.g. "smartphones").')
-    service_area: AdministrativeArea | GeoShape | Place | list[AdministrativeArea | GeoShape | Place] | None = Field(default=None, alias='serviceArea', description='The geographic area where the service is provided.')
+    service_area: AdministrativeArea | GeoShape | Place | list[AdministrativeArea | GeoShape | Place] | None = Field(default=None, alias='serviceArea', description='The geographic area where the service is provided.\n\nSupersedes `area`.\n\nSuperseded by `areaServed`.')
     telephone: Text | list[Text] | None = Field(default=None, alias='telephone', description='The telephone number.')

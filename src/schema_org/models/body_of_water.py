@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.landform import Landform
 
 class BodyOfWater(Landform):
-    __doc__ = 'A body of water, such as a sea, ocean, or lake.'
+    __doc__ = 'https://schema.org/BodyOfWater\n\nA body of water, such as a sea, ocean, or lake.'
     SCHEMA_TYPE: ClassVar[str] = 'BodyOfWater'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BodyOfWater', 'Landform', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

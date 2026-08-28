@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.anatomical_structure import AnatomicalStructure
 
 class Bone(AnatomicalStructure):
-    __doc__ = 'Rigid connective tissue that comprises up the skeletal structure of the human body.'
+    __doc__ = 'https://schema.org/Bone\n\nRigid connective tissue that comprises up the skeletal structure of the human body.'
     SCHEMA_TYPE: ClassVar[str] = 'Bone'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Bone', 'AnatomicalStructure', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

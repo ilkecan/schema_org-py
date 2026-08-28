@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.anatomical_structure import AnatomicalStructure
 
 class Nerve(AnatomicalStructure):
-    __doc__ = 'A common pathway for the electrochemical nerve impulses that are transmitted along each of the axons.'
+    __doc__ = 'https://schema.org/Nerve\n\nA common pathway for the electrochemical nerve impulses that are transmitted along each of the axons.'
     SCHEMA_TYPE: ClassVar[str] = 'Nerve'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Nerve', 'AnatomicalStructure', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -56,7 +56,7 @@ class Nerve(AnatomicalStructure):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['Nerve'] = Field(default='Nerve', alias='@type', frozen=True)
-    branch: AnatomicalStructure | list[AnatomicalStructure] | None = Field(default=None, alias='branch', description='The branches that delineate from the nerve bundle. Not to be confused with [[branchOf]].')
+    branch: AnatomicalStructure | list[AnatomicalStructure] | None = Field(default=None, alias='branch', description='The branches that delineate from the nerve bundle. Not to be confused with [[branchOf]].\n\nSuperseded by `arterialBranch`.')
     nerve_motor: Muscle | list[Muscle] | None = Field(default=None, alias='nerveMotor', description='The neurological pathway extension that involves muscle control.')
     sensory_unit: AnatomicalStructure | SuperficialAnatomy | list[AnatomicalStructure | SuperficialAnatomy] | None = Field(default=None, alias='sensoryUnit', description='The neurological pathway extension that inputs and sends information to the brain or spinal cord.')
     sourced_from: BrainStructure | list[BrainStructure] | None = Field(default=None, alias='sourcedFrom', description='The neurological pathway that originates the neurons.')

@@ -17,7 +17,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.play_action import PlayAction
 
 class ExerciseAction(PlayAction):
-    __doc__ = 'The act of participating in exertive activity for the purposes of improving health and fitness.'
+    __doc__ = 'https://schema.org/ExerciseAction\n\nThe act of participating in exertive activity for the purposes of improving health and fitness.'
     SCHEMA_TYPE: ClassVar[str] = 'ExerciseAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ExerciseAction', 'PlayAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -65,10 +65,10 @@ class ExerciseAction(PlayAction):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['ExerciseAction'] = Field(default='ExerciseAction', alias='@type', frozen=True)
-    course: Place | list[Place] | None = Field(default=None, alias='course', description='A sub property of location. The course where this action was taken.')
+    course: Place | list[Place] | None = Field(default=None, alias='course', description='A sub property of location. The course where this action was taken.\n\nSuperseded by `exerciseCourse`.')
     diet: Diet | list[Diet] | None = Field(default=None, alias='diet', description='A sub property of instrument. The diet used in this action.')
     distance: Distance | list[Distance] | None = Field(default=None, alias='distance', description='The distance travelled, e.g. exercising or travelling.')
-    exercise_course: Place | list[Place] | None = Field(default=None, alias='exerciseCourse', description='A sub property of location. The course where this action was taken.')
+    exercise_course: Place | list[Place] | None = Field(default=None, alias='exerciseCourse', description='A sub property of location. The course where this action was taken.\n\nSupersedes `course`.')
     exercise_plan: ExercisePlan | list[ExercisePlan] | None = Field(default=None, alias='exercisePlan', description='A sub property of instrument. The exercise plan used on this action.')
     exercise_related_diet: Diet | list[Diet] | None = Field(default=None, alias='exerciseRelatedDiet', description='A sub property of instrument. The diet used in this action.')
     exercise_type: Text | list[Text] | None = Field(default=None, alias='exerciseType', description='Type(s) of exercise or activity, such as strength training, flexibility training, aerobics, cardiac rehabilitation, etc.')

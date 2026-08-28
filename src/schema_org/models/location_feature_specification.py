@@ -21,7 +21,7 @@ from schema_org.enums import QualitativeValue
 from schema_org.models.property_value import PropertyValue
 
 class LocationFeatureSpecification(PropertyValue):
-    __doc__ = 'Specifies a location feature by providing a structured value representing a feature of an accommodation as a property-value pair of varying degrees of formality.'
+    __doc__ = 'https://schema.org/LocationFeatureSpecification\n\nSpecifies a location feature by providing a structured value representing a feature of an accommodation as a property-value pair of varying degrees of formality.'
     SCHEMA_TYPE: ClassVar[str] = 'LocationFeatureSpecification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('LocationFeatureSpecification', 'PropertyValue', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

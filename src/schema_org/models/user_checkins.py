@@ -21,7 +21,7 @@ from schema_org.enums import EventStatusType
 from schema_org.models.user_interaction import UserInteraction
 
 class UserCheckins(UserInteraction):
-    __doc__ = 'UserInteraction and its subtypes is an old way of talking about users interacting with pages. It is generally better to use [[Action]]-based vocabulary, alongside types such as [[Comment]].'
+    __doc__ = 'https://schema.org/UserCheckins\n\nUserInteraction and its subtypes is an old way of talking about users interacting with pages. It is generally better to use [[Action]]-based vocabulary, alongside types such as [[Comment]].\n\nSuperseded by `InteractionCounter`.'
     SCHEMA_TYPE: ClassVar[str] = 'UserCheckins'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('UserCheckins', 'UserInteraction', 'Event', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

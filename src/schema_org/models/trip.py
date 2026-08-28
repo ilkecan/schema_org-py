@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class Trip(Intangible):
-    __doc__ = 'A trip or journey. An itinerary of visits to one or more places.'
+    __doc__ = 'https://schema.org/Trip\n\nA trip or journey. An itinerary of visits to one or more places.'
     SCHEMA_TYPE: ClassVar[str] = 'Trip'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Trip', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -46,8 +46,8 @@ class Trip(Intangible):
     arrival_time: DateTime | Time | list[DateTime | Time] | None = Field(default=None, alias='arrivalTime', description='The expected arrival time.')
     departure_time: DateTime | Time | list[DateTime | Time] | None = Field(default=None, alias='departureTime', description='The expected departure time.')
     itinerary: ItemList | Place | list[ItemList | Place] | None = Field(default=None, alias='itinerary', description='Destination(s) ( [[Place]] ) that make up a trip. For a trip where destination order is important use [[ItemList]] to specify that order (see examples).')
-    offers: Demand | Offer | list[Demand | Offer] | None = Field(default=None, alias='offers', description='An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.\n      ')
-    part_of_trip: Trip | list[Trip] | None = Field(default=None, alias='partOfTrip', description='Identifies that this [[Trip]] is a subTrip of another Trip.  For example Day 1, Day 2, etc. of a multi-day trip.')
-    provider: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='provider', description='The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.')
-    sub_trip: Trip | list[Trip] | None = Field(default=None, alias='subTrip', description='Identifies a [[Trip]] that is a subTrip of this Trip.  For example Day 1, Day 2, etc. of a multi-day trip.')
+    offers: Demand | Offer | list[Demand | Offer] | None = Field(default=None, alias='offers', description='An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.\n      \n\nInverse-property: `itemOffered`.')
+    part_of_trip: Trip | list[Trip] | None = Field(default=None, alias='partOfTrip', description='Identifies that this [[Trip]] is a subTrip of another Trip.  For example Day 1, Day 2, etc. of a multi-day trip.\n\nInverse-property: `subTrip`.')
+    provider: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='provider', description='The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.\n\nSupersedes `carrier`.')
+    sub_trip: Trip | list[Trip] | None = Field(default=None, alias='subTrip', description='Identifies a [[Trip]] that is a subTrip of this Trip.  For example Day 1, Day 2, etc. of a multi-day trip.\n\nInverse-property: `partOfTrip`.')
     trip_origin: Place | list[Place] | None = Field(default=None, alias='tripOrigin', description='The location of origin of the trip, prior to any destination(s).')

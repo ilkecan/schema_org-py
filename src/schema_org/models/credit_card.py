@@ -20,7 +20,7 @@ from schema_org.models.loan_or_credit import LoanOrCredit
 from schema_org.models.payment_card import PaymentCard
 
 class CreditCard(LoanOrCredit, PaymentCard):
-    __doc__ = 'A card payment method of a particular brand or name.  Used to mark up a particular payment method and/or the financial product/service that supplies the card account.\\n\\nCommonly used values:\\n\\n* http://purl.org/goodrelations/v1#AmericanExpress\\n* http://purl.org/goodrelations/v1#DinersClub\\n* http://purl.org/goodrelations/v1#Discover\\n* http://purl.org/goodrelations/v1#JCB\\n* http://purl.org/goodrelations/v1#MasterCard\\n* http://purl.org/goodrelations/v1#VISA\n       '
+    __doc__ = 'https://schema.org/CreditCard\n\nA card payment method of a particular brand or name.  Used to mark up a particular payment method and/or the financial product/service that supplies the card account.\\n\\nCommonly used values:\\n\\n* http://purl.org/goodrelations/v1#AmericanExpress\\n* http://purl.org/goodrelations/v1#DinersClub\\n* http://purl.org/goodrelations/v1#Discover\\n* http://purl.org/goodrelations/v1#JCB\\n* http://purl.org/goodrelations/v1#MasterCard\\n* http://purl.org/goodrelations/v1#VISA\n       '
     SCHEMA_TYPE: ClassVar[str] = 'CreditCard'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('CreditCard', 'LoanOrCredit', 'PaymentCard', 'FinancialProduct', 'PaymentMethod', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

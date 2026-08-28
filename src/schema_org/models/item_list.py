@@ -15,7 +15,7 @@ from schema_org.enums import ItemListOrderType
 from schema_org.models.intangible import Intangible
 
 class ItemList(Intangible):
-    __doc__ = 'A list of items of any sort&#x2014;for example, Top 10 Movies About Weathermen, or Top 100 Party Songs. Not to be confused with HTML lists, which are often used only for formatting.'
+    __doc__ = 'https://schema.org/ItemList\n\nA list of items of any sort&#x2014;for example, Top 10 Movies About Weathermen, or Top 100 Party Songs. Not to be confused with HTML lists, which are often used only for formatting.'
     SCHEMA_TYPE: ClassVar[str] = 'ItemList'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ItemList', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -25,7 +25,7 @@ from schema_org.models.creative_work import CreativeWork
 from schema_org.models.lifestyle_modification import LifestyleModification
 
 class Diet(CreativeWork, LifestyleModification):
-    __doc__ = 'A strategy of regulating the intake of food to achieve or maintain a specific health-related goal.'
+    __doc__ = 'https://schema.org/Diet\n\nA strategy of regulating the intake of food to achieve or maintain a specific health-related goal.'
     SCHEMA_TYPE: ClassVar[str] = 'Diet'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Diet', 'CreativeWork', 'LifestyleModification', 'Thing', 'MedicalEntity')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

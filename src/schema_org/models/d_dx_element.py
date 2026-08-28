@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_intangible import MedicalIntangible
 
 class DDxElement(MedicalIntangible):
-    __doc__ = 'An alternative, closely-related condition typically considered later in the differential diagnosis process along with the signs that are used to distinguish it.'
+    __doc__ = 'https://schema.org/DDxElement\n\nAn alternative, closely-related condition typically considered later in the differential diagnosis process along with the signs that are used to distinguish it.'
     SCHEMA_TYPE: ClassVar[str] = 'DDxElement'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DDxElement', 'MedicalIntangible', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

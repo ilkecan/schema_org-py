@@ -23,7 +23,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.web_page_element import WebPageElement
 
 class WPSideBar(WebPageElement):
-    __doc__ = 'A sidebar section of the page.'
+    __doc__ = 'https://schema.org/WPSideBar\n\nA sidebar section of the page.'
     SCHEMA_TYPE: ClassVar[str] = 'WPSideBar'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('WPSideBar', 'WebPageElement', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

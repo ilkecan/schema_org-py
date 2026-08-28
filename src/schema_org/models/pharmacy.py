@@ -20,7 +20,7 @@ from schema_org.models.medical_business import MedicalBusiness
 from schema_org.models.medical_organization import MedicalOrganization
 
 class Pharmacy(MedicalBusiness, MedicalOrganization):
-    __doc__ = 'A pharmacy or drugstore.'
+    __doc__ = 'https://schema.org/Pharmacy\n\nA pharmacy or drugstore.'
     SCHEMA_TYPE: ClassVar[str] = 'Pharmacy'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Pharmacy', 'MedicalBusiness', 'MedicalOrganization', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

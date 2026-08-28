@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.interact_action import InteractAction
 
 class LeaveAction(InteractAction):
-    __doc__ = 'An agent leaves an event / group with participants/friends at a location.\\n\\nRelated actions:\\n\\n* [[JoinAction]]: The antonym of LeaveAction.\\n* [[UnRegisterAction]]: Unlike UnRegisterAction, LeaveAction implies leaving a group/team of people rather than a service.'
+    __doc__ = 'https://schema.org/LeaveAction\n\nAn agent leaves an event / group with participants/friends at a location.\\n\\nRelated actions:\\n\\n* [[JoinAction]]: The antonym of LeaveAction.\\n* [[UnRegisterAction]]: Unlike UnRegisterAction, LeaveAction implies leaving a group/team of people rather than a service.'
     SCHEMA_TYPE: ClassVar[str] = 'LeaveAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('LeaveAction', 'InteractAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -50,4 +50,4 @@ class LeaveAction(InteractAction):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['LeaveAction'] = Field(default='LeaveAction', alias='@type', frozen=True)
-    event: Event | list[Event] | None = Field(default=None, alias='event', description='Upcoming or past event associated with this place, organization, or action.')
+    event: Event | list[Event] | None = Field(default=None, alias='event', description='Upcoming or past event associated with this place, organization, or action.\n\nSupersedes `events`.')

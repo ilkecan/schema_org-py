@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class DefinedTermSet(CreativeWork):
-    __doc__ = 'A set of defined terms, for example a set of categories or a classification scheme, a glossary, dictionary or enumeration. Use the about property to specify what the term set is about.'
+    __doc__ = 'https://schema.org/DefinedTermSet\n\nA set of defined terms, for example a set of categories or a classification scheme, a glossary, dictionary or enumeration. Use the about property to specify what the term set is about.'
     SCHEMA_TYPE: ClassVar[str] = 'DefinedTermSet'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DefinedTermSet', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -158,5 +158,5 @@ class DefinedTermSet(CreativeWork):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['DefinedTermSet'] = Field(default='DefinedTermSet', alias='@type', frozen=True)
-    about: Thing | list[Thing] | None = Field(default=None, alias='about', description='The subject matter of an object.')
+    about: Thing | list[Thing] | None = Field(default=None, alias='about', description='The subject matter of an object.\n\nInverse-property: `subjectOf`.')
     has_defined_term: DefinedTerm | list[DefinedTerm] | None = Field(default=None, alias='hasDefinedTerm', description='A Defined Term contained in this term set.')

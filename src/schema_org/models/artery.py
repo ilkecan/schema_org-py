@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.vessel import Vessel
 
 class Artery(Vessel):
-    __doc__ = 'A type of blood vessel that specifically carries blood away from the heart.'
+    __doc__ = 'https://schema.org/Artery\n\nA type of blood vessel that specifically carries blood away from the heart.'
     SCHEMA_TYPE: ClassVar[str] = 'Artery'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Artery', 'Vessel', 'AnatomicalStructure', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -54,5 +54,5 @@ class Artery(Vessel):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['Artery'] = Field(default='Artery', alias='@type', frozen=True)
-    arterial_branch: AnatomicalStructure | list[AnatomicalStructure] | None = Field(default=None, alias='arterialBranch', description='The branches that comprise the arterial structure.')
+    arterial_branch: AnatomicalStructure | list[AnatomicalStructure] | None = Field(default=None, alias='arterialBranch', description='The branches that comprise the arterial structure.\n\nSupersedes `branch`.')
     supply_to: AnatomicalStructure | list[AnatomicalStructure] | None = Field(default=None, alias='supplyTo', description='The area to which the artery supplies blood.')

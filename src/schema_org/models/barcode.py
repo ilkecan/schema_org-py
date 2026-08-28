@@ -23,7 +23,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.image_object import ImageObject
 
 class Barcode(ImageObject):
-    __doc__ = 'An image of a visual machine-readable code such as a barcode or QR code.'
+    __doc__ = 'https://schema.org/Barcode\n\nAn image of a visual machine-readable code such as a barcode or QR code.'
     SCHEMA_TYPE: ClassVar[str] = 'Barcode'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Barcode', 'ImageObject', 'MediaObject', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

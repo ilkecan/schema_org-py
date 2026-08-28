@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.bio_chem_entity import BioChemEntity
 
 class MolecularEntity(BioChemEntity):
-    __doc__ = 'Any constitutionally or isotopically distinct atom, molecule, ion, ion pair, radical, radical ion, complex, conformer etc., identifiable as a separately distinguishable entity.'
+    __doc__ = 'https://schema.org/MolecularEntity\n\nAny constitutionally or isotopically distinct atom, molecule, ion, ion pair, radical, radical ion, complex, conformer etc., identifiable as a separately distinguishable entity.'
     SCHEMA_TYPE: ClassVar[str] = 'MolecularEntity'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MolecularEntity', 'BioChemEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

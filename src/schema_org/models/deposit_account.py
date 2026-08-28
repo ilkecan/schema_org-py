@@ -17,7 +17,7 @@ from schema_org.models.bank_account import BankAccount
 from schema_org.models.investment_or_deposit import InvestmentOrDeposit
 
 class DepositAccount(BankAccount, InvestmentOrDeposit):
-    __doc__ = 'A type of Bank Account with a main purpose of depositing funds to gain interest or other benefits.'
+    __doc__ = 'https://schema.org/DepositAccount\n\nA type of Bank Account with a main purpose of depositing funds to gain interest or other benefits.'
     SCHEMA_TYPE: ClassVar[str] = 'DepositAccount'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DepositAccount', 'BankAccount', 'InvestmentOrDeposit', 'FinancialProduct', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

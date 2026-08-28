@@ -15,7 +15,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.performing_group import PerformingGroup
 
 class MusicGroup(PerformingGroup):
-    __doc__ = 'A musical group, such as a band, an orchestra, or a choir. Can also be a solo musician.'
+    __doc__ = 'https://schema.org/MusicGroup\n\nA musical group, such as a band, an orchestra, or a choir. Can also be a solo musician.'
     SCHEMA_TYPE: ClassVar[str] = 'MusicGroup'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MusicGroup', 'PerformingGroup', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -118,9 +118,9 @@ class MusicGroup(PerformingGroup):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['MusicGroup'] = Field(default='MusicGroup', alias='@type', frozen=True)
-    album: MusicAlbum | list[MusicAlbum] | None = Field(default=None, alias='album', description='A music album.')
-    albums: MusicAlbum | list[MusicAlbum] | None = Field(default=None, alias='albums', description='A collection of music albums.')
+    album: MusicAlbum | list[MusicAlbum] | None = Field(default=None, alias='album', description='A music album.\n\nSupersedes `albums`.')
+    albums: MusicAlbum | list[MusicAlbum] | None = Field(default=None, alias='albums', description='A collection of music albums.\n\nSuperseded by `album`.')
     genre: DefinedTerm | Text | URL | list[DefinedTerm | Text | URL] | None = Field(default=None, alias='genre', description='Genre of the creative work, broadcast channel or group.')
-    music_group_member: Person | list[Person] | None = Field(default=None, alias='musicGroupMember', description='A member of a music group&#x2014;for example, John, Paul, George, or Ringo.')
-    track: ItemList | MusicRecording | list[ItemList | MusicRecording] | None = Field(default=None, alias='track', description='A music recording (track)&#x2014;usually a single song. If an ItemList is given, the list should contain items of type MusicRecording.')
-    tracks: MusicRecording | list[MusicRecording] | None = Field(default=None, alias='tracks', description='A music recording (track)&#x2014;usually a single song.')
+    music_group_member: Person | list[Person] | None = Field(default=None, alias='musicGroupMember', description='A member of a music group&#x2014;for example, John, Paul, George, or Ringo.\n\nSuperseded by `member`.')
+    track: ItemList | MusicRecording | list[ItemList | MusicRecording] | None = Field(default=None, alias='track', description='A music recording (track)&#x2014;usually a single song. If an ItemList is given, the list should contain items of type MusicRecording.\n\nSupersedes `tracks`.')
+    tracks: MusicRecording | list[MusicRecording] | None = Field(default=None, alias='tracks', description='A music recording (track)&#x2014;usually a single song.\n\nSuperseded by `track`.')

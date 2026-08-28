@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.anatomical_structure import AnatomicalStructure
 
 class Muscle(AnatomicalStructure):
-    __doc__ = 'A muscle is an anatomical structure consisting of a contractile form of tissue that animals use to effect movement.'
+    __doc__ = 'https://schema.org/Muscle\n\nA muscle is an anatomical structure consisting of a contractile form of tissue that animals use to effect movement.'
     SCHEMA_TYPE: ClassVar[str] = 'Muscle'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Muscle', 'AnatomicalStructure', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

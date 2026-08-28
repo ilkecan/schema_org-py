@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class DefinedTerm(Intangible):
-    __doc__ = 'A word, name, acronym, phrase, etc. with a formal definition. Often used in the context of category or subject classification, glossaries or dictionaries, product or creative work types, etc. Use the name property for the term being defined, use termCode if the term has an alpha-numeric code allocated, use description to provide the definition of the term. Use the about property to specify what the term is about.'
+    __doc__ = 'https://schema.org/DefinedTerm\n\nA word, name, acronym, phrase, etc. with a formal definition. Often used in the context of category or subject classification, glossaries or dictionaries, product or creative work types, etc. Use the name property for the term being defined, use termCode if the term has an alpha-numeric code allocated, use description to provide the definition of the term. Use the about property to specify what the term is about.'
     SCHEMA_TYPE: ClassVar[str] = 'DefinedTerm'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DefinedTerm', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -36,6 +36,6 @@ class DefinedTerm(Intangible):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['DefinedTerm'] = Field(default='DefinedTerm', alias='@type', frozen=True)
-    about: Thing | list[Thing] | None = Field(default=None, alias='about', description='The subject matter of an object.')
+    about: Thing | list[Thing] | None = Field(default=None, alias='about', description='The subject matter of an object.\n\nInverse-property: `subjectOf`.')
     in_defined_term_set: DefinedTermSet | URL | list[DefinedTermSet | URL] | None = Field(default=None, alias='inDefinedTermSet', description='A [[DefinedTermSet]] that contains this term.')
     term_code: Text | list[Text] | None = Field(default=None, alias='termCode', description='A code that identifies this [[DefinedTerm]] within a [[DefinedTermSet]].')

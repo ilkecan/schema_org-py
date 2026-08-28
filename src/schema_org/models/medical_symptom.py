@@ -18,7 +18,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_sign_or_symptom import MedicalSignOrSymptom
 
 class MedicalSymptom(MedicalSignOrSymptom):
-    __doc__ = 'Any complaint sensed and expressed by the patient (therefore defined as subjective)  like stomachache, lower-back pain, or fatigue.'
+    __doc__ = 'https://schema.org/MedicalSymptom\n\nAny complaint sensed and expressed by the patient (therefore defined as subjective)  like stomachache, lower-back pain, or fatigue.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalSymptom'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalSymptom', 'MedicalSignOrSymptom', 'MedicalCondition', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

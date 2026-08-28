@@ -14,7 +14,7 @@ from schema_org.enums import QualitativeValue
 from schema_org.models.intangible import Intangible
 
 class Seat(Intangible):
-    __doc__ = 'Used to describe a seat, such as a reserved seat in an event reservation.'
+    __doc__ = 'https://schema.org/Seat\n\nUsed to describe a seat, such as a reserved seat in an event reservation.'
     SCHEMA_TYPE: ClassVar[str] = 'Seat'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Seat', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

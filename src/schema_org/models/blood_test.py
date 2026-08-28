@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_test import MedicalTest
 
 class BloodTest(MedicalTest):
-    __doc__ = "A medical test performed on a sample of a patient's blood."
+    __doc__ = "https://schema.org/BloodTest\n\nA medical test performed on a sample of a patient's blood."
     SCHEMA_TYPE: ClassVar[str] = 'BloodTest'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BloodTest', 'MedicalTest', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

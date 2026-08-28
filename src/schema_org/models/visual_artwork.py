@@ -23,7 +23,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class VisualArtwork(CreativeWork):
-    __doc__ = 'A work of art that is primarily visual in character.'
+    __doc__ = 'https://schema.org/VisualArtwork\n\nA work of art that is primarily visual in character.'
     SCHEMA_TYPE: ClassVar[str] = 'VisualArtwork'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('VisualArtwork', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -177,13 +177,13 @@ class VisualArtwork(CreativeWork):
     art_medium: Text | URL | list[Text | URL] | None = Field(default=None, alias='artMedium', description='The material used. (E.g. Oil, Watercolour, Acrylic, Linoprint, Marble, Cyanotype, Digital, Lithograph, DryPoint, Intaglio, Pastel, Woodcut, Pencil, Mixed Media, etc.)')
     artform: Text | URL | list[Text | URL] | None = Field(default=None, alias='artform', description='e.g. Painting, Drawing, Sculpture, Print, Photograph, Assemblage, Collage, etc.')
     artist: Person | list[Person] | None = Field(default=None, alias='artist', description='The primary artist for a work\n    \tin a medium other than pencils or digital line art--for example, if the\n    \tprimary artwork is done in watercolors or digital paints.')
-    artwork_surface: Text | URL | list[Text | URL] | None = Field(default=None, alias='artworkSurface', description='The supporting materials for the artwork, e.g. Canvas, Paper, Wood, Board, etc.')
+    artwork_surface: Text | URL | list[Text | URL] | None = Field(default=None, alias='artworkSurface', description='The supporting materials for the artwork, e.g. Canvas, Paper, Wood, Board, etc.\n\nSupersedes `surface`.')
     colorist: Person | list[Person] | None = Field(default=None, alias='colorist', description='The individual who adds color to inked drawings.')
     depth: Distance | QuantitativeValue | list[Distance | QuantitativeValue] | None = Field(default=None, alias='depth', description='The depth of the item.')
     height: Distance | QuantitativeValue | list[Distance | QuantitativeValue] | None = Field(default=None, alias='height', description='The height of the item.')
     inker: Person | list[Person] | None = Field(default=None, alias='inker', description='The individual who traces over the pencil drawings in ink after pencils are complete.')
     letterer: Person | list[Person] | None = Field(default=None, alias='letterer', description='The individual who adds lettering, including speech balloons and sound effects, to artwork.')
     penciler: Person | list[Person] | None = Field(default=None, alias='penciler', description='The individual who draws the primary narrative artwork.')
-    surface: Text | URL | list[Text | URL] | None = Field(default=None, alias='surface', description='A material used as a surface in some artwork, e.g. Canvas, Paper, Wood, Board, etc.')
+    surface: Text | URL | list[Text | URL] | None = Field(default=None, alias='surface', description='A material used as a surface in some artwork, e.g. Canvas, Paper, Wood, Board, etc.\n\nSuperseded by `artworkSurface`.')
     weight: Mass | QuantitativeValue | list[Mass | QuantitativeValue] | None = Field(default=None, alias='weight', description='The weight of the product or person.')
     width: Distance | QuantitativeValue | list[Distance | QuantitativeValue] | None = Field(default=None, alias='width', description='The width of the item.')

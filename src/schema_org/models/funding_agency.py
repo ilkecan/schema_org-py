@@ -15,7 +15,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.project import Project
 
 class FundingAgency(Project):
-    __doc__ = 'A FundingAgency is an organization that implements one or more [[FundingScheme]]s and manages\n    the granting process (via [[Grant]]s, typically [[MonetaryGrant]]s).\n    A funding agency is not always required for grant funding, e.g. philanthropic giving, corporate sponsorship etc.\n    \nExamples of funding agencies include ERC, REA, NIH, Bill and Melinda Gates Foundation, ...\n    '
+    __doc__ = 'https://schema.org/FundingAgency\n\nA FundingAgency is an organization that implements one or more [[FundingScheme]]s and manages\n    the granting process (via [[Grant]]s, typically [[MonetaryGrant]]s).\n    A funding agency is not always required for grant funding, e.g. philanthropic giving, corporate sponsorship etc.\n    \nExamples of funding agencies include ERC, REA, NIH, Bill and Melinda Gates Foundation, ...\n    '
     SCHEMA_TYPE: ClassVar[str] = 'FundingAgency'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('FundingAgency', 'Project', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

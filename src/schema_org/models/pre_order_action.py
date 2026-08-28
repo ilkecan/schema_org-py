@@ -17,7 +17,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.trade_action import TradeAction
 
 class PreOrderAction(TradeAction):
-    __doc__ = 'An agent orders a (not yet released) object/product/service to be delivered/sent.'
+    __doc__ = 'https://schema.org/PreOrderAction\n\nAn agent orders a (not yet released) object/product/service to be delivered/sent.'
     SCHEMA_TYPE: ClassVar[str] = 'PreOrderAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PreOrderAction', 'TradeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

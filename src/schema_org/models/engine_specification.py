@@ -14,7 +14,7 @@ from schema_org.enums import QualitativeValue
 from schema_org.models.structured_value import StructuredValue
 
 class EngineSpecification(StructuredValue):
-    __doc__ = 'Information about the engine of the vehicle. A vehicle can have multiple engines represented by multiple engine specification entities.'
+    __doc__ = 'https://schema.org/EngineSpecification\n\nInformation about the engine of the vehicle. A vehicle can have multiple engines represented by multiple engine specification entities.'
     SCHEMA_TYPE: ClassVar[str] = 'EngineSpecification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('EngineSpecification', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

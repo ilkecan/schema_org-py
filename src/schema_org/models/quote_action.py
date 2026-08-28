@@ -17,7 +17,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.trade_action import TradeAction
 
 class QuoteAction(TradeAction):
-    __doc__ = 'An agent quotes/estimates/appraises an object/product/service with a price at a location/store.'
+    __doc__ = 'https://schema.org/QuoteAction\n\nAn agent quotes/estimates/appraises an object/product/service with a price at a location/store.'
     SCHEMA_TYPE: ClassVar[str] = 'QuoteAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('QuoteAction', 'TradeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

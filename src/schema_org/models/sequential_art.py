@@ -25,7 +25,7 @@ from schema_org.models.book import Book
 from schema_org.models.visual_artwork import VisualArtwork
 
 class SequentialArt(Book, VisualArtwork):
-    __doc__ = 'An art forms that use images deployed in a specific order for the purpose of graphic storytelling (i.e., narration of graphic stories) or conveying information. Examples of SequentialArt are Franco-Belgian Bande Dessinée, Comics in the USA and 漫画 (Manga) in Japan.'
+    __doc__ = 'https://schema.org/SequentialArt\n\nAn art forms that use images deployed in a specific order for the purpose of graphic storytelling (i.e., narration of graphic stories) or conveying information. Examples of SequentialArt are Franco-Belgian Bande Dessinée, Comics in the USA and 漫画 (Manga) in Japan.'
     SCHEMA_TYPE: ClassVar[str] = 'SequentialArt'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SequentialArt', 'Book', 'VisualArtwork', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

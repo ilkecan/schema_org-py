@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_entity import MedicalEntity
 
 class MedicalIntangible(MedicalEntity):
-    __doc__ = "A utility class that serves as the umbrella for a number of 'intangible' things in the medical space."
+    __doc__ = "https://schema.org/MedicalIntangible\n\nA utility class that serves as the umbrella for a number of 'intangible' things in the medical space."
     SCHEMA_TYPE: ClassVar[str] = 'MedicalIntangible'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalIntangible', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

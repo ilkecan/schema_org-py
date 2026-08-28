@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class MediaSubscription(Intangible):
-    __doc__ = 'A subscription which allows a user to access media including audio, video, books, etc.'
+    __doc__ = 'https://schema.org/MediaSubscription\n\nA subscription which allows a user to access media including audio, video, books, etc.'
     SCHEMA_TYPE: ClassVar[str] = 'MediaSubscription'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MediaSubscription', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -14,7 +14,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class HealthPlanNetwork(Intangible):
-    __doc__ = 'A US-style health insurance plan network.'
+    __doc__ = 'https://schema.org/HealthPlanNetwork\n\nA US-style health insurance plan network.'
     SCHEMA_TYPE: ClassVar[str] = 'HealthPlanNetwork'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('HealthPlanNetwork', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

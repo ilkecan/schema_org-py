@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.organization_role import OrganizationRole
 
 class EmployeeRole(OrganizationRole):
-    __doc__ = 'A subclass of OrganizationRole used to describe employee relationships.'
+    __doc__ = 'https://schema.org/EmployeeRole\n\nA subclass of OrganizationRole used to describe employee relationships.'
     SCHEMA_TYPE: ClassVar[str] = 'EmployeeRole'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('EmployeeRole', 'OrganizationRole', 'Role', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

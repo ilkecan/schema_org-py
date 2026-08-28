@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class ComputerLanguage(Intangible):
-    __doc__ = 'This type covers computer programming languages such as Scheme and Lisp, as well as other language-like computer representations. Natural languages are best represented with the [[Language]] type.'
+    __doc__ = 'https://schema.org/ComputerLanguage\n\nThis type covers computer programming languages such as Scheme and Lisp, as well as other language-like computer representations. Natural languages are best represented with the [[Language]] type.'
     SCHEMA_TYPE: ClassVar[str] = 'ComputerLanguage'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ComputerLanguage', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -18,7 +18,7 @@ from schema_org.enums import QualitativeValue
 from schema_org.models.dose_schedule import DoseSchedule
 
 class RecommendedDoseSchedule(DoseSchedule):
-    __doc__ = "A recommended dosing schedule for a drug or supplement as prescribed or recommended by an authority or by the drug/supplement's manufacturer. Capture the recommending authority in the recognizingAuthority property of MedicalEntity."
+    __doc__ = "https://schema.org/RecommendedDoseSchedule\n\nA recommended dosing schedule for a drug or supplement as prescribed or recommended by an authority or by the drug/supplement's manufacturer. Capture the recommending authority in the recognizingAuthority property of MedicalEntity."
     SCHEMA_TYPE: ClassVar[str] = 'RecommendedDoseSchedule'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('RecommendedDoseSchedule', 'DoseSchedule', 'MedicalIntangible', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

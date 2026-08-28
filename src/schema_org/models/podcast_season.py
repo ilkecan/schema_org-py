@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work_season import CreativeWorkSeason
 
 class PodcastSeason(CreativeWorkSeason):
-    __doc__ = 'A single season of a podcast. Many podcasts do not break down into separate seasons. In that case, PodcastSeries should be used.'
+    __doc__ = 'https://schema.org/PodcastSeason\n\nA single season of a podcast. Many podcasts do not break down into separate seasons. In that case, PodcastSeries should be used.'
     SCHEMA_TYPE: ClassVar[str] = 'PodcastSeason'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PodcastSeason', 'CreativeWorkSeason', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

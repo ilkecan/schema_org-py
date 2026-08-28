@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.anatomical_structure import AnatomicalStructure
 
 class Vessel(AnatomicalStructure):
-    __doc__ = 'A component of the human body circulatory system comprised of an intricate network of hollow tubes that transport blood throughout the entire body.'
+    __doc__ = 'https://schema.org/Vessel\n\nA component of the human body circulatory system comprised of an intricate network of hollow tubes that transport blood throughout the entire body.'
     SCHEMA_TYPE: ClassVar[str] = 'Vessel'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Vessel', 'AnatomicalStructure', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

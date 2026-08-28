@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.role import Role
 
 class PerformanceRole(Role):
-    __doc__ = 'A PerformanceRole is a Role that some entity places with regard to a theatrical performance, e.g. in a Movie, TVSeries etc.'
+    __doc__ = 'https://schema.org/PerformanceRole\n\nA PerformanceRole is a Role that some entity places with regard to a theatrical performance, e.g. in a Movie, TVSeries etc.'
     SCHEMA_TYPE: ClassVar[str] = 'PerformanceRole'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PerformanceRole', 'Role', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

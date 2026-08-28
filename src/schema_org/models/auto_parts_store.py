@@ -19,7 +19,7 @@ from schema_org.models.automotive_business import AutomotiveBusiness
 from schema_org.models.store import Store
 
 class AutoPartsStore(AutomotiveBusiness, Store):
-    __doc__ = 'An auto parts store.'
+    __doc__ = 'https://schema.org/AutoPartsStore\n\nAn auto parts store.'
     SCHEMA_TYPE: ClassVar[str] = 'AutoPartsStore'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AutoPartsStore', 'AutomotiveBusiness', 'Store', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

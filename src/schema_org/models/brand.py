@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class Brand(Intangible):
-    __doc__ = 'A brand is a name used by an organization or business person for labeling a product, product group, or similar.'
+    __doc__ = 'https://schema.org/Brand\n\nA brand is a name used by an organization or business person for labeling a product, product group, or similar.'
     SCHEMA_TYPE: ClassVar[str] = 'Brand'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Brand', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -39,5 +39,5 @@ class Brand(Intangible):
     schema_type: Literal['Brand'] = Field(default='Brand', alias='@type', frozen=True)
     aggregate_rating: AggregateRating | list[AggregateRating] | None = Field(default=None, alias='aggregateRating', description='The overall rating, based on a collection of reviews or ratings, of the item.')
     logo: ImageObject | URL | list[ImageObject | URL] | None = Field(default=None, alias='logo', description='An associated logo.')
-    review: Review | list[Review] | None = Field(default=None, alias='review', description='A review of the item.')
+    review: Review | list[Review] | None = Field(default=None, alias='review', description='A review of the item.\n\nSupersedes `reviews`.')
     slogan: Text | list[Text] | None = Field(default=None, alias='slogan', description='A slogan or motto associated with the item.')

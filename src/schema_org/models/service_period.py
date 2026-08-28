@@ -16,7 +16,7 @@ from schema_org.enums import DayOfWeek
 from schema_org.models.structured_value import StructuredValue
 
 class ServicePeriod(StructuredValue):
-    __doc__ = 'ServicePeriod represents a duration with some constraints about cutoff time and business days. This is used e.g. in shipping for handling times or transit time.'
+    __doc__ = 'https://schema.org/ServicePeriod\n\nServicePeriod represents a duration with some constraints about cutoff time and business days. This is used e.g. in shipping for handling times or transit time.'
     SCHEMA_TYPE: ClassVar[str] = 'ServicePeriod'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ServicePeriod', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -19,7 +19,7 @@ from schema_org.models.health_and_beauty_business import HealthAndBeautyBusiness
 from schema_org.models.sports_activity_location import SportsActivityLocation
 
 class HealthClub(HealthAndBeautyBusiness, SportsActivityLocation):
-    __doc__ = 'A health club.'
+    __doc__ = 'https://schema.org/HealthClub\n\nA health club.'
     SCHEMA_TYPE: ClassVar[str] = 'HealthClub'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('HealthClub', 'HealthAndBeautyBusiness', 'SportsActivityLocation', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

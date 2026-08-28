@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.place import Place
 
 class LandmarksOrHistoricalBuildings(Place):
-    __doc__ = 'An historical landmark or building.'
+    __doc__ = 'https://schema.org/LandmarksOrHistoricalBuildings\n\nAn historical landmark or building.'
     SCHEMA_TYPE: ClassVar[str] = 'LandmarksOrHistoricalBuildings'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('LandmarksOrHistoricalBuildings', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

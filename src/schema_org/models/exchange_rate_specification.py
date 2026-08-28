@@ -14,7 +14,7 @@ from schema_org.datatypes import URL
 from schema_org.models.structured_value import StructuredValue
 
 class ExchangeRateSpecification(StructuredValue):
-    __doc__ = 'A structured value representing exchange rate.'
+    __doc__ = 'https://schema.org/ExchangeRateSpecification\n\nA structured value representing exchange rate.'
     SCHEMA_TYPE: ClassVar[str] = 'ExchangeRateSpecification'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ExchangeRateSpecification', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

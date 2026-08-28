@@ -22,7 +22,7 @@ from schema_org.enums import Specialty
 from schema_org.models.web_page import WebPage
 
 class FAQPage(WebPage):
-    __doc__ = 'A [[FAQPage]] is a [[WebPage]] presenting one or more "[Frequently asked questions](https://en.wikipedia.org/wiki/FAQ)" (see also [[QAPage]]).'
+    __doc__ = 'https://schema.org/FAQPage\n\nA [[FAQPage]] is a [[WebPage]] presenting one or more "[Frequently asked questions](https://en.wikipedia.org/wiki/FAQ)" (see also [[QAPage]]).'
     SCHEMA_TYPE: ClassVar[str] = 'FAQPage'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('FAQPage', 'WebPage', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

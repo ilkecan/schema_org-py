@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.update_action import UpdateAction
 
 class ReplaceAction(UpdateAction):
-    __doc__ = 'The act of editing a recipient by replacing an old object with a new object.'
+    __doc__ = 'https://schema.org/ReplaceAction\n\nThe act of editing a recipient by replacing an old object with a new object.'
     SCHEMA_TYPE: ClassVar[str] = 'ReplaceAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ReplaceAction', 'UpdateAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

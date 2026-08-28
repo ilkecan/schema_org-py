@@ -20,7 +20,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.lodging_business import LodgingBusiness
 
 class Hotel(LodgingBusiness):
-    __doc__ = 'A hotel is an establishment that provides lodging paid on a short-term basis (source: Wikipedia, the free encyclopedia, see http://en.wikipedia.org/wiki/Hotel).\n<br /><br />\nSee also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.\n'
+    __doc__ = 'https://schema.org/Hotel\n\nA hotel is an establishment that provides lodging paid on a short-term basis (source: Wikipedia, the free encyclopedia, see http://en.wikipedia.org/wiki/Hotel).\n<br /><br />\nSee also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.\n'
     SCHEMA_TYPE: ClassVar[str] = 'Hotel'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Hotel', 'LodgingBusiness', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

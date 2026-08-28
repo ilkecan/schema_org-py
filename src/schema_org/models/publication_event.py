@@ -21,7 +21,7 @@ from schema_org.enums import EventStatusType
 from schema_org.models.event import Event
 
 class PublicationEvent(Event):
-    __doc__ = 'A PublicationEvent corresponds indifferently to the event of publication for a CreativeWork of any type, e.g. a broadcast event, an on-demand event, a book/journal publication via a variety of delivery media.'
+    __doc__ = 'https://schema.org/PublicationEvent\n\nA PublicationEvent corresponds indifferently to the event of publication for a CreativeWork of any type, e.g. a broadcast event, an on-demand event, a book/journal publication via a variety of delivery media.'
     SCHEMA_TYPE: ClassVar[str] = 'PublicationEvent'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PublicationEvent', 'Event', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -87,6 +87,6 @@ class PublicationEvent(Event):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['PublicationEvent'] = Field(default='PublicationEvent', alias='@type', frozen=True)
-    free: Boolean | list[Boolean] | None = Field(default=None, alias='free', description='A flag to signal that the item, event, or place is accessible for free.')
+    free: Boolean | list[Boolean] | None = Field(default=None, alias='free', description='A flag to signal that the item, event, or place is accessible for free.\n\nSuperseded by `isAccessibleForFree`.')
     published_by: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='publishedBy', description='An agent associated with the publication event.')
     published_on: BroadcastService | list[BroadcastService] | None = Field(default=None, alias='publishedOn', description='A broadcast service associated with the publication event.')

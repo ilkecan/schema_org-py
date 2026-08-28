@@ -23,7 +23,7 @@ from schema_org.enums import Specialty
 from schema_org.models.web_page import WebPage
 
 class MedicalWebPage(WebPage):
-    __doc__ = 'A web page that provides medical information.'
+    __doc__ = 'https://schema.org/MedicalWebPage\n\nA web page that provides medical information.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalWebPage'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalWebPage', 'WebPage', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -171,5 +171,5 @@ class MedicalWebPage(WebPage):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['MedicalWebPage'] = Field(default='MedicalWebPage', alias='@type', frozen=True)
-    aspect: Text | list[Text] | None = Field(default=None, alias='aspect', description="An aspect of medical practice that is considered on the page, such as 'diagnosis', 'treatment', 'causes', 'prognosis', 'etiology', 'epidemiology', etc.")
+    aspect: Text | list[Text] | None = Field(default=None, alias='aspect', description="An aspect of medical practice that is considered on the page, such as 'diagnosis', 'treatment', 'causes', 'prognosis', 'etiology', 'epidemiology', etc.\n\nSuperseded by `mainContentOfPage`.")
     medical_audience: MedicalAudience | MedicalAudienceType | list[MedicalAudience | MedicalAudienceType] | None = Field(default=None, alias='medicalAudience', description='Medical audience for page.')

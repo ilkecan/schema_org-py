@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work_series import CreativeWorkSeries
 
 class PodcastSeries(CreativeWorkSeries):
-    __doc__ = 'A podcast is an episodic series of digital audio or video files which a user can download and listen to.'
+    __doc__ = 'https://schema.org/PodcastSeries\n\nA podcast is an episodic series of digital audio or video files which a user can download and listen to.'
     SCHEMA_TYPE: ClassVar[str] = 'PodcastSeries'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PodcastSeries', 'CreativeWorkSeries', 'CreativeWork', 'Series', 'Thing', 'Intangible')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -162,5 +162,5 @@ class PodcastSeries(CreativeWorkSeries):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['PodcastSeries'] = Field(default='PodcastSeries', alias='@type', frozen=True)
-    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.')
+    actor: PerformingGroup | Person | list[PerformingGroup | Person] | None = Field(default=None, alias='actor', description='An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.\n\nSupersedes `actors`.')
     web_feed: DataFeed | URL | list[DataFeed | URL] | None = Field(default=None, alias='webFeed', description='The URL for a feed, e.g. associated with a podcast series, blog, or series of date-stamped updates. This is usually RSS or Atom.')

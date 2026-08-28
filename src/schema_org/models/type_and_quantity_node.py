@@ -15,7 +15,7 @@ from schema_org.enums import BusinessFunction
 from schema_org.models.structured_value import StructuredValue
 
 class TypeAndQuantityNode(StructuredValue):
-    __doc__ = 'A structured value indicating the quantity, unit of measurement, and business function of goods included in a bundle offer.'
+    __doc__ = 'https://schema.org/TypeAndQuantityNode\n\nA structured value indicating the quantity, unit of measurement, and business function of goods included in a bundle offer.'
     SCHEMA_TYPE: ClassVar[str] = 'TypeAndQuantityNode'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('TypeAndQuantityNode', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

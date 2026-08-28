@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.permit import Permit
 
 class GovernmentPermit(Permit):
-    __doc__ = 'A permit issued by a government agency.'
+    __doc__ = 'https://schema.org/GovernmentPermit\n\nA permit issued by a government agency.'
     SCHEMA_TYPE: ClassVar[str] = 'GovernmentPermit'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('GovernmentPermit', 'Permit', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

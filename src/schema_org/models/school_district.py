@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.administrative_area import AdministrativeArea
 
 class SchoolDistrict(AdministrativeArea):
-    __doc__ = 'A School District is an administrative area for the administration of schools.'
+    __doc__ = 'https://schema.org/SchoolDistrict\n\nA School District is an administrative area for the administration of schools.'
     SCHEMA_TYPE: ClassVar[str] = 'SchoolDistrict'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SchoolDistrict', 'AdministrativeArea', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

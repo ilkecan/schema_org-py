@@ -21,7 +21,7 @@ from schema_org.enums import ReturnMethodEnumeration
 from schema_org.models.intangible import Intangible
 
 class MerchantReturnPolicySeasonalOverride(Intangible):
-    __doc__ = 'A seasonal override of a return policy, for example used for holidays.'
+    __doc__ = 'https://schema.org/MerchantReturnPolicySeasonalOverride\n\nA seasonal override of a return policy, for example used for holidays.'
     SCHEMA_TYPE: ClassVar[str] = 'MerchantReturnPolicySeasonalOverride'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MerchantReturnPolicySeasonalOverride', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -51,7 +51,7 @@ class MerchantReturnPolicySeasonalOverride(Intangible):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['MerchantReturnPolicySeasonalOverride'] = Field(default='MerchantReturnPolicySeasonalOverride', alias='@type', frozen=True)
     end_date: Date | DateTime | list[Date | DateTime] | None = Field(default=None, alias='endDate', description='The end date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).')
-    merchant_return_days: Date | DateTime | Integer | list[Date | DateTime | Integer] | None = Field(default=None, alias='merchantReturnDays', description='Specifies either a fixed return date or the number of days (from the delivery date) that a product can be returned. Used when the [[returnPolicyCategory]] property is specified as [[MerchantReturnFiniteReturnWindow]].')
+    merchant_return_days: Date | DateTime | Integer | list[Date | DateTime | Integer] | None = Field(default=None, alias='merchantReturnDays', description='Specifies either a fixed return date or the number of days (from the delivery date) that a product can be returned. Used when the [[returnPolicyCategory]] property is specified as [[MerchantReturnFiniteReturnWindow]].\n\nSupersedes `productReturnDays`.')
     refund_type: RefundTypeEnumeration | list[RefundTypeEnumeration] | None = Field(default=None, alias='refundType', description='A refund type, from an enumerated list.')
     restocking_fee: MonetaryAmount | Number | list[MonetaryAmount | Number] | None = Field(default=None, alias='restockingFee', description='Use [[MonetaryAmount]] to specify a fixed restocking fee for product returns, or use [[Number]] to specify a percentage of the product price paid by the customer.')
     return_fees: ReturnFeesEnumeration | list[ReturnFeesEnumeration] | None = Field(default=None, alias='returnFees', description='The type of return fees for purchased products (for any return reason).')

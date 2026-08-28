@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.control_action import ControlAction
 
 class ResumeAction(ControlAction):
-    __doc__ = 'The act of resuming a device or application which was formerly paused (e.g. resume music playback or resume a timer).'
+    __doc__ = 'https://schema.org/ResumeAction\n\nThe act of resuming a device or application which was formerly paused (e.g. resume music playback or resume a timer).'
     SCHEMA_TYPE: ClassVar[str] = 'ResumeAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ResumeAction', 'ControlAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

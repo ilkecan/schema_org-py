@@ -20,7 +20,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.lodging_business import LodgingBusiness
 
 class BedAndBreakfast(LodgingBusiness):
-    __doc__ = 'Bed and breakfast.\n<br /><br />\nSee also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.\n'
+    __doc__ = 'https://schema.org/BedAndBreakfast\n\nBed and breakfast.\n<br /><br />\nSee also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.\n'
     SCHEMA_TYPE: ClassVar[str] = 'BedAndBreakfast'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BedAndBreakfast', 'LodgingBusiness', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

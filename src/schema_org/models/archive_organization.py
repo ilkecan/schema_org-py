@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.local_business import LocalBusiness
 
 class ArchiveOrganization(LocalBusiness):
-    __doc__ = 'An organization with archival holdings. An organization which keeps and preserves archival material and typically makes it accessible to the public.'
+    __doc__ = 'https://schema.org/ArchiveOrganization\n\nAn organization with archival holdings. An organization which keeps and preserves archival material and typically makes it accessible to the public.'
     SCHEMA_TYPE: ClassVar[str] = 'ArchiveOrganization'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ArchiveOrganization', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -154,4 +154,4 @@ class ArchiveOrganization(LocalBusiness):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['ArchiveOrganization'] = Field(default='ArchiveOrganization', alias='@type', frozen=True)
-    archive_held: ArchiveComponent | list[ArchiveComponent] | None = Field(default=None, alias='archiveHeld', description='Collection, [fonds](https://en.wikipedia.org/wiki/Fonds), or item held, kept or maintained by an [[ArchiveOrganization]].')
+    archive_held: ArchiveComponent | list[ArchiveComponent] | None = Field(default=None, alias='archiveHeld', description='Collection, [fonds](https://en.wikipedia.org/wiki/Fonds), or item held, kept or maintained by an [[ArchiveOrganization]].\n\nInverse-property: `holdingArchive`.')

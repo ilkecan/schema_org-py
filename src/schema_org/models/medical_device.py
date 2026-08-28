@@ -16,7 +16,7 @@ from schema_org.enums import MedicineSystem
 from schema_org.models.medical_entity import MedicalEntity
 
 class MedicalDevice(MedicalEntity):
-    __doc__ = 'Any object used in a medical capacity, such as to diagnose or treat a patient.'
+    __doc__ = 'https://schema.org/MedicalDevice\n\nAny object used in a medical capacity, such as to diagnose or treat a patient.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalDevice'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalDevice', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

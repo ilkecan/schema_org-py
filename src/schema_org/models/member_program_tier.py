@@ -15,7 +15,7 @@ from schema_org.enums import TierBenefitEnumeration
 from schema_org.models.intangible import Intangible
 
 class MemberProgramTier(Intangible):
-    __doc__ = 'A MemberProgramTier specifies a tier under a loyalty (member) program, for example "gold".'
+    __doc__ = 'https://schema.org/MemberProgramTier\n\nA MemberProgramTier specifies a tier under a loyalty (member) program, for example "gold".'
     SCHEMA_TYPE: ClassVar[str] = 'MemberProgramTier'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MemberProgramTier', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -41,5 +41,5 @@ class MemberProgramTier(Intangible):
     schema_type: Literal['MemberProgramTier'] = Field(default='MemberProgramTier', alias='@type', frozen=True)
     has_tier_benefit: TierBenefitEnumeration | list[TierBenefitEnumeration] | None = Field(default=None, alias='hasTierBenefit', description='A member benefit for a particular tier of a loyalty program.')
     has_tier_requirement: CreditCard | MonetaryAmount | Text | UnitPriceSpecification | list[CreditCard | MonetaryAmount | Text | UnitPriceSpecification] | None = Field(default=None, alias='hasTierRequirement', description='A requirement for a user to join a membership tier, for example: a CreditCard if the tier requires sign up for a credit card, A UnitPriceSpecification if the user is required to pay a (periodic) fee, or a MonetaryAmount if the user needs to spend a minimum amount to join the tier. If a tier is free to join then this property does not need to be specified.')
-    is_tier_of: MemberProgram | list[MemberProgram] | None = Field(default=None, alias='isTierOf', description='The member program this tier is a part of.')
+    is_tier_of: MemberProgram | list[MemberProgram] | None = Field(default=None, alias='isTierOf', description='The member program this tier is a part of.\n\nInverse-property: `hasTiers`.')
     membership_points_earned: Number | QuantitativeValue | list[Number | QuantitativeValue] | None = Field(default=None, alias='membershipPointsEarned', description='The number of membership points earned by the member. If necessary, the unitText can be used to express the units the points are issued in. (E.g. stars, miles, etc.)')

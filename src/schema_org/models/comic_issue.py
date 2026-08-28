@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.publication_issue import PublicationIssue
 
 class ComicIssue(PublicationIssue):
-    __doc__ = 'Individual comic issues are serially published as\n    \tpart of a larger series. For the sake of consistency, even one-shot issues\n    \tbelong to a series comprised of a single issue. All comic issues can be\n    \tuniquely identified by: the combination of the name and volume number of the\n    \tseries to which the issue belongs; the issue number; and the variant\n    \tdescription of the issue (if any).'
+    __doc__ = 'https://schema.org/ComicIssue\n\nIndividual comic issues are serially published as\n    \tpart of a larger series. For the sake of consistency, even one-shot issues\n    \tbelong to a series comprised of a single issue. All comic issues can be\n    \tuniquely identified by: the combination of the name and volume number of the\n    \tseries to which the issue belongs; the issue number; and the variant\n    \tdescription of the issue (if any).'
     SCHEMA_TYPE: ClassVar[str] = 'ComicIssue'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ComicIssue', 'PublicationIssue', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

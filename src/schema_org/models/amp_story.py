@@ -20,10 +20,11 @@ from schema_org.datatypes import Time
 from schema_org.datatypes import URL
 from schema_org.enums import IPTCDigitalSourceEnumeration
 from schema_org.enums import SizeSpecification
+from schema_org.models.creative_work import CreativeWork
 from schema_org.models.media_object import MediaObject
 
-class AmpStory(MediaObject):
-    __doc__ = 'A creative work with a visual storytelling format intended to be viewed online, particularly on mobile devices.'
+class AmpStory(MediaObject, CreativeWork):
+    __doc__ = 'https://schema.org/AmpStory\n\nA creative work with a visual storytelling format intended to be viewed online, particularly on mobile devices.'
     SCHEMA_TYPE: ClassVar[str] = 'AmpStory'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AmpStory', 'CreativeWork', 'MediaObject', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

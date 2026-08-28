@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.action import Action
 
 class PlayAction(Action):
-    __doc__ = 'The act of playing/exercising/training/performing for enjoyment, leisure, recreation, competition or exercise.\\n\\nRelated actions:\\n\\n* [[ListenAction]]: Unlike ListenAction (which is under ConsumeAction), PlayAction refers to performing for an audience or at an event, rather than consuming music.\\n* [[WatchAction]]: Unlike WatchAction (which is under ConsumeAction), PlayAction refers to showing/displaying for an audience or at an event, rather than consuming visual content.'
+    __doc__ = 'https://schema.org/PlayAction\n\nThe act of playing/exercising/training/performing for enjoyment, leisure, recreation, competition or exercise.\\n\\nRelated actions:\\n\\n* [[ListenAction]]: Unlike ListenAction (which is under ConsumeAction), PlayAction refers to performing for an audience or at an event, rather than consuming music.\\n* [[WatchAction]]: Unlike WatchAction (which is under ConsumeAction), PlayAction refers to showing/displaying for an audience or at an event, rather than consuming visual content.'
     SCHEMA_TYPE: ClassVar[str] = 'PlayAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PlayAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -51,5 +51,5 @@ class PlayAction(Action):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['PlayAction'] = Field(default='PlayAction', alias='@type', frozen=True)
-    audience: Audience | list[Audience] | None = Field(default=None, alias='audience', description='An intended audience, i.e. a group for whom something was created.')
-    event: Event | list[Event] | None = Field(default=None, alias='event', description='Upcoming or past event associated with this place, organization, or action.')
+    audience: Audience | list[Audience] | None = Field(default=None, alias='audience', description='An intended audience, i.e. a group for whom something was created.\n\nSupersedes `serviceAudience`.')
+    event: Event | list[Event] | None = Field(default=None, alias='event', description='Upcoming or past event associated with this place, organization, or action.\n\nSupersedes `events`.')

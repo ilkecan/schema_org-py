@@ -14,7 +14,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class OccupationalExperienceRequirements(Intangible):
-    __doc__ = 'Indicates employment-related experience requirements, e.g. [[monthsOfExperience]].'
+    __doc__ = 'https://schema.org/OccupationalExperienceRequirements\n\nIndicates employment-related experience requirements, e.g. [[monthsOfExperience]].'
     SCHEMA_TYPE: ClassVar[str] = 'OccupationalExperienceRequirements'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('OccupationalExperienceRequirements', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

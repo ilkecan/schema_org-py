@@ -17,7 +17,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.organization import Organization
 
 class MedicalOrganization(Organization):
-    __doc__ = 'A medical organization (physical or not), such as hospital, institution or clinic.'
+    __doc__ = 'https://schema.org/MedicalOrganization\n\nA medical organization (physical or not), such as hospital, institution or clinic.'
     SCHEMA_TYPE: ClassVar[str] = 'MedicalOrganization'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('MedicalOrganization', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

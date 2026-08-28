@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.landform import Landform
 
 class Mountain(Landform):
-    __doc__ = 'A mountain, like Mount Whitney or Mount Everest.'
+    __doc__ = 'https://schema.org/Mountain\n\nA mountain, like Mount Whitney or Mount Everest.'
     SCHEMA_TYPE: ClassVar[str] = 'Mountain'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Mountain', 'Landform', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.insert_action import InsertAction
 
 class PrependAction(InsertAction):
-    __doc__ = 'The act of inserting at the beginning if an ordered collection.'
+    __doc__ = 'https://schema.org/PrependAction\n\nThe act of inserting at the beginning if an ordered collection.'
     SCHEMA_TYPE: ClassVar[str] = 'PrependAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PrependAction', 'InsertAction', 'AddAction', 'UpdateAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.assess_action import AssessAction
 
 class ChooseAction(AssessAction):
-    __doc__ = 'The act of expressing a preference from a set of options or a large or unbounded set of choices/options.'
+    __doc__ = 'https://schema.org/ChooseAction\n\nThe act of expressing a preference from a set of options or a large or unbounded set of choices/options.'
     SCHEMA_TYPE: ClassVar[str] = 'ChooseAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ChooseAction', 'AssessAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -51,5 +51,5 @@ class ChooseAction(AssessAction):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['ChooseAction'] = Field(default='ChooseAction', alias='@type', frozen=True)
-    action_option: Text | Thing | list[Text | Thing] | None = Field(default=None, alias='actionOption', description='A sub property of object. The options subject to this action.')
-    option: Text | Thing | list[Text | Thing] | None = Field(default=None, alias='option', description='A sub property of object. The options subject to this action.')
+    action_option: Text | Thing | list[Text | Thing] | None = Field(default=None, alias='actionOption', description='A sub property of object. The options subject to this action.\n\nSupersedes `option`.')
+    option: Text | Thing | list[Text | Thing] | None = Field(default=None, alias='option', description='A sub property of object. The options subject to this action.\n\nSuperseded by `actionOption`.')

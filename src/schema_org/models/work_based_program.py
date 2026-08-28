@@ -19,7 +19,7 @@ from schema_org.enums import DayOfWeek
 from schema_org.models.educational_occupational_program import EducationalOccupationalProgram
 
 class WorkBasedProgram(EducationalOccupationalProgram):
-    __doc__ = 'A program with both an educational and employment component. Typically based at a workplace and structured around work-based learning, with the aim of instilling competencies related to an occupation. WorkBasedProgram is used to distinguish programs such as apprenticeships from school, college or other classroom based educational programs.'
+    __doc__ = 'https://schema.org/WorkBasedProgram\n\nA program with both an educational and employment component. Typically based at a workplace and structured around work-based learning, with the aim of instilling competencies related to an occupation. WorkBasedProgram is used to distinguish programs such as apprenticeships from school, college or other classroom based educational programs.'
     SCHEMA_TYPE: ClassVar[str] = 'WorkBasedProgram'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('WorkBasedProgram', 'EducationalOccupationalProgram', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

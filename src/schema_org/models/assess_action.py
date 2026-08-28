@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.action import Action
 
 class AssessAction(Action):
-    __doc__ = "The act of forming one's opinion, reaction or sentiment."
+    __doc__ = "https://schema.org/AssessAction\n\nThe act of forming one's opinion, reaction or sentiment."
     SCHEMA_TYPE: ClassVar[str] = 'AssessAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AssessAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

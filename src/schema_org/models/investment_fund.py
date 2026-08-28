@@ -16,7 +16,7 @@ from schema_org.enums import PhysicalActivityCategory
 from schema_org.models.investment_or_deposit import InvestmentOrDeposit
 
 class InvestmentFund(InvestmentOrDeposit):
-    __doc__ = 'A company or fund that gathers capital from a number of investors to create a pool of money that is then re-invested into stocks, bonds and other assets.'
+    __doc__ = 'https://schema.org/InvestmentFund\n\nA company or fund that gathers capital from a number of investors to create a pool of money that is then re-invested into stocks, bonds and other assets.'
     SCHEMA_TYPE: ClassVar[str] = 'InvestmentFund'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('InvestmentFund', 'InvestmentOrDeposit', 'FinancialProduct', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

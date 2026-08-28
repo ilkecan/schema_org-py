@@ -20,7 +20,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.local_business import LocalBusiness
 
 class LodgingBusiness(LocalBusiness):
-    __doc__ = 'A lodging business, such as a motel, hotel, or inn.'
+    __doc__ = 'https://schema.org/LodgingBusiness\n\nA lodging business, such as a motel, hotel, or inn.'
     SCHEMA_TYPE: ClassVar[str] = 'LodgingBusiness'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('LodgingBusiness', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -163,7 +163,7 @@ class LodgingBusiness(LocalBusiness):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['LodgingBusiness'] = Field(default='LodgingBusiness', alias='@type', frozen=True)
     amenity_feature: LocationFeatureSpecification | list[LocationFeatureSpecification] | None = Field(default=None, alias='amenityFeature', description='An amenity feature (e.g. a characteristic or service) of the Accommodation. This generic property does not make a statement about whether the feature is included in an offer for the main accommodation or available at extra costs.')
-    audience: Audience | list[Audience] | None = Field(default=None, alias='audience', description='An intended audience, i.e. a group for whom something was created.')
+    audience: Audience | list[Audience] | None = Field(default=None, alias='audience', description='An intended audience, i.e. a group for whom something was created.\n\nSupersedes `serviceAudience`.')
     available_language: Language | Text | list[Language | Text] | None = Field(default=None, alias='availableLanguage', description='A language someone may use with or at the item, service or place. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[inLanguage]].')
     checkin_time: DateTime | Time | list[DateTime | Time] | None = Field(default=None, alias='checkinTime', description='The earliest someone may check into a lodging establishment.')
     checkout_time: DateTime | Time | list[DateTime | Time] | None = Field(default=None, alias='checkoutTime', description='The latest someone may check out of a lodging establishment.')

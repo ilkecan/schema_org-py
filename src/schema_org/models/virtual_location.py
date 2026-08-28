@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class VirtualLocation(Intangible):
-    __doc__ = 'An online or virtual location for attending events. For example, one may attend an online seminar or educational event. While a virtual location may be used as the location of an event, virtual locations should not be confused with physical locations in the real world.'
+    __doc__ = 'https://schema.org/VirtualLocation\n\nAn online or virtual location for attending events. For example, one may attend an online seminar or educational event. While a virtual location may be used as the location of an event, virtual locations should not be confused with physical locations in the real world.'
     SCHEMA_TYPE: ClassVar[str] = 'VirtualLocation'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('VirtualLocation', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

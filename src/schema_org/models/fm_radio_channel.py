@@ -13,7 +13,7 @@ from schema_org.datatypes import URL
 from schema_org.models.radio_channel import RadioChannel
 
 class FMRadioChannel(RadioChannel):
-    __doc__ = 'A radio channel that uses FM.'
+    __doc__ = 'https://schema.org/FMRadioChannel\n\nA radio channel that uses FM.'
     SCHEMA_TYPE: ClassVar[str] = 'FMRadioChannel'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('FMRadioChannel', 'RadioChannel', 'BroadcastChannel', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

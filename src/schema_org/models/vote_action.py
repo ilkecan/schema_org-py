@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.choose_action import ChooseAction
 
 class VoteAction(ChooseAction):
-    __doc__ = 'The act of expressing a preference from a fixed/finite/structured set of choices/options.'
+    __doc__ = 'https://schema.org/VoteAction\n\nThe act of expressing a preference from a fixed/finite/structured set of choices/options.'
     SCHEMA_TYPE: ClassVar[str] = 'VoteAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('VoteAction', 'ChooseAction', 'AssessAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

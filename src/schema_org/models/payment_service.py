@@ -18,7 +18,7 @@ from schema_org.models.financial_product import FinancialProduct
 from schema_org.models.payment_method import PaymentMethod
 
 class PaymentService(FinancialProduct, PaymentMethod):
-    __doc__ = 'A Service to transfer funds from a person or organization to a beneficiary person or organization.'
+    __doc__ = 'https://schema.org/PaymentService\n\nA Service to transfer funds from a person or organization to a beneficiary person or organization.'
     SCHEMA_TYPE: ClassVar[str] = 'PaymentService'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PaymentService', 'FinancialProduct', 'PaymentMethod', 'Service', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

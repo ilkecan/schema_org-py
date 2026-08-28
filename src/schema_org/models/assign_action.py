@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.allocate_action import AllocateAction
 
 class AssignAction(AllocateAction):
-    __doc__ = 'The act of allocating an action/event/task to some destination (someone or something).'
+    __doc__ = 'https://schema.org/AssignAction\n\nThe act of allocating an action/event/task to some destination (someone or something).'
     SCHEMA_TYPE: ClassVar[str] = 'AssignAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('AssignAction', 'AllocateAction', 'OrganizeAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

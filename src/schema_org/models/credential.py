@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Credential(CreativeWork):
-    __doc__ = 'A credential is a certificate that is used to verify the identity of a person or entity.'
+    __doc__ = 'https://schema.org/Credential\n\nA credential is a certificate that is used to verify the identity of a person or entity.'
     SCHEMA_TYPE: ClassVar[str] = 'Credential'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Credential', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -15,7 +15,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.organization import Organization
 
 class NewsMediaOrganization(Organization):
-    __doc__ = 'A News/Media organization such as a newspaper or TV station.'
+    __doc__ = 'https://schema.org/NewsMediaOrganization\n\nA News/Media organization such as a newspaper or TV station.'
     SCHEMA_TYPE: ClassVar[str] = 'NewsMediaOrganization'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('NewsMediaOrganization', 'Organization', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

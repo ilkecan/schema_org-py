@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.structured_value import StructuredValue
 
 class InteractionCounter(StructuredValue):
-    __doc__ = 'A summary of how users have interacted with this CreativeWork. In most cases, authors will use a subtype to specify the specific type of interaction.'
+    __doc__ = 'https://schema.org/InteractionCounter\n\nA summary of how users have interacted with this CreativeWork. In most cases, authors will use a subtype to specify the specific type of interaction.\n\nSupersedes `UserBlocks`.'
     SCHEMA_TYPE: ClassVar[str] = 'InteractionCounter'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('InteractionCounter', 'StructuredValue', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

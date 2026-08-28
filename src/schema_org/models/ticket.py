@@ -16,7 +16,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class Ticket(Intangible):
-    __doc__ = 'Used to describe a ticket to an event, a flight, a bus ride, etc.'
+    __doc__ = 'https://schema.org/Ticket\n\nUsed to describe a ticket to an event, a flight, a bus ride, etc.'
     SCHEMA_TYPE: ClassVar[str] = 'Ticket'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Ticket', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

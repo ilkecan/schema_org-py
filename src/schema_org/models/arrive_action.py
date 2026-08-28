@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.move_action import MoveAction
 
 class ArriveAction(MoveAction):
-    __doc__ = 'The act of arriving at a place. An agent arrives at a destination from a fromLocation, optionally with participants.'
+    __doc__ = 'https://schema.org/ArriveAction\n\nThe act of arriving at a place. An agent arrives at a destination from a fromLocation, optionally with participants.'
     SCHEMA_TYPE: ClassVar[str] = 'ArriveAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('ArriveAction', 'MoveAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

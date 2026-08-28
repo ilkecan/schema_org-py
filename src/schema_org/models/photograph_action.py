@@ -16,7 +16,7 @@ from schema_org.enums import ActionStatusType
 from schema_org.models.create_action import CreateAction
 
 class PhotographAction(CreateAction):
-    __doc__ = 'The act of capturing still images of objects using a camera.'
+    __doc__ = 'https://schema.org/PhotographAction\n\nThe act of capturing still images of objects using a camera.'
     SCHEMA_TYPE: ClassVar[str] = 'PhotographAction'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('PhotographAction', 'CreateAction', 'Action', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

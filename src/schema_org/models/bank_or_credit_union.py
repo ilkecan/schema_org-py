@@ -18,7 +18,7 @@ from schema_org.enums import NonprofitType
 from schema_org.models.financial_service import FinancialService
 
 class BankOrCreditUnion(FinancialService):
-    __doc__ = 'Bank or credit union.'
+    __doc__ = 'https://schema.org/BankOrCreditUnion\n\nBank or credit union.'
     SCHEMA_TYPE: ClassVar[str] = 'BankOrCreditUnion'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('BankOrCreditUnion', 'FinancialService', 'LocalBusiness', 'Organization', 'Place', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

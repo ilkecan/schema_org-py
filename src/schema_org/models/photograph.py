@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Photograph(CreativeWork):
-    __doc__ = 'A photograph.'
+    __doc__ = 'https://schema.org/Photograph\n\nA photograph.'
     SCHEMA_TYPE: ClassVar[str] = 'Photograph'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Photograph', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

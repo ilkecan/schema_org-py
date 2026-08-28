@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class DigitalDocument(CreativeWork):
-    __doc__ = 'An electronic file or document.'
+    __doc__ = 'https://schema.org/DigitalDocument\n\nAn electronic file or document.'
     SCHEMA_TYPE: ClassVar[str] = 'DigitalDocument'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('DigitalDocument', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

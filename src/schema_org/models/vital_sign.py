@@ -19,7 +19,7 @@ from schema_org.enums import PhysicalExam
 from schema_org.models.medical_sign import MedicalSign
 
 class VitalSign(MedicalSign):
-    __doc__ = 'Vital signs are measures of various physiological functions in order to assess the most basic body functions.'
+    __doc__ = 'https://schema.org/VitalSign\n\nVital signs are measures of various physiological functions in order to assess the most basic body functions.'
     SCHEMA_TYPE: ClassVar[str] = 'VitalSign'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('VitalSign', 'MedicalSign', 'MedicalSignOrSymptom', 'MedicalCondition', 'MedicalEntity', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -23,7 +23,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.web_page_element import WebPageElement
 
 class SiteNavigationElement(WebPageElement):
-    __doc__ = 'A navigation element of the page.'
+    __doc__ = 'https://schema.org/SiteNavigationElement\n\nA navigation element of the page.'
     SCHEMA_TYPE: ClassVar[str] = 'SiteNavigationElement'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('SiteNavigationElement', 'WebPageElement', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

@@ -19,7 +19,7 @@ from schema_org.datatypes import URL
 from schema_org.models.intangible import Intangible
 
 class JobPosting(Intangible):
-    __doc__ = 'A listing that describes a job opening in a certain organization.'
+    __doc__ = 'https://schema.org/JobPosting\n\nA listing that describes a job opening in a certain organization.'
     SCHEMA_TYPE: ClassVar[str] = 'JobPosting'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('JobPosting', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
@@ -80,7 +80,7 @@ class JobPosting(Intangible):
     applicant_location_requirements: AdministrativeArea | list[AdministrativeArea] | None = Field(default=None, alias='applicantLocationRequirements', description='The location(s) applicants can apply from. This is usually used for telecommuting jobs where the applicant does not need to be in a physical office. Note: This should not be used for citizenship or work visa requirements.')
     application_contact: ContactPoint | list[ContactPoint] | None = Field(default=None, alias='applicationContact', description='Contact details for further information relevant to this job posting.')
     base_salary: MonetaryAmount | Number | PriceSpecification | list[MonetaryAmount | Number | PriceSpecification] | None = Field(default=None, alias='baseSalary', description='The base salary of the job or of an employee in an EmployeeRole.')
-    benefits: Text | list[Text] | None = Field(default=None, alias='benefits', description='Description of benefits associated with the job.')
+    benefits: Text | list[Text] | None = Field(default=None, alias='benefits', description='Description of benefits associated with the job.\n\nSuperseded by `jobBenefits`.')
     date_posted: Date | DateTime | list[Date | DateTime] | None = Field(default=None, alias='datePosted', description='Publication date of an online listing.')
     direct_apply: Boolean | list[Boolean] | None = Field(default=None, alias='directApply', description='Indicates whether an [[url]] that is associated with a [[JobPosting]] enables direct application for the job, via the posting website. A job posting is considered to have directApply of [[True]] if an application process for the specified job can be directly initiated via the url(s) given (noting that e.g. multiple internet domains might nevertheless be involved at an implementation level). A value of [[False]] is appropriate if there is no clear path to applying directly online for the specified job, navigating directly from the JobPosting url(s) supplied.')
     education_requirements: EducationalOccupationalCredential | Text | list[EducationalOccupationalCredential | Text] | None = Field(default=None, alias='educationRequirements', description='Educational background needed for the position or Occupation.')
@@ -92,10 +92,10 @@ class JobPosting(Intangible):
     experience_in_place_of_education: Boolean | list[Boolean] | None = Field(default=None, alias='experienceInPlaceOfEducation', description='Indicates whether a [[JobPosting]] will accept experience (as indicated by [[OccupationalExperienceRequirements]]) in place of its formal educational qualifications (as indicated by [[educationRequirements]]). If true, indicates that satisfying one of these requirements is sufficient.')
     experience_requirements: OccupationalExperienceRequirements | Text | list[OccupationalExperienceRequirements | Text] | None = Field(default=None, alias='experienceRequirements', description='Description of skills and experience needed for the position or Occupation.')
     hiring_organization: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='hiringOrganization', description='Organization or Person offering the job position.')
-    incentive_compensation: Text | list[Text] | None = Field(default=None, alias='incentiveCompensation', description='Description of bonus and commission compensation aspects of the job.')
-    incentives: Text | list[Text] | None = Field(default=None, alias='incentives', description='Description of bonus and commission compensation aspects of the job.')
+    incentive_compensation: Text | list[Text] | None = Field(default=None, alias='incentiveCompensation', description='Description of bonus and commission compensation aspects of the job.\n\nSupersedes `incentives`.')
+    incentives: Text | list[Text] | None = Field(default=None, alias='incentives', description='Description of bonus and commission compensation aspects of the job.\n\nSuperseded by `incentiveCompensation`.')
     industry: DefinedTerm | Text | list[DefinedTerm | Text] | None = Field(default=None, alias='industry', description='The industry associated with the job position.')
-    job_benefits: Text | list[Text] | None = Field(default=None, alias='jobBenefits', description='Description of benefits associated with the job.')
+    job_benefits: Text | list[Text] | None = Field(default=None, alias='jobBenefits', description='Description of benefits associated with the job.\n\nSupersedes `benefits`.')
     job_duration: Duration | QuantitativeValue | list[Duration | QuantitativeValue] | None = Field(default=None, alias='jobDuration', description='The expected duration of an employment offer as advertised by the employer. Relevant for job postings that have a clearly defined period in mind such as seasonal work, substitutes for maternal leave or any other temporary employment.')
     job_immediate_start: Boolean | list[Boolean] | None = Field(default=None, alias='jobImmediateStart', description='An indicator as to whether a position is available for an immediate start.')
     job_location: Place | list[Place] | None = Field(default=None, alias='jobLocation', description='A (typically single) geographic location associated with the job position.')

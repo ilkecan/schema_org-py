@@ -21,7 +21,7 @@ from schema_org.enums import SizeSpecification
 from schema_org.models.creative_work import CreativeWork
 
 class Conversation(CreativeWork):
-    __doc__ = 'One or more messages between organizations or people on a particular topic. Individual messages can be linked to the conversation with isPartOf or hasPart properties.'
+    __doc__ = 'https://schema.org/Conversation\n\nOne or more messages between organizations or people on a particular topic. Individual messages can be linked to the conversation with isPartOf or hasPart properties.'
     SCHEMA_TYPE: ClassVar[str] = 'Conversation'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('Conversation', 'CreativeWork', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (

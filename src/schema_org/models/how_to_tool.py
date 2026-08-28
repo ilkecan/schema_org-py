@@ -15,7 +15,7 @@ from schema_org.datatypes import URL
 from schema_org.models.how_to_item import HowToItem
 
 class HowToTool(HowToItem):
-    __doc__ = 'A tool used (but not consumed) when performing instructions for how to achieve a result.'
+    __doc__ = 'https://schema.org/HowToTool\n\nA tool used (but not consumed) when performing instructions for how to achieve a result.'
     SCHEMA_TYPE: ClassVar[str] = 'HowToTool'
     SCHEMA_TYPES: ClassVar[tuple[str, ...]] = ('HowToTool', 'HowToItem', 'ListItem', 'Intangible', 'Thing')
     SCHEMA_PROPERTIES: ClassVar[tuple[PropertyMetadata, ...]] = (
