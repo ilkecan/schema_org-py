@@ -1,12 +1,67 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
 [project]
-name = "schema_org-py"
+name = "schema-org"
 version = "0.1.0"
-dependencies = [
+description = "Generated Pydantic models for the Schema.org vocabulary"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT AND CC-BY-SA-3.0"
+license-files = ["LICENSE.txt", "LICENSE-SCHEMA-ORG.txt"]
+authors = [
+  { name = "Ilkecan Bozdogan", email = "ilkecan@protonmail.com" },
 ]
+dependencies = [
+  "pydantic>=2.9,<3",
+  "typing-extensions>=4.12",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://github.com/ilkecan/schema_org-py"
+Documentation = "https://github.com/ilkecan/schema_org-py#readme"
+Changelog = "https://github.com/ilkecan/schema_org-py/blob/main/CHANGELOG.md"
+Issues = "https://github.com/ilkecan/schema_org-py/issues"
+Source = "https://github.com/ilkecan/schema_org-py"
 
 [dependency-groups]
 dev = [
+  "build>=1.2,<2",
+  "hatchling>=1.27,<2",
+  "pytest>=8.3,<10",
+  "rdflib>=7.1,<8",
 ]
 
-test = [
+[tool.hatch.build]
+dev-mode-dirs = ["src", "codegen"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/schema_org"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src/schema_org",
+  "/LICENSE.txt",
+  "/LICENSE-SCHEMA-ORG.txt",
+  "/README.md",
+  "/CHANGELOG.md",
+  "/pyproject.toml",
 ]
+
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+pythonpath = ["src", "codegen"]
+testpaths = ["tests"]
