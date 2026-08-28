@@ -1,0 +1,12 @@
+[project]
+name = "schema_org-py"
+version = "0.1.0"
+dependencies = [
+]
+
+[dependency-groups]
+dev = [
+]
+
+test = [
+]
