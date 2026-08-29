@@ -12,6 +12,7 @@ from .parser import parse
 from .schema_version import SchemaVersion
 from .manifest import read_manifest, validate_manifest
 from .transaction import apply_transaction
+from .vocabulary import ValidationError, Vocabulary
 ROOT = Path(__file__).resolve().parents[2]
 PRIMITIVE_ALIASES = {
     "Text": "str", "URL": "str", "Boolean": "bool", "Integer": "int",
@@ -180,10 +181,12 @@ def _model_imports(vocabulary: Vocabulary, properties: Iterable[str], parents: I
         imports.add(f"from schema_org.models.{module_name(parent)} import {constant_name(parent)}")
     for property_name_ in properties:
         definition = vocabulary.property_definition(property_name_)
+        range_names = set(definition.ranges)
         for range_name in definition.ranges:
-            if range_name == current_name:
-                continue
-            if range_name in ordinary:
+            if vocabulary.enumeration(range_name):
+                range_names.update(vocabulary.descendants(range_name))
+        for range_name in range_names:
+            if range_name == current_name or range_name in ordinary:
                 continue
             if vocabulary.enumeration(range_name):
                 imports.add(f"from schema_org.enums import {constant_name(range_name)}")
@@ -196,10 +199,12 @@ def _annotation(vocabulary: Vocabulary, definition) -> str:
     names: list[str] = []
     ordinary = {subject.name for subject in vocabulary.ordinary_classes}
     for range_name in definition.ranges:
-        if range_name == "Property":
-            continue
-        if range_name in ordinary or vocabulary.enumeration(range_name) or vocabulary.data_type(range_name):
-            names.append(constant_name(range_name))
+        expanded = (range_name, *vocabulary.descendants(range_name)) if vocabulary.enumeration(range_name) else (range_name,)
+        for expanded_name in expanded:
+            if expanded_name == "Property":
+                continue
+            if expanded_name in ordinary or vocabulary.enumeration(expanded_name) or vocabulary.data_type(expanded_name):
+                names.append(constant_name(expanded_name))
     names = list(dict.fromkeys(names))
     if not names:
         return "SchemaValue | None"
