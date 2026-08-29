@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path, PurePosixPath
+import shutil
 import subprocess
 import sys
 import tarfile
@@ -47,8 +48,6 @@ def _runtime_files(project_root: Path) -> set[str]:
     if actual != expected:
         raise ValidationError("tracked runtime files do not match generated manifest")
     return expected
-    _clean_wheel_smoke(wheels[0])
-    return wheels[0]
 
 
 def _validate_wheel(path: Path, runtime: set[str]) -> None:
@@ -136,7 +135,13 @@ def _safe_archive_name(name: str) -> bool:
 def _clean_wheel_smoke(wheel: Path) -> None:
     with tempfile.TemporaryDirectory(prefix="schema-org-wheel-") as temporary:
         environment = Path(temporary) / "venv"
-        venv.EnvBuilder(with_pip=True, clear=True).create(environment)
+        try:
+            venv.EnvBuilder(with_pip=True, clear=True).create(environment)
+        except subprocess.CalledProcessError:
+            if shutil.which("uv") is None:
+                raise
+            shutil.rmtree(environment, ignore_errors=True)
+            _run(["uv", "venv", "--seed", str(environment)], Path(temporary))
         python = environment / "bin/python"
         _run([str(python), "-m", "pip", "install", str(wheel)], Path(temporary))
         script = """
