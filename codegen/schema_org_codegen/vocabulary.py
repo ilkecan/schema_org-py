@@ -30,12 +30,21 @@ class Vocabulary:
         self.naming = naming
         self.subjects = tuple(subjects)
         self._by_uri: dict[str, Subject] = {}
+        by_name: dict[str, list[Subject]] = {}
         for subject in self.subjects:
             if subject.uri in self._by_uri:
                 raise ValidationError(f"Duplicate schema URI {subject.uri}")
             if subject.type_is("Class") and subject.type_is("Property"):
                 raise ValidationError(f"Schema subject {subject.uri} is both a class and property")
             self._by_uri[subject.uri] = subject
+            by_name.setdefault(subject.name, []).append(subject)
+        logical_collisions = [
+            f"{name} ({', '.join(sorted(subject.uri for subject in subjects))})"
+            for name, subjects in sorted(by_name.items())
+            if len(subjects) > 1
+        ]
+        if logical_collisions:
+            raise ValidationError(f"Duplicate schema name {'; '.join(logical_collisions)}")
         self.classes = tuple(sorted((s for s in self.subjects if s.type_is("Class")), key=lambda s: s.name))
         self.properties = tuple(sorted((s for s in self.subjects if s.type_is("Property")), key=lambda s: s.name))
         self._class_by_name = {s.name: s for s in self.classes}
@@ -268,20 +277,78 @@ class Vocabulary:
 
     def _validate_references(self) -> None:
         errors: list[str] = []
+
+        def validate(
+            subject: Subject,
+            relation: str,
+            values: Iterable[str | None],
+            expected: dict[str, Subject],
+        ) -> None:
+            for value in values:
+                if value is None:
+                    continue
+                name = schema_name(value)
+                if name in {"Class", "Property"}:
+                    continue
+                if name and name not in expected:
+                    errors.append(
+                        f"Unknown schema.org {relation} {name} for {subject.name}"
+                    )
+
         for subject in self.classes:
-            for parent in subject.parents:
-                name = schema_name(parent)
-                if name and name not in self._class_by_name:
-                    errors.append(f"Unknown schema.org parent {name} for {subject.name}")
+            validate(subject, "parent", subject.parents, self._class_by_name)
+            validate(
+                subject,
+                "equivalent class",
+                subject.equivalent_class,
+                self._class_by_name,
+            )
+            validate(
+                subject,
+                "superseding class",
+                (subject.superseded_by,),
+                self._class_by_name,
+            )
         for property_ in self.properties:
-            for value in property_.domains:
-                name = schema_name(value)
-                if name and name not in self._class_by_name:
-                    errors.append(f"Unknown schema.org domain {name} for {property_.name}")
-            for value in property_.ranges:
-                name = schema_name(value)
-                if name and name not in self._class_by_name:
-                    errors.append(f"Unknown schema.org range {name} for {property_.name}")
+            validate(property_, "domain", property_.domains, self._class_by_name)
+            validate(property_, "range", property_.ranges, self._class_by_name)
+            validate(
+                property_,
+                "inverse property",
+                (property_.inverse_of,),
+                self._property_by_name,
+            )
+            validate(
+                property_,
+                "superseding property",
+                (property_.superseded_by,),
+                self._property_by_name,
+            )
+            validate(
+                property_,
+                "equivalent property",
+                property_.equivalent_properties,
+                self._property_by_name,
+            )
+            validate(
+                property_,
+                "superproperty",
+                property_.subproperty_of,
+                self._property_by_name,
+            )
+        for subject in self.subjects:
+            if subject.type_is("Class") or subject.type_is("Property"):
+                continue
+            validate(
+                subject,
+                "type",
+                (
+                    value
+                    for value in subject.types
+                    if (schema_name(value) or value) not in {"Class", "Property"}
+                ),
+                self._class_by_name,
+            )
         if errors:
             raise ValidationError("; ".join(errors))
 

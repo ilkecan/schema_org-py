@@ -40,17 +40,14 @@ def test_vocabulary_rejects_dangling_and_cycles():
         Vocabulary([subject("A", parents=("https://schema.org/B",)), subject("B", parents=("https://schema.org/A",))])
 
 
-def test_schema_version_headers_are_strict():
+def test_schema_version_headers_are_strict(tmp_path):
     valid = "# schema_org_release: v30.0\n# schema_org_source: https://schema.org/version/30.0/schemaorg-all-https.ttl\n"
-    path = ROOT / "tests/.schema-version-fixture.ttl"
+    path = tmp_path / "schema-version-fixture.ttl"
     path.write_text(valid, encoding="utf-8")
-    try:
-        assert SchemaVersion.current(path).version == "30.0"
-        path.write_text(valid + "# schema_org_source: https://schema.org/version/30.0/schemaorg-all-https.ttl\n", encoding="utf-8")
-        with pytest.raises(CodegenValidationError):
-            SchemaVersion.current(path)
-    finally:
-        path.unlink()
+    assert SchemaVersion.current(path).version == "30.0"
+    path.write_text(valid + "# schema_org_source: https://schema.org/version/30.0/schemaorg-all-https.ttl\n", encoding="utf-8")
+    with pytest.raises(CodegenValidationError):
+        SchemaVersion.current(path)
 
 
 def test_strict_models_aliases_enums_and_assignment():

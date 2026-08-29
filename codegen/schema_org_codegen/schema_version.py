@@ -23,7 +23,7 @@ class SchemaVersion:
     def current(cls, schema_file: str | Path) -> "SchemaVersion":
         try:
             lines = Path(schema_file).read_text(encoding="utf-8").splitlines()
-        except OSError as error:
+        except (OSError, UnicodeDecodeError) as error:
             raise ValidationError(f"Unable to read schema file: {schema_file}") from error
         release = _RELEASE.fullmatch(lines[0]) if lines else None
         source = _SOURCE.fullmatch(lines[1]) if len(lines) > 1 else None
