@@ -92,7 +92,12 @@ class SchemaModel(BaseModel):
                 property_metadata = metadata.get(alias)
                 if property_metadata is not None and "Number" in property_metadata.ranges:
                     _reject_number_bool(value, path=f"$.{alias}")
-                _walk_schema_value(value, path=f"$.{alias}", active=active)
+                _walk_schema_value(
+                    value,
+                    path=f"$.{alias}",
+                    active=active,
+                    allow_nested_lists=bool(property_metadata and property_metadata.ranges),
+                )
             return cleaned
         _walk_schema_value(data, path="$", active=set())
         return data
@@ -164,7 +169,14 @@ def _generated_enum(value: SchemaEnum) -> bool:
         return False
 
 
-def _walk_schema_value(value: object, *, path: str, active: set[int], allow_list: bool = True) -> None:
+def _walk_schema_value(
+    value: object,
+    *,
+    path: str,
+    active: set[int],
+    allow_list: bool = True,
+    allow_nested_lists: bool = False,
+) -> None:
     if value is None:
         return
     if isinstance(value, SchemaModel):
@@ -175,13 +187,20 @@ def _walk_schema_value(value: object, *, path: str, active: set[int], allow_list
             raise CircularReferenceError(f"Circular reference at {path}")
         active.add(object_id)
         try:
+            metadata = {item.schema_name: item for item in type(value).SCHEMA_PROPERTIES}
             for field_name, field in type(value).model_fields.items():
                 if field_name in {"schema_id", "schema_type"}:
                     continue
                 item = getattr(value, field_name)
                 if item is not None:
                     alias = field.alias or field_name
-                    _walk_schema_value(item, path=f"{path}.{alias}", active=active)
+                    property_metadata = metadata.get(alias)
+                    _walk_schema_value(
+                        item,
+                        path=f"{path}.{alias}",
+                        active=active,
+                        allow_nested_lists=bool(property_metadata and property_metadata.ranges),
+                    )
         finally:
             active.remove(object_id)
         return
@@ -196,7 +215,7 @@ def _walk_schema_value(value: object, *, path: str, active: set[int], allow_list
     if isinstance(value, (str, bool, int, float, date, datetime, time)):
         raise ValueError(f"invalid schema value at {path}")
     if isinstance(value, list):
-        if not allow_list:
+        if not allow_list and not allow_nested_lists:
             raise ValueError(f"invalid schema value at {path}: nested lists are not allowed")
         object_id = id(value)
         if object_id in active:
@@ -204,7 +223,13 @@ def _walk_schema_value(value: object, *, path: str, active: set[int], allow_list
         active.add(object_id)
         try:
             for index, item in enumerate(value):
-                _walk_schema_value(item, path=f"{path}[{index}]", active=active, allow_list=False)
+                _walk_schema_value(
+                    item,
+                    path=f"{path}[{index}]",
+                    active=active,
+                    allow_list=False,
+                    allow_nested_lists=allow_nested_lists,
+                )
         finally:
             active.remove(object_id)
         return
@@ -217,7 +242,13 @@ def _walk_schema_value(value: object, *, path: str, active: set[int], allow_list
             for key, item in value.items():
                 if not isinstance(key, str):
                     raise ValueError(f"invalid {path}: mapping keys must be str")
-                _walk_schema_value(item, path=f"{path}[{key!r}]", active=active, allow_list=False)
+                _walk_schema_value(
+                    item,
+                    path=f"{path}[{key!r}]",
+                    active=active,
+                    allow_list=False,
+                    allow_nested_lists=allow_nested_lists,
+                )
         finally:
             active.remove(object_id)
         return
