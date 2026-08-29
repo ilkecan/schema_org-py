@@ -1,20 +1,21 @@
 from __future__ import annotations
 
-import json
 import os
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 import re
 import shutil
 import subprocess
 import sys
-import tempfile
-from typing import cast
 import tarfile
+import tempfile
 import zipfile
 from urllib.request import urlopen
 
 from .generator import generate
+from .check import check
+from .manifest import read_manifest
 from .schema_version import SchemaVersion
+from .transaction import apply_transaction
 from .vocabulary import ValidationError, Vocabulary
 
 LATEST_URL = "https://schema.org/version/latest/"
@@ -93,7 +94,6 @@ class SchemaUpdater:
         root = staging / "project"
         shutil.copytree(self.project_root, root, ignore=_ignore_validation_files)
         return root
-
     def _validate_staged(self, root: Path) -> None:
         package = root / "src/schema_org"
         for path in package.rglob("*.py"):
@@ -104,6 +104,8 @@ class SchemaUpdater:
             environment = os.environ.copy()
             environment["PYTHONPATH"] = f"{root / 'src'}:{root / 'codegen'}"
             _run_checked([sys.executable, "-m", "pytest"], root, environment, "generated tests failed")
+        if (root / "codegen/generated_manifest.json").exists():
+            check(root)
         if (root / "pyproject.toml").exists():
             build_dir = root / ".schema-org-build"
             _run_checked([sys.executable, "-m", "build", "--outdir", str(build_dir)], root, os.environ.copy(), "generated package build failed")
@@ -114,51 +116,19 @@ class SchemaUpdater:
 
     def _commit(self, staging: Path, annotated: str) -> None:
         staged_package = staging / "src/schema_org"
-        destination = self.project_root / "src/schema_org"
         manifest_target = self.project_root / "codegen/generated_manifest.json"
-        previous_manifest = _read_manifest(manifest_target)
-        old_paths = {
-            path for path in cast(list[object], previous_manifest.get("paths", []))
-            if _safe_generated_path(path)
+        staged_manifest_path = staging / "codegen/generated_manifest.json"
+        staged_manifest = read_manifest(staged_manifest_path, project_root=staging)
+        previous_manifest = read_manifest(manifest_target, project_root=self.project_root)
+        old_paths = set(previous_manifest["paths"])
+        new_paths = set(staged_manifest["paths"])
+        replacements = {
+            relative: (staged_package / Path(relative).relative_to("src/schema_org")).read_bytes()
+            for relative in sorted(new_paths)
         }
-        new_paths = {
-            f"src/schema_org/{path.relative_to(staged_package).as_posix()}"
-            for path in staged_package.rglob("*") if path.is_file()
-        }
-        touched = {self.target, manifest_target}
-        touched.update(self.project_root / path for path in old_paths | new_paths)
-        with tempfile.TemporaryDirectory(prefix="schema-org-rollback-", dir=self.project_root) as backup_dir_name:
-            backup_dir = Path(backup_dir_name)
-            states: dict[Path, bool] = {}
-            for index, path in enumerate(sorted(touched)):
-                states[path] = path.exists()
-                if path.exists():
-                    (backup_dir / str(index)).write_bytes(path.read_bytes())
-            try:
-                _atomic_write_bytes(self.target, annotated.encode("utf-8"))
-                for relative in sorted(old_paths - new_paths):
-                    path = self.project_root / relative
-                    if path.exists():
-                        path.unlink()
-                for source in sorted(path for path in staged_package.rglob("*") if path.is_file()):
-                    _atomic_write_bytes(destination / source.relative_to(staged_package), source.read_bytes())
-                staged_manifest = staging / "codegen/generated_manifest.json"
-                _atomic_write_bytes(manifest_target, staged_manifest.read_bytes())
-            except BaseException:
-                for index, path in enumerate(sorted(touched)):
-                    backup = backup_dir / str(index)
-                    if states[path]:
-                        _atomic_write_bytes(path, backup.read_bytes())
-                    elif path.exists():
-                        path.unlink()
-                raise
-
-
-def _safe_generated_path(path: object) -> bool:
-    if not isinstance(path, str) or not path.startswith("src/schema_org/"):
-        return False
-    relative = PurePosixPath(path)
-    return ".." not in relative.parts and len(relative.parts) > 2
+        replacements[manifest_target.relative_to(self.project_root).as_posix()] = staged_manifest_path.read_bytes()
+        replacements[self.target.relative_to(self.project_root).as_posix()] = annotated.encode("utf-8")
+        apply_transaction(self.project_root, replacements, old_paths - new_paths, writer=_atomic_write_bytes)
 
 def _ignore_validation_files(path: str, names: list[str]) -> set[str]:
     ignored = {".git", ".devenv", ".pytest_cache", "__pycache__", ".venv", "dist", "build"}
@@ -172,16 +142,6 @@ def _run_checked(command: list[str], cwd: Path, environment: dict[str, str], mes
         raise ValidationError(f"{message}: {detail}")
 
 
-def _read_manifest(path: Path) -> dict[str, object]:
-    if not path.exists():
-        return {}
-    try:
-        value = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, ValueError) as error:
-        raise ValidationError("generated manifest is invalid") from error
-    if not isinstance(value, dict) or not isinstance(value.get("paths", []), list):
-        raise ValidationError("generated manifest is invalid")
-    return value
 
 
 def _validate_archive(path: Path) -> None:
@@ -199,13 +159,14 @@ def _validate_archive(path: Path) -> None:
         raise ValidationError("wheel does not contain py.typed")
 
 
+
+
 def _atomic_write_bytes(path: Path, content: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.NamedTemporaryFile("wb", dir=path.parent, delete=False) as handle:
         handle.write(content)
         temporary = Path(handle.name)
     os.replace(temporary, path)
-
 
 def _numeric_version(version: str) -> str:
     match = re.fullmatch(r"v?(\d+\.\d+)", str(version))

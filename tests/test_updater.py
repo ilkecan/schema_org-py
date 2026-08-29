@@ -26,7 +26,12 @@ def tracked_tree(tmp_path: Path) -> tuple[Path, Path, str]:
     target.parent.mkdir(parents=True)
     target.write_text("# schema_org_release: v30.0\n# schema_org_source: https://schema.org/version/30.0/schemaorg-all-https.ttl\n" + TTL, encoding="utf-8")
     (root / "src/schema_org").mkdir(parents=True)
-    (root / "codegen/generated_manifest.json").write_text('{"paths": []}\n', encoding="utf-8")
+    (root / "codegen/generated_manifest.json").write_text(json.dumps({
+        "schema_version": "30.0",
+        "schema_source": "https://schema.org/version/30.0/schemaorg-all-https.ttl",
+        "paths": [],
+        "terms": {"classes": [], "datatypes": [], "enumerations": [], "enumeration_members": [], "properties": []},
+    }) + "\n", encoding="utf-8")
     return root, target, hashlib.sha256(target.read_bytes()).hexdigest()
 
 
@@ -93,10 +98,16 @@ def test_validator_failure_preserves_every_tracked_artifact(tmp_path):
 
 def test_replacement_failure_rolls_back_all_files(tmp_path, monkeypatch):
     root, target, _ = tracked_tree(tmp_path)
-    existing = root / "src/schema_org/existing.py"
+    existing = root / "src/schema_org/models/existing.py"
+    existing.parent.mkdir(parents=True)
     existing.write_text("old", encoding="utf-8")
     manifest = root / "codegen/generated_manifest.json"
-    manifest.write_text(json.dumps({"paths": ["src/schema_org/existing.py"]}), encoding="utf-8")
+    manifest.write_text(json.dumps({
+        "schema_version": "30.0",
+        "schema_source": "https://schema.org/version/30.0/schemaorg-all-https.ttl",
+        "paths": ["src/schema_org/models/existing.py"],
+        "terms": {"classes": [], "datatypes": [], "enumerations": [], "enumeration_members": [], "properties": []},
+    }), encoding="utf-8")
     before = {path.relative_to(root): path.read_bytes() for path in root.rglob("*") if path.is_file()}
     original = updater_module._atomic_write_bytes
     calls = 0

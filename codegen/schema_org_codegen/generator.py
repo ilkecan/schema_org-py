@@ -10,8 +10,8 @@ from typing import Iterable
 from .naming import constant_name, enum_member_name, module_name, property_name
 from .parser import parse
 from .schema_version import SchemaVersion
-from .vocabulary import ValidationError, Vocabulary
-
+from .manifest import read_manifest, validate_manifest
+from .transaction import apply_transaction
 ROOT = Path(__file__).resolve().parents[2]
 PRIMITIVE_ALIASES = {
     "Text": "str", "URL": "str", "Boolean": "bool", "Integer": "int",
@@ -39,8 +39,7 @@ def generate(
         staged_manifest = Path(temporary) / "generated_manifest.json"
         manifest = _manifest(vocabulary, version, staged_package)
         staged_manifest.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-        _commit_tree(staged_package, output_root / "src/schema_org")
-        _atomic_replace(staged_manifest, output_root / "codegen/generated_manifest.json")
+        _commit_tree(staged_package, output_root / "src/schema_org", staged_manifest, manifest)
     return manifest
 
 
@@ -491,50 +490,19 @@ def _manifest(vocabulary: Vocabulary, version: SchemaVersion, package: Path) -> 
         "terms": terms,
     }
 
-def _commit_tree(staged: Path, destination: Path) -> None:
-    destination.mkdir(parents=True, exist_ok=True)
+def _commit_tree(staged: Path, destination: Path, staged_manifest: Path, manifest: dict[str, object]) -> None:
     root = destination.parent.parent
     previous_manifest_path = root / "codegen/generated_manifest.json"
-    previous_paths: set[str] = set()
-    if previous_manifest_path.exists():
-        try:
-            loaded = json.loads(previous_manifest_path.read_text(encoding="utf-8"))
-            previous_paths = {
-                path for path in loaded.get("paths", [])
-                if _safe_generated_path(path)
-            }
-        except (OSError, ValueError):
-            previous_paths = set()
-    new_paths = {f"src/schema_org/{path.relative_to(staged).as_posix()}" for path in staged.rglob("*") if path.is_file()}
-    touched = {root / relative for relative in previous_paths | new_paths}
-    with tempfile.TemporaryDirectory(prefix="schema-org-rollback-", dir=root) as backup_dir_name:
-        backup_dir = Path(backup_dir_name)
-        states: dict[Path, bool] = {}
-        for index, path in enumerate(sorted(touched)):
-            states[path] = path.exists()
-            if path.exists():
-                (backup_dir / str(index)).write_bytes(path.read_bytes())
-        try:
-            for relative in sorted(previous_paths - new_paths):
-                target = root / relative
-                if target.exists():
-                    target.unlink()
-            for source in sorted(path for path in staged.rglob("*") if path.is_file()):
-                _atomic_replace(source, destination / source.relative_to(staged))
-        except BaseException:
-            for index, path in enumerate(sorted(touched)):
-                backup = backup_dir / str(index)
-                if states[path]:
-                    _atomic_write(path, backup.read_bytes())
-                elif path.exists():
-                    path.unlink()
-            raise
-
-def _safe_generated_path(path: object) -> bool:
-    if not isinstance(path, str) or not path.startswith("src/schema_org/"):
-        return False
-    relative = PurePosixPath(path)
-    return ".." not in relative.parts and len(relative.parts) > 2
+    previous = read_manifest(previous_manifest_path, project_root=root) if previous_manifest_path.exists() else None
+    validated = validate_manifest(manifest)
+    previous_paths = set(previous["paths"]) if previous is not None else set()
+    new_paths = set(validated["paths"])
+    replacements = {
+        relative: (staged / Path(relative).relative_to("src/schema_org")).read_bytes()
+        for relative in sorted(new_paths)
+    }
+    replacements["codegen/generated_manifest.json"] = staged_manifest.read_bytes()
+    apply_transaction(root, replacements, previous_paths - new_paths)
 
 
 def _atomic_write(path: Path, content: str) -> None:
