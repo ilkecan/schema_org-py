@@ -11,4 +11,6 @@ class CustomBuildHook(BuildHookInterface):
     def initialize(self, version: str, build_data: dict[str, object]) -> None:
         force_include = build_data.get("force_include")
         if isinstance(force_include, dict):
-            force_include.pop(str(Path(self.root) / ".gitignore"), None)
+            for source, target in list(force_include.items()):
+                if Path(source).name == ".gitignore" or Path(str(target)).name == ".gitignore":
+                    force_include.pop(source, None)

@@ -58,6 +58,7 @@ include = [
   "/README.md",
   "/CHANGELOG.md",
   "/pyproject.toml",
+  "/build_hooks.py",
 ]
 ignore-vcs = true
 
