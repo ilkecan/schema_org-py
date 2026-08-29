@@ -58,7 +58,7 @@ def apply_transaction(
 
 def _checked_path(root: Path, relative: str) -> Path:
     pure = PurePosixPath(relative)
-    if not relative or pure.is_absolute() or "." in pure.parts or ".." in pure.parts:
+    if not relative or pure.is_absolute() or any(part in {".", ".."} for part in relative.split("/")):
         raise ValidationError(f"unsafe transaction path {relative!r}")
     path = root / relative
     current = root

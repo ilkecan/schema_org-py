@@ -37,6 +37,42 @@ def test_vocabulary_preserves_external_meta_ranges():
     assert vocabulary.property_ranges("value") == ()
     assert vocabulary.property_external_ranges("value") == ("Property", "https://example.test/Value")
 
+@pytest.mark.parametrize(
+    ("kind", "subject_kwargs"),
+    [
+        ("parent", {"parents": ("https://schema.org/Missing",)}),
+        ("equivalent class", {"equivalent_class": ("https://schema.org/Missing",)}),
+        ("superseding class", {"superseded_by": "https://schema.org/Missing"}),
+    ],
+)
+def test_vocabulary_rejects_dangling_class_references(kind, subject_kwargs):
+    with pytest.raises(ValidationError, match=kind):
+        Vocabulary([subject("Thing"), subject("Child", **subject_kwargs)])
+
+
+@pytest.mark.parametrize(
+    ("kind", "subject_kwargs"),
+    [
+        ("domain", {"domains": ("https://schema.org/Missing",)}),
+        ("range", {"ranges": ("https://schema.org/Missing",)}),
+        ("inverse property", {"inverse_of": "https://schema.org/Missing"}),
+        ("superseding property", {"superseded_by": "https://schema.org/Missing"}),
+        ("equivalent property", {"equivalent_properties": ("https://schema.org/Missing",)}),
+        ("superproperty", {"subproperty_of": ("https://schema.org/Missing",)}),
+    ],
+)
+def test_vocabulary_rejects_dangling_property_references(kind, subject_kwargs):
+    with pytest.raises(ValidationError, match=kind):
+        Vocabulary([subject("Thing"), subject("value", ("Property",), **subject_kwargs)])
+
+def test_vocabulary_rejects_dangling_enumeration_member_type():
+    with pytest.raises(ValidationError, match="type"):
+        Vocabulary([
+            subject("Thing"),
+            subject("Enumeration", parents=("https://schema.org/Thing",)),
+            subject("Member", ("https://schema.org/Missing",)),
+        ])
+
 
 def test_vocabulary_rejects_http_https_logical_collisions():
     with pytest.raises(ValidationError, match="Duplicate schema name"):

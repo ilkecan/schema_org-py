@@ -1,3 +1,5 @@
+import subprocess
+import sys
 from datetime import date, datetime
 
 import pytest
@@ -63,3 +65,11 @@ def test_jsonld_aliases_context_and_dates():
         "birthDate": "1990-01-02",
     }
     assert '"@context":"https://schema.org"' in Person(name="Ada").to_jsonld_json()
+def test_fresh_process_direct_module_and_json_validation():
+    script = (
+        "from schema_org.models.person import Person\n"
+        "p = Person.model_validate_json('{\"name\":\"Ada\"}')\n"
+        "assert p.name == 'Ada'\n"
+    )
+    result = subprocess.run([sys.executable, "-c", script], capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
