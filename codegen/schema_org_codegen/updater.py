@@ -46,8 +46,13 @@ class SchemaUpdater:
     def update(self, version: str | None = None) -> bool:
         numeric = _numeric_version(version) if version is not None else self.latest_version()
         current = SchemaVersion.current(self.target)
-        if numeric == current.version:
+        _target_relative(self.project_root, self.target)
+        current_key = _version_key(current.version)
+        requested_key = _version_key(numeric)
+        if requested_key == current_key:
             return False
+        if requested_key < current_key:
+            raise ValidationError("requested schema version is older than the current version")
         url = f"https://schema.org/version/{numeric}/schemaorg-all-https.ttl"
         body_bytes = _response_bytes(self._download_checked(url))
         if not body_bytes:
@@ -61,7 +66,7 @@ class SchemaUpdater:
             f"# schema_org_source: {url}\n"
             f"{body}"
         )
-        with tempfile.TemporaryDirectory(prefix="schema-org-update-", dir=self.project_root) as temporary:
+        with tempfile.TemporaryDirectory(prefix="schema-org-update-") as temporary:
             staging = Path(temporary)
             validation_root = self._validation_root(staging)
             candidate = validation_root / "codegen/data/schema.ttl"
@@ -84,31 +89,44 @@ class SchemaUpdater:
                 self.validator(validation_root)
             self._commit(validation_root, annotated)
         return True
-
     def _validation_root(self, staging: Path) -> Path:
         if not (self.project_root / "pyproject.toml").exists():
             root = staging / "project"
             root.mkdir()
             return root
+        required = ("tests", "src/schema_org", "codegen")
+        if any(not (self.project_root / item).exists() for item in required):
+            raise ValidationError("project root is incomplete for schema update validation")
         root = staging / "project"
         shutil.copytree(self.project_root, root, ignore=_ignore_validation_files)
         return root
+
     def _validate_staged(self, root: Path) -> None:
         package = root / "src/schema_org"
-        for path in package.rglob("*.py"):
+        generated_files = sorted(package.rglob("*.py"))
+        if not generated_files:
+            raise ValidationError("staged generated package is missing")
+        for path in generated_files:
             result = subprocess.run([sys.executable, "-m", "py_compile", str(path)], capture_output=True, text=True)
             if result.returncode:
                 raise ValidationError(f"generated Python failed to compile: {result.stderr.strip()}")
-        if (root / "tests").is_dir() and (root / "pyproject.toml").exists():
-            environment = os.environ.copy()
-            environment["PYTHONPATH"] = f"{root / 'src'}:{root / 'codegen'}"
-            _run_checked([sys.executable, "-m", "pytest"], root, environment, "generated tests failed")
-        if (root / "codegen/generated_manifest.json").exists():
-            check(root)
-        if (root / "pyproject.toml").exists():
-            build_dir = root / ".schema-org-build"
-            _run_checked([sys.executable, "-m", "build", "--outdir", str(build_dir)], root, os.environ.copy(), "generated package build failed")
+        if not (root / "pyproject.toml").exists():
+            return
+        environment = os.environ.copy()
+        environment["PYTHONPATH"] = f"{root / 'src'}:{root / 'codegen'}"
+        _run_checked([sys.executable, "-m", "pytest"], root, environment, "generated tests failed")
+        check(root)
+        build_dir = Path(tempfile.mkdtemp(prefix="schema-org-build-"))
+        try:
+            _run_checked(
+                [sys.executable, "-m", "build", "--outdir", str(build_dir)],
+                root,
+                environment,
+                "generated package build failed",
+            )
             validate_distributions(build_dir, project_root=root)
+        finally:
+            shutil.rmtree(build_dir, ignore_errors=True)
 
     def _commit(self, staging: Path, annotated: str) -> None:
         staged_package = staging / "src/schema_org"
@@ -125,7 +143,6 @@ class SchemaUpdater:
         replacements[manifest_target.relative_to(self.project_root).as_posix()] = staged_manifest_path.read_bytes()
         replacements[self.target.relative_to(self.project_root).as_posix()] = annotated.encode("utf-8")
         apply_transaction(self.project_root, replacements, old_paths - new_paths, writer=_atomic_write_bytes)
-
 def _ignore_validation_files(path: str, names: list[str]) -> set[str]:
     ignored = {".git", ".devenv", ".pytest_cache", "__pycache__", ".venv", "dist", "build"}
     return {name for name in names if name in ignored or name.startswith("tmp") or name.startswith(".schema-org-")}
@@ -144,12 +161,6 @@ def _run_checked(command: list[str], cwd: Path, environment: dict[str, str], mes
 
 
 
-def _atomic_write_bytes(path: Path, content: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.NamedTemporaryFile("wb", dir=path.parent, delete=False) as handle:
-        handle.write(content)
-        temporary = Path(handle.name)
-    os.replace(temporary, path)
 
 def _numeric_version(version: str) -> str:
     match = re.fullmatch(r"v?(\d+\.\d+)", str(version))
@@ -159,8 +170,10 @@ def _numeric_version(version: str) -> str:
 
 
 def _response_body(response) -> str:
-    return _response_bytes(response).decode("utf-8")
-
+    try:
+        return _response_bytes(response).decode("utf-8")
+    except UnicodeDecodeError as error:
+        raise ValidationError("schema response was not valid UTF-8") from error
 
 def _response_bytes(response) -> bytes:
     status = getattr(response, "status", getattr(response, "status_code", None))
@@ -185,3 +198,25 @@ def _response_bytes(response) -> bytes:
 def _download(url: str):
     with urlopen(url) as response:
         return response.read()
+def _version_key(version: str) -> tuple[int, int]:
+    major, minor = version.split(".", 1)
+    return int(major), int(minor)
+
+
+def _target_relative(project_root: Path, target: Path) -> str:
+    candidate = target if target.is_absolute() else project_root / target
+    current = project_root
+    try:
+        relative = candidate.relative_to(project_root)
+    except ValueError as error:
+        raise ValidationError("schema target must be inside the project root") from error
+    if any(part in {".", ".."} for part in relative.parts):
+        raise ValidationError("schema target path is unsafe")
+    for part in relative.parts:
+        current /= part
+        if current.is_symlink():
+            raise ValidationError("schema target must not use symlinks")
+    return relative.as_posix()
+def _atomic_write_bytes(path: Path, content: bytes) -> None:
+    from .transaction import _replace_bytes
+    _replace_bytes(path, content)

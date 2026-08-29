@@ -40,14 +40,17 @@ def apply_transaction(
         if originals[relative] != content
     }
     changed_removals = {relative for relative in removal_paths if originals[relative] is not None}
+    attempted: set[str] = set()
     try:
         for relative in sorted(changed_removals):
+            attempted.add(relative)
             paths[relative].unlink()
         for relative in sorted(changed_replacements):
+            attempted.add(relative)
             writer(paths[relative], replacements[relative])
     except Exception:
         try:
-            _restore(paths, originals, writer)
+            _restore(paths, originals, writer, attempted)
         except Exception as restore_error:
             raise TransactionError(f"transaction failed and restoration failed: {restore_error}") from restore_error
         raise
@@ -68,14 +71,28 @@ def _checked_path(root: Path, relative: str) -> Path:
 
 def _replace_bytes(path: Path, content: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.NamedTemporaryFile("wb", dir=path.parent, delete=False) as handle:
-        handle.write(content)
-        temporary = Path(handle.name)
-    os.replace(temporary, path)
+    temporary: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile("wb", dir=path.parent, delete=False) as handle:
+            temporary = Path(handle.name)
+            handle.write(content)
+        os.replace(temporary, path)
+        temporary = None
+    finally:
+        if temporary is not None:
+            try:
+                temporary.unlink()
+            except FileNotFoundError:
+                pass
 
-
-def _restore(paths: Mapping[str, Path], originals: Mapping[str, bytes | None], writer) -> None:
-    for relative, content in originals.items():
+def _restore(
+    paths: Mapping[str, Path],
+    originals: Mapping[str, bytes | None],
+    writer,
+    attempted: Iterable[str],
+) -> None:
+    for relative in attempted:
+        content = originals[relative]
         path = paths[relative]
         if content is None:
             if path.exists() or path.is_symlink():
