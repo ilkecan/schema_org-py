@@ -141,7 +141,7 @@ def _clean_wheel_smoke(wheel: Path) -> None:
             if shutil.which("uv") is None:
                 raise
             shutil.rmtree(environment, ignore_errors=True)
-            _run(["uv", "venv", "--seed", str(environment)], Path(temporary))
+            _run(["uv", "venv", "--seed", "--python", sys.executable, str(environment)], Path(temporary))
         python = environment / "bin/python"
         _run([str(python), "-m", "pip", "install", str(wheel)], Path(temporary))
         script = """
