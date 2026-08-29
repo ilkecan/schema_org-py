@@ -10,9 +10,22 @@ from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
+from schema_org.enums import DrugCostCategory
+from schema_org.enums import DrugPregnancyCategory
+from schema_org.enums import DrugPrescriptionStatus
+from schema_org.enums import InfectiousAgentClass
+from schema_org.enums import MedicalAudienceType
+from schema_org.enums import MedicalDevicePurpose
 from schema_org.enums import MedicalEnumeration
+from schema_org.enums import MedicalEvidenceLevel
+from schema_org.enums import MedicalImagingTechnique
+from schema_org.enums import MedicalObservationalStudyDesign
+from schema_org.enums import MedicalProcedureType
 from schema_org.enums import MedicalSpecialty
+from schema_org.enums import MedicalStudyStatus
+from schema_org.enums import MedicalTrialDesign
 from schema_org.enums import MedicineSystem
+from schema_org.enums import PhysicalExam
 from schema_org.models.medical_entity import MedicalEntity
 
 class MedicalTest(MedicalEntity):
@@ -50,7 +63,7 @@ class MedicalTest(MedicalEntity):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['MedicalTest'] = Field(default='MedicalTest', alias='@type', frozen=True)
     affected_by: Drug | list[Drug] | None = Field(default=None, alias='affectedBy', description="Drugs that affect the test's results.")
-    normal_range: MedicalEnumeration | Text | list[MedicalEnumeration | Text] | None = Field(default=None, alias='normalRange', description='Range of acceptable values for a typical patient, when applicable.')
+    normal_range: MedicalEnumeration | DrugCostCategory | DrugPregnancyCategory | DrugPrescriptionStatus | InfectiousAgentClass | MedicalAudienceType | MedicalDevicePurpose | MedicalEvidenceLevel | MedicalImagingTechnique | MedicalObservationalStudyDesign | MedicalProcedureType | MedicalSpecialty | MedicalStudyStatus | MedicalTrialDesign | MedicineSystem | PhysicalExam | Text | list[MedicalEnumeration | DrugCostCategory | DrugPregnancyCategory | DrugPrescriptionStatus | InfectiousAgentClass | MedicalAudienceType | MedicalDevicePurpose | MedicalEvidenceLevel | MedicalImagingTechnique | MedicalObservationalStudyDesign | MedicalProcedureType | MedicalSpecialty | MedicalStudyStatus | MedicalTrialDesign | MedicineSystem | PhysicalExam | Text] | None = Field(default=None, alias='normalRange', description='Range of acceptable values for a typical patient, when applicable.')
     sign_detected: MedicalSign | list[MedicalSign] | None = Field(default=None, alias='signDetected', description='A sign detected by the test.')
     used_to_diagnose: MedicalCondition | list[MedicalCondition] | None = Field(default=None, alias='usedToDiagnose', description='A condition the test is used to diagnose.')
     uses_device: MedicalDevice | list[MedicalDevice] | None = Field(default=None, alias='usesDevice', description='Device used to perform the test.')

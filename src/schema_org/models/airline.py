@@ -12,7 +12,12 @@ from schema_org.datatypes import Date
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
 from schema_org.enums import BoardingPolicyType
+from schema_org.enums import DENonprofitType
+from schema_org.enums import ITNonprofitType
+from schema_org.enums import NLNonprofitType
 from schema_org.enums import NonprofitType
+from schema_org.enums import UKNonprofitType
+from schema_org.enums import USNonprofitType
 from schema_org.models.organization import Organization
 
 class Airline(Organization):

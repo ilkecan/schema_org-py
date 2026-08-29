@@ -10,7 +10,11 @@ from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
+from schema_org.enums import BedType
+from schema_org.enums import DriveWheelConfigurationValue
 from schema_org.enums import QualitativeValue
+from schema_org.enums import SizeSpecification
+from schema_org.enums import SteeringPositionValue
 from schema_org.models.intangible import Intangible
 
 class Seat(Intangible):
@@ -41,4 +45,4 @@ class Seat(Intangible):
     seat_number: Text | list[Text] | None = Field(default=None, alias='seatNumber', description='The location of the reserved seat (e.g., 27).')
     seat_row: Text | list[Text] | None = Field(default=None, alias='seatRow', description='The row location of the reserved seat (e.g., B).')
     seat_section: Text | list[Text] | None = Field(default=None, alias='seatSection', description='The section location of the reserved seat (e.g. Orchestra).')
-    seating_type: QualitativeValue | Text | list[QualitativeValue | Text] | None = Field(default=None, alias='seatingType', description='The type/class of the seat.')
+    seating_type: QualitativeValue | BedType | DriveWheelConfigurationValue | SizeSpecification | SteeringPositionValue | Text | list[QualitativeValue | BedType | DriveWheelConfigurationValue | SizeSpecification | SteeringPositionValue | Text] | None = Field(default=None, alias='seatingType', description='The type/class of the seat.')

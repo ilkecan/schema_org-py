@@ -10,9 +10,22 @@ from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
+from schema_org.enums import DrugCostCategory
+from schema_org.enums import DrugPregnancyCategory
+from schema_org.enums import DrugPrescriptionStatus
+from schema_org.enums import InfectiousAgentClass
+from schema_org.enums import MedicalAudienceType
+from schema_org.enums import MedicalDevicePurpose
 from schema_org.enums import MedicalEnumeration
+from schema_org.enums import MedicalEvidenceLevel
+from schema_org.enums import MedicalImagingTechnique
+from schema_org.enums import MedicalObservationalStudyDesign
+from schema_org.enums import MedicalProcedureType
 from schema_org.enums import MedicalSpecialty
+from schema_org.enums import MedicalStudyStatus
+from schema_org.enums import MedicalTrialDesign
 from schema_org.enums import MedicineSystem
+from schema_org.enums import PhysicalExam
 from schema_org.models.thing import Thing
 
 class MedicalEntity(Thing):
@@ -47,7 +60,7 @@ class MedicalEntity(Thing):
     code: MedicalCode | list[MedicalCode] | None = Field(default=None, alias='code', description='A medical code for the entity, taken from a controlled vocabulary or ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.')
     funding: Grant | list[Grant] | None = Field(default=None, alias='funding', description='A [[Grant]] that directly or indirectly provide funding or sponsorship for this item. See also [[ownershipFundingInfo]].\n\nInverse-property: `fundedItem`.')
     guideline: MedicalGuideline | list[MedicalGuideline] | None = Field(default=None, alias='guideline', description='A medical guideline related to this entity.')
-    legal_status: DrugLegalStatus | MedicalEnumeration | Text | list[DrugLegalStatus | MedicalEnumeration | Text] | None = Field(default=None, alias='legalStatus', description="The drug or supplement's legal status, including any controlled substance schedules that apply.")
+    legal_status: DrugLegalStatus | MedicalEnumeration | DrugCostCategory | DrugPregnancyCategory | DrugPrescriptionStatus | InfectiousAgentClass | MedicalAudienceType | MedicalDevicePurpose | MedicalEvidenceLevel | MedicalImagingTechnique | MedicalObservationalStudyDesign | MedicalProcedureType | MedicalSpecialty | MedicalStudyStatus | MedicalTrialDesign | MedicineSystem | PhysicalExam | Text | list[DrugLegalStatus | MedicalEnumeration | DrugCostCategory | DrugPregnancyCategory | DrugPrescriptionStatus | InfectiousAgentClass | MedicalAudienceType | MedicalDevicePurpose | MedicalEvidenceLevel | MedicalImagingTechnique | MedicalObservationalStudyDesign | MedicalProcedureType | MedicalSpecialty | MedicalStudyStatus | MedicalTrialDesign | MedicineSystem | PhysicalExam | Text] | None = Field(default=None, alias='legalStatus', description="The drug or supplement's legal status, including any controlled substance schedules that apply.")
     medicine_system: MedicineSystem | list[MedicineSystem] | None = Field(default=None, alias='medicineSystem', description="The system of medicine that includes this MedicalEntity, for example 'evidence-based', 'homeopathic', 'chiropractic', etc.")
     recognizing_authority: Organization | list[Organization] | None = Field(default=None, alias='recognizingAuthority', description='If applicable, the organization that officially recognizes this entity as part of its endorsed system of medicine.')
     relevant_specialty: MedicalSpecialty | list[MedicalSpecialty] | None = Field(default=None, alias='relevantSpecialty', description='If applicable, a medical specialty in which this entity is relevant.')

@@ -12,8 +12,12 @@ from schema_org.datatypes import DateTime
 from schema_org.datatypes import Number
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
+from schema_org.enums import BedType
+from schema_org.enums import DriveWheelConfigurationValue
 from schema_org.enums import QualitativeValue
 from schema_org.enums import ReservationStatusType
+from schema_org.enums import SizeSpecification
+from schema_org.enums import SteeringPositionValue
 from schema_org.models.reservation import Reservation
 
 class FlightReservation(Reservation):
@@ -55,6 +59,6 @@ class FlightReservation(Reservation):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['FlightReservation'] = Field(default='FlightReservation', alias='@type', frozen=True)
     boarding_group: Text | list[Text] | None = Field(default=None, alias='boardingGroup', description='The airline-specific indicator of boarding order / preference.')
-    passenger_priority_status: QualitativeValue | Text | list[QualitativeValue | Text] | None = Field(default=None, alias='passengerPriorityStatus', description='The priority status assigned to a passenger for security or boarding (e.g. FastTrack or Priority).')
+    passenger_priority_status: QualitativeValue | BedType | DriveWheelConfigurationValue | SizeSpecification | SteeringPositionValue | Text | list[QualitativeValue | BedType | DriveWheelConfigurationValue | SizeSpecification | SteeringPositionValue | Text] | None = Field(default=None, alias='passengerPriorityStatus', description='The priority status assigned to a passenger for security or boarding (e.g. FastTrack or Priority).')
     passenger_sequence_number: Text | list[Text] | None = Field(default=None, alias='passengerSequenceNumber', description="The passenger's sequence number as assigned by the airline.")
     security_screening: Text | list[Text] | None = Field(default=None, alias='securityScreening', description='The type of security screening the passenger is subject to.')

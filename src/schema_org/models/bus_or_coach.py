@@ -16,6 +16,7 @@ from schema_org.datatypes import Number
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
 from schema_org.enums import AdultOrientedEnumeration
+from schema_org.enums import BedType
 from schema_org.enums import CarUsageType
 from schema_org.enums import DriveWheelConfigurationValue
 from schema_org.enums import OfferItemCondition

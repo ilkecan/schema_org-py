@@ -10,9 +10,22 @@ from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
+from schema_org.enums import DrugCostCategory
+from schema_org.enums import DrugPregnancyCategory
+from schema_org.enums import DrugPrescriptionStatus
+from schema_org.enums import InfectiousAgentClass
+from schema_org.enums import MedicalAudienceType
+from schema_org.enums import MedicalDevicePurpose
 from schema_org.enums import MedicalEnumeration
+from schema_org.enums import MedicalEvidenceLevel
+from schema_org.enums import MedicalImagingTechnique
+from schema_org.enums import MedicalObservationalStudyDesign
+from schema_org.enums import MedicalProcedureType
 from schema_org.enums import MedicalSpecialty
+from schema_org.enums import MedicalStudyStatus
+from schema_org.enums import MedicalTrialDesign
 from schema_org.enums import MedicineSystem
+from schema_org.enums import PhysicalExam
 from schema_org.models.medical_entity import MedicalEntity
 
 class AnatomicalSystem(MedicalEntity):

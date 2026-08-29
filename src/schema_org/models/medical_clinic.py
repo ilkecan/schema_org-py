@@ -14,8 +14,13 @@ from schema_org.datatypes import Integer
 from schema_org.datatypes import Number
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
+from schema_org.enums import DENonprofitType
+from schema_org.enums import ITNonprofitType
 from schema_org.enums import MedicalSpecialty
+from schema_org.enums import NLNonprofitType
 from schema_org.enums import NonprofitType
+from schema_org.enums import UKNonprofitType
+from schema_org.enums import USNonprofitType
 from schema_org.models.medical_business import MedicalBusiness
 from schema_org.models.medical_organization import MedicalOrganization
 

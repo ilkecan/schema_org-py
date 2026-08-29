@@ -17,6 +17,7 @@ from schema_org.datatypes import Number
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
 from schema_org.enums import IPTCDigitalSourceEnumeration
+from schema_org.enums import MedicalSpecialty
 from schema_org.enums import SizeSpecification
 from schema_org.enums import Specialty
 from schema_org.models.web_page import WebPage

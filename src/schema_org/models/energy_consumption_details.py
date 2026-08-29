@@ -12,6 +12,7 @@ from schema_org.datatypes import Text
 from schema_org.datatypes import URL
 from schema_org.enums import EUEnergyEfficiencyEnumeration
 from schema_org.enums import EnergyEfficiencyEnumeration
+from schema_org.enums import EnergyStarEnergyEfficiencyEnumeration
 from schema_org.models.intangible import Intangible
 
 class EnergyConsumptionDetails(Intangible):
@@ -40,4 +41,4 @@ class EnergyConsumptionDetails(Intangible):
     schema_type: Literal['EnergyConsumptionDetails'] = Field(default='EnergyConsumptionDetails', alias='@type', frozen=True)
     energy_efficiency_scale_max: EUEnergyEfficiencyEnumeration | list[EUEnergyEfficiencyEnumeration] | None = Field(default=None, alias='energyEfficiencyScaleMax', description='Specifies the most energy efficient class on the regulated EU energy consumption scale for the product category a product belongs to. For example, energy consumption for televisions placed on the market after January 1, 2020 is scaled from D to A+++.')
     energy_efficiency_scale_min: EUEnergyEfficiencyEnumeration | list[EUEnergyEfficiencyEnumeration] | None = Field(default=None, alias='energyEfficiencyScaleMin', description='Specifies the least energy efficient class on the regulated EU energy consumption scale for the product category a product belongs to. For example, energy consumption for televisions placed on the market after January 1, 2020 is scaled from D to A+++.')
-    has_energy_efficiency_category: EnergyEfficiencyEnumeration | list[EnergyEfficiencyEnumeration] | None = Field(default=None, alias='hasEnergyEfficiencyCategory', description='Defines the energy efficiency Category (which could be either a rating out of range of values or a yes/no certification) for a product according to an international energy efficiency standard.')
+    has_energy_efficiency_category: EnergyEfficiencyEnumeration | EUEnergyEfficiencyEnumeration | EnergyStarEnergyEfficiencyEnumeration | list[EnergyEfficiencyEnumeration | EUEnergyEfficiencyEnumeration | EnergyStarEnergyEfficiencyEnumeration] | None = Field(default=None, alias='hasEnergyEfficiencyCategory', description='Defines the energy efficiency Category (which could be either a rating out of range of values or a yes/no certification) for a product according to an international energy efficiency standard.')

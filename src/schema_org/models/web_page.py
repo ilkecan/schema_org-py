@@ -17,6 +17,7 @@ from schema_org.datatypes import Number
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
 from schema_org.enums import IPTCDigitalSourceEnumeration
+from schema_org.enums import MedicalSpecialty
 from schema_org.enums import SizeSpecification
 from schema_org.enums import Specialty
 from schema_org.models.creative_work import CreativeWork
@@ -177,4 +178,4 @@ class WebPage(CreativeWork):
     significant_link: URL | list[URL] | None = Field(default=None, alias='significantLink', description='One of the more significant URLs on the page. Typically, these are the non-navigation links that are clicked on the most.\n\nSupersedes `significantLinks`.')
     significant_links: URL | list[URL] | None = Field(default=None, alias='significantLinks', description='The most significant URLs on the page. Typically, these are the non-navigation links that are clicked on the most.\n\nSuperseded by `significantLink`.')
     speakable: SpeakableSpecification | URL | list[SpeakableSpecification | URL] | None = Field(default=None, alias='speakable', description="Indicates sections of a Web page that are particularly 'speakable' in the sense of being highlighted as being especially appropriate for text-to-speech conversion. Other sections of a page may also be usefully spoken in particular circumstances; the 'speakable' property serves to indicate the parts most likely to be generally useful for speech.\n\nThe *speakable* property can be repeated an arbitrary number of times, with three kinds of possible 'content-locator' values:\n\n1.) *id-value* URL references - uses *id-value* of an element in the page being annotated. The simplest use of *speakable* has (potentially relative) URL values, referencing identified sections of the document concerned.\n\n2.) CSS Selectors - addresses content in the annotated page, e.g. via class attribute. Use the [[cssSelector]] property.\n\n3.)  XPaths - addresses content via XPaths (assuming an XML view of the content). Use the [[xpath]] property.\n\n\nFor more sophisticated markup of speakable sections beyond simple ID references, either CSS selectors or XPath expressions to pick out document section(s) as speakable. For this\nwe define a supporting type, [[SpeakableSpecification]]  which is defined to be a possible value of the *speakable* property.\n         ")
-    specialty: Specialty | list[Specialty] | None = Field(default=None, alias='specialty', description="One of the domain specialities to which this web page's content applies.")
+    specialty: Specialty | MedicalSpecialty | list[Specialty | MedicalSpecialty] | None = Field(default=None, alias='specialty', description="One of the domain specialities to which this web page's content applies.")

@@ -14,8 +14,12 @@ from schema_org.datatypes import Number
 from schema_org.datatypes import Text
 from schema_org.datatypes import Time
 from schema_org.datatypes import URL
+from schema_org.enums import BedType
+from schema_org.enums import DriveWheelConfigurationValue
 from schema_org.enums import QualitativeValue
 from schema_org.enums import ReservationStatusType
+from schema_org.enums import SizeSpecification
+from schema_org.enums import SteeringPositionValue
 from schema_org.models.reservation import Reservation
 
 class LodgingReservation(Reservation):
@@ -61,6 +65,6 @@ class LodgingReservation(Reservation):
     checkin_time: DateTime | Time | list[DateTime | Time] | None = Field(default=None, alias='checkinTime', description='The earliest someone may check into a lodging establishment.')
     checkout_time: DateTime | Time | list[DateTime | Time] | None = Field(default=None, alias='checkoutTime', description='The latest someone may check out of a lodging establishment.')
     lodging_unit_description: Text | list[Text] | None = Field(default=None, alias='lodgingUnitDescription', description='A full description of the lodging unit.')
-    lodging_unit_type: QualitativeValue | Text | list[QualitativeValue | Text] | None = Field(default=None, alias='lodgingUnitType', description='Textual description of the unit type (including suite vs. room, size of bed, etc.).')
+    lodging_unit_type: QualitativeValue | BedType | DriveWheelConfigurationValue | SizeSpecification | SteeringPositionValue | Text | list[QualitativeValue | BedType | DriveWheelConfigurationValue | SizeSpecification | SteeringPositionValue | Text] | None = Field(default=None, alias='lodgingUnitType', description='Textual description of the unit type (including suite vs. room, size of bed, etc.).')
     num_adults: Integer | QuantitativeValue | list[Integer | QuantitativeValue] | None = Field(default=None, alias='numAdults', description='The number of adults staying in the unit.')
     num_children: Integer | QuantitativeValue | list[Integer | QuantitativeValue] | None = Field(default=None, alias='numChildren', description='The number of children staying in the unit.')

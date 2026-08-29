@@ -15,11 +15,24 @@ from schema_org.datatypes import Mass
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
 from schema_org.enums import AdultOrientedEnumeration
+from schema_org.enums import DrugCostCategory
+from schema_org.enums import DrugPregnancyCategory
+from schema_org.enums import DrugPrescriptionStatus
+from schema_org.enums import InfectiousAgentClass
+from schema_org.enums import MedicalAudienceType
+from schema_org.enums import MedicalDevicePurpose
 from schema_org.enums import MedicalEnumeration
+from schema_org.enums import MedicalEvidenceLevel
+from schema_org.enums import MedicalImagingTechnique
+from schema_org.enums import MedicalObservationalStudyDesign
+from schema_org.enums import MedicalProcedureType
 from schema_org.enums import MedicalSpecialty
+from schema_org.enums import MedicalStudyStatus
+from schema_org.enums import MedicalTrialDesign
 from schema_org.enums import MedicineSystem
 from schema_org.enums import OfferItemCondition
 from schema_org.enums import PhysicalActivityCategory
+from schema_org.enums import PhysicalExam
 from schema_org.enums import SizeSpecification
 from schema_org.models.product import Product
 from schema_org.models.substance import Substance
@@ -123,7 +136,7 @@ class DietarySupplement(Product, Substance):
     schema_type: Literal['DietarySupplement'] = Field(default='DietarySupplement', alias='@type', frozen=True)
     active_ingredient: Text | list[Text] | None = Field(default=None, alias='activeIngredient', description='An active ingredient, typically chemical compounds and/or biologic substances.')
     is_proprietary: Boolean | list[Boolean] | None = Field(default=None, alias='isProprietary', description="True if this item's name is a proprietary/brand name (vs. generic name).")
-    legal_status: DrugLegalStatus | MedicalEnumeration | Text | list[DrugLegalStatus | MedicalEnumeration | Text] | None = Field(default=None, alias='legalStatus', description="The drug or supplement's legal status, including any controlled substance schedules that apply.")
+    legal_status: DrugLegalStatus | MedicalEnumeration | DrugCostCategory | DrugPregnancyCategory | DrugPrescriptionStatus | InfectiousAgentClass | MedicalAudienceType | MedicalDevicePurpose | MedicalEvidenceLevel | MedicalImagingTechnique | MedicalObservationalStudyDesign | MedicalProcedureType | MedicalSpecialty | MedicalStudyStatus | MedicalTrialDesign | MedicineSystem | PhysicalExam | Text | list[DrugLegalStatus | MedicalEnumeration | DrugCostCategory | DrugPregnancyCategory | DrugPrescriptionStatus | InfectiousAgentClass | MedicalAudienceType | MedicalDevicePurpose | MedicalEvidenceLevel | MedicalImagingTechnique | MedicalObservationalStudyDesign | MedicalProcedureType | MedicalSpecialty | MedicalStudyStatus | MedicalTrialDesign | MedicineSystem | PhysicalExam | Text] | None = Field(default=None, alias='legalStatus', description="The drug or supplement's legal status, including any controlled substance schedules that apply.")
     maximum_intake: MaximumDoseSchedule | list[MaximumDoseSchedule] | None = Field(default=None, alias='maximumIntake', description='Recommended intake of this supplement for a given population as defined by a specific recommending authority.')
     mechanism_of_action: Text | list[Text] | None = Field(default=None, alias='mechanismOfAction', description='The specific biochemical interaction through which this drug or supplement produces its pharmacological effect.')
     non_proprietary_name: Text | list[Text] | None = Field(default=None, alias='nonProprietaryName', description='The generic name of this drug or supplement.')

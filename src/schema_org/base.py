@@ -80,25 +80,25 @@ class SchemaModel(BaseModel):
     @classmethod
     def _validate_schema_values(cls, data: object) -> object:
         if isinstance(data, dict):
-            cleaned = {key: value for key, value in data.items() if key != "@context"}
-            active = {id(cleaned)}
+            active = {id(data)}
             metadata = {item.schema_name: item for item in cls.SCHEMA_PROPERTIES}
-            for key, value in cleaned.items():
+            for key, value in data.items():
                 field = cls.model_fields.get(key) or next(
                     (candidate for candidate in cls.model_fields.values() if candidate.alias == key),
                     None,
                 )
                 alias = field.alias if field is not None else key
                 property_metadata = metadata.get(alias)
+                if (
+                    property_metadata is not None
+                    and _has_generated_range(property_metadata.ranges)
+                    and isinstance(value, (dict, list))
+                ):
+                    continue
                 if property_metadata is not None and "Number" in property_metadata.ranges:
                     _reject_number_bool(value, path=f"$.{alias}")
-                _walk_schema_value(
-                    value,
-                    path=f"$.{alias}",
-                    active=active,
-                    allow_nested_lists=bool(property_metadata and property_metadata.ranges),
-                )
-            return cleaned
+                _walk_schema_value(value, path=f"$.{alias}", active=active)
+            return data
         _walk_schema_value(data, path="$", active=set())
         return data
     @classmethod
@@ -160,12 +160,18 @@ def _reject_number_bool(value: object, *, path: str) -> None:
 
 
 def _generated_enum(value: SchemaEnum) -> bool:
-    if type(value).__module__ != "schema_org.enums":
-        return False
     try:
         from schema_org import registry
-        return type(value).__name__ in registry._ENUM_NAMES.values()
-    except (AttributeError, KeyError):
+        enum_name = type(value).__name__
+        enum = registry.ENUM_BY_SCHEMA.get(enum_name)
+        return enum is type(value)
+    except (AttributeError, KeyError, TypeError):
+        return False
+def _has_generated_range(ranges: tuple[str, ...]) -> bool:
+    try:
+        from schema_org import registry
+        return any(name in registry._MODEL_CLASSES for name in ranges)
+    except (AttributeError, ImportError):
         return False
 
 
@@ -175,7 +181,6 @@ def _walk_schema_value(
     path: str,
     active: set[int],
     allow_list: bool = True,
-    allow_nested_lists: bool = False,
 ) -> None:
     if value is None:
         return
@@ -199,7 +204,6 @@ def _walk_schema_value(
                         item,
                         path=f"{path}.{alias}",
                         active=active,
-                        allow_nested_lists=bool(property_metadata and property_metadata.ranges),
                     )
         finally:
             active.remove(object_id)
@@ -215,7 +219,7 @@ def _walk_schema_value(
     if isinstance(value, (str, bool, int, float, date, datetime, time)):
         raise ValueError(f"invalid schema value at {path}")
     if isinstance(value, list):
-        if not allow_list and not allow_nested_lists:
+        if not allow_list:
             raise ValueError(f"invalid schema value at {path}: nested lists are not allowed")
         object_id = id(value)
         if object_id in active:
@@ -228,7 +232,6 @@ def _walk_schema_value(
                     path=f"{path}[{index}]",
                     active=active,
                     allow_list=False,
-                    allow_nested_lists=allow_nested_lists,
                 )
         finally:
             active.remove(object_id)
@@ -247,7 +250,6 @@ def _walk_schema_value(
                     path=f"{path}[{key!r}]",
                     active=active,
                     allow_list=False,
-                    allow_nested_lists=allow_nested_lists,
                 )
         finally:
             active.remove(object_id)

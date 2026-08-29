@@ -11,7 +11,12 @@ from pydantic import Field
 from schema_org.datatypes import Date
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
+from schema_org.enums import DENonprofitType
+from schema_org.enums import ITNonprofitType
+from schema_org.enums import NLNonprofitType
 from schema_org.enums import NonprofitType
+from schema_org.enums import UKNonprofitType
+from schema_org.enums import USNonprofitType
 from schema_org.models.thing import Thing
 
 class Organization(Thing):
@@ -171,7 +176,7 @@ class Organization(Thing):
     member_of: MemberProgramTier | Organization | ProgramMembership | list[MemberProgramTier | Organization | ProgramMembership] | None = Field(default=None, alias='memberOf', description='An Organization (or ProgramMembership) to which this Person or Organization belongs.\n\nInverse-property: `member`.')
     members: Organization | Person | list[Organization | Person] | None = Field(default=None, alias='members', description='A member of this organization.\n\nSuperseded by `member`.')
     naics: Text | list[Text] | None = Field(default=None, alias='naics', description='The North American Industry Classification System (NAICS) code for a particular organization or business person.')
-    nonprofit_status: NonprofitType | list[NonprofitType] | None = Field(default=None, alias='nonprofitStatus', description='nonprofitStatus indicates the legal status of a non-profit organization in its primary place of business.')
+    nonprofit_status: NonprofitType | DENonprofitType | ITNonprofitType | NLNonprofitType | UKNonprofitType | USNonprofitType | list[NonprofitType | DENonprofitType | ITNonprofitType | NLNonprofitType | UKNonprofitType | USNonprofitType] | None = Field(default=None, alias='nonprofitStatus', description='nonprofitStatus indicates the legal status of a non-profit organization in its primary place of business.')
     number_of_employees: QuantitativeValue | list[QuantitativeValue] | None = Field(default=None, alias='numberOfEmployees', description='The number of employees in an organization, e.g. business.')
     ownership_funding_info: AboutPage | CreativeWork | Text | URL | list[AboutPage | CreativeWork | Text | URL] | None = Field(default=None, alias='ownershipFundingInfo', description='For an [[Organization]] (often but not necessarily a [[NewsMediaOrganization]]), a description of organizational ownership structure; funding and grants. In a news/media setting, this is with particular reference to editorial independence.   Note that the [[funder]] is also available and can be used to make basic funder information machine-readable.')
     owns: Thing | list[Thing] | None = Field(default=None, alias='owns', description='Things owned by the organization or person.\n\nInverse-property: `owner`.')

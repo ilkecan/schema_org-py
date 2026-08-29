@@ -11,7 +11,11 @@ from pydantic import Field
 from schema_org.datatypes import Number
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
+from schema_org.enums import BedType
+from schema_org.enums import DriveWheelConfigurationValue
 from schema_org.enums import QualitativeValue
+from schema_org.enums import SizeSpecification
+from schema_org.enums import SteeringPositionValue
 from schema_org.models.intangible import Intangible
 
 class BroadcastFrequencySpecification(Intangible):
@@ -39,5 +43,5 @@ class BroadcastFrequencySpecification(Intangible):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['BroadcastFrequencySpecification'] = Field(default='BroadcastFrequencySpecification', alias='@type', frozen=True)
     broadcast_frequency_value: Number | QuantitativeValue | list[Number | QuantitativeValue] | None = Field(default=None, alias='broadcastFrequencyValue', description='The frequency in MHz for a particular broadcast.')
-    broadcast_signal_modulation: QualitativeValue | Text | list[QualitativeValue | Text] | None = Field(default=None, alias='broadcastSignalModulation', description='The modulation (e.g. FM, AM, etc) used by a particular broadcast service.')
+    broadcast_signal_modulation: QualitativeValue | BedType | DriveWheelConfigurationValue | SizeSpecification | SteeringPositionValue | Text | list[QualitativeValue | BedType | DriveWheelConfigurationValue | SizeSpecification | SteeringPositionValue | Text] | None = Field(default=None, alias='broadcastSignalModulation', description='The modulation (e.g. FM, AM, etc) used by a particular broadcast service.')
     broadcast_sub_channel: Text | list[Text] | None = Field(default=None, alias='broadcastSubChannel', description='The subchannel used for the broadcast.')

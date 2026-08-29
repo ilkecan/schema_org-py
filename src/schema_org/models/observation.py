@@ -14,10 +14,102 @@ from schema_org.datatypes import DateTime
 from schema_org.datatypes import Number
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
+from schema_org.enums import ActionStatusType
+from schema_org.enums import AdultOrientedEnumeration
+from schema_org.enums import BedType
+from schema_org.enums import BoardingPolicyType
+from schema_org.enums import BodyMeasurementTypeEnumeration
+from schema_org.enums import BookFormatType
+from schema_org.enums import BusinessEntityType
+from schema_org.enums import BusinessFunction
+from schema_org.enums import CarUsageType
+from schema_org.enums import CertificationStatusEnumeration
+from schema_org.enums import ContactPointOption
+from schema_org.enums import DENonprofitType
+from schema_org.enums import DayOfWeek
+from schema_org.enums import DeliveryMethod
+from schema_org.enums import DigitalDocumentPermissionType
+from schema_org.enums import DigitalPlatformEnumeration
+from schema_org.enums import DriveWheelConfigurationValue
+from schema_org.enums import DrugCostCategory
+from schema_org.enums import DrugPregnancyCategory
+from schema_org.enums import DrugPrescriptionStatus
+from schema_org.enums import EUEnergyEfficiencyEnumeration
+from schema_org.enums import EnergyEfficiencyEnumeration
+from schema_org.enums import EnergyStarEnergyEfficiencyEnumeration
 from schema_org.enums import Enumeration
+from schema_org.enums import EventAttendanceModeEnumeration
+from schema_org.enums import EventStatusType
+from schema_org.enums import FulfillmentTypeEnumeration
+from schema_org.enums import GameAvailabilityEnumeration
+from schema_org.enums import GamePlayMode
+from schema_org.enums import GameServerStatus
+from schema_org.enums import GenderType
+from schema_org.enums import GovernmentBenefitsType
+from schema_org.enums import HealthAspectEnumeration
+from schema_org.enums import IPTCDigitalSourceEnumeration
+from schema_org.enums import ITNonprofitType
+from schema_org.enums import IncentiveQualifiedExpenseType
+from schema_org.enums import IncentiveStatus
+from schema_org.enums import IncentiveType
+from schema_org.enums import InfectiousAgentClass
+from schema_org.enums import ItemAvailability
+from schema_org.enums import ItemListOrderType
+from schema_org.enums import LegalForceStatus
+from schema_org.enums import LegalValueLevel
+from schema_org.enums import MapCategoryType
 from schema_org.enums import MeasurementMethodEnum
 from schema_org.enums import MeasurementTypeEnumeration
+from schema_org.enums import MediaEnumeration
+from schema_org.enums import MediaManipulationRatingEnumeration
+from schema_org.enums import MedicalAudienceType
+from schema_org.enums import MedicalDevicePurpose
+from schema_org.enums import MedicalEnumeration
+from schema_org.enums import MedicalEvidenceLevel
+from schema_org.enums import MedicalImagingTechnique
+from schema_org.enums import MedicalObservationalStudyDesign
+from schema_org.enums import MedicalProcedureType
+from schema_org.enums import MedicalSpecialty
+from schema_org.enums import MedicalStudyStatus
+from schema_org.enums import MedicalTrialDesign
+from schema_org.enums import MedicineSystem
+from schema_org.enums import MerchantReturnEnumeration
+from schema_org.enums import MusicAlbumProductionType
+from schema_org.enums import MusicAlbumReleaseType
+from schema_org.enums import MusicReleaseFormatType
+from schema_org.enums import NLNonprofitType
+from schema_org.enums import NonprofitType
+from schema_org.enums import OfferItemCondition
+from schema_org.enums import OrderStatus
+from schema_org.enums import PaymentMethodType
+from schema_org.enums import PaymentStatusType
+from schema_org.enums import PhysicalActivityCategory
+from schema_org.enums import PhysicalExam
+from schema_org.enums import PriceComponentTypeEnumeration
+from schema_org.enums import PriceTypeEnumeration
+from schema_org.enums import ProductReturnEnumeration
+from schema_org.enums import PurchaseType
 from schema_org.enums import QualitativeValue
+from schema_org.enums import RefundTypeEnumeration
+from schema_org.enums import ReservationStatusType
+from schema_org.enums import RestrictedDiet
+from schema_org.enums import ReturnFeesEnumeration
+from schema_org.enums import ReturnLabelSourceEnumeration
+from schema_org.enums import ReturnMethodEnumeration
+from schema_org.enums import RsvpResponseType
+from schema_org.enums import SizeGroupEnumeration
+from schema_org.enums import SizeSpecification
+from schema_org.enums import SizeSystemEnumeration
+from schema_org.enums import Specialty
+from schema_org.enums import StatusEnumeration
+from schema_org.enums import SteeringPositionValue
+from schema_org.enums import TierBenefitEnumeration
+from schema_org.enums import UKNonprofitType
+from schema_org.enums import USNonprofitType
+from schema_org.enums import WarrantyScope
+from schema_org.enums import WearableMeasurementTypeEnumeration
+from schema_org.enums import WearableSizeGroupEnumeration
+from schema_org.enums import WearableSizeSystemEnumeration
 from schema_org.models.intangible import Intangible
 from schema_org.models.quantitative_value import QuantitativeValue
 
@@ -63,7 +155,7 @@ class Observation(QuantitativeValue, Intangible):
     measured_property: SchemaValue | None = Field(default=None, alias='measuredProperty', description="The measuredProperty of an [[Observation]], typically via its [[StatisticalVariable]]. There are various kinds of applicable [[Property]]: a schema.org property, a property from other RDF-compatible systems, e.g. W3C RDF Data Cube, Data Commons, Wikidata, or schema.org extensions such as [GS1's](https://www.gs1.org/voc/?show=properties).")
     measurement_denominator: StatisticalVariable | list[StatisticalVariable] | None = Field(default=None, alias='measurementDenominator', description='Identifies the denominator variable when an observation represents a ratio or percentage.')
     measurement_method: DefinedTerm | MeasurementMethodEnum | Text | URL | list[DefinedTerm | MeasurementMethodEnum | Text | URL] | None = Field(default=None, alias='measurementMethod', description='A subproperty of [[measurementTechnique]] that can be used for specifying specific methods, in particular via [[MeasurementMethodEnum]].')
-    measurement_qualifier: Enumeration | list[Enumeration] | None = Field(default=None, alias='measurementQualifier', description='Provides additional qualification to an observation. For example, a GDP observation measures the Nominal value.')
+    measurement_qualifier: Enumeration | ActionStatusType | AdultOrientedEnumeration | BedType | BoardingPolicyType | BodyMeasurementTypeEnumeration | BookFormatType | BusinessEntityType | BusinessFunction | CarUsageType | CertificationStatusEnumeration | ContactPointOption | DENonprofitType | DayOfWeek | DeliveryMethod | DigitalDocumentPermissionType | DigitalPlatformEnumeration | DriveWheelConfigurationValue | DrugCostCategory | DrugPregnancyCategory | DrugPrescriptionStatus | EUEnergyEfficiencyEnumeration | EnergyEfficiencyEnumeration | EnergyStarEnergyEfficiencyEnumeration | EventAttendanceModeEnumeration | EventStatusType | FulfillmentTypeEnumeration | GameAvailabilityEnumeration | GamePlayMode | GameServerStatus | GenderType | GovernmentBenefitsType | HealthAspectEnumeration | IPTCDigitalSourceEnumeration | ITNonprofitType | IncentiveQualifiedExpenseType | IncentiveStatus | IncentiveType | InfectiousAgentClass | ItemAvailability | ItemListOrderType | LegalForceStatus | LegalValueLevel | MapCategoryType | MeasurementMethodEnum | MeasurementTypeEnumeration | MediaEnumeration | MediaManipulationRatingEnumeration | MedicalAudienceType | MedicalDevicePurpose | MedicalEnumeration | MedicalEvidenceLevel | MedicalImagingTechnique | MedicalObservationalStudyDesign | MedicalProcedureType | MedicalSpecialty | MedicalStudyStatus | MedicalTrialDesign | MedicineSystem | MerchantReturnEnumeration | MusicAlbumProductionType | MusicAlbumReleaseType | MusicReleaseFormatType | NLNonprofitType | NonprofitType | OfferItemCondition | OrderStatus | PaymentMethodType | PaymentStatusType | PhysicalActivityCategory | PhysicalExam | PriceComponentTypeEnumeration | PriceTypeEnumeration | ProductReturnEnumeration | PurchaseType | QualitativeValue | RefundTypeEnumeration | ReservationStatusType | RestrictedDiet | ReturnFeesEnumeration | ReturnLabelSourceEnumeration | ReturnMethodEnumeration | RsvpResponseType | SizeGroupEnumeration | SizeSpecification | SizeSystemEnumeration | Specialty | StatusEnumeration | SteeringPositionValue | TierBenefitEnumeration | UKNonprofitType | USNonprofitType | WarrantyScope | WearableMeasurementTypeEnumeration | WearableSizeGroupEnumeration | WearableSizeSystemEnumeration | list[Enumeration | ActionStatusType | AdultOrientedEnumeration | BedType | BoardingPolicyType | BodyMeasurementTypeEnumeration | BookFormatType | BusinessEntityType | BusinessFunction | CarUsageType | CertificationStatusEnumeration | ContactPointOption | DENonprofitType | DayOfWeek | DeliveryMethod | DigitalDocumentPermissionType | DigitalPlatformEnumeration | DriveWheelConfigurationValue | DrugCostCategory | DrugPregnancyCategory | DrugPrescriptionStatus | EUEnergyEfficiencyEnumeration | EnergyEfficiencyEnumeration | EnergyStarEnergyEfficiencyEnumeration | EventAttendanceModeEnumeration | EventStatusType | FulfillmentTypeEnumeration | GameAvailabilityEnumeration | GamePlayMode | GameServerStatus | GenderType | GovernmentBenefitsType | HealthAspectEnumeration | IPTCDigitalSourceEnumeration | ITNonprofitType | IncentiveQualifiedExpenseType | IncentiveStatus | IncentiveType | InfectiousAgentClass | ItemAvailability | ItemListOrderType | LegalForceStatus | LegalValueLevel | MapCategoryType | MeasurementMethodEnum | MeasurementTypeEnumeration | MediaEnumeration | MediaManipulationRatingEnumeration | MedicalAudienceType | MedicalDevicePurpose | MedicalEnumeration | MedicalEvidenceLevel | MedicalImagingTechnique | MedicalObservationalStudyDesign | MedicalProcedureType | MedicalSpecialty | MedicalStudyStatus | MedicalTrialDesign | MedicineSystem | MerchantReturnEnumeration | MusicAlbumProductionType | MusicAlbumReleaseType | MusicReleaseFormatType | NLNonprofitType | NonprofitType | OfferItemCondition | OrderStatus | PaymentMethodType | PaymentStatusType | PhysicalActivityCategory | PhysicalExam | PriceComponentTypeEnumeration | PriceTypeEnumeration | ProductReturnEnumeration | PurchaseType | QualitativeValue | RefundTypeEnumeration | ReservationStatusType | RestrictedDiet | ReturnFeesEnumeration | ReturnLabelSourceEnumeration | ReturnMethodEnumeration | RsvpResponseType | SizeGroupEnumeration | SizeSpecification | SizeSystemEnumeration | Specialty | StatusEnumeration | SteeringPositionValue | TierBenefitEnumeration | UKNonprofitType | USNonprofitType | WarrantyScope | WearableMeasurementTypeEnumeration | WearableSizeGroupEnumeration | WearableSizeSystemEnumeration] | None = Field(default=None, alias='measurementQualifier', description='Provides additional qualification to an observation. For example, a GDP observation measures the Nominal value.')
     measurement_technique: DefinedTerm | MeasurementMethodEnum | Text | URL | list[DefinedTerm | MeasurementMethodEnum | Text | URL] | None = Field(default=None, alias='measurementTechnique', description='A technique, method or technology used in an [[Observation]], [[StatisticalVariable]] or [[Dataset]] (or [[DataDownload]], [[DataCatalog]]), corresponding to the method used for measuring the corresponding variable(s) (for datasets, described using [[variableMeasured]]; for [[Observation]], a [[StatisticalVariable]]). Often but not necessarily each [[variableMeasured]] will have an explicit representation as (or mapping to) an property such as those defined in Schema.org, or other RDF vocabularies and "knowledge graphs". In that case the subproperty of [[variableMeasured]] called [[measuredProperty]] is applicable.\n    \nThe [[measurementTechnique]] property helps when extra clarification is needed about how a [[measuredProperty]] was measured. This is oriented towards scientific and scholarly dataset publication but may have broader applicability; it is not intended as a full representation of measurement, but can often serve as a high level summary for dataset discovery. \n\nFor example, if [[variableMeasured]] is: molecule concentration, [[measurementTechnique]] could be: "mass spectrometry" or "nmr spectroscopy" or "colorimetry" or "immunofluorescence". If the [[variableMeasured]] is "depression rating", the [[measurementTechnique]] could be "Zung Scale" or "HAM-D" or "Beck Depression Inventory". \n\nIf there are several [[variableMeasured]] properties recorded for some given data object, use a [[PropertyValue]] for each [[variableMeasured]] and attach the corresponding [[measurementTechnique]]. The value can also be from an enumeration, organized as a [[MeasurementMethodEnum]].')
     observation_about: Place | Thing | list[Place | Thing] | None = Field(default=None, alias='observationAbout', description='The [[observationAbout]] property identifies an entity, often a [[Place]], associated with an [[Observation]].')
     observation_date: Date | DateTime | list[Date | DateTime] | None = Field(default=None, alias='observationDate', description='The observationDate of an [[Observation]].')

@@ -12,6 +12,13 @@ from schema_org.datatypes import DateTime
 from schema_org.datatypes import Integer
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
+from schema_org.enums import ActionStatusType
+from schema_org.enums import EventStatusType
+from schema_org.enums import GameServerStatus
+from schema_org.enums import LegalForceStatus
+from schema_org.enums import OrderStatus
+from schema_org.enums import PaymentStatusType
+from schema_org.enums import ReservationStatusType
 from schema_org.enums import StatusEnumeration
 from schema_org.models.instantaneous_event import InstantaneousEvent
 
@@ -40,4 +47,4 @@ class Error(InstantaneousEvent):
     )
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['Error'] = Field(default='Error', alias='@type', frozen=True)
-    error_code: DefinedTerm | Integer | StatusEnumeration | Text | list[DefinedTerm | Integer | StatusEnumeration | Text] | None = Field(default=None, alias='errorCode', description='Application or platform dependant error code.')
+    error_code: DefinedTerm | Integer | StatusEnumeration | ActionStatusType | EventStatusType | GameServerStatus | LegalForceStatus | OrderStatus | PaymentStatusType | ReservationStatusType | Text | list[DefinedTerm | Integer | StatusEnumeration | ActionStatusType | EventStatusType | GameServerStatus | LegalForceStatus | OrderStatus | PaymentStatusType | ReservationStatusType | Text] | None = Field(default=None, alias='errorCode', description='Application or platform dependant error code.')

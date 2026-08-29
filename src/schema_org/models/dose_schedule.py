@@ -11,10 +11,27 @@ from pydantic import Field
 from schema_org.datatypes import Number
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
+from schema_org.enums import BedType
+from schema_org.enums import DriveWheelConfigurationValue
+from schema_org.enums import DrugCostCategory
+from schema_org.enums import DrugPregnancyCategory
+from schema_org.enums import DrugPrescriptionStatus
+from schema_org.enums import InfectiousAgentClass
+from schema_org.enums import MedicalAudienceType
+from schema_org.enums import MedicalDevicePurpose
 from schema_org.enums import MedicalEnumeration
+from schema_org.enums import MedicalEvidenceLevel
+from schema_org.enums import MedicalImagingTechnique
+from schema_org.enums import MedicalObservationalStudyDesign
+from schema_org.enums import MedicalProcedureType
 from schema_org.enums import MedicalSpecialty
+from schema_org.enums import MedicalStudyStatus
+from schema_org.enums import MedicalTrialDesign
 from schema_org.enums import MedicineSystem
+from schema_org.enums import PhysicalExam
 from schema_org.enums import QualitativeValue
+from schema_org.enums import SizeSpecification
+from schema_org.enums import SteeringPositionValue
 from schema_org.models.medical_intangible import MedicalIntangible
 
 class DoseSchedule(MedicalIntangible):
@@ -51,6 +68,6 @@ class DoseSchedule(MedicalIntangible):
     schema_id: str | None = Field(default=None, alias='@id')
     schema_type: Literal['DoseSchedule'] = Field(default='DoseSchedule', alias='@type', frozen=True)
     dose_unit: Text | list[Text] | None = Field(default=None, alias='doseUnit', description="The unit of the dose, e.g. 'mg'.")
-    dose_value: Number | QualitativeValue | list[Number | QualitativeValue] | None = Field(default=None, alias='doseValue', description='The value of the dose, e.g. 500.')
+    dose_value: Number | QualitativeValue | BedType | DriveWheelConfigurationValue | SizeSpecification | SteeringPositionValue | list[Number | QualitativeValue | BedType | DriveWheelConfigurationValue | SizeSpecification | SteeringPositionValue] | None = Field(default=None, alias='doseValue', description='The value of the dose, e.g. 500.')
     frequency: Text | list[Text] | None = Field(default=None, alias='frequency', description="How often the dose is taken, e.g. 'daily'.")
     target_population: Text | list[Text] | None = Field(default=None, alias='targetPopulation', description="Characteristics of the population for which this is intended, or which typically uses it, e.g. 'adults'.")

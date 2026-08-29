@@ -10,7 +10,11 @@ from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
+from schema_org.enums import BedType
+from schema_org.enums import DriveWheelConfigurationValue
 from schema_org.enums import QualitativeValue
+from schema_org.enums import SizeSpecification
+from schema_org.enums import SteeringPositionValue
 from schema_org.models.structured_value import StructuredValue
 
 class EngineSpecification(StructuredValue):
@@ -41,6 +45,6 @@ class EngineSpecification(StructuredValue):
     schema_type: Literal['EngineSpecification'] = Field(default='EngineSpecification', alias='@type', frozen=True)
     engine_displacement: QuantitativeValue | list[QuantitativeValue] | None = Field(default=None, alias='engineDisplacement', description='The volume swept by all of the pistons inside the cylinders of an internal combustion engine in a single movement. \\n\\nTypical unit code(s): CMQ for cubic centimeter, LTR for liters, INQ for cubic inches\\n* Note 1: You can link to information about how the given value has been determined using the [[valueReference]] property.\\n* Note 2: You can use [[minValue]] and [[maxValue]] to indicate ranges.')
     engine_power: QuantitativeValue | list[QuantitativeValue] | None = Field(default=None, alias='enginePower', description="The power of the vehicle's engine.\n    Typical unit code(s): KWT for kilowatt, BHP for brake horsepower, N12 for metric horsepower (PS, with 1 PS = 735,49875 W)\\n\\n* Note 1: There are many different ways of measuring an engine's power. For an overview, see  [http://en.wikipedia.org/wiki/Horsepower#Engine\\_power\\_test\\_codes](http://en.wikipedia.org/wiki/Horsepower#Engine_power_test_codes).\\n* Note 2: You can link to information about how the given value has been determined using the [[valueReference]] property.\\n* Note 3: You can use [[minValue]] and [[maxValue]] to indicate ranges.")
-    engine_type: QualitativeValue | Text | URL | list[QualitativeValue | Text | URL] | None = Field(default=None, alias='engineType', description='The type of engine or engines powering the vehicle.')
-    fuel_type: QualitativeValue | Text | URL | list[QualitativeValue | Text | URL] | None = Field(default=None, alias='fuelType', description='The type of fuel suitable for the engine or engines of the vehicle. If the vehicle has only one engine, this property can be attached directly to the vehicle.')
+    engine_type: QualitativeValue | BedType | DriveWheelConfigurationValue | SizeSpecification | SteeringPositionValue | Text | URL | list[QualitativeValue | BedType | DriveWheelConfigurationValue | SizeSpecification | SteeringPositionValue | Text | URL] | None = Field(default=None, alias='engineType', description='The type of engine or engines powering the vehicle.')
+    fuel_type: QualitativeValue | BedType | DriveWheelConfigurationValue | SizeSpecification | SteeringPositionValue | Text | URL | list[QualitativeValue | BedType | DriveWheelConfigurationValue | SizeSpecification | SteeringPositionValue | Text | URL] | None = Field(default=None, alias='fuelType', description='The type of fuel suitable for the engine or engines of the vehicle. If the vehicle has only one engine, this property can be attached directly to the vehicle.')
     torque: QuantitativeValue | list[QuantitativeValue] | None = Field(default=None, alias='torque', description="The torque (turning force) of the vehicle's engine.\\n\\nTypical unit code(s): NU for newton metre (N m), F17 for pound-force per foot, or F48 for pound-force per inch\\n\\n* Note 1: You can link to information about how the given value has been determined (e.g. reference RPM) using the [[valueReference]] property.\\n* Note 2: You can use [[minValue]] and [[maxValue]] to indicate ranges.")

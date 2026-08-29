@@ -11,11 +11,27 @@ from pydantic import Field
 from schema_org.datatypes import Number
 from schema_org.datatypes import Text
 from schema_org.datatypes import URL
+from schema_org.enums import BedType
+from schema_org.enums import DriveWheelConfigurationValue
 from schema_org.enums import DrugCostCategory
+from schema_org.enums import DrugPregnancyCategory
+from schema_org.enums import DrugPrescriptionStatus
+from schema_org.enums import InfectiousAgentClass
+from schema_org.enums import MedicalAudienceType
+from schema_org.enums import MedicalDevicePurpose
 from schema_org.enums import MedicalEnumeration
+from schema_org.enums import MedicalEvidenceLevel
+from schema_org.enums import MedicalImagingTechnique
+from schema_org.enums import MedicalObservationalStudyDesign
+from schema_org.enums import MedicalProcedureType
 from schema_org.enums import MedicalSpecialty
+from schema_org.enums import MedicalStudyStatus
+from schema_org.enums import MedicalTrialDesign
 from schema_org.enums import MedicineSystem
+from schema_org.enums import PhysicalExam
 from schema_org.enums import QualitativeValue
+from schema_org.enums import SizeSpecification
+from schema_org.enums import SteeringPositionValue
 from schema_org.models.medical_entity import MedicalEntity
 
 class DrugCost(MedicalEntity):
@@ -57,5 +73,5 @@ class DrugCost(MedicalEntity):
     cost_category: DrugCostCategory | list[DrugCostCategory] | None = Field(default=None, alias='costCategory', description='The category of cost, such as wholesale, retail, reimbursement cap, etc.')
     cost_currency: Text | list[Text] | None = Field(default=None, alias='costCurrency', description='The currency (in 3-letter) of the drug cost. See: http://en.wikipedia.org/wiki/ISO_4217. ')
     cost_origin: Text | list[Text] | None = Field(default=None, alias='costOrigin', description="Additional details to capture the origin of the cost data. For example, 'Medicare Part B'.")
-    cost_per_unit: Number | QualitativeValue | Text | list[Number | QualitativeValue | Text] | None = Field(default=None, alias='costPerUnit', description='The cost per unit of the drug.')
+    cost_per_unit: Number | QualitativeValue | BedType | DriveWheelConfigurationValue | SizeSpecification | SteeringPositionValue | Text | list[Number | QualitativeValue | BedType | DriveWheelConfigurationValue | SizeSpecification | SteeringPositionValue | Text] | None = Field(default=None, alias='costPerUnit', description='The cost per unit of the drug.')
     drug_unit: Text | list[Text] | None = Field(default=None, alias='drugUnit', description="The unit in which the drug is measured, e.g. '5 mg tablet'.")
