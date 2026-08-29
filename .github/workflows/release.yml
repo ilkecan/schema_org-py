@@ -18,6 +18,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - uses: astral-sh/setup-uv@v6
+      - name: Verify release tag
+        run: test "$GITHUB_REF_NAME" = "v$(uv version --short)"
       - run: uv sync
       - run: uv run python -m pytest
       - run: uv run python -m schema_org_codegen.check
