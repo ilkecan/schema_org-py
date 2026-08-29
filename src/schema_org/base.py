@@ -89,15 +89,17 @@ class SchemaModel(BaseModel):
                 )
                 alias = field.alias if field is not None else key
                 property_metadata = metadata.get(alias)
-                if (
-                    property_metadata is not None
-                    and _has_generated_range(property_metadata.ranges)
-                    and isinstance(value, (dict, list))
-                ):
-                    continue
-                if property_metadata is not None and "Number" in property_metadata.ranges:
-                    _reject_number_bool(value, path=f"$.{alias}")
-                _walk_schema_value(value, path=f"$.{alias}", active=active)
+                if property_metadata is not None and _has_generated_range(property_metadata.ranges):
+                    _walk_typed_input(
+                        value,
+                        path=f"$.{alias}",
+                        active=active,
+                        expected_models=_generated_range_names(property_metadata.ranges),
+                    )
+                else:
+                    if property_metadata is not None and "Number" in property_metadata.ranges:
+                        _reject_number_bool(value, path=f"$.{alias}")
+                    _walk_schema_value(value, path=f"$.{alias}", active=active)
             return data
         _walk_schema_value(data, path="$", active=set())
         return data
@@ -167,13 +169,122 @@ def _generated_enum(value: SchemaEnum) -> bool:
         return enum is type(value)
     except (AttributeError, KeyError, TypeError):
         return False
-def _has_generated_range(ranges: tuple[str, ...]) -> bool:
+def _generated_range_names(ranges: tuple[str, ...]) -> tuple[str, ...]:
     try:
         from schema_org import registry
-        return any(name in registry._MODEL_CLASSES for name in ranges)
+        return tuple(name for name in ranges if name in registry._MODEL_CLASSES)
     except (AttributeError, ImportError):
-        return False
+        return ()
 
+
+def _has_generated_range(ranges: tuple[str, ...]) -> bool:
+    return bool(_generated_range_names(ranges))
+
+def _typed_field(expected_models: tuple[str, ...], key: str):
+    try:
+        from schema_org import registry
+        for name in expected_models:
+            model = registry.get_model(name)
+            field = model.model_fields.get(key) or next(
+                (candidate for candidate in model.model_fields.values() if candidate.alias == key),
+                None,
+            )
+            if field is not None:
+                return model, field
+    except (AttributeError, KeyError, TypeError):
+        pass
+    return None, None
+
+def _walk_typed_input(
+    value: object,
+    *,
+    path: str,
+    active: set[int],
+    expected_models: tuple[str, ...] = (),
+) -> None:
+    if value is None or type(value) in {str, bool, int, float, date, datetime, time}:
+        return
+    if isinstance(value, SchemaModel):
+        if not _generated_model(value):
+            raise ValueError("schema values must be generated Schema.org models")
+        object_id = id(value)
+        if object_id in active:
+            raise CircularReferenceError(f"Circular reference at {path}")
+        active.add(object_id)
+        try:
+            metadata = {item.schema_name: item for item in type(value).SCHEMA_PROPERTIES}
+            for field_name, field in type(value).model_fields.items():
+                if field_name in {"schema_id", "schema_type"}:
+                    continue
+                item = getattr(value, field_name)
+                if item is not None:
+                    alias = field.alias or field_name
+                    property_metadata = metadata.get(alias)
+                    ranges = property_metadata.ranges if property_metadata is not None else ()
+                    _walk_typed_input(
+                        item,
+                        path=f"{path}.{alias}",
+                        active=active,
+                        expected_models=_generated_range_names(ranges),
+                    )
+        finally:
+            active.remove(object_id)
+        return
+    if isinstance(value, SchemaEnum):
+        if not _generated_enum(value):
+            raise ValueError("schema values must be generated Schema.org enum members")
+        return
+    if isinstance(value, list):
+        object_id = id(value)
+        if object_id in active:
+            raise CircularReferenceError(f"Circular reference at {path}")
+        active.add(object_id)
+        try:
+            for index, item in enumerate(value):
+                _walk_typed_input(
+                    item,
+                    path=f"{path}[{index}]",
+                    active=active,
+                    expected_models=expected_models,
+                )
+        finally:
+            active.remove(object_id)
+        return
+    if isinstance(value, dict):
+        object_id = id(value)
+        if object_id in active:
+            raise CircularReferenceError(f"Circular reference at {path}")
+        active.add(object_id)
+        try:
+            for key, item in value.items():
+                if not isinstance(key, str):
+                    raise ValueError(f"invalid {path}: mapping keys must be str")
+                model, field = _typed_field(expected_models, key)
+                if field is None:
+                    next_path = f"{path}[{key!r}]"
+                    next_models = expected_models
+                else:
+                    alias = field.alias or key
+                    next_path = f"{path}.{alias}"
+                    property_metadata = next(
+                        (
+                            candidate
+                            for candidate in model.SCHEMA_PROPERTIES
+                            if candidate.schema_name == alias
+                        ),
+                        None,
+                    )
+                    ranges = property_metadata.ranges if property_metadata is not None else ()
+                    next_models = _generated_range_names(ranges)
+                _walk_typed_input(
+                    item,
+                    path=next_path,
+                    active=active,
+                    expected_models=next_models,
+                )
+        finally:
+            active.remove(object_id)
+        return
 
 def _walk_schema_value(
     value: object,

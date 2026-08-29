@@ -55,6 +55,23 @@ def test_self_assignment_and_cycle_path():
         person.to_jsonld()
 
 
+
+def test_typed_inputs_reject_subclasses_and_report_raw_cycles():
+    class CustomPerson(Person):
+        pass
+
+    custom = CustomPerson.model_construct(name="Ada")
+    with pytest.raises(ValidationError):
+        Person(children=[custom])
+
+    person = Person(name="Ada")
+    with pytest.raises(ValidationError):
+        person.children = [custom]
+    child = {}
+    child["children"] = [child]
+    with pytest.raises(ValidationError, match=r"\$\.children\[0\]\.children\[0\]"):
+        Person(children=[child])
+
 def test_jsonld_aliases_context_and_dates():
     result = Person(name="Ada", address=PostalAddress(address_locality="London"), birth_date=date(1990, 1, 2)).to_jsonld()
     assert result == {
