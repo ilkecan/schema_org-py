@@ -162,8 +162,6 @@ def test_http_failure_preserves_target(tmp_path):
 
 def test_validator_failure_preserves_every_tracked_artifact(tmp_path):
     root, target, _ = tracked_tree(tmp_path)
-    existing = root / "src/schema_org/existing.py"
-    existing.write_text("old", encoding="utf-8")
     before = {path.relative_to(root): path.read_bytes() for path in root.rglob("*") if path.is_file()}
 
     def reject(_root):
@@ -191,14 +189,22 @@ def test_replacement_failure_rolls_back_all_files(tmp_path, monkeypatch):
     before = {path.relative_to(root): path.read_bytes() for path in root.rglob("*") if path.is_file()}
     original = transaction_module._replace_bytes
     calls = 0
+    failed = False
 
     def fail_after_two(path, content):
-        nonlocal calls
+        nonlocal calls, failed
         calls += 1
-        if calls == 3:
+        original(path, content)
+        if calls == 3 and not failed:
+            failed = True
             raise OSError("replace failed")
+
     monkeypatch.setattr(transaction_module, "_replace_bytes", fail_after_two)
-    updater = SchemaUpdater(downloader=lambda url: TTL, target=target, project_root=root)
+    updater = SchemaUpdater(
+        downloader=lambda url: TTL,
+        target=Path("codegen/data/schema.ttl"),
+        project_root=root,
+    )
     with pytest.raises(OSError, match="replace failed"):
         updater.update("v30.1")
     after = {path.relative_to(root): path.read_bytes() for path in root.rglob("*") if path.is_file()}

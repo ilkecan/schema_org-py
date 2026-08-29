@@ -6,7 +6,7 @@ import zipfile
 import pytest
 
 from schema_org_codegen import ValidationError
-from schema_org_codegen.package_check import _validate_sdist, _validate_wheel
+from schema_org_codegen.package_check import _runtime_files, _validate_sdist, _validate_wheel
 
 
 def test_wheel_requires_exact_runtime_and_metadata(tmp_path: Path):
@@ -60,3 +60,29 @@ def test_sdist_allows_ancestor_directories_and_rejects_development_files(tmp_pat
         archive.addfile(info)
     with pytest.raises(ValidationError):
         _validate_sdist(bad, {"__init__.py", "py.typed"}, tmp_path)
+
+
+def test_runtime_files_follow_manifest_and_base_only(tmp_path: Path):
+    runtime = tmp_path / "src/schema_org"
+    (runtime / "__init__.py").parent.mkdir(parents=True)
+    (runtime / "__init__.py").write_bytes(b"")
+    (runtime / "base.py").write_bytes(b"")
+    (tmp_path / "codegen").mkdir()
+    manifest = {
+        "schema_version": "1.0",
+        "schema_source": "https://schema.org/version/1.0/schemaorg-all-https.ttl",
+        "paths": ["src/schema_org/__init__.py"],
+        "terms": {
+            "classes": [],
+            "datatypes": [],
+            "enumerations": [],
+            "enumeration_members": [],
+            "properties": [],
+        },
+    }
+    import json
+    (tmp_path / "codegen/generated_manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    assert _runtime_files(tmp_path) == {"__init__.py", "base.py"}
+    (runtime / "unexpected.py").write_bytes(b"")
+    with pytest.raises(ValidationError):
+        _runtime_files(tmp_path)

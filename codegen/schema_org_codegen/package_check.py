@@ -7,7 +7,7 @@ import tarfile
 import tempfile
 import venv
 import zipfile
-
+from .manifest import read_manifest
 from .vocabulary import ValidationError
 
 _RUNTIME_ROOT = Path("src/schema_org")
@@ -23,16 +23,30 @@ def validate_distributions(dist_dir: Path, *, project_root: Path) -> Path:
     sdists = [path for path in artifacts if path.name.endswith(".tar.gz")]
     if len(wheels) != 1 or len(sdists) != 1 or len(artifacts) != 2:
         raise ValidationError("distribution directory must contain one wheel and one sdist")
-    runtime_root = project_root / _RUNTIME_ROOT
-    if not runtime_root.is_dir():
-        raise ValidationError("tracked runtime package is missing")
-    runtime = {
-        path.relative_to(runtime_root).as_posix()
-        for path in runtime_root.rglob("*")
-        if path.is_file() and (path.suffix == ".py" or path.name == "py.typed")
-    }
+    runtime = _runtime_files(project_root)
     _validate_wheel(wheels[0], runtime)
     _validate_sdist(sdists[0], runtime, project_root)
+    _clean_wheel_smoke(wheels[0])
+    return wheels[0]
+
+
+def _runtime_files(project_root: Path) -> set[str]:
+    manifest = read_manifest(project_root / "codegen/generated_manifest.json", project_root=project_root)
+    generated = {
+        path.removeprefix("src/schema_org/")
+        for path in manifest["paths"]
+    }
+    expected = generated | {"base.py"}
+    runtime_root = project_root / _RUNTIME_ROOT
+    actual: set[str] = set()
+    for path in runtime_root.rglob("*"):
+        if path.is_symlink():
+            raise ValidationError("tracked runtime package contains a symlink")
+        if path.is_file() and "__pycache__" not in path.parts:
+            actual.add(path.relative_to(runtime_root).as_posix())
+    if actual != expected:
+        raise ValidationError("tracked runtime files do not match generated manifest")
+    return expected
     _clean_wheel_smoke(wheels[0])
     return wheels[0]
 

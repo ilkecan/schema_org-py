@@ -23,8 +23,11 @@ VERSION_PATTERN = re.compile(r"Schema\.org Version\s+(?:v)?(\d+\.\d+)", re.IGNOR
 
 class SchemaUpdater:
     def __init__(self, downloader=None, *, target: str | Path | None = None, project_root: str | Path | None = None, validator=None):
-        self.project_root = Path(project_root) if project_root is not None else Path(__file__).resolve().parents[2]
-        self.target = Path(target) if target is not None else self.project_root / "codegen/data/schema.ttl"
+        self.project_root = (Path(project_root) if project_root is not None else Path(__file__).resolve().parents[2]).resolve()
+        raw_target = Path(target) if target is not None else Path("codegen/data/schema.ttl")
+        candidate = raw_target if raw_target.is_absolute() else self.project_root / raw_target
+        self._target_relative = _target_relative(self.project_root, candidate)
+        self.target = self.project_root / self._target_relative
         self.downloader = downloader or _download
         self.validator = validator
 
@@ -46,7 +49,6 @@ class SchemaUpdater:
     def update(self, version: str | None = None) -> bool:
         numeric = _numeric_version(version) if version is not None else self.latest_version()
         current = SchemaVersion.current(self.target)
-        _target_relative(self.project_root, self.target)
         current_key = _version_key(current.version)
         requested_key = _version_key(numeric)
         if requested_key == current_key:
@@ -144,8 +146,8 @@ class SchemaUpdater:
             relative: (staged_package / Path(relative).relative_to("src/schema_org")).read_bytes()
             for relative in sorted(new_paths)
         }
-        replacements[manifest_target.relative_to(self.project_root).as_posix()] = staged_manifest_path.read_bytes()
-        replacements[self.target.relative_to(self.project_root).as_posix()] = annotated.encode("utf-8")
+        replacements["codegen/generated_manifest.json"] = staged_manifest_path.read_bytes()
+        replacements[self._target_relative] = annotated.encode("utf-8")
         apply_transaction(self.project_root, replacements, old_paths - new_paths)
 def _ignore_validation_files(path: str, names: list[str]) -> set[str]:
     ignored = {".git", ".devenv", ".pytest_cache", "__pycache__", ".venv", "dist", "build"}
