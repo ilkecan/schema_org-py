@@ -21,7 +21,7 @@ class ValidationError(ValueError):
 class Vocabulary:
     TOP_LEVEL_RESERVED_NAMES = frozenset({
         "SchemaModel", "SchemaEnum", "CircularReferenceError", "JsonValue",
-        "SchemaScalar", "SchemaValue", "PropertyMetadata", "ClassMetadata",
+        "SchemaScalar", "SchemaValue", "SchemaMap", "PropertyMetadata", "ClassMetadata",
         "EnumerationMemberMetadata", "SCHEMA_VERSION", "SCHEMA_TYPE",
         "SCHEMA_TYPES", "SCHEMA_PROPERTIES", "model_config", "model_fields",
     })
@@ -382,9 +382,15 @@ class Vocabulary:
 
     def _validate_names(self) -> None:
         class_names = [s.name for s in self.classes]
-        self._validate_name_set(class_names, constant_name, "class", self.TOP_LEVEL_RESERVED_NAMES)
-        self._validate_name_set(class_names, module_name, "module")
+        self._validate_name_set(class_names, constant_name, "class")
+        self._validate_name_set(
+            class_names,
+            constant_name,
+            "class import",
+            frozenset({"SchemaModel", "PropertyMetadata", "SchemaValue", "ClassVar", "Literal", "Field"}),
+        )
         ordinary_names = [s.name for s in self.ordinary_classes]
+        self._validate_name_set(ordinary_names, module_name, "module")
         self._validate_name_set(
             [*ordinary_names, *(s.name for s in self.enumeration_classes)],
             constant_name,
@@ -392,10 +398,22 @@ class Vocabulary:
             self.TOP_LEVEL_RESERVED_NAMES,
         )
         property_reserved = {
-            "schema_id", "schema_type", "model_config", "model_fields",
-            "model_dump", "model_validate", "to_jsonld", "to_jsonld_json",
+            "construct", "copy", "dict", "from_orm", "json",
+            "model_computed_fields", "model_config", "model_construct", "model_copy",
+            "model_dump", "model_dump_json", "model_extra", "model_fields",
+            "model_fields_set", "model_json_schema", "model_parametrized_name",
+            "model_post_init", "model_rebuild", "model_validate",
+            "model_validate_json", "model_validate_strings", "parse_file",
+            "parse_obj", "parse_raw", "schema", "schema_json", "update_forward_refs",
+            "validate", "schema_id", "schema_type", "SCHEMA_TYPE", "SCHEMA_TYPES",
+            "SCHEMA_PROPERTIES", "to_jsonld", "to_jsonld_json",
         }
-        self._validate_name_set((p.name for p in self.properties), property_name, "property", property_reserved)
+        self._validate_name_set(
+            (p.name for p in self.properties),
+            property_name,
+            "property",
+            property_reserved,
+        )
         for enum in self.enumeration_classes:
             members = [m.name for m in self.enumeration_members if any(self.descendant(type_name, enum.name) for type_name in m.types)]
             self._validate_name_set(
@@ -407,6 +425,10 @@ class Vocabulary:
     def _validate_name_set(names: Iterable[str], mapper, kind: str, reserved=frozenset()) -> None:
         groups: dict[str, list[str]] = {}
         for name in names:
+            if kind == "property" and str(name).startswith("_"):
+                raise ValidationError(f"Invalid Python property name for {name}: leading underscore")
+            if kind.startswith("enumeration ") and str(name).startswith("_"):
+                raise ValidationError(f"Invalid Python enum member for {name}: leading underscore")
             try:
                 mapped = mapper(name)
             except (TypeError, ValueError) as error:

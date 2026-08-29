@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path, PurePosixPath
 import re
+from pathlib import PurePosixPath
 
+from .path_validation import validate_relative_file_path
 from .vocabulary import ValidationError
 
 _MANIFEST_KEYS = frozenset({"schema_version", "schema_source", "paths", "terms"})
@@ -75,9 +76,7 @@ def _sorted_unique_strings(value: object) -> list[str]:
 
 
 def _validate_owned_path(path: str) -> None:
-    pure = PurePosixPath(path)
-    if pure.is_absolute() or ".." in pure.parts or "." in pure.parts:
-        raise ValidationError(f"unsafe generated path {path!r}")
+    pure = validate_relative_file_path(path)
     if path in _ROOT_FILES:
         return
     if pure.match("src/schema_org/models/*.py") and pure.name != "__init__.py":

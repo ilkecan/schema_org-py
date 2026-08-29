@@ -95,3 +95,47 @@ def test_vocabulary_from_graph_rejects_non_uri_relationship(tmp_path: Path):
     )
     with pytest.raises(ValidationError, match="non-URI domain"):
         Vocabulary.from_file(path)
+
+
+def test_vocabulary_rejects_emitted_namespace_name_collisions():
+    with pytest.raises(ValidationError, match="root export"):
+        Vocabulary([subject("Thing"), subject("SchemaMap")])
+    with pytest.raises(ValidationError, match="class import"):
+        Vocabulary([subject("Thing"), subject("Field", parents=("https://schema.org/Thing",))])
+    with pytest.raises(ValidationError, match="property"):
+        Vocabulary([
+            subject("Thing"),
+            subject("modelCopy", ("Property",), domains=("https://schema.org/Thing",)),
+        ])
+
+
+def test_vocabulary_rejects_leading_underscore_emitted_names():
+    with pytest.raises(ValidationError, match="property"):
+        Vocabulary([
+            subject("Thing"),
+            subject("_value", ("Property",), domains=("https://schema.org/Thing",)),
+        ])
+    with pytest.raises(ValidationError, match="enum member"):
+        Vocabulary([
+            subject("Thing"),
+            subject("Enumeration", parents=("https://schema.org/Thing",)),
+            subject("Status", parents=("https://schema.org/Enumeration",)),
+            Subject(
+                uri="https://schema.org/_Unknown",
+                types=("https://schema.org/Status",),
+                parents=(),
+                domains=(),
+                ranges=(),
+                label="_Unknown",
+                comment="",
+            ),
+        ])
+
+
+def test_datatype_module_name_overlap_does_not_collide():
+    Vocabulary([
+        subject("Thing"),
+        subject("DataType", parents=("https://schema.org/Thing",)),
+        subject("FooBar", parents=("https://schema.org/Thing",)),
+        subject("Foo_Bar", parents=("https://schema.org/DataType",)),
+    ])

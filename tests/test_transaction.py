@@ -28,10 +28,42 @@ def test_transaction_skips_unchanged_and_rolls_back_new_files(tmp_path: Path):
     assert files(tmp_path) == before
 
 
-@pytest.mark.parametrize("relative", ["../escape", "/absolute", "dir/../escape", "dir/./file"])
+@pytest.mark.parametrize(
+    "relative",
+    [
+        "../escape",
+        "/absolute",
+        "dir/../escape",
+        "dir/./file",
+        "dir//file",
+        "dir/file/",
+        r"dir\file",
+        "C:/file",
+    ],
+)
 def test_transaction_rejects_each_unsafe_path(tmp_path: Path, relative: str):
     with pytest.raises(ValidationError):
         apply_transaction(tmp_path, {relative: b"x"})
+
+
+@pytest.mark.parametrize("relative", ["src//schema_org/models/person.py", "src/schema_org/models/person.py/", r"src\schema_org\models\person.py"])
+def test_manifest_rejects_noncanonical_owned_paths(relative: str):
+    from schema_org_codegen.manifest import validate_manifest
+
+    value = {
+        "schema_version": "1.0",
+        "schema_source": "https://schema.org/version/1.0/schemaorg-all-https.ttl",
+        "paths": [relative],
+        "terms": {
+            "classes": [],
+            "datatypes": [],
+            "enumerations": [],
+            "enumeration_members": [],
+            "properties": [],
+        },
+    }
+    with pytest.raises(ValidationError):
+        validate_manifest(value)
 
 
 def test_transaction_rolls_back_removal_and_replacement(tmp_path: Path):

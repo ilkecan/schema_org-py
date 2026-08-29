@@ -2,9 +2,10 @@ from __future__ import annotations
 
 from collections.abc import Iterable, Mapping
 import os
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 import tempfile
 
+from .path_validation import validate_relative_file_path
 from .vocabulary import ValidationError
 
 
@@ -57,10 +58,8 @@ def apply_transaction(
 
 
 def _checked_path(root: Path, relative: str) -> Path:
-    pure = PurePosixPath(relative)
-    if not relative or pure.is_absolute() or any(part in {".", ".."} for part in relative.split("/")):
-        raise ValidationError(f"unsafe transaction path {relative!r}")
-    path = root / relative
+    pure = validate_relative_file_path(relative)
+    path = root / pure
     current = root
     for part in pure.parts:
         current = current / part
