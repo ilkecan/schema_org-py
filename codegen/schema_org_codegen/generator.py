@@ -111,10 +111,14 @@ def _render_model(vocabulary: Vocabulary, name: str) -> str:
     return "\n".join(lines)
 
 
-def _description(comment: str, superseded_by: str | None, supersedes: str | None, inverse_of: str | None) -> str:
+def _description(
+    comment: str,
+    superseded_by: str | None,
+    supersedes: tuple[str, ...],
+    inverse_of: str | None,
+) -> str:
     parts = [comment] if comment else []
-    if supersedes:
-        parts.append(f"Supersedes `{supersedes}`.")
+    parts.extend(f"Supersedes `{term}`." for term in supersedes)
     if superseded_by:
         parts.append(f"Superseded by `{superseded_by}`.")
     if inverse_of:

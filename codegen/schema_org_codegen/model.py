@@ -42,12 +42,12 @@ class ClassDefinition:
     external_parents: tuple[str, ...]
     equivalent_classes: tuple[str, ...]
     superseded_by: str | None
-    supersedes: str | None
     label: str
     comment: str
     contributors: tuple[str, ...]
     sources: tuple[str, ...]
     properties: tuple[str, ...]
+    supersedes: tuple[str, ...] = ()
     is_datatype: bool = False
     is_enumeration: bool = False
 
@@ -62,13 +62,13 @@ class PropertyDefinition:
     external_ranges: tuple[str, ...]
     inverse_of: str | None
     superseded_by: str | None
-    supersedes: str | None
     equivalent_properties: tuple[str, ...]
     subproperty_of: tuple[str, ...]
     label: str
     comment: str
     contributors: tuple[str, ...]
     sources: tuple[str, ...]
+    supersedes: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)

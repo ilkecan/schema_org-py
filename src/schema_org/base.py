@@ -31,7 +31,7 @@ class PropertyMetadata:
     external_ranges: tuple[str, ...] = ()
     inverse_of: str | None = None
     superseded_by: str | None = None
-    supersedes: str | None = None
+    supersedes: tuple[str, ...] = ()
     equivalent_properties: tuple[str, ...] = ()
     subproperty_of: tuple[str, ...] = ()
     domains: tuple[str, ...] = ()
@@ -50,7 +50,7 @@ class ClassMetadata:
     external_parents: tuple[str, ...] = ()
     equivalent_classes: tuple[str, ...] = ()
     superseded_by: str | None = None
-    supersedes: str | None = None
+    supersedes: tuple[str, ...] = ()
     label: str = ""
     comment: str = ""
     contributors: tuple[str, ...] = ()

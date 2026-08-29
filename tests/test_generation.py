@@ -6,8 +6,10 @@ from schema_org import (
     AmpStory,
     Course,
     Dentist,
+    InteractionCounter,
     MedicalAudience,
     Observation,
+    Offer,
     PalliativeProcedure,
     SequentialArt,
     TVSeason,
@@ -43,6 +45,34 @@ def test_generated_metadata_is_frozen_and_complete():
     assert PropertyMetadata.__dataclass_params__.frozen
     assert isinstance(registry.CLASS_METADATA["SequentialArt"], ClassMetadata)
     assert all(isinstance(value, PropertyMetadata) for value in SequentialArt.SCHEMA_PROPERTIES)
+
+
+def test_supersession_metadata_and_descriptions_are_complete():
+    predecessors = (
+        "UserBlocks",
+        "UserCheckins",
+        "UserComments",
+        "UserDownloads",
+        "UserInteraction",
+        "UserLikes",
+        "UserPageVisits",
+        "UserPlays",
+        "UserPlusOnes",
+        "UserTweets",
+    )
+    assert registry.CLASS_METADATA["InteractionCounter"].supersedes == predecessors
+    assert registry.PROPERTY_BY_SCHEMA["seller"].supersedes == ("merchant", "vendor")
+    assert all(
+        registry.CLASS_METADATA[name].superseded_by == "InteractionCounter"
+        for name in predecessors
+    )
+    assert all(f"Supersedes `{name}`." in InteractionCounter.__doc__ for name in predecessors)
+    seller_description = Offer.model_fields["seller"].description
+    assert seller_description is not None
+    assert seller_description.index("Supersedes `merchant`.") < seller_description.index(
+        "Supersedes `vendor`."
+    )
+
 
 def test_c3_ordering_is_deterministic(tmp_path: Path):
     ttl = (

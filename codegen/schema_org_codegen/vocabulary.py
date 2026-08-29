@@ -232,7 +232,12 @@ class Vocabulary:
 
     def class_definition(self, name: str) -> ClassDefinition:
         subject = self._subject(name)
-        supersedes = next((candidate.name for candidate in self.classes if candidate.superseded_by == subject.uri), None)
+        supersedes = tuple(sorted(
+            candidate.name
+            for candidate in self.classes
+            if candidate.superseded_by
+            and schema_name(candidate.superseded_by) == subject.name
+        ))
         return ClassDefinition(
             name=subject.name, uri=subject.uri, parents=self.direct_parents(subject),
             external_parents=self.external_parents(subject),
@@ -246,7 +251,12 @@ class Vocabulary:
 
     def property_definition(self, name: str) -> PropertyDefinition:
         subject = self._property(name)
-        supersedes = next((candidate.name for candidate in self.properties if candidate.superseded_by == subject.uri), None)
+        supersedes = tuple(sorted(
+            candidate.name
+            for candidate in self.properties
+            if candidate.superseded_by
+            and schema_name(candidate.superseded_by) == subject.name
+        ))
         return PropertyDefinition(
             name=subject.name, uri=subject.uri, domains=self.property_domains(subject),
             external_domains=self.property_external_domains(subject), ranges=self.property_ranges(subject),
