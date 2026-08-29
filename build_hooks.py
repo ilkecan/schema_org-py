@@ -1,0 +1,14 @@
+from __future__ import annotations
+
+from pathlib import Path
+
+from hatchling.builders.hooks.plugin.interface import BuildHookInterface
+
+
+class CustomBuildHook(BuildHookInterface):
+    PLUGIN_NAME = "custom"
+
+    def initialize(self, version: str, build_data: dict[str, object]) -> None:
+        force_include = build_data.get("force_include")
+        if isinstance(force_include, dict):
+            force_include.pop(str(Path(self.root) / ".gitignore"), None)

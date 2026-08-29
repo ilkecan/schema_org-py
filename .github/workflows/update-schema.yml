@@ -5,6 +5,10 @@ on:
     - cron: "17 4 * * 1"
   workflow_dispatch:
 
+concurrency:
+  group: schema-org-update
+  cancel-in-progress: false
+
 permissions:
   contents: write
   pull-requests: write
@@ -12,6 +16,9 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -21,14 +28,28 @@ jobs:
       - run: uv sync
       - id: latest
         run: echo "version=$(uv run python -c 'from schema_org_codegen.updater import SchemaUpdater; print(SchemaUpdater().latest_version())')" >> "$GITHUB_OUTPUT"
-      - name: Update snapshot
-        run: uv run python -c 'from schema_org_codegen.updater import SchemaUpdater; SchemaUpdater().update("${{ steps.latest.outputs.version }}")'
-      - run: uv run python -m pytest
-      - run: uv run python -m schema_org_codegen.check
-      - uses: peter-evans/create-pull-request@v7
+      - id: update
+        run: uv run python -c 'from schema_org_codegen.updater import SchemaUpdater; print("changed=true" if SchemaUpdater().update("${{ steps.latest.outputs.version }}") else "changed=false")' >> "$GITHUB_OUTPUT"
+      - if: steps.update.outputs.changed == 'true'
+        run: uv run python -m pytest
+      - if: steps.update.outputs.changed == 'true'
+        run: uv run python -m schema_org_codegen.check
+      - if: steps.update.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
         with:
           branch: automation/schema-org-update
           delete-branch: true
           title: "Update Schema.org to v${{ steps.latest.outputs.version }}"
           commit-message: "Update Schema.org to v${{ steps.latest.outputs.version }}"
           body: "Regenerate the package from the immutable Schema.org release."
+          add-paths: |
+            codegen/data/schema.ttl
+            codegen/generated_manifest.json
+            src/schema_org/__init__.py
+            src/schema_org/datatypes.py
+            src/schema_org/enums.py
+            src/schema_org/registry.py
+            src/schema_org/schema_version.py
+            src/schema_org/py.typed
+            src/schema_org/models/__init__.py
+            src/schema_org/models/*.py

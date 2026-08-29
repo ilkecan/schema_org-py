@@ -6,14 +6,13 @@ import re
 import shutil
 import subprocess
 import sys
-import tarfile
-import tempfile
-import zipfile
 from urllib.request import urlopen
+import tempfile
 
 from .generator import generate
-from .check import check
+from .package_check import validate_distributions
 from .manifest import read_manifest
+from .check import check
 from .schema_version import SchemaVersion
 from .transaction import apply_transaction
 from .vocabulary import ValidationError, Vocabulary
@@ -109,10 +108,7 @@ class SchemaUpdater:
         if (root / "pyproject.toml").exists():
             build_dir = root / ".schema-org-build"
             _run_checked([sys.executable, "-m", "build", "--outdir", str(build_dir)], root, os.environ.copy(), "generated package build failed")
-            for artifact in build_dir.iterdir():
-                if artifact.suffix not in {".whl", ".gz", ".zip"}:
-                    raise ValidationError(f"unexpected build artifact {artifact.name}")
-                _validate_archive(artifact)
+            validate_distributions(build_dir, project_root=root)
 
     def _commit(self, staging: Path, annotated: str) -> None:
         staged_package = staging / "src/schema_org"
@@ -144,19 +140,6 @@ def _run_checked(command: list[str], cwd: Path, environment: dict[str, str], mes
 
 
 
-def _validate_archive(path: Path) -> None:
-    if path.suffix == ".whl":
-        names = zipfile.ZipFile(path).namelist()
-    else:
-        names = tarfile.open(path).getnames()
-    forbidden = (
-        lambda name: "/codegen/" in f"/{name}" or "/tests/" in f"/{name}"
-        or name.endswith(".ttl") or "templates" in name
-    )
-    if any(forbidden(name) for name in names):
-        raise ValidationError(f"forbidden development file in {path.name}")
-    if path.suffix == ".whl" and not any(name.endswith("py.typed") for name in names):
-        raise ValidationError("wheel does not contain py.typed")
 
 
 

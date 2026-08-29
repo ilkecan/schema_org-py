@@ -59,6 +59,10 @@ include = [
   "/CHANGELOG.md",
   "/pyproject.toml",
 ]
+ignore-vcs = true
+
+[tool.hatch.build.targets.sdist.hooks.custom]
+path = "build_hooks.py"
 
 
 [tool.pytest.ini_options]
