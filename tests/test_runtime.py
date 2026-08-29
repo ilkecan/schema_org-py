@@ -45,12 +45,12 @@ def test_deep_nested_models_and_structural_values():
         Observation(measured_property={"a": [1]})
 
 
-def test_self_assignment_and_cycle_path():
+def test_self_assignment_is_rejected_and_bypassed_cycles_report_paths():
     person = Person(name="Ada")
     with pytest.raises(ValidationError):
-        person.colleague = [person, 1]
+        person.colleague = [person]
     assert person.colleague is None
-    person.colleague = [person]
+    object.__setattr__(person, "colleague", [person])
     with pytest.raises(CircularReferenceError, match=r"\$\.colleague\[0\]"):
         person.to_jsonld()
 

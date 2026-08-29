@@ -66,9 +66,11 @@ def test_strict_models_aliases_enums_and_assignment():
         person.name = 1
 
 
-def test_cycles_report_schema_paths():
+def test_cycles_are_rejected_before_serialization():
     person = Person(name="Ada")
-    person.colleague = [person]
+    with pytest.raises(ValidationError):
+        person.colleague = [person]
+    object.__setattr__(person, "colleague", [person])
     with pytest.raises(CircularReferenceError, match=r"\$\.colleague\[0\]"):
         person.to_jsonld()
 

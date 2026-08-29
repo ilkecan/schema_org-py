@@ -124,13 +124,6 @@ class SchemaModel(BaseModel):
         )
 
     def __setattr__(self, name: str, value: object) -> None:
-        if name in type(self).model_fields and _contains_identity(value, self):
-            substitute = self.model_copy(deep=False)
-            candidate = _replace_identity(value, self, substitute, {})
-            super().__setattr__(name, candidate)
-            validated = self.__dict__[name]
-            self.__dict__[name] = _replace_identity(validated, substitute, self, {})
-            return
         super().__setattr__(name, value)
 
     def to_jsonld(self) -> dict[str, JsonValue]:
@@ -368,44 +361,7 @@ def _walk_schema_value(
     raise ValueError(f"invalid schema value at {path}")
 
 
-def _contains_identity(value: object, target: SchemaModel, active: set[int] | None = None) -> bool:
-    if value is target:
-        return True
-    if isinstance(value, SchemaModel):
-        return False
-    if active is None:
-        active = set()
-    object_id = id(value)
-    if object_id in active:
-        return False
-    if isinstance(value, (list, dict)):
-        active.add(object_id)
-        try:
-            values = value if isinstance(value, list) else value.values()
-            return any(_contains_identity(item, target, active) for item in values)
-        finally:
-            active.remove(object_id)
-    return False
 
-
-def _replace_identity(value: object, target: object, replacement: object, seen: dict[int, object]) -> object:
-    if value is target:
-        return replacement
-    if not isinstance(value, (list, dict)):
-        return value
-    object_id = id(value)
-    if object_id in seen:
-        return seen[object_id]
-    if isinstance(value, list):
-        result: list[object] = []
-        seen[object_id] = result
-        result.extend(_replace_identity(item, target, replacement, seen) for item in value)
-        return result
-    result_dict: dict[object, object] = {}
-    seen[object_id] = result_dict
-    for key, item in value.items():
-        result_dict[key] = _replace_identity(item, target, replacement, seen)
-    return result_dict
 
 
 def _serialize(value: object, *, root: bool, active: dict[str, object], path: str) -> JsonValue:
