@@ -72,6 +72,22 @@ def test_typed_inputs_reject_subclasses_and_report_raw_cycles():
     with pytest.raises(ValidationError, match=r"\$\.children\[0\]\.children\[0\]"):
         Person(children=[child])
 
+
+def test_lazy_model_resolution_is_cached_and_forceable():
+    from schema_org import registry
+    from schema_org import Person as RootPerson
+    from schema_org.models import Person as ModelsPerson
+
+    registry._MODEL_CACHE.clear()
+    first = registry.get_model("Person")
+    assert first is RootPerson is ModelsPerson
+    assert registry._MODEL_CACHE["Person"] is first
+    assert registry.get_model("Person") is first
+    first.model_rebuild()
+    assert registry._MODEL_CACHE["Person"] is first
+    assert first.model_rebuild(force=True) is True
+    assert registry._MODEL_CACHE["Person"] is first
+
 def test_jsonld_aliases_context_and_dates():
     result = Person(name="Ada", address=PostalAddress(address_locality="London"), birth_date=date(1990, 1, 2)).to_jsonld()
     assert result == {

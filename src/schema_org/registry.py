@@ -7666,6 +7666,7 @@ _DEPENDENCIES = MappingProxyType({
     'WriteAction': ('Action', 'CreateAction', 'CreativeWork', 'EntryPoint', 'Event', 'HowTo', 'ImageObject', 'Language', 'Organization', 'Person', 'Place', 'PostalAddress', 'PropertyValue', 'TextObject', 'Thing', 'VirtualLocation'),
     'Zoo': ('Action', 'AggregateRating', 'Certification', 'CivicStructure', 'CreativeWork', 'DefinedTerm', 'Event', 'GeoCoordinates', 'GeoShape', 'GeospatialGeometry', 'ImageObject', 'LocationFeatureSpecification', 'Map', 'OpeningHoursSpecification', 'Organization', 'Person', 'Photograph', 'Place', 'PostalAddress', 'PropertyValue', 'Review', 'TextObject'),
 })
+_MODEL_CACHE: dict[str, type] = {}
 SCHEMA_VERSION = '30.0'
 
 class _LazyModels(Mapping[str, type]):
@@ -7679,10 +7680,7 @@ class _LazyModels(Mapping[str, type]):
 MODEL_BY_SCHEMA = _LazyModels()
 
 def get_model(name: str) -> type:
-    module = import_module(f"schema_org.models.{_MODEL_MODULES[name]}")
-    model = getattr(module, _MODEL_CLASSES[name])
-    rebuild(name)
-    return model
+    return rebuild(name)
 
 def ancestry(name: str) -> tuple[str, ...]:
     result = []
@@ -7697,7 +7695,9 @@ def ancestry(name: str) -> tuple[str, ...]:
         queue.extend(PARENTS.get(current, ()))
     return tuple(result)
 
-def rebuild(name: str) -> type:
+def rebuild(name: str, *, force: bool = False) -> type:
+    if not force and name in _MODEL_CACHE:
+        return _MODEL_CACHE[name]
     loaded = {}
     def load(current: str):
         if current in loaded:
@@ -7711,6 +7711,7 @@ def rebuild(name: str) -> type:
     import schema_org.enums as enums
     namespace = {**loaded, **vars(datatypes), **vars(enums)}
     loaded[name].model_rebuild(force=True, _types_namespace=namespace)
+    _MODEL_CACHE[name] = loaded[name]
     return loaded[name]
 
 class _LazyEnums(Mapping[str, type]):

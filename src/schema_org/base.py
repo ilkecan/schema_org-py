@@ -114,7 +114,7 @@ class SchemaModel(BaseModel):
     ) -> bool | None:
         if _types_namespace is None and cls.__module__.startswith("schema_org.models."):
             from schema_org import registry
-            registry.rebuild(cls.SCHEMA_TYPE)
+            registry.rebuild(cls.SCHEMA_TYPE, force=force)
             return True
         return super().model_rebuild(
             force=force,

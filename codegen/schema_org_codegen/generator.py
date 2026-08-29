@@ -224,7 +224,6 @@ def _effective_properties(vocabulary: Vocabulary, name: str) -> tuple[str, ...]:
 
 def _render_models_init(models) -> str:
     lines = [
-        "from importlib import import_module",
         "from typing import TYPE_CHECKING",
         "",
         "if TYPE_CHECKING:",
@@ -232,20 +231,23 @@ def _render_models_init(models) -> str:
     lines.extend(f"    from .{module_name(subject.name)} import {constant_name(subject.name)}" for subject in models)
     lines.extend([
         "",
-        "_MODEL_MODULES = {",
+        "_SCHEMA_BY_EXPORT = {",
     ])
-    lines.extend(f"    {constant_name(subject.name)!r}: {module_name(subject.name)!r}," for subject in models)
+    lines.extend(f"    {constant_name(subject.name)!r}: {subject.name!r}," for subject in models)
     lines.extend([
         "}",
         "",
         "def __getattr__(name: str):",
-        "    module_name = _MODEL_MODULES.get(name)",
-        "    if module_name is None:",
+        "    schema_name = _SCHEMA_BY_EXPORT.get(name)",
+        "    if schema_name is None:",
         "        raise AttributeError(name)",
-        "    return getattr(import_module(f'.{module_name}', __name__), name)",
+        "    from schema_org import registry",
+        "    model = registry.get_model(schema_name)",
+        "    globals()[name] = model",
+        "    return model",
         "",
         "def __dir__():",
-        "    return sorted(set(globals()) | set(_MODEL_MODULES))",
+        "    return sorted(set(globals()) | set(_SCHEMA_BY_EXPORT))",
     ])
     return "\n".join(lines) + "\n"
 
@@ -365,9 +367,15 @@ def _render_registry(vocabulary: Vocabulary, version: SchemaVersion) -> str:
     lines.append("_DEPENDENCIES = MappingProxyType({")
     for subject in ordinary:
         dependencies = set(vocabulary.direct_parents(subject.name)) & ordinary_names
-        dependencies.update(range_name for property_name_ in _effective_properties(vocabulary, subject.name) for range_name in vocabulary.property_definition(property_name_).ranges if range_name in ordinary_names)
+        dependencies.update(
+            range_name
+            for property_name_ in _effective_properties(vocabulary, subject.name)
+            for range_name in vocabulary.property_definition(property_name_).ranges
+            if range_name in ordinary_names
+        )
         lines.append(f"    {subject.name!r}: {tuple(sorted(dependencies))!r},")
     lines.append("})")
+    lines.append("_MODEL_CACHE: dict[str, type] = {}")
     lines.extend([
         f"SCHEMA_VERSION = {version.version!r}",
         "",
@@ -382,10 +390,7 @@ def _render_registry(vocabulary: Vocabulary, version: SchemaVersion) -> str:
         "MODEL_BY_SCHEMA = _LazyModels()",
         "",
         "def get_model(name: str) -> type:",
-        "    module = import_module(f\"schema_org.models.{_MODEL_MODULES[name]}\")",
-        "    model = getattr(module, _MODEL_CLASSES[name])",
-        "    rebuild(name)",
-        "    return model",
+        "    return rebuild(name)",
         "",
         "def ancestry(name: str) -> tuple[str, ...]:",
         "    result = []",
@@ -400,7 +405,9 @@ def _render_registry(vocabulary: Vocabulary, version: SchemaVersion) -> str:
         "        queue.extend(PARENTS.get(current, ()))",
         "    return tuple(result)",
         "",
-        "def rebuild(name: str) -> type:",
+        "def rebuild(name: str, *, force: bool = False) -> type:",
+        "    if not force and name in _MODEL_CACHE:",
+        "        return _MODEL_CACHE[name]",
         "    loaded = {}",
         "    def load(current: str):",
         "        if current in loaded:",
@@ -414,8 +421,8 @@ def _render_registry(vocabulary: Vocabulary, version: SchemaVersion) -> str:
         "    import schema_org.enums as enums",
         "    namespace = {**loaded, **vars(datatypes), **vars(enums)}",
         "    loaded[name].model_rebuild(force=True, _types_namespace=namespace)",
+        "    _MODEL_CACHE[name] = loaded[name]",
         "    return loaded[name]",
-        
         "",
         "class _LazyEnums(Mapping[str, type]):",
         "    def __getitem__(self, name: str) -> type:",
@@ -448,9 +455,9 @@ def _render_root_init(vocabulary: Vocabulary) -> str:
     lines.extend(f"    from .models.{module_name(s.name)} import {constant_name(s.name)}" for s in ordinary)
     lines.extend([
         "",
-        "_MODEL_MODULES = {",
+        "_SCHEMA_BY_EXPORT = {",
     ])
-    lines.extend(f"    {constant_name(s.name)!r}: {module_name(s.name)!r}," for s in ordinary)
+    lines.extend(f"    {constant_name(s.name)!r}: {s.name!r}," for s in ordinary)
     lines.extend([
         "}",
         "_ENUM_NAMES = {",
@@ -460,14 +467,17 @@ def _render_root_init(vocabulary: Vocabulary) -> str:
         "}",
         "",
         "def __getattr__(name: str):",
-        "    module_name = _MODEL_MODULES.get(name)",
-        "    if module_name is not None:",
-        "        model = getattr(import_module(f'.models.{module_name}', __name__), name)",
+        "    schema_name = _SCHEMA_BY_EXPORT.get(name)",
+        "    if schema_name is not None:",
         "        from . import registry",
-        "        return registry.rebuild(next(term for term, cls_name in registry._MODEL_CLASSES.items() if cls_name == name))",
+        "        model = registry.get_model(schema_name)",
+        "        globals()[name] = model",
+        "        return model",
         "    enum_name = _ENUM_NAMES.get(name)",
         "    if enum_name is not None:",
-        "        return getattr(import_module('.enums', __name__), enum_name)",
+        "        enum = getattr(import_module('.enums', __name__), enum_name)",
+        "        globals()[name] = enum",
+        "        return enum",
         "    raise AttributeError(name)",
         "",
         "__all__ = [",
