@@ -90,11 +90,17 @@ class SchemaUpdater:
             self._commit(validation_root, annotated)
         return True
     def _validation_root(self, staging: Path) -> Path:
-        if not (self.project_root / "pyproject.toml").exists():
-            root = staging / "project"
-            root.mkdir()
-            return root
-        required = ("tests", "src/schema_org", "codegen")
+        required = (
+            "pyproject.toml",
+            "tests",
+            "src/schema_org",
+            "codegen",
+            "README.md",
+            "CHANGELOG.md",
+            "LICENSE.txt",
+            "LICENSE-SCHEMA-ORG.txt",
+            "build_hooks.py",
+        )
         if any(not (self.project_root / item).exists() for item in required):
             raise ValidationError("project root is incomplete for schema update validation")
         root = staging / "project"
@@ -110,8 +116,6 @@ class SchemaUpdater:
             result = subprocess.run([sys.executable, "-m", "py_compile", str(path)], capture_output=True, text=True)
             if result.returncode:
                 raise ValidationError(f"generated Python failed to compile: {result.stderr.strip()}")
-        if not (root / "pyproject.toml").exists():
-            return
         environment = os.environ.copy()
         environment["PYTHONPATH"] = f"{root / 'src'}:{root / 'codegen'}"
         _run_checked([sys.executable, "-m", "pytest"], root, environment, "generated tests failed")

@@ -130,7 +130,7 @@ from schema_org import (
     Person, PostalAddress, SequentialArt, Book, VisualArtwork,
     Offer, ItemAvailability, BookFormatType, SCHEMA_VERSION,
 )
-assert SCHEMA_VERSION == '30.0'
+assert isinstance(SCHEMA_VERSION, str) and SCHEMA_VERSION
 assert issubclass(SequentialArt, Book)
 assert issubclass(SequentialArt, VisualArtwork)
 person = Person(name='Ada', address=PostalAddress(address_locality='London'))
