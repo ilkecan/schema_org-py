@@ -146,7 +146,7 @@ class SchemaUpdater:
         }
         replacements[manifest_target.relative_to(self.project_root).as_posix()] = staged_manifest_path.read_bytes()
         replacements[self.target.relative_to(self.project_root).as_posix()] = annotated.encode("utf-8")
-        apply_transaction(self.project_root, replacements, old_paths - new_paths, writer=_atomic_write_bytes)
+        apply_transaction(self.project_root, replacements, old_paths - new_paths)
 def _ignore_validation_files(path: str, names: list[str]) -> set[str]:
     ignored = {".git", ".devenv", ".pytest_cache", "__pycache__", ".venv", "dist", "build"}
     return {name for name in names if name in ignored or name.startswith("tmp") or name.startswith(".schema-org-")}
@@ -221,6 +221,3 @@ def _target_relative(project_root: Path, target: Path) -> str:
         if current.is_symlink():
             raise ValidationError("schema target must not use symlinks")
     return relative.as_posix()
-def _atomic_write_bytes(path: Path, content: bytes) -> None:
-    from .transaction import _replace_bytes
-    _replace_bytes(path, content)

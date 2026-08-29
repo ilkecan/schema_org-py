@@ -6,8 +6,7 @@ from pathlib import Path
 import shutil
 
 import pytest
-
-import schema_org_codegen.updater as updater_module
+import schema_org_codegen.transaction as transaction_module
 from schema_org_codegen.updater import SchemaUpdater
 from schema_org_codegen.vocabulary import ValidationError
 
@@ -190,7 +189,7 @@ def test_replacement_failure_rolls_back_all_files(tmp_path, monkeypatch):
         "terms": {"classes": [], "datatypes": [], "enumerations": [], "enumeration_members": [], "properties": []},
     }), encoding="utf-8")
     before = {path.relative_to(root): path.read_bytes() for path in root.rglob("*") if path.is_file()}
-    original = updater_module._atomic_write_bytes
+    original = transaction_module._replace_bytes
     calls = 0
 
     def fail_after_two(path, content):
@@ -198,9 +197,7 @@ def test_replacement_failure_rolls_back_all_files(tmp_path, monkeypatch):
         calls += 1
         if calls == 3:
             raise OSError("replace failed")
-        return original(path, content)
-
-    monkeypatch.setattr(updater_module, "_atomic_write_bytes", fail_after_two)
+    monkeypatch.setattr(transaction_module, "_replace_bytes", fail_after_two)
     updater = SchemaUpdater(downloader=lambda url: TTL, target=target, project_root=root)
     with pytest.raises(OSError, match="replace failed"):
         updater.update("v30.1")
