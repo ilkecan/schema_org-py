@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Mapping
 from datetime import date, datetime, time
 from dataclasses import dataclass
 from enum import Enum
@@ -67,6 +68,7 @@ class EnumerationMemberMetadata:
     label: str = ""
     comment: str = ""
 
+
 class SchemaModel(BaseModel):
     model_config = ConfigDict(strict=True, extra="forbid", validate_assignment=True, populate_by_name=True)
 
@@ -76,37 +78,150 @@ class SchemaModel(BaseModel):
 
     @model_validator(mode="before")
     @classmethod
-    def _reject_non_generated_models(cls, data: object) -> object:
-        def visit(value: object) -> None:
-            if isinstance(value, SchemaModel):
-                if not type(value).__module__.startswith("schema_org.models."):
-                    raise ValueError("schema values must be generated Schema.org models")
-                return
-            if isinstance(value, list):
-                for item in value:
-                    visit(item)
-            elif isinstance(value, dict):
-                for item in value.values():
-                    visit(item)
-
-        visit(data)
+    def _validate_schema_values(cls, data: object) -> object:
+        if isinstance(data, dict):
+            cleaned = {key: value for key, value in data.items() if key != "@context"}
+            active = {id(cleaned)}
+            metadata = {item.schema_name: item for item in cls.SCHEMA_PROPERTIES}
+            for key, value in cleaned.items():
+                field = cls.model_fields.get(key) or next(
+                    (candidate for candidate in cls.model_fields.values() if candidate.alias == key),
+                    None,
+                )
+                alias = field.alias if field is not None else key
+                property_metadata = metadata.get(alias)
+                if property_metadata is not None and "Number" in property_metadata.ranges:
+                    _reject_number_bool(value, path=f"$.{alias}")
+                _walk_schema_value(value, path=f"$.{alias}", active=active)
+            return cleaned
+        _walk_schema_value(data, path="$", active=set())
         return data
+    @classmethod
+    def model_rebuild(
+        cls,
+        *,
+        force: bool = False,
+        raise_errors: bool = True,
+        _parent_namespace_depth: int = 2,
+        _types_namespace: Mapping[str, object] | None = None,
+    ) -> bool | None:
+        if _types_namespace is None and cls.__module__.startswith("schema_org.models."):
+            from schema_org import registry
+            registry.rebuild(cls.SCHEMA_TYPE)
+            return True
+        return super().model_rebuild(
+            force=force,
+            raise_errors=raise_errors,
+            _parent_namespace_depth=_parent_namespace_depth,
+            _types_namespace=_types_namespace,
+        )
 
     def __setattr__(self, name: str, value: object) -> None:
-        try:
-            super().__setattr__(name, value)
-        except ValidationError:
-            if name in type(self).model_fields and _contains_identity(value, self):
-                self.__dict__[name] = value
-                self.__pydantic_fields_set__.add(name)
-                return
-            raise
+        if name in type(self).model_fields and _contains_identity(value, self):
+            substitute = self.model_copy(deep=False)
+            candidate = _replace_identity(value, self, substitute, {})
+            super().__setattr__(name, candidate)
+            validated = self.__dict__[name]
+            self.__dict__[name] = _replace_identity(validated, substitute, self, {})
+            return
+        super().__setattr__(name, value)
 
     def to_jsonld(self) -> dict[str, JsonValue]:
-        return _serialize(self, root=True, active={"objects": set()}, path="$")  # type: ignore[return-value]
+        return _serialize(self, root=True, active={"objects": set()}, path="$" )  # type: ignore[return-value]
 
     def to_jsonld_json(self, *, indent: int | None = None) -> str:
         return json.dumps(self.to_jsonld(), indent=indent, ensure_ascii=False, separators=None if indent is not None else (",", ":"))
+
+
+SchemaScalar: TypeAlias = str | int | float | bool | SchemaModel | SchemaEnum
+SchemaMap = TypeAliasType("SchemaMap", dict[str, "SchemaScalar | SchemaMap"])
+SchemaValue = TypeAliasType("SchemaValue", SchemaScalar | SchemaMap | list[SchemaScalar | SchemaMap])
+
+
+def _generated_model(value: SchemaModel) -> bool:
+    try:
+        from schema_org import registry
+        return registry.get_model(value.SCHEMA_TYPE) is type(value)
+    except (AttributeError, KeyError, TypeError):
+        return False
+
+
+def _reject_number_bool(value: object, *, path: str) -> None:
+    if type(value) is bool:
+        raise ValueError(f"invalid Number value at {path}")
+    if isinstance(value, list):
+        for index, item in enumerate(value):
+            _reject_number_bool(item, path=f"{path}[{index}]")
+
+
+def _generated_enum(value: SchemaEnum) -> bool:
+    if type(value).__module__ != "schema_org.enums":
+        return False
+    try:
+        from schema_org import registry
+        return type(value).__name__ in registry._ENUM_NAMES.values()
+    except (AttributeError, KeyError):
+        return False
+
+
+def _walk_schema_value(value: object, *, path: str, active: set[int], allow_list: bool = True) -> None:
+    if value is None:
+        return
+    if isinstance(value, SchemaModel):
+        if not _generated_model(value):
+            raise ValueError("schema values must be generated Schema.org models")
+        object_id = id(value)
+        if object_id in active:
+            raise CircularReferenceError(f"Circular reference at {path}")
+        active.add(object_id)
+        try:
+            for field_name, field in type(value).model_fields.items():
+                if field_name in {"schema_id", "schema_type"}:
+                    continue
+                item = getattr(value, field_name)
+                if item is not None:
+                    alias = field.alias or field_name
+                    _walk_schema_value(item, path=f"{path}.{alias}", active=active)
+        finally:
+            active.remove(object_id)
+        return
+    if isinstance(value, SchemaEnum):
+        if not _generated_enum(value):
+            raise ValueError("schema values must be generated Schema.org enum members")
+        return
+    if type(value) in {str, bool, int, float}:
+        return
+    if type(value) in {date, datetime, time}:
+        return
+    if isinstance(value, (str, bool, int, float, date, datetime, time)):
+        raise ValueError(f"invalid schema value at {path}")
+    if isinstance(value, list):
+        if not allow_list:
+            raise ValueError(f"invalid schema value at {path}: nested lists are not allowed")
+        object_id = id(value)
+        if object_id in active:
+            raise CircularReferenceError(f"Circular reference at {path}")
+        active.add(object_id)
+        try:
+            for index, item in enumerate(value):
+                _walk_schema_value(item, path=f"{path}[{index}]", active=active, allow_list=False)
+        finally:
+            active.remove(object_id)
+        return
+    if isinstance(value, dict):
+        object_id = id(value)
+        if object_id in active:
+            raise CircularReferenceError(f"Circular reference at {path}")
+        active.add(object_id)
+        try:
+            for key, item in value.items():
+                if not isinstance(key, str):
+                    raise ValueError(f"invalid {path}: mapping keys must be str")
+                _walk_schema_value(item, path=f"{path}[{key!r}]", active=active, allow_list=False)
+        finally:
+            active.remove(object_id)
+        return
+    raise ValueError(f"invalid schema value at {path}")
 
 
 def _contains_identity(value: object, target: SchemaModel, active: set[int] | None = None) -> bool:
@@ -119,22 +234,34 @@ def _contains_identity(value: object, target: SchemaModel, active: set[int] | No
     object_id = id(value)
     if object_id in active:
         return False
-    if isinstance(value, list):
+    if isinstance(value, (list, dict)):
         active.add(object_id)
         try:
-            return any(_contains_identity(item, target, active) for item in value)
-        finally:
-            active.remove(object_id)
-    if isinstance(value, dict):
-        active.add(object_id)
-        try:
-            return any(_contains_identity(item, target, active) for item in value.values())
+            values = value if isinstance(value, list) else value.values()
+            return any(_contains_identity(item, target, active) for item in values)
         finally:
             active.remove(object_id)
     return False
- 
-SchemaScalar: TypeAlias = str | int | float | bool | SchemaModel | SchemaEnum
-SchemaValue = TypeAliasType("SchemaValue", SchemaScalar | dict[str, "SchemaValue"] | list[SchemaScalar])
+
+
+def _replace_identity(value: object, target: object, replacement: object, seen: dict[int, object]) -> object:
+    if value is target:
+        return replacement
+    if not isinstance(value, (list, dict)):
+        return value
+    object_id = id(value)
+    if object_id in seen:
+        return seen[object_id]
+    if isinstance(value, list):
+        result: list[object] = []
+        seen[object_id] = result
+        result.extend(_replace_identity(item, target, replacement, seen) for item in value)
+        return result
+    result_dict: dict[object, object] = {}
+    seen[object_id] = result_dict
+    for key, item in value.items():
+        result_dict[key] = _replace_identity(item, target, replacement, seen)
+    return result_dict
 
 
 def _serialize(value: object, *, root: bool, active: dict[str, object], path: str) -> JsonValue:

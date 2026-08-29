@@ -205,8 +205,6 @@ def _annotation(vocabulary: Vocabulary, definition) -> str:
     if not names:
         return "SchemaValue | None"
     item = " | ".join(names)
-    if definition.external_ranges:
-        return f"{item} | list[{item}] | SchemaValue | None"
     return f"{item} | list[{item}] | None"
 
 
@@ -434,7 +432,7 @@ def _render_root_init(vocabulary: Vocabulary) -> str:
         "from importlib import import_module",
         "from typing import TYPE_CHECKING",
         "",
-        "from .base import CircularReferenceError, ClassMetadata, EnumerationMemberMetadata, JsonValue, PropertyMetadata, SchemaEnum, SchemaModel, SchemaScalar, SchemaValue",
+        "from .base import CircularReferenceError, ClassMetadata, EnumerationMemberMetadata, JsonValue, PropertyMetadata, SchemaEnum, SchemaMap, SchemaModel, SchemaScalar, SchemaValue",
         "from .schema_version import SCHEMA_VERSION",
         "",
         "if TYPE_CHECKING:",
@@ -470,7 +468,7 @@ def _render_root_init(vocabulary: Vocabulary) -> str:
     lines.extend(f"    {constant_name(s.name)!r}," for s in vocabulary.enumeration_classes)
     lines.extend([
         "    'SCHEMA_VERSION',", "    'ClassMetadata',", "    'EnumerationMemberMetadata',",
-        "    'SchemaModel',", "    'SchemaEnum',",
+        "    'SchemaMap',", "    'SchemaModel',", "    'SchemaEnum',",
         "    'CircularReferenceError',",
         "]",
     ])

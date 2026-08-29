@@ -5,7 +5,7 @@
 from importlib import import_module
 from typing import TYPE_CHECKING
 
-from .base import CircularReferenceError, ClassMetadata, EnumerationMemberMetadata, JsonValue, PropertyMetadata, SchemaEnum, SchemaModel, SchemaScalar, SchemaValue
+from .base import CircularReferenceError, ClassMetadata, EnumerationMemberMetadata, JsonValue, PropertyMetadata, SchemaEnum, SchemaMap, SchemaModel, SchemaScalar, SchemaValue
 from .schema_version import SCHEMA_VERSION
 
 if TYPE_CHECKING:
@@ -2691,6 +2691,7 @@ __all__ = [
     'SCHEMA_VERSION',
     'ClassMetadata',
     'EnumerationMemberMetadata',
+    'SchemaMap',
     'SchemaModel',
     'SchemaEnum',
     'CircularReferenceError',
