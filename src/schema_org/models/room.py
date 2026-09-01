@@ -6,16 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import BedType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.accommodation import Accommodation
+
 
 class Room(Accommodation):
     __doc__ = 'https://schema.org/Room\n\nA room is a distinguishable space within a structure, usually separated from other spaces by interior walls (source: Wikipedia, the free encyclopedia, see <a href="http://en.wikipedia.org/wiki/Room">http://en.wikipedia.org/wiki/Room</a>).\n<br /><br />\nSee also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.\n'

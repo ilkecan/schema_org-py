@@ -4,13 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.bio_chem_entity import BioChemEntity
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Text
+    from schema_org.models import DefinedTerm, QuantitativeValue
+
 
 class MolecularEntity(BioChemEntity):
     __doc__ = 'https://schema.org/MolecularEntity\n\nAny constitutionally or isotopically distinct atom, molecule, ion, ion pair, radical, radical ion, complex, conformer etc., identifiable as a separately distinguishable entity.'

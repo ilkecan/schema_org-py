@@ -6,14 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.body_of_water import BodyOfWater
+
 
 class LakeBodyOfWater(BodyOfWater):
     __doc__ = 'https://schema.org/LakeBodyOfWater\n\nA lake (for example, Lake Pontrachain).'

@@ -4,18 +4,18 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import BedType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.accommodation import Accommodation
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Number, Text
+    from schema_org.enums import BedType
+    from schema_org.models import BedDetails, QuantitativeValue
+
 
 class Suite(Accommodation):
     __doc__ = 'https://schema.org/Suite\n\nA suite in a hotel or other public accommodation, denotes a class of luxury accommodations, the key feature of which is multiple rooms (source: Wikipedia, the free encyclopedia, see <a href="http://en.wikipedia.org/wiki/Suite_(hotel)">http://en.wikipedia.org/wiki/Suite_(hotel)</a>).\n<br /><br />\nSee also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.\n'

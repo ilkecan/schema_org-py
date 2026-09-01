@@ -4,22 +4,18 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import IPTCDigitalSourceEnumeration
-from schema_org.enums import PhysicalActivityCategory
-from schema_org.enums import SizeSpecification
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.creative_work import CreativeWork
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Text
+    from schema_org.enums import PhysicalActivityCategory
+    from schema_org.models import CategoryCode, StructuredValue, Thing
+
 
 class Guide(CreativeWork):
     __doc__ = 'https://schema.org/Guide\n\n[[Guide]] is a page or article that recommends specific products or services, or aspects of a thing for a user to consider. A [[Guide]] may represent a Buying Guide and detail aspects of products or services for a user to consider. A [[Guide]] may represent a Product Guide and recommend specific products or services. A [[Guide]] may represent a Ranked List and recommend specific products or services with ranking.'

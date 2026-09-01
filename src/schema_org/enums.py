@@ -6,6 +6,7 @@ from __future__ import annotations
 
 from schema_org.base import SchemaEnum
 
+
 class ActionStatusType(SchemaEnum):
     ACTIVE_ACTION_STATUS = 'https://schema.org/ActiveActionStatus'
     COMPLETED_ACTION_STATUS = 'https://schema.org/CompletedActionStatus'

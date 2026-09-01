@@ -4,15 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import BedType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Number, Text
+    from schema_org.enums import BedType
+
 
 class BedDetails(Intangible):
     __doc__ = 'https://schema.org/BedDetails\n\nAn entity holding detailed information about the available bed types, e.g. the quantity of twin beds for a hotel room. For the single case of just one bed of a certain type, you can use bed directly with a text. See also [[BedType]] (under development).'

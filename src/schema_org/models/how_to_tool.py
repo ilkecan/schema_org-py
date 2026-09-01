@@ -6,13 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.how_to_item import HowToItem
+
 
 class HowToTool(HowToItem):
     __doc__ = 'https://schema.org/HowToTool\n\nA tool used (but not consumed) when performing instructions for how to achieve a result.'

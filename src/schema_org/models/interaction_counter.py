@@ -4,16 +4,24 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.structured_value import StructuredValue
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import DateTime, Integer, Text, Time
+    from schema_org.models import (
+        Action,
+        Place,
+        PostalAddress,
+        SoftwareApplication,
+        VirtualLocation,
+        WebSite,
+    )
+
 
 class InteractionCounter(StructuredValue):
     __doc__ = 'https://schema.org/InteractionCounter\n\nA summary of how users have interacted with this CreativeWork. In most cases, authors will use a subtype to specify the specific type of interaction.\n\nSupersedes `UserBlocks`.\n\nSupersedes `UserCheckins`.\n\nSupersedes `UserComments`.\n\nSupersedes `UserDownloads`.\n\nSupersedes `UserInteraction`.\n\nSupersedes `UserLikes`.\n\nSupersedes `UserPageVisits`.\n\nSupersedes `UserPlays`.\n\nSupersedes `UserPlusOnes`.\n\nSupersedes `UserTweets`.'

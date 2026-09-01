@@ -4,13 +4,16 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
+if TYPE_CHECKING:
+    from schema_org.models import MemberProgramTier, Organization
+
 
 class MemberProgram(Intangible):
     __doc__ = 'https://schema.org/MemberProgram\n\nA MemberProgram defines a loyalty (or membership) program that provides its members with certain benefits, for example better pricing, free shipping or returns, or the ability to earn loyalty points. Member programs may have multiple tiers, for example silver and gold members, each with different benefits.'

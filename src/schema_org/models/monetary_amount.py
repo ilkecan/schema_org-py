@@ -4,17 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.structured_value import StructuredValue
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Boolean, Date, DateTime, Number, Text
+    from schema_org.models import StructuredValue
+
 
 class MonetaryAmount(StructuredValue):
     __doc__ = 'https://schema.org/MonetaryAmount\n\nA monetary value or range. This type can be used to describe an amount of money such as $50 USD, or a range as in describing a bank account being suitable for a balance between £1,000 and £1,000,000 GBP, or the value of a salary, etc. It is recommended to use [[PriceSpecification]] Types to describe the price of an Offer, Invoice, etc.\n\nSupersedes `DatedMoneySpecification`.'

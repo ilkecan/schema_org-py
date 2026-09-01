@@ -4,22 +4,26 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import IPTCDigitalSourceEnumeration
-from schema_org.enums import SizeSpecification
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.creative_work import CreativeWork
 from schema_org.models.learning_resource import LearningResource
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Integer, Text
+    from schema_org.models import (
+        AlignmentObject,
+        CourseInstance,
+        DefinedTerm,
+        EducationalOccupationalCredential,
+        Language,
+        StructuredValue,
+        Syllabus,
+    )
+
 
 class Course(LearningResource, CreativeWork):
     __doc__ = 'https://schema.org/Course\n\nA description of an educational course which may be offered as distinct instances which take place at different times or take place at different locations, or be offered through different media or modes of study. An educational course is a sequence of one or more educational events and/or creative works which aims to build knowledge, competence or ability of learners.'

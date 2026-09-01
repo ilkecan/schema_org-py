@@ -4,17 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import ActionStatusType
-from schema_org.enums import DeliveryMethod
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.transfer_action import TransferAction
+
+if TYPE_CHECKING:
+    from schema_org.enums import DeliveryMethod
+    from schema_org.models import Audience, Organization, Person
+
 
 class ReceiveAction(TransferAction):
     __doc__ = 'https://schema.org/ReceiveAction\n\nThe act of physically/electronically taking delivery of an object that has been transferred from an origin to a destination. Reciprocal of SendAction.\\n\\nRelated actions:\\n\\n* [[SendAction]]: The reciprocal of ReceiveAction.\\n* [[TakeAction]]: Unlike TakeAction, ReceiveAction does not imply that the ownership has been transferred (e.g. I can receive a package, but it does not mean the package is now mine).'

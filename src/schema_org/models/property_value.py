@@ -4,111 +4,115 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import ActionStatusType
-from schema_org.enums import AdultOrientedEnumeration
-from schema_org.enums import BedType
-from schema_org.enums import BoardingPolicyType
-from schema_org.enums import BodyMeasurementTypeEnumeration
-from schema_org.enums import BookFormatType
-from schema_org.enums import BusinessEntityType
-from schema_org.enums import BusinessFunction
-from schema_org.enums import CarUsageType
-from schema_org.enums import CertificationStatusEnumeration
-from schema_org.enums import ContactPointOption
-from schema_org.enums import DENonprofitType
-from schema_org.enums import DayOfWeek
-from schema_org.enums import DeliveryMethod
-from schema_org.enums import DigitalDocumentPermissionType
-from schema_org.enums import DigitalPlatformEnumeration
-from schema_org.enums import DriveWheelConfigurationValue
-from schema_org.enums import DrugCostCategory
-from schema_org.enums import DrugPregnancyCategory
-from schema_org.enums import DrugPrescriptionStatus
-from schema_org.enums import EUEnergyEfficiencyEnumeration
-from schema_org.enums import EnergyEfficiencyEnumeration
-from schema_org.enums import EnergyStarEnergyEfficiencyEnumeration
-from schema_org.enums import Enumeration
-from schema_org.enums import EventAttendanceModeEnumeration
-from schema_org.enums import EventStatusType
-from schema_org.enums import FulfillmentTypeEnumeration
-from schema_org.enums import GameAvailabilityEnumeration
-from schema_org.enums import GamePlayMode
-from schema_org.enums import GameServerStatus
-from schema_org.enums import GenderType
-from schema_org.enums import GovernmentBenefitsType
-from schema_org.enums import HealthAspectEnumeration
-from schema_org.enums import IPTCDigitalSourceEnumeration
-from schema_org.enums import ITNonprofitType
-from schema_org.enums import IncentiveQualifiedExpenseType
-from schema_org.enums import IncentiveStatus
-from schema_org.enums import IncentiveType
-from schema_org.enums import InfectiousAgentClass
-from schema_org.enums import ItemAvailability
-from schema_org.enums import ItemListOrderType
-from schema_org.enums import LegalForceStatus
-from schema_org.enums import LegalValueLevel
-from schema_org.enums import MapCategoryType
-from schema_org.enums import MeasurementMethodEnum
-from schema_org.enums import MeasurementTypeEnumeration
-from schema_org.enums import MediaEnumeration
-from schema_org.enums import MediaManipulationRatingEnumeration
-from schema_org.enums import MedicalAudienceType
-from schema_org.enums import MedicalDevicePurpose
-from schema_org.enums import MedicalEnumeration
-from schema_org.enums import MedicalEvidenceLevel
-from schema_org.enums import MedicalImagingTechnique
-from schema_org.enums import MedicalObservationalStudyDesign
-from schema_org.enums import MedicalProcedureType
-from schema_org.enums import MedicalSpecialty
-from schema_org.enums import MedicalStudyStatus
-from schema_org.enums import MedicalTrialDesign
-from schema_org.enums import MedicineSystem
-from schema_org.enums import MerchantReturnEnumeration
-from schema_org.enums import MusicAlbumProductionType
-from schema_org.enums import MusicAlbumReleaseType
-from schema_org.enums import MusicReleaseFormatType
-from schema_org.enums import NLNonprofitType
-from schema_org.enums import NonprofitType
-from schema_org.enums import OfferItemCondition
-from schema_org.enums import OrderStatus
-from schema_org.enums import PaymentMethodType
-from schema_org.enums import PaymentStatusType
-from schema_org.enums import PhysicalActivityCategory
-from schema_org.enums import PhysicalExam
-from schema_org.enums import PriceComponentTypeEnumeration
-from schema_org.enums import PriceTypeEnumeration
-from schema_org.enums import ProductReturnEnumeration
-from schema_org.enums import PurchaseType
-from schema_org.enums import QualitativeValue
-from schema_org.enums import RefundTypeEnumeration
-from schema_org.enums import ReservationStatusType
-from schema_org.enums import RestrictedDiet
-from schema_org.enums import ReturnFeesEnumeration
-from schema_org.enums import ReturnLabelSourceEnumeration
-from schema_org.enums import ReturnMethodEnumeration
-from schema_org.enums import RsvpResponseType
-from schema_org.enums import SizeGroupEnumeration
-from schema_org.enums import SizeSpecification
-from schema_org.enums import SizeSystemEnumeration
-from schema_org.enums import Specialty
-from schema_org.enums import StatusEnumeration
-from schema_org.enums import SteeringPositionValue
-from schema_org.enums import TierBenefitEnumeration
-from schema_org.enums import UKNonprofitType
-from schema_org.enums import USNonprofitType
-from schema_org.enums import WarrantyScope
-from schema_org.enums import WearableMeasurementTypeEnumeration
-from schema_org.enums import WearableSizeGroupEnumeration
-from schema_org.enums import WearableSizeSystemEnumeration
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.structured_value import StructuredValue
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Boolean, Number, Text
+    from schema_org.enums import (
+        ActionStatusType,
+        AdultOrientedEnumeration,
+        BedType,
+        BoardingPolicyType,
+        BodyMeasurementTypeEnumeration,
+        BookFormatType,
+        BusinessEntityType,
+        BusinessFunction,
+        CarUsageType,
+        CertificationStatusEnumeration,
+        ContactPointOption,
+        DayOfWeek,
+        DeliveryMethod,
+        DENonprofitType,
+        DigitalDocumentPermissionType,
+        DigitalPlatformEnumeration,
+        DriveWheelConfigurationValue,
+        DrugCostCategory,
+        DrugPregnancyCategory,
+        DrugPrescriptionStatus,
+        EnergyEfficiencyEnumeration,
+        EnergyStarEnergyEfficiencyEnumeration,
+        Enumeration,
+        EUEnergyEfficiencyEnumeration,
+        EventAttendanceModeEnumeration,
+        EventStatusType,
+        FulfillmentTypeEnumeration,
+        GameAvailabilityEnumeration,
+        GamePlayMode,
+        GameServerStatus,
+        GenderType,
+        GovernmentBenefitsType,
+        HealthAspectEnumeration,
+        IncentiveQualifiedExpenseType,
+        IncentiveStatus,
+        IncentiveType,
+        InfectiousAgentClass,
+        IPTCDigitalSourceEnumeration,
+        ItemAvailability,
+        ItemListOrderType,
+        ITNonprofitType,
+        LegalForceStatus,
+        LegalValueLevel,
+        MapCategoryType,
+        MeasurementMethodEnum,
+        MeasurementTypeEnumeration,
+        MediaEnumeration,
+        MediaManipulationRatingEnumeration,
+        MedicalAudienceType,
+        MedicalDevicePurpose,
+        MedicalEnumeration,
+        MedicalEvidenceLevel,
+        MedicalImagingTechnique,
+        MedicalObservationalStudyDesign,
+        MedicalProcedureType,
+        MedicalSpecialty,
+        MedicalStudyStatus,
+        MedicalTrialDesign,
+        MedicineSystem,
+        MerchantReturnEnumeration,
+        MusicAlbumProductionType,
+        MusicAlbumReleaseType,
+        MusicReleaseFormatType,
+        NLNonprofitType,
+        NonprofitType,
+        OfferItemCondition,
+        OrderStatus,
+        PaymentMethodType,
+        PaymentStatusType,
+        PhysicalActivityCategory,
+        PhysicalExam,
+        PriceComponentTypeEnumeration,
+        PriceTypeEnumeration,
+        ProductReturnEnumeration,
+        PurchaseType,
+        QualitativeValue,
+        RefundTypeEnumeration,
+        ReservationStatusType,
+        RestrictedDiet,
+        ReturnFeesEnumeration,
+        ReturnLabelSourceEnumeration,
+        ReturnMethodEnumeration,
+        RsvpResponseType,
+        SizeGroupEnumeration,
+        SizeSpecification,
+        SizeSystemEnumeration,
+        Specialty,
+        StatusEnumeration,
+        SteeringPositionValue,
+        TierBenefitEnumeration,
+        UKNonprofitType,
+        USNonprofitType,
+        WarrantyScope,
+        WearableMeasurementTypeEnumeration,
+        WearableSizeGroupEnumeration,
+        WearableSizeSystemEnumeration,
+    )
+    from schema_org.models import DefinedTerm, QuantitativeValue, StructuredValue
+
 
 class PropertyValue(StructuredValue):
     __doc__ = "https://schema.org/PropertyValue\n\nA property-value pair, e.g. representing a feature of a product or place. Use the 'name' property for the name of the property. If there is an additional human-readable version of the value, put that into the 'description' property.\\n\\n Always use specific schema.org properties when a) they exist and b) you can populate them. Using PropertyValue as a substitute will typically not trigger the same effect as using the original, specific property.\n    "

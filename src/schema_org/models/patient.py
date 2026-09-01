@@ -4,20 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Date
-from schema_org.datatypes import Distance
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Mass
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import GenderType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.medical_audience import MedicalAudience
 from schema_org.models.person import Person
+
+if TYPE_CHECKING:
+    from schema_org.models import Drug, MedicalCondition
+
 
 class Patient(MedicalAudience, Person):
     __doc__ = 'https://schema.org/Patient\n\nA patient is any person recipient of health care services.'

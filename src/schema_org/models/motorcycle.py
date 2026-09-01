@@ -6,25 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import Distance
-from schema_org.datatypes import Mass
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import AdultOrientedEnumeration
-from schema_org.enums import BedType
-from schema_org.enums import CarUsageType
-from schema_org.enums import DriveWheelConfigurationValue
-from schema_org.enums import OfferItemCondition
-from schema_org.enums import PhysicalActivityCategory
-from schema_org.enums import QualitativeValue
-from schema_org.enums import SizeSpecification
-from schema_org.enums import SteeringPositionValue
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.vehicle import Vehicle
+
 
 class Motorcycle(Vehicle):
     __doc__ = 'https://schema.org/Motorcycle\n\nA motorcycle or motorbike is a single-track, two-wheeled motor vehicle.'

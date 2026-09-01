@@ -6,11 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
 
 class ComputerLanguage(Intangible):
     __doc__ = 'https://schema.org/ComputerLanguage\n\nThis type covers computer programming languages such as Scheme and Lisp, as well as other language-like computer representations. Natural languages are best represented with the [[Language]] type.'

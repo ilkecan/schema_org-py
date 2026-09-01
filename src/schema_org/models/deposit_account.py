@@ -6,15 +6,12 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import GovernmentBenefitsType
-from schema_org.enums import PhysicalActivityCategory
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.bank_account import BankAccount
 from schema_org.models.investment_or_deposit import InvestmentOrDeposit
+
 
 class DepositAccount(BankAccount, InvestmentOrDeposit):
     __doc__ = 'https://schema.org/DepositAccount\n\nA type of Bank Account with a main purpose of depositing funds to gain interest or other benefits.'

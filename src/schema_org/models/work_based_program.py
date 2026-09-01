@@ -4,19 +4,19 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import DayOfWeek
-from schema_org.models.educational_occupational_program import EducationalOccupationalProgram
+
+from schema_org.base import PropertyMetadata
+from schema_org.models.educational_occupational_program import (
+    EducationalOccupationalProgram,
+)
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Text
+    from schema_org.models import CategoryCode, MonetaryAmountDistribution
+
 
 class WorkBasedProgram(EducationalOccupationalProgram):
     __doc__ = 'https://schema.org/WorkBasedProgram\n\nA program with both an educational and employment component. Typically based at a workplace and structured around work-based learning, with the aim of instilling competencies related to an occupation. WorkBasedProgram is used to distinguish programs such as apprenticeships from school, college or other classroom based educational programs.'

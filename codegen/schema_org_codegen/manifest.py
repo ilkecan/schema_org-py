@@ -2,12 +2,21 @@ from __future__ import annotations
 
 import json
 import re
-from pathlib import PurePosixPath
+from pathlib import Path, PurePosixPath
+from typing import TypedDict, cast
 
 from .path_validation import validate_relative_file_path
 from .vocabulary import ValidationError
 
 _MANIFEST_KEYS = frozenset({"schema_version", "schema_source", "paths", "terms"})
+
+
+class Manifest(TypedDict):
+    schema_version: str
+    schema_source: str
+    paths: list[str]
+    terms: dict[str, list[str]]
+
 _TERM_KEYS = frozenset({"classes", "datatypes", "enumerations", "enumeration_members", "properties"})
 _ROOT_FILES = frozenset({
     "src/schema_org/__init__.py",
@@ -21,7 +30,7 @@ _ROOT_FILES = frozenset({
 _VERSION_SOURCE = re.compile(r"https://schema\.org/version/(\d+\.\d+)/schemaorg-all-https\.ttl")
 
 
-def read_manifest(path: Path, *, project_root: Path | None = None) -> dict[str, object]:
+def read_manifest(path: Path, *, project_root: Path | None = None) -> Manifest:
     try:
         value = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, ValueError) as error:
@@ -29,14 +38,16 @@ def read_manifest(path: Path, *, project_root: Path | None = None) -> dict[str, 
     return validate_manifest(value, project_root=project_root)
 
 
-def validate_manifest(value: object, *, project_root: Path | None = None) -> dict[str, object]:
+def validate_manifest(value: object, *, project_root: Path | None = None) -> Manifest:
     if not isinstance(value, dict) or set(value) != _MANIFEST_KEYS:
         raise ValidationError("generated manifest is invalid")
     version = value.get("schema_version")
     source = value.get("schema_source")
     if not isinstance(version, str) or not re.fullmatch(r"\d+\.\d+", version):
         raise ValidationError("generated manifest schema_version is invalid")
-    source_match = _VERSION_SOURCE.fullmatch(source) if isinstance(source, str) else None
+    if not isinstance(source, str):
+        raise ValidationError("generated manifest schema_source is invalid")
+    source_match = _VERSION_SOURCE.fullmatch(source)
     if source_match is None or source_match.group(1) != version:
         raise ValidationError("generated manifest schema_source is invalid")
     paths = _sorted_unique_strings(value.get("paths"))
@@ -49,14 +60,12 @@ def validate_manifest(value: object, *, project_root: Path | None = None) -> dic
     }
     for path in paths:
         _validate_owned_path(path)
-    if project_root is not None:
-        _validate_filesystem_paths(project_root, paths)
-    return {
+    return cast(Manifest, {
         "schema_version": version,
         "schema_source": source,
         "paths": paths,
         "terms": normalized_terms,
-    }
+    })
 
 
 def owned_path(path: str) -> bool:

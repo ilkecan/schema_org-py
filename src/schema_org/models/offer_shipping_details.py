@@ -4,16 +4,25 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Distance
-from schema_org.datatypes import Mass
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.structured_value import StructuredValue
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Boolean, Distance, Mass, Text
+    from schema_org.models import (
+        DefinedRegion,
+        MemberProgramTier,
+        MonetaryAmount,
+        QuantitativeValue,
+        ShippingDeliveryTime,
+        ShippingRateSettings,
+        ShippingService,
+    )
+
 
 class OfferShippingDetails(StructuredValue):
     __doc__ = 'https://schema.org/OfferShippingDetails\n\nOfferShippingDetails represents information about shipping destinations.\n\nMultiple of these entities can be used to represent different shipping rates for different destinations:\n\nOne entity for Alaska/Hawaii. A different one for continental US. A different one for all France.\n\nMultiple of these entities can be used to represent different shipping costs and delivery times.\n\nTwo entities that are identical but differ in rate and time:\n\nE.g. Cheaper and slower: $5 in 5-7 days\nor Fast and expensive: $15 in 1-2 days.'

@@ -4,16 +4,16 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import ActionStatusType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.transfer_action import TransferAction
+
+if TYPE_CHECKING:
+    from schema_org.models import Audience, ContactPoint, Organization, Person
+
 
 class GiveAction(TransferAction):
     __doc__ = "https://schema.org/GiveAction\n\nThe act of transferring ownership of an object to a destination. Reciprocal of TakeAction.\\n\\nRelated actions:\\n\\n* [[TakeAction]]: Reciprocal of GiveAction.\\n* [[SendAction]]: Unlike SendAction, GiveAction implies that ownership is being transferred (e.g. I may send my laptop to you, but that doesn't mean I'm giving it to you)."

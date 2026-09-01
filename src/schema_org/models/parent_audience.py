@@ -4,16 +4,16 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import GenderType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.people_audience import PeopleAudience
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Number
+
 
 class ParentAudience(PeopleAudience):
     __doc__ = 'https://schema.org/ParentAudience\n\nA set of characteristics describing parents, who can be interested in viewing some content.'

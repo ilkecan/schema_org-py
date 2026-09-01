@@ -4,19 +4,18 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import DayOfWeek
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Date, DateTime, Duration, Integer, Text, Time
+    from schema_org.enums import DayOfWeek
+    from schema_org.models import QuantitativeValue
+
 
 class Schedule(Intangible):
     __doc__ = 'https://schema.org/Schedule\n\nA schedule defines a repeating time period used to describe a regularly occurring [[Event]]. At a minimum a schedule will specify [[repeatFrequency]] which describes the interval between occurrences of the event. Additional information can be provided to specify the schedule more precisely.\n      This includes identifying the day(s) of the week or month when the recurring event will take place, in addition to its start and end time. Schedules may also\n      have start and end dates to indicate when they are active, e.g. to define a limited calendar of events.'

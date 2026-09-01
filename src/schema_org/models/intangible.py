@@ -6,11 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.thing import Thing
+
 
 class Intangible(Thing):
     __doc__ = "https://schema.org/Intangible\n\nA utility class that serves as the umbrella for a number of 'intangible' things such as quantities, structured values, etc."

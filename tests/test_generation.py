@@ -1,6 +1,8 @@
 from pathlib import Path
 
 import pytest
+from schema_org_codegen import Vocabulary
+from schema_org_codegen.generator import _ordered_direct_parents, generate
 
 from schema_org import (
     AmpStory,
@@ -14,11 +16,9 @@ from schema_org import (
     SequentialArt,
     TVSeason,
     TVSeries,
+    registry,
 )
-from schema_org import registry
 from schema_org.base import ClassMetadata, PropertyMetadata
-from schema_org_codegen import Vocabulary
-from schema_org_codegen.generator import _ordered_direct_parents, generate
 
 
 @pytest.mark.parametrize(

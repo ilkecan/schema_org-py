@@ -6,14 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import ActionStatusType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.interact_action import InteractAction
+
 
 class SubscribeAction(InteractAction):
     __doc__ = 'https://schema.org/SubscribeAction\n\nThe act of forming a personal connection with someone/something (object) unidirectionally/asymmetrically to get updates pushed to.\\n\\nRelated actions:\\n\\n* [[FollowAction]]: Unlike FollowAction, SubscribeAction implies that the subscriber acts as a passive agent being constantly/actively pushed for updates.\\n* [[RegisterAction]]: Unlike RegisterAction, SubscribeAction implies that the agent is interested in continuing receiving updates from the object.\\n* [[JoinAction]]: Unlike JoinAction, SubscribeAction implies that the agent is interested in continuing receiving updates from the object.'

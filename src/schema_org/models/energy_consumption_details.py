@@ -4,16 +4,20 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import EUEnergyEfficiencyEnumeration
-from schema_org.enums import EnergyEfficiencyEnumeration
-from schema_org.enums import EnergyStarEnergyEfficiencyEnumeration
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
+if TYPE_CHECKING:
+    from schema_org.enums import (
+        EnergyEfficiencyEnumeration,
+        EnergyStarEnergyEfficiencyEnumeration,
+        EUEnergyEfficiencyEnumeration,
+    )
+
 
 class EnergyConsumptionDetails(Intangible):
     __doc__ = 'https://schema.org/EnergyConsumptionDetails\n\nEnergyConsumptionDetails represents information related to the energy efficiency of a product that consumes energy. The information that can be provided is based on international regulations such as for example [EU directive 2017/1369](https://eur-lex.europa.eu/eli/reg/2017/1369/oj) for energy labeling and the [Energy labeling rule](https://www.ftc.gov/enforcement/rules/rulemaking-regulatory-reform-proceedings/energy-water-use-labeling-consumer) under the Energy Policy and Conservation Act (EPCA) in the US.'

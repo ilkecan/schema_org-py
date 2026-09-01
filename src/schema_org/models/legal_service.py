@@ -6,21 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import DENonprofitType
-from schema_org.enums import ITNonprofitType
-from schema_org.enums import NLNonprofitType
-from schema_org.enums import NonprofitType
-from schema_org.enums import UKNonprofitType
-from schema_org.enums import USNonprofitType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.local_business import LocalBusiness
+
 
 class LegalService(LocalBusiness):
     __doc__ = 'https://schema.org/LegalService\n\nA LegalService is a business that provides legally-oriented services, advice and representation, e.g. law firms.\\n\\nAs a [[LocalBusiness]] it can be described as a [[provider]] of one or more [[Service]]\\(s).'

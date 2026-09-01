@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from pathlib import Path
-import re
 
 from .vocabulary import ValidationError
 
@@ -20,7 +20,7 @@ class SchemaVersion:
         return self.schema_version.removeprefix("v")
 
     @classmethod
-    def current(cls, schema_file: str | Path) -> "SchemaVersion":
+    def current(cls, schema_file: str | Path) -> SchemaVersion:
         try:
             lines = Path(schema_file).read_text(encoding="utf-8").splitlines()
         except (OSError, UnicodeDecodeError) as error:

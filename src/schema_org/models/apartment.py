@@ -4,18 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import BedType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.accommodation import Accommodation
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Number
+    from schema_org.models import QuantitativeValue
+
 
 class Apartment(Accommodation):
     __doc__ = 'https://schema.org/Apartment\n\nAn apartment (in American English) or flat (in British English) is a self-contained housing unit (a type of residential real estate) that occupies only part of a building (source: Wikipedia, the free encyclopedia, see <a href="http://en.wikipedia.org/wiki/Apartment">http://en.wikipedia.org/wiki/Apartment</a>).'

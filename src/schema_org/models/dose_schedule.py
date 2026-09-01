@@ -4,35 +4,23 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import BedType
-from schema_org.enums import DriveWheelConfigurationValue
-from schema_org.enums import DrugCostCategory
-from schema_org.enums import DrugPregnancyCategory
-from schema_org.enums import DrugPrescriptionStatus
-from schema_org.enums import InfectiousAgentClass
-from schema_org.enums import MedicalAudienceType
-from schema_org.enums import MedicalDevicePurpose
-from schema_org.enums import MedicalEnumeration
-from schema_org.enums import MedicalEvidenceLevel
-from schema_org.enums import MedicalImagingTechnique
-from schema_org.enums import MedicalObservationalStudyDesign
-from schema_org.enums import MedicalProcedureType
-from schema_org.enums import MedicalSpecialty
-from schema_org.enums import MedicalStudyStatus
-from schema_org.enums import MedicalTrialDesign
-from schema_org.enums import MedicineSystem
-from schema_org.enums import PhysicalExam
-from schema_org.enums import QualitativeValue
-from schema_org.enums import SizeSpecification
-from schema_org.enums import SteeringPositionValue
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.medical_intangible import MedicalIntangible
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Number, Text
+    from schema_org.enums import (
+        BedType,
+        DriveWheelConfigurationValue,
+        QualitativeValue,
+        SizeSpecification,
+        SteeringPositionValue,
+    )
+
 
 class DoseSchedule(MedicalIntangible):
     __doc__ = 'https://schema.org/DoseSchedule\n\nA specific dosing schedule for a drug or supplement.'

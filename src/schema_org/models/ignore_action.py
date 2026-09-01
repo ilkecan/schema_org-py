@@ -6,14 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import ActionStatusType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.assess_action import AssessAction
+
 
 class IgnoreAction(AssessAction):
     __doc__ = 'https://schema.org/IgnoreAction\n\nThe act of intentionally disregarding the object. An agent ignores an object.'

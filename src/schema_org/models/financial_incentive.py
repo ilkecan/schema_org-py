@@ -4,19 +4,35 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import IncentiveQualifiedExpenseType
-from schema_org.enums import IncentiveStatus
-from schema_org.enums import IncentiveType
-from schema_org.enums import PurchaseType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Date, DateTime, Text
+    from schema_org.enums import (
+        IncentiveQualifiedExpenseType,
+        IncentiveStatus,
+        IncentiveType,
+        PurchaseType,
+    )
+    from schema_org.models import (
+        AdministrativeArea,
+        DefinedTerm,
+        GeoShape,
+        LoanOrCredit,
+        MonetaryAmount,
+        Organization,
+        Person,
+        Place,
+        Product,
+        QuantitativeValue,
+        UnitPriceSpecification,
+    )
+
 
 class FinancialIncentive(Intangible):
     __doc__ = 'https://schema.org/FinancialIncentive\n\n<p>Represents financial incentives for goods/services offered by an organization (or individual).</p>\n\n<p>Typically contains the [[name]] of the incentive, the [[incentivizedItem]], the [[incentiveAmount]], the [[incentiveStatus]], [[incentiveType]], the [[provider]] of the incentive, and [[eligibleWithSupplier]].</p>\n\n<p>Optionally contains criteria on whether the incentive is limited based on [[purchaseType]], [[purchasePriceLimit]], [[incomeLimit]], and the [[qualifiedExpense]].\n    '

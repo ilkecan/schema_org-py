@@ -4,18 +4,27 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import PaymentStatusType
-from schema_org.enums import PhysicalActivityCategory
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Date, DateTime, Duration, Text
+    from schema_org.enums import PaymentStatusType, PhysicalActivityCategory
+    from schema_org.models import (
+        CategoryCode,
+        MonetaryAmount,
+        Order,
+        Organization,
+        PaymentMethod,
+        Person,
+        PriceSpecification,
+        Thing,
+    )
+
 
 class Invoice(Intangible):
     __doc__ = 'https://schema.org/Invoice\n\nA statement of the money due for goods or services; a bill.'

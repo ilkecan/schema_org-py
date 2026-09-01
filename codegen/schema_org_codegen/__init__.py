@@ -13,5 +13,6 @@ __all__ = [
     "Subject",
     "ValidationError",
     "Vocabulary",
+    "generate",
     "parse",
 ]

@@ -4,21 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import EventAttendanceModeEnumeration
-from schema_org.enums import EventStatusType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.user_interaction import UserInteraction
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Date, DateTime, Text
+    from schema_org.models import CreativeWork, Organization, Person
+
 
 class UserComments(UserInteraction):
     __doc__ = 'https://schema.org/UserComments\n\nUserInteraction and its subtypes is an old way of talking about users interacting with pages. It is generally better to use [[Action]]-based vocabulary, alongside types such as [[Comment]].\n\nSuperseded by `InteractionCounter`.'

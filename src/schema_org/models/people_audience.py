@@ -4,16 +4,18 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import GenderType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.audience import Audience
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Integer, Number, Text
+    from schema_org.enums import GenderType
+    from schema_org.models import MedicalCondition, QuantitativeValue
+
 
 class PeopleAudience(Audience):
     __doc__ = "https://schema.org/PeopleAudience\n\nA set of characteristics belonging to people, e.g. who compose an item's target audience."

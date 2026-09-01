@@ -4,16 +4,25 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import DeliveryMethod
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Date, DateTime, Text
+    from schema_org.enums import DeliveryMethod
+    from schema_org.models import (
+        DeliveryEvent,
+        Order,
+        Organization,
+        Person,
+        PostalAddress,
+        Product,
+    )
+
 
 class ParcelDelivery(Intangible):
     __doc__ = 'https://schema.org/ParcelDelivery\n\nThe delivery of a parcel either via the postal service or a commercial service.'

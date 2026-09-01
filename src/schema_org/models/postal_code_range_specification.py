@@ -4,13 +4,16 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.structured_value import StructuredValue
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Text
+
 
 class PostalCodeRangeSpecification(StructuredValue):
     __doc__ = 'https://schema.org/PostalCodeRangeSpecification\n\nIndicates a range of postal codes, usually defined as the set of valid codes between [[postalCodeBegin]] and [[postalCodeEnd]], inclusively.'

@@ -4,21 +4,59 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import IPTCDigitalSourceEnumeration
-from schema_org.enums import SizeSpecification
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.thing import Thing
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import (
+        URL,
+        Boolean,
+        Date,
+        DateTime,
+        Duration,
+        Integer,
+        Number,
+        Text,
+    )
+    from schema_org.enums import IPTCDigitalSourceEnumeration, SizeSpecification
+    from schema_org.models import (
+        AggregateRating,
+        AlignmentObject,
+        Audience,
+        AudioObject,
+        Claim,
+        Clip,
+        Comment,
+        CorrectionComment,
+        Country,
+        DefinedTerm,
+        Demand,
+        Event,
+        Grant,
+        ImageObject,
+        InteractionCounter,
+        ItemList,
+        Language,
+        MediaObject,
+        MusicRecording,
+        Offer,
+        Organization,
+        Person,
+        Place,
+        Product,
+        PublicationEvent,
+        QuantitativeValue,
+        Rating,
+        Review,
+        Thing,
+        VideoObject,
+        WebPage,
+    )
+
 
 class CreativeWork(Thing):
     __doc__ = 'https://schema.org/CreativeWork\n\nThe most generic kind of creative work, including books, movies, photographs, software programs, etc.'

@@ -4,23 +4,25 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import IPTCDigitalSourceEnumeration
-from schema_org.enums import MedicalSpecialty
-from schema_org.enums import SizeSpecification
-from schema_org.enums import Specialty
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.creative_work import CreativeWork
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Date, Text
+    from schema_org.enums import MedicalSpecialty, Specialty
+    from schema_org.models import (
+        BreadcrumbList,
+        ImageObject,
+        Organization,
+        Person,
+        SpeakableSpecification,
+        WebPageElement,
+    )
+
 
 class WebPage(CreativeWork):
     __doc__ = 'https://schema.org/WebPage\n\nA web page. Every web page is implicitly assumed to be declared to be of type WebPage, so the various properties about that webpage, such as <code>breadcrumb</code> may be used. We recommend explicit declaration if these properties are specified, but if they are found outside of an itemscope, they will be assumed to be about the page.'

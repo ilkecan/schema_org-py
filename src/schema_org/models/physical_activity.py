@@ -4,30 +4,24 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import DrugCostCategory
-from schema_org.enums import DrugPregnancyCategory
-from schema_org.enums import DrugPrescriptionStatus
-from schema_org.enums import InfectiousAgentClass
-from schema_org.enums import MedicalAudienceType
-from schema_org.enums import MedicalDevicePurpose
-from schema_org.enums import MedicalEnumeration
-from schema_org.enums import MedicalEvidenceLevel
-from schema_org.enums import MedicalImagingTechnique
-from schema_org.enums import MedicalObservationalStudyDesign
-from schema_org.enums import MedicalProcedureType
-from schema_org.enums import MedicalSpecialty
-from schema_org.enums import MedicalStudyStatus
-from schema_org.enums import MedicalTrialDesign
-from schema_org.enums import MedicineSystem
-from schema_org.enums import PhysicalActivityCategory
-from schema_org.enums import PhysicalExam
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.lifestyle_modification import LifestyleModification
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Text
+    from schema_org.enums import PhysicalActivityCategory
+    from schema_org.models import (
+        AnatomicalStructure,
+        AnatomicalSystem,
+        CategoryCode,
+        SuperficialAnatomy,
+        Thing,
+    )
+
 
 class PhysicalActivity(LifestyleModification):
     __doc__ = 'https://schema.org/PhysicalActivity\n\nAny bodily activity that enhances or maintains physical fitness and overall health and wellness. Includes activity that is part of daily living and routine, structured exercise, and exercise prescribed as part of a medical treatment or recovery plan.'

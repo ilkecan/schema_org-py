@@ -4,21 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import Distance
-from schema_org.datatypes import Mass
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import AdultOrientedEnumeration
-from schema_org.enums import OfferItemCondition
-from schema_org.enums import PhysicalActivityCategory
-from schema_org.enums import SizeSpecification
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.product import Product
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Text
+    from schema_org.models import DefinedTerm, Product
+
 
 class ProductGroup(Product):
     __doc__ = 'https://schema.org/ProductGroup\n\nA ProductGroup represents a group of [[Product]]s that vary only in certain well-described ways, such as by [[size]], [[color]], [[material]] etc.\n\nWhile a ProductGroup itself is not directly offered for sale, the various varying products that it represents can be. The ProductGroup serves as a prototype or template, standing in for all of the products who have an [[isVariantOf]] relationship to it. As such, properties (including additional types) can be applied to the ProductGroup to represent characteristics shared by each of the (possibly very many) variants. Properties that reference a ProductGroup are not included in this mechanism; neither are the following specific properties [[variesBy]], [[hasVariant]], [[url]]. '

@@ -4,18 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import GovernmentBenefitsType
-from schema_org.enums import PhysicalActivityCategory
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.loan_or_credit import LoanOrCredit
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Boolean
+    from schema_org.models import MonetaryAmount
+
 
 class MortgageLoan(LoanOrCredit):
     __doc__ = 'https://schema.org/MortgageLoan\n\nA loan in which property or real estate is used as collateral. (A loan securitized against some real estate.)'

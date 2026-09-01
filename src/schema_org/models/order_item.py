@@ -4,15 +4,18 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import OrderStatus
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.structured_value import StructuredValue
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Number, Text
+    from schema_org.enums import OrderStatus
+    from schema_org.models import ParcelDelivery, Product, QuantitativeValue, Service
+
 
 class OrderItem(StructuredValue):
     __doc__ = 'https://schema.org/OrderItem\n\nAn order item is a line of an order. It includes the quantity and shipping details of a bought offer.'

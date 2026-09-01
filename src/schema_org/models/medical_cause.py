@@ -4,29 +4,16 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import DrugCostCategory
-from schema_org.enums import DrugPregnancyCategory
-from schema_org.enums import DrugPrescriptionStatus
-from schema_org.enums import InfectiousAgentClass
-from schema_org.enums import MedicalAudienceType
-from schema_org.enums import MedicalDevicePurpose
-from schema_org.enums import MedicalEnumeration
-from schema_org.enums import MedicalEvidenceLevel
-from schema_org.enums import MedicalImagingTechnique
-from schema_org.enums import MedicalObservationalStudyDesign
-from schema_org.enums import MedicalProcedureType
-from schema_org.enums import MedicalSpecialty
-from schema_org.enums import MedicalStudyStatus
-from schema_org.enums import MedicalTrialDesign
-from schema_org.enums import MedicineSystem
-from schema_org.enums import PhysicalExam
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.medical_entity import MedicalEntity
+
+if TYPE_CHECKING:
+    from schema_org.models import MedicalEntity
+
 
 class MedicalCause(MedicalEntity):
     __doc__ = 'https://schema.org/MedicalCause\n\nThe causative agent(s) that are responsible for the pathophysiologic process that eventually results in a medical condition, symptom or sign. In this schema, unless otherwise specified this is meant to be the proximate cause of the medical condition, symptom or sign. The proximate cause is defined as the causative agent that most directly results in the medical condition, symptom or sign. For example, the HIV virus could be considered a cause of AIDS. Or in a diagnostic context, if a patient fell and sustained a hip fracture and two days later sustained a pulmonary embolism which eventuated in a cardiac arrest, the cause of the cardiac arrest (the proximate cause) would be the pulmonary embolism and not the fall. Medical causes can include cardiovascular, chemical, dermatologic, endocrine, environmental, gastroenterologic, genetic, hematologic, gynecologic, iatrogenic, infectious, musculoskeletal, neurologic, nutritional, obstetric, oncologic, otolaryngologic, pharmacologic, psychiatric, pulmonary, renal, rheumatologic, toxic, traumatic, or urologic causes; medical conditions can be causes as well.'

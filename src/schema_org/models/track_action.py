@@ -4,17 +4,16 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import ActionStatusType
-from schema_org.enums import DeliveryMethod
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.find_action import FindAction
+
+if TYPE_CHECKING:
+    from schema_org.enums import DeliveryMethod
+
 
 class TrackAction(FindAction):
     __doc__ = 'https://schema.org/TrackAction\n\nAn agent tracks an object for updates.\\n\\nRelated actions:\\n\\n* [[FollowAction]]: Unlike FollowAction, TrackAction refers to the interest on the location of innanimates objects.\\n* [[SubscribeAction]]: Unlike SubscribeAction, TrackAction refers to  the interest on the location of innanimate objects.'

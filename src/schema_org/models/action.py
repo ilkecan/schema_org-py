@@ -4,16 +4,27 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import ActionStatusType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.thing import Thing
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, DateTime, Text, Time
+    from schema_org.enums import ActionStatusType
+    from schema_org.models import (
+        EntryPoint,
+        HowTo,
+        Organization,
+        Person,
+        Place,
+        PostalAddress,
+        Thing,
+        VirtualLocation,
+    )
+
 
 class Action(Thing):
     __doc__ = 'https://schema.org/Action\n\nAn action performed by a direct agent and indirect participants upon a direct object. Optionally happens at a location with the help of an inanimate instrument. The execution of the action may produce a result. Specific action sub-type documentation specifies the exact expectation of each argument/role.\\n\\nSee also [blog post](https://blog.schema.org/2014/04/16/announcing-schema-org-actions/) and [Actions overview document](https://schema.org/docs/actions.html).'

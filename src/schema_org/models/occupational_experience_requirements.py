@@ -4,14 +4,16 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Number
+
 
 class OccupationalExperienceRequirements(Intangible):
     __doc__ = 'https://schema.org/OccupationalExperienceRequirements\n\nIndicates employment-related experience requirements, e.g. [[monthsOfExperience]].'

@@ -4,10 +4,17 @@
 
 from __future__ import annotations
 
-from importlib import import_module
 from collections.abc import Iterator, Mapping
+from importlib import import_module
 from types import MappingProxyType
-from schema_org.base import ClassMetadata, EnumerationMemberMetadata, PropertyMetadata
+
+from schema_org.base import (
+    ClassMetadata,
+    EnumerationMemberMetadata,
+    PropertyMetadata,
+    SchemaModel,
+)
+
 _MODEL_MODULES = MappingProxyType({
     '3DModel': 'three_d_model',
     'AMRadioChannel': 'am_radio_channel',
@@ -7666,11 +7673,11 @@ _DEPENDENCIES = MappingProxyType({
     'WriteAction': ('Action', 'CreateAction', 'CreativeWork', 'EntryPoint', 'Event', 'HowTo', 'ImageObject', 'Language', 'Organization', 'Person', 'Place', 'PostalAddress', 'PropertyValue', 'TextObject', 'Thing', 'VirtualLocation'),
     'Zoo': ('Action', 'AggregateRating', 'Certification', 'CivicStructure', 'CreativeWork', 'DefinedTerm', 'Event', 'GeoCoordinates', 'GeoShape', 'GeospatialGeometry', 'ImageObject', 'LocationFeatureSpecification', 'Map', 'OpeningHoursSpecification', 'Organization', 'Person', 'Photograph', 'Place', 'PostalAddress', 'PropertyValue', 'Review', 'TextObject'),
 })
-_MODEL_CACHE: dict[str, type] = {}
+_MODEL_CACHE: dict[str, type[SchemaModel]] = {}
 SCHEMA_VERSION = '30.0'
 
-class _LazyModels(Mapping[str, type]):
-    def __getitem__(self, name: str) -> type:
+class _LazyModels(Mapping[str, type[SchemaModel]]):
+    def __getitem__(self, name: str) -> type[SchemaModel]:
         return get_model(name)
     def __iter__(self) -> Iterator[str]:
         return iter(_MODEL_MODULES)
@@ -7679,7 +7686,7 @@ class _LazyModels(Mapping[str, type]):
 
 MODEL_BY_SCHEMA = _LazyModels()
 
-def get_model(name: str) -> type:
+def get_model(name: str) -> type[SchemaModel]:
     return rebuild(name)
 
 def ancestry(name: str) -> tuple[str, ...]:
@@ -7695,7 +7702,7 @@ def ancestry(name: str) -> tuple[str, ...]:
         queue.extend(PARENTS.get(current, ()))
     return tuple(result)
 
-def rebuild(name: str, *, force: bool = False) -> type:
+def rebuild(name: str, *, force: bool = False) -> type[SchemaModel]:
     if not force and name in _MODEL_CACHE:
         return _MODEL_CACHE[name]
     loaded = {}

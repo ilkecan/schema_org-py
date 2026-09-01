@@ -4,38 +4,43 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import Distance
-from schema_org.datatypes import Mass
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import AdultOrientedEnumeration
-from schema_org.enums import DrugCostCategory
-from schema_org.enums import DrugPregnancyCategory
-from schema_org.enums import DrugPrescriptionStatus
-from schema_org.enums import InfectiousAgentClass
-from schema_org.enums import MedicalAudienceType
-from schema_org.enums import MedicalDevicePurpose
-from schema_org.enums import MedicalEnumeration
-from schema_org.enums import MedicalEvidenceLevel
-from schema_org.enums import MedicalImagingTechnique
-from schema_org.enums import MedicalObservationalStudyDesign
-from schema_org.enums import MedicalProcedureType
-from schema_org.enums import MedicalSpecialty
-from schema_org.enums import MedicalStudyStatus
-from schema_org.enums import MedicalTrialDesign
-from schema_org.enums import MedicineSystem
-from schema_org.enums import OfferItemCondition
-from schema_org.enums import PhysicalActivityCategory
-from schema_org.enums import PhysicalExam
-from schema_org.enums import SizeSpecification
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.product import Product
 from schema_org.models.substance import Substance
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Boolean, Text
+    from schema_org.enums import (
+        DrugCostCategory,
+        DrugPregnancyCategory,
+        DrugPrescriptionStatus,
+        InfectiousAgentClass,
+        MedicalAudienceType,
+        MedicalDevicePurpose,
+        MedicalEnumeration,
+        MedicalEvidenceLevel,
+        MedicalImagingTechnique,
+        MedicalObservationalStudyDesign,
+        MedicalProcedureType,
+        MedicalSpecialty,
+        MedicalStudyStatus,
+        MedicalTrialDesign,
+        MedicineSystem,
+        PhysicalExam,
+    )
+    from schema_org.models import (
+        DoseSchedule,
+        DrugClass,
+        DrugLegalStatus,
+        DrugStrength,
+        HealthInsurancePlan,
+        MaximumDoseSchedule,
+    )
+
 
 class Drug(Product, Substance):
     __doc__ = 'https://schema.org/Drug\n\nA chemical or biologic substance, used as a medical therapy, that has a physiological effect on an organism. Here the term drug is used interchangeably with the term medicine although clinical knowledge makes a clear difference between them.'

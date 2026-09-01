@@ -6,13 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import GovernmentBenefitsType
-from schema_org.enums import PhysicalActivityCategory
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.service import Service
+
 
 class TaxiService(Service):
     __doc__ = 'https://schema.org/TaxiService\n\nA service for a vehicle for hire with a driver for local travel. Fares are usually calculated based on distance traveled.\n\nSupersedes `Taxi`.'

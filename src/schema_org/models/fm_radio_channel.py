@@ -6,11 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.radio_channel import RadioChannel
+
 
 class FMRadioChannel(RadioChannel):
     __doc__ = 'https://schema.org/FMRadioChannel\n\nA radio channel that uses FM.'

@@ -6,13 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import GovernmentBenefitsType
-from schema_org.enums import PhysicalActivityCategory
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.broadcast_service import BroadcastService
+
 
 class RadioBroadcastService(BroadcastService):
     __doc__ = 'https://schema.org/RadioBroadcastService\n\nA delivery service through which radio content is provided via broadcast over the air or online.'

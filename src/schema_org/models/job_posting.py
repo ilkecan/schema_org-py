@@ -4,19 +4,42 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import (
+        URL,
+        Boolean,
+        Date,
+        DateTime,
+        Duration,
+        Integer,
+        Number,
+        Text,
+    )
+    from schema_org.models import (
+        AdministrativeArea,
+        CategoryCode,
+        ContactPoint,
+        Credential,
+        DefinedTerm,
+        EducationalOccupationalCredential,
+        MonetaryAmount,
+        MonetaryAmountDistribution,
+        Occupation,
+        OccupationalExperienceRequirements,
+        Organization,
+        Person,
+        Place,
+        PriceSpecification,
+        QuantitativeValue,
+    )
+
 
 class JobPosting(Intangible):
     __doc__ = 'https://schema.org/JobPosting\n\nA listing that describes a job opening in a certain organization.'

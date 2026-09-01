@@ -4,20 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Date
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import DENonprofitType
-from schema_org.enums import ITNonprofitType
-from schema_org.enums import NLNonprofitType
-from schema_org.enums import NonprofitType
-from schema_org.enums import UKNonprofitType
-from schema_org.enums import USNonprofitType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.organization import Organization
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Text
+    from schema_org.models import AboutPage, Article, CreativeWork
+
 
 class NewsMediaOrganization(Organization):
     __doc__ = 'https://schema.org/NewsMediaOrganization\n\nA News/Media organization such as a newspaper or TV station.'

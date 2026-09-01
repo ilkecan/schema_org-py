@@ -6,14 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import ActionStatusType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.find_action import FindAction
+
 
 class CheckAction(FindAction):
     __doc__ = "https://schema.org/CheckAction\n\nAn agent inspects, determines, investigates, inquires, or examines an object's accuracy, quality, condition, or state."

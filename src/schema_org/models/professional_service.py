@@ -6,21 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import DENonprofitType
-from schema_org.enums import ITNonprofitType
-from schema_org.enums import NLNonprofitType
-from schema_org.enums import NonprofitType
-from schema_org.enums import UKNonprofitType
-from schema_org.enums import USNonprofitType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.local_business import LocalBusiness
+
 
 class ProfessionalService(LocalBusiness):
     __doc__ = 'https://schema.org/ProfessionalService\n\nOriginal definition: "provider of professional services."\\n\\nThe general [[ProfessionalService]] type for local businesses was deprecated due to confusion with [[Service]]. For reference, the types that it included were: [[Dentist]],\n        [[AccountingService]], [[Attorney]], [[Notary]], as well as types for several kinds of [[HomeAndConstructionBusiness]]: [[Electrician]], [[GeneralContractor]],\n        [[HousePainter]], [[Locksmith]], [[Plumber]], [[RoofingContractor]]. [[LegalService]] was introduced as a more inclusive supertype of [[Attorney]].'

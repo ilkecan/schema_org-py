@@ -6,18 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Date
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import DENonprofitType
-from schema_org.enums import ITNonprofitType
-from schema_org.enums import NLNonprofitType
-from schema_org.enums import NonprofitType
-from schema_org.enums import UKNonprofitType
-from schema_org.enums import USNonprofitType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.organization import Organization
+
 
 class FundingScheme(Organization):
     __doc__ = 'https://schema.org/FundingScheme\n\nA FundingScheme combines organizational, project and policy aspects of grant-based funding\n    that sets guidelines, principles and mechanisms to support other kinds of projects and activities.\n    Funding is typically organized via [[Grant]] funding. Examples of funding schemes: Swiss Priority Programmes (SPPs); EU Framework 7 (FP7); Horizon 2020; the NIH-R01 Grant Program; Wellcome institutional strategic support fund. For large scale public sector funding, the management and administration of grant awards is often handled by other, dedicated, organizations - [[FundingAgency]]s such as ERC, REA, ...'

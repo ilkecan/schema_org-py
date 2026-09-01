@@ -4,14 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.structured_value import StructuredValue
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import DateTime
+    from schema_org.models import Thing
+
 
 class InstantaneousEvent(StructuredValue):
     __doc__ = 'https://schema.org/InstantaneousEvent\n\nAn event with no duration, like for instance a computer log entry.'

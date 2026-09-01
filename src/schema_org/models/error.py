@@ -4,23 +4,27 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import ActionStatusType
-from schema_org.enums import EventStatusType
-from schema_org.enums import GameServerStatus
-from schema_org.enums import LegalForceStatus
-from schema_org.enums import OrderStatus
-from schema_org.enums import PaymentStatusType
-from schema_org.enums import ReservationStatusType
-from schema_org.enums import StatusEnumeration
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.instantaneous_event import InstantaneousEvent
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Integer, Text
+    from schema_org.enums import (
+        ActionStatusType,
+        EventStatusType,
+        GameServerStatus,
+        LegalForceStatus,
+        OrderStatus,
+        PaymentStatusType,
+        ReservationStatusType,
+        StatusEnumeration,
+    )
+    from schema_org.models import DefinedTerm
+
 
 class Error(InstantaneousEvent):
     __doc__ = 'https://schema.org/Error\n\nRepresentation of an Error.'

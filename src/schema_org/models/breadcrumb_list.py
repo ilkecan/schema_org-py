@@ -6,13 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import ItemListOrderType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.item_list import ItemList
+
 
 class BreadcrumbList(ItemList):
     __doc__ = 'https://schema.org/BreadcrumbList\n\nA BreadcrumbList is an ItemList consisting of a chain of linked Web pages, typically described using at least their URL and their name, and typically ending with the current page.\\n\\nThe [[position]] property is used to reconstruct the order of the items in a BreadcrumbList. The convention is that a breadcrumb list has an [[itemListOrder]] of [[ItemListOrderAscending]] (lower values listed first), and that the first items in this list correspond to the "top" or beginning of the breadcrumb trail, e.g. with a site or section homepage. The specific values of \'position\' are not assigned meaning for a BreadcrumbList, but they should be integers, e.g. beginning with \'1\' for the first item in the list.\n      '

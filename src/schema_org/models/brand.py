@@ -4,13 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Text
+    from schema_org.models import AggregateRating, ImageObject, Review
+
 
 class Brand(Intangible):
     __doc__ = 'https://schema.org/Brand\n\nA brand is a name used by an organization or business person for labeling a product, product group, or similar.'

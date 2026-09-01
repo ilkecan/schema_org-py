@@ -4,17 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import ActionStatusType
-from schema_org.enums import DeliveryMethod
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.transfer_action import TransferAction
+
+if TYPE_CHECKING:
+    from schema_org.enums import DeliveryMethod
+    from schema_org.models import Audience, ContactPoint, Organization, Person
+
 
 class SendAction(TransferAction):
     __doc__ = "https://schema.org/SendAction\n\nThe act of physically/electronically dispatching an object for transfer from an origin to a destination. Related actions:\\n\\n* [[ReceiveAction]]: The reciprocal of SendAction.\\n* [[GiveAction]]: Unlike GiveAction, SendAction does not imply the transfer of ownership (e.g. I can send you my laptop, but I'm not necessarily giving it to you)."

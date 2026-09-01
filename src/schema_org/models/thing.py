@@ -4,12 +4,25 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata, SchemaModel
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Text
+    from schema_org.models import (
+        Action,
+        CreativeWork,
+        Event,
+        ImageObject,
+        Organization,
+        Person,
+        PropertyValue,
+        TextObject,
+    )
+
 
 class Thing(SchemaModel):
     __doc__ = 'https://schema.org/Thing\n\nThe most generic type of item.'

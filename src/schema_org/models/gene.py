@@ -4,13 +4,22 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.bio_chem_entity import BioChemEntity
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Text
+    from schema_org.models import (
+        AnatomicalStructure,
+        AnatomicalSystem,
+        BioChemEntity,
+        DefinedTerm,
+    )
+
 
 class Gene(BioChemEntity):
     __doc__ = 'https://schema.org/Gene\n\nA discrete unit of inheritance which affects one or more biological traits (Source: [https://en.wikipedia.org/wiki/Gene](https://en.wikipedia.org/wiki/Gene)). Examples include FOXP2 (Forkhead box protein P2), SCARNA21 (small Cajal body-specific RNA 21), A- (agouti genotype).'

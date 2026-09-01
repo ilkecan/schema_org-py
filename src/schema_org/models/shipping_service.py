@@ -4,14 +4,22 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import FulfillmentTypeEnumeration
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.structured_value import StructuredValue
+
+if TYPE_CHECKING:
+    from schema_org.enums import FulfillmentTypeEnumeration
+    from schema_org.models import (
+        MemberProgramTier,
+        QuantitativeValue,
+        ServicePeriod,
+        ShippingConditions,
+    )
+
 
 class ShippingService(StructuredValue):
     __doc__ = 'https://schema.org/ShippingService\n\nShippingService represents the criteria used to determine if and how an offer could be shipped to a customer.'

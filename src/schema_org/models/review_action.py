@@ -4,16 +4,16 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import ActionStatusType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.assess_action import AssessAction
+
+if TYPE_CHECKING:
+    from schema_org.models import Review
+
 
 class ReviewAction(AssessAction):
     __doc__ = 'https://schema.org/ReviewAction\n\nThe act of producing a balanced opinion about the object for an audience. An agent reviews an object with participants resulting in a review.'

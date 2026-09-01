@@ -4,15 +4,18 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import ItemListOrderType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Integer, Text
+    from schema_org.enums import ItemListOrderType
+    from schema_org.models import ListItem, Thing
+
 
 class ItemList(Intangible):
     __doc__ = 'https://schema.org/ItemList\n\nA list of items of any sort&#x2014;for example, Top 10 Movies About Weathermen, or Top 100 Party Songs. Not to be confused with HTML lists, which are often used only for formatting.'

@@ -4,23 +4,24 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import BedType
-from schema_org.enums import DriveWheelConfigurationValue
-from schema_org.enums import QualitativeValue
-from schema_org.enums import ReservationStatusType
-from schema_org.enums import SizeSpecification
-from schema_org.enums import SteeringPositionValue
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.reservation import Reservation
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import DateTime, Integer, Text, Time
+    from schema_org.enums import (
+        BedType,
+        DriveWheelConfigurationValue,
+        QualitativeValue,
+        SizeSpecification,
+        SteeringPositionValue,
+    )
+    from schema_org.models import QuantitativeValue
+
 
 class LodgingReservation(Reservation):
     __doc__ = 'https://schema.org/LodgingReservation\n\nA reservation for lodging at a hotel, motel, inn, etc.\\n\\nNote: This type is for information about actual reservations, e.g. in confirmation emails or HTML pages with individual confirmations of reservations.'

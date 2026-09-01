@@ -1,10 +1,8 @@
 from pathlib import Path
 
 import pytest
-
 from schema_org_codegen import ValidationError
 from schema_org_codegen.schema_version import SchemaVersion
-
 
 VALID = (
     "# schema_org_release: v30.0\n"

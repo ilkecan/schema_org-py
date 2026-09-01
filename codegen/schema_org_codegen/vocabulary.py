@@ -1,13 +1,19 @@
 from __future__ import annotations
 
 from collections import deque
-from dataclasses import dataclass
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import OWL, RDF, RDFS
-from .model import ClassDefinition, EnumerationMember, PropertyDefinition, Subject, schema_name, schema_uri
+
+from .model import (
+    ClassDefinition,
+    EnumerationMember,
+    PropertyDefinition,
+    Subject,
+    schema_name,
+)
 from .naming import constant_name, enum_member_name, module_name, property_name
 
 SCHEMA_HTTP = "http://schema.org/"
@@ -69,19 +75,19 @@ class Vocabulary:
         self._validate_names()
 
     @classmethod
-    def from_graph(cls, graph: Graph) -> "Vocabulary":
+    def from_graph(cls, graph: Graph) -> Vocabulary:
         subjects: list[Subject] = []
         uris = sorted({str(item) for item in graph.subjects() if _is_schema_uri(item)})
         for uri in uris:
             subject = URIRef(uri)
 
-            def objects(*predicates: URIRef) -> tuple[object, ...]:
+            def objects(*predicates: URIRef, subject=subject) -> tuple[object, ...]:
                 return tuple(sorted(
                     (item for predicate in predicates for item in graph.objects(subject, predicate)),
                     key=str,
                 ))
 
-            def uri_terms(name: str, *predicates: URIRef) -> tuple[str, ...]:
+            def uri_terms(name: str, *predicates: URIRef, uri=uri) -> tuple[str, ...]:
                 values = objects(*predicates)
                 if any(not isinstance(value, URIRef) for value in values):
                     raise ValidationError(f"Schema subject {uri} has non-URI {name} value")
@@ -107,10 +113,13 @@ class Vocabulary:
                 raise ValidationError(f"Schema subject {uri} has multiple rdfs:comment values")
             inverse_values = uri_terms("inverseOf", *_schema_values("inverseOf"))
             superseded_values = uri_terms("supersededBy", *_schema_values("supersededBy"))
+            same_as_values = uri_terms("sameAs", OWL.sameAs, *_schema_values("sameAs"))
             if len(inverse_values) > 1:
                 raise ValidationError(f"Schema subject {uri} has multiple inverseOf values")
             if len(superseded_values) > 1:
                 raise ValidationError(f"Schema subject {uri} has multiple supersededBy values")
+            if len(same_as_values) > 1:
+                raise ValidationError(f"Schema subject {uri} has multiple sameAs values")
             subjects.append(Subject(
                 uri=uri,
                 types=types,
@@ -121,7 +130,7 @@ class Vocabulary:
                 superseded_by=superseded_values[0] if superseded_values else None,
                 equivalent_class=uri_terms("equivalentClass", OWL.equivalentClass),
                 equivalent_properties=uri_terms("equivalentProperty", OWL.equivalentProperty),
-                same_as=uri_terms("sameAs", OWL.sameAs, *_schema_values("sameAs")),
+                same_as=same_as_values,
                 subproperty_of=uri_terms("subPropertyOf", RDFS.subPropertyOf, *_schema_values("subPropertyOf")),
                 label=str(labels[0]),
                 comment=str(comments[0]) if comments else "",
@@ -131,7 +140,7 @@ class Vocabulary:
         return cls(subjects)
 
     @classmethod
-    def from_file(cls, path: str | Path) -> "Vocabulary":
+    def from_file(cls, path: str | Path) -> Vocabulary:
         graph = Graph()
         try:
             graph.parse(str(path), format="turtle")
@@ -374,7 +383,7 @@ class Vocabulary:
                 return
             colors[name] = 1
             for parent in self.direct_parents(name):
-                visit(parent, path + [name])
+                visit(parent, [*path, name])
             colors[name] = 2
 
         for subject in self.classes:

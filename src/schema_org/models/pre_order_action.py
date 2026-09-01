@@ -6,15 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import ActionStatusType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.trade_action import TradeAction
+
 
 class PreOrderAction(TradeAction):
     __doc__ = 'https://schema.org/PreOrderAction\n\nAn agent orders a (not yet released) object/product/service to be delivered/sent.'

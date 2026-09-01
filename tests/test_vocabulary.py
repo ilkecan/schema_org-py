@@ -1,7 +1,6 @@
 from pathlib import Path
 
 import pytest
-
 from schema_org_codegen import Subject, ValidationError, Vocabulary
 
 
@@ -139,3 +138,18 @@ def test_datatype_module_name_overlap_does_not_collide():
         subject("FooBar", parents=("https://schema.org/Thing",)),
         subject("Foo_Bar", parents=("https://schema.org/DataType",)),
     ])
+
+
+def test_vocabulary_from_graph_enforces_single_same_as(tmp_path: Path):
+    path = tmp_path / "schema.ttl"
+    path.write_text(
+        "# schema_org_release: v1.0\n"
+        "# schema_org_source: https://schema.org/version/1.0/schemaorg-all-https.ttl\n"
+        "@prefix schema: <https://schema.org/> .\n"
+        "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n"
+        "schema:Thing a rdfs:Class ; rdfs:label \"Thing\" ; "
+        "schema:sameAs <https://example.test/one>, <https://example.test/two> .\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(ValidationError, match="multiple sameAs"):
+        Vocabulary.from_file(path)

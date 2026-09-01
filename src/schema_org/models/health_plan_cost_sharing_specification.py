@@ -4,14 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Number, Text
+    from schema_org.models import PriceSpecification
+
 
 class HealthPlanCostSharingSpecification(Intangible):
     __doc__ = 'https://schema.org/HealthPlanCostSharingSpecification\n\nA description of costs to the patient under a given network or formulary.'

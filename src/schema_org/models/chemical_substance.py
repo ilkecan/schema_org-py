@@ -4,13 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.bio_chem_entity import BioChemEntity
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Text
+    from schema_org.models import DefinedTerm
+
 
 class ChemicalSubstance(BioChemEntity):
     __doc__ = "https://schema.org/ChemicalSubstance\n\nA chemical substance is 'a portion of matter of constant composition, composed of molecular entities of the same type or of different types' (source: [ChEBI:59999](https://www.ebi.ac.uk/chebi/searchId.do?chebiId=59999))."

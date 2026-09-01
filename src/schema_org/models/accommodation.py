@@ -4,18 +4,23 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import BedType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.place import Place
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Boolean, Duration, Integer, Number, Text
+    from schema_org.enums import BedType
+    from schema_org.models import (
+        BedDetails,
+        FloorPlan,
+        LocationFeatureSpecification,
+        QuantitativeValue,
+    )
+
 
 class Accommodation(Place):
     __doc__ = 'https://schema.org/Accommodation\n\nAn accommodation is a place that can accommodate human beings, e.g. a hotel room, a camping pitch, or a meeting room. Many accommodations are for overnight stays, but this is not a mandatory requirement.\nFor more specific types of accommodations not defined in schema.org, one can use [[additionalType]] with external vocabularies.\n<br /><br />\nSee also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.\n'

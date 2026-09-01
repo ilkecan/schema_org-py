@@ -6,14 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import ActionStatusType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.action import Action
+
 
 class AchieveAction(Action):
     __doc__ = 'https://schema.org/AchieveAction\n\nThe act of accomplishing something via previous efforts. It is an instantaneous action rather than an ongoing process.'

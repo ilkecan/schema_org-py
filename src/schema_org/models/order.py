@@ -4,18 +4,29 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import OrderStatus
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Boolean, Date, DateTime, Number, Text
+    from schema_org.enums import OrderStatus
+    from schema_org.models import (
+        Invoice,
+        Offer,
+        OrderItem,
+        Organization,
+        ParcelDelivery,
+        PaymentMethod,
+        Person,
+        PostalAddress,
+        Product,
+        Service,
+    )
+
 
 class Order(Intangible):
     __doc__ = 'https://schema.org/Order\n\nAn order is a confirmation of a transaction (a receipt), which can contain multiple line items, each represented by an Offer that has been accepted by the customer.'

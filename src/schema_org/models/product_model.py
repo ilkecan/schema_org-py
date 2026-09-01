@@ -4,21 +4,16 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import Distance
-from schema_org.datatypes import Mass
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import AdultOrientedEnumeration
-from schema_org.enums import OfferItemCondition
-from schema_org.enums import PhysicalActivityCategory
-from schema_org.enums import SizeSpecification
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.product import Product
+
+if TYPE_CHECKING:
+    from schema_org.models import ProductGroup
+
 
 class ProductModel(Product):
     __doc__ = 'https://schema.org/ProductModel\n\nA datasheet or vendor specification of a product (in the sense of a prototypical description).'

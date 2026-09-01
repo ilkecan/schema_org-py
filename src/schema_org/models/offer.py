@@ -4,26 +4,62 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import AdultOrientedEnumeration
-from schema_org.enums import BusinessEntityType
-from schema_org.enums import BusinessFunction
-from schema_org.enums import DeliveryMethod
-from schema_org.enums import ItemAvailability
-from schema_org.enums import OfferItemCondition
-from schema_org.enums import PhysicalActivityCategory
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import (
+        URL,
+        Boolean,
+        Date,
+        DateTime,
+        Duration,
+        Number,
+        Text,
+        Time,
+    )
+    from schema_org.enums import (
+        AdultOrientedEnumeration,
+        BusinessEntityType,
+        BusinessFunction,
+        DeliveryMethod,
+        ItemAvailability,
+        OfferItemCondition,
+        PhysicalActivityCategory,
+    )
+    from schema_org.models import (
+        AdministrativeArea,
+        AggregateOffer,
+        AggregateRating,
+        CategoryCode,
+        CreativeWork,
+        Event,
+        GeoShape,
+        LoanOrCredit,
+        MemberProgramTier,
+        MenuItem,
+        MerchantReturnPolicy,
+        OfferShippingDetails,
+        Organization,
+        PaymentMethod,
+        Person,
+        Place,
+        PriceSpecification,
+        Product,
+        PropertyValue,
+        QuantitativeValue,
+        Review,
+        Service,
+        Thing,
+        Trip,
+        TypeAndQuantityNode,
+        WarrantyPromise,
+    )
+
 
 class Offer(Intangible):
     __doc__ = 'https://schema.org/Offer\n\nAn offer to transfer some rights to an item or to provide a service — for example, an offer to sell tickets to an event, to rent the DVD of a movie, to stream a TV show over the internet, to repair a motorcycle, or to loan a book.\\n\\nNote: As the [[businessFunction]] property, which identifies the form of offer (e.g. sell, lease, repair, dispose), defaults to http://purl.org/goodrelations/v1#Sell; an Offer without a defined businessFunction value can be assumed to be an offer to sell.\\n\\nFor [GTIN](http://www.gs1.org/barcodes/technical/idkeys/gtin)-related fields, see [Check Digit calculator](http://www.gs1.org/barcodes/support/check_digit_calculator) and [validation guide](http://www.gs1us.org/resources/standards/gtin-validation-guide) from [GS1](http://www.gs1.org/).'

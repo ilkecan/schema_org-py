@@ -4,23 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import IPTCDigitalSourceEnumeration
-from schema_org.enums import MusicAlbumProductionType
-from schema_org.enums import MusicAlbumReleaseType
-from schema_org.enums import SizeSpecification
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.music_playlist import MusicPlaylist
+
+if TYPE_CHECKING:
+    from schema_org.enums import MusicAlbumProductionType, MusicAlbumReleaseType
+    from schema_org.models import MusicGroup, MusicRelease, Person
+
 
 class MusicAlbum(MusicPlaylist):
     __doc__ = 'https://schema.org/MusicAlbum\n\nA collection of music tracks.'

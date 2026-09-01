@@ -4,18 +4,18 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Distance
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import BoardingPolicyType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.trip import Trip
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import DateTime, Distance, Duration, Text
+    from schema_org.enums import BoardingPolicyType
+    from schema_org.models import Airport, Organization, Person, Vehicle
+
 
 class Flight(Trip):
     __doc__ = 'https://schema.org/Flight\n\nAn airline flight.'

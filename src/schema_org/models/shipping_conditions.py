@@ -4,16 +4,24 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Distance
-from schema_org.datatypes import Mass
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.structured_value import StructuredValue
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Boolean, Distance, Mass
+    from schema_org.models import (
+        DefinedRegion,
+        MonetaryAmount,
+        OpeningHoursSpecification,
+        QuantitativeValue,
+        ServicePeriod,
+        ShippingRateSettings,
+    )
+
 
 class ShippingConditions(StructuredValue):
     __doc__ = 'https://schema.org/ShippingConditions\n\nShippingConditions represent a set of constraints and information about the conditions of shipping a product. Such conditions may apply to only a subset of the products being shipped, depending on aspects of the product like weight, size, price, destination, and others. All the specified conditions must be met for this ShippingConditions to apply.\n\nSupersedes `DeliveryTimeSettings`.'

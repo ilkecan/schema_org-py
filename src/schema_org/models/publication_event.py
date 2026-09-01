@@ -4,21 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import EventAttendanceModeEnumeration
-from schema_org.enums import EventStatusType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.event import Event
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Boolean
+    from schema_org.models import BroadcastService, Organization, Person
+
 
 class PublicationEvent(Event):
     __doc__ = 'https://schema.org/PublicationEvent\n\nA PublicationEvent corresponds indifferently to the event of publication for a CreativeWork of any type, e.g. a broadcast event, an on-demand event, a book/journal publication via a variety of delivery media.'

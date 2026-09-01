@@ -4,13 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.defined_term import DefinedTerm
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Text
+    from schema_org.models import CategoryCodeSet
+
 
 class CategoryCode(DefinedTerm):
     __doc__ = 'https://schema.org/CategoryCode\n\nA Category Code.'

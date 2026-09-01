@@ -4,14 +4,17 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import DigitalDocumentPermissionType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
+if TYPE_CHECKING:
+    from schema_org.enums import DigitalDocumentPermissionType
+    from schema_org.models import Audience, ContactPoint, Organization, Person
+
 
 class DigitalDocumentPermission(Intangible):
     __doc__ = 'https://schema.org/DigitalDocumentPermission\n\nA permission for a particular person or group to access a particular file.'

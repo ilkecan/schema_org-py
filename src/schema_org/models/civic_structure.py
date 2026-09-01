@@ -4,16 +4,16 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.place import Place
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Text
+
 
 class CivicStructure(Place):
     __doc__ = 'https://schema.org/CivicStructure\n\nA public structure, such as a town hall or concert hall.'

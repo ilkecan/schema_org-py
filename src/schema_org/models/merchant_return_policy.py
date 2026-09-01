@@ -4,24 +4,31 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import MerchantReturnEnumeration
-from schema_org.enums import OfferItemCondition
-from schema_org.enums import RefundTypeEnumeration
-from schema_org.enums import ReturnFeesEnumeration
-from schema_org.enums import ReturnLabelSourceEnumeration
-from schema_org.enums import ReturnMethodEnumeration
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.intangible import Intangible
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Boolean, Date, DateTime, Integer, Number, Text
+    from schema_org.enums import (
+        MerchantReturnEnumeration,
+        OfferItemCondition,
+        RefundTypeEnumeration,
+        ReturnFeesEnumeration,
+        ReturnLabelSourceEnumeration,
+        ReturnMethodEnumeration,
+    )
+    from schema_org.models import (
+        Country,
+        MemberProgramTier,
+        MerchantReturnPolicySeasonalOverride,
+        MonetaryAmount,
+        PropertyValue,
+    )
+
 
 class MerchantReturnPolicy(Intangible):
     __doc__ = 'https://schema.org/MerchantReturnPolicy\n\nA MerchantReturnPolicy provides information about product return policies associated with an [[Organization]], [[Product]], or [[Offer]].\n\nSupersedes `ProductReturnPolicy`.'

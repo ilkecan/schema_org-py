@@ -6,14 +6,11 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import GovernmentBenefitsType
-from schema_org.enums import PhysicalActivityCategory
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.investment_or_deposit import InvestmentOrDeposit
+
 
 class BrokerageAccount(InvestmentOrDeposit):
     __doc__ = 'https://schema.org/BrokerageAccount\n\nAn account that allows an investor to deposit funds and place investment orders with a licensed broker or brokerage firm.'

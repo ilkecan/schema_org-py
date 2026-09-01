@@ -6,22 +6,13 @@ from __future__ import annotations
 
 from typing import ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Date
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Duration
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
-from schema_org.enums import IPTCDigitalSourceEnumeration
-from schema_org.enums import ItemListOrderType
-from schema_org.enums import SizeSpecification
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.creative_work import CreativeWork
 from schema_org.models.item_list import ItemList
 from schema_org.models.list_item import ListItem
+
 
 class HowToStep(CreativeWork, ItemList, ListItem):
     __doc__ = 'https://schema.org/HowToStep\n\nA step in the instructions for how to achieve a result. It is an ordered list with HowToDirection and/or HowToTip items.'

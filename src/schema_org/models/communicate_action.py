@@ -4,16 +4,24 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import DateTime
-from schema_org.datatypes import Text
-from schema_org.datatypes import Time
-from schema_org.datatypes import URL
-from schema_org.enums import ActionStatusType
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.interact_action import InteractAction
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import Text
+    from schema_org.models import (
+        Audience,
+        ContactPoint,
+        Language,
+        Organization,
+        Person,
+        Thing,
+    )
+
 
 class CommunicateAction(InteractAction):
     __doc__ = 'https://schema.org/CommunicateAction\n\nThe act of conveying information to another person via a communication medium (instrument) such as speech, email, or telephone conversation.'

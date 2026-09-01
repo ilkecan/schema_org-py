@@ -4,16 +4,33 @@
 
 from __future__ import annotations
 
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from schema_org.base import PropertyMetadata, SchemaModel, SchemaValue
 from pydantic import Field
-from schema_org.datatypes import Boolean
-from schema_org.datatypes import Integer
-from schema_org.datatypes import Number
-from schema_org.datatypes import Text
-from schema_org.datatypes import URL
+
+from schema_org.base import PropertyMetadata
 from schema_org.models.thing import Thing
+
+if TYPE_CHECKING:
+    from schema_org.datatypes import URL, Boolean, Integer, Number, Text
+    from schema_org.models import (
+        AggregateRating,
+        Certification,
+        DefinedTerm,
+        Event,
+        GeoCoordinates,
+        GeoShape,
+        GeospatialGeometry,
+        ImageObject,
+        LocationFeatureSpecification,
+        Map,
+        OpeningHoursSpecification,
+        Photograph,
+        PostalAddress,
+        PropertyValue,
+        Review,
+    )
+
 
 class Place(Thing):
     __doc__ = 'https://schema.org/Place\n\nEntities that have a somewhat fixed, physical extension.'
