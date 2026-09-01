@@ -84,6 +84,10 @@ uv run python -m schema_org_codegen.package_check "$PWD/dist"
 
 The schema generator and its source data live in `codegen/`. Generated runtime files live in `src/schema_org/`.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for pull request contribution and verification procedures. See [MAINTAINING.md](MAINTAINING.md) for Schema.org update and release procedures.
+
 ## Licensing and attribution
 
 Project-authored material and generated Python structure are offered under the [MIT License](LICENSE.txt). The complete `codegen/data/schema.ttl` snapshot and Schema.org descriptions copied into generated docstrings and metadata remain licensed under [CC BY-SA 3.0](LICENSE-SCHEMA-ORG.txt). The snapshot is maintainer input and is not included in the distribution.
