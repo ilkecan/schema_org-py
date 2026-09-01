@@ -1,12 +1,15 @@
-from pathlib import Path
 import io
 import tarfile
 import zipfile
+from pathlib import Path
 
 import pytest
-
 from schema_org_codegen import ValidationError
-from schema_org_codegen.package_check import _runtime_files, _validate_sdist, _validate_wheel
+from schema_org_codegen.package_check import (
+    _runtime_files,
+    _validate_sdist,
+    _validate_wheel,
+)
 
 
 def test_wheel_requires_exact_runtime_and_metadata(tmp_path: Path):

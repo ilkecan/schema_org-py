@@ -1,18 +1,18 @@
 from __future__ import annotations
 
 import os
-from pathlib import Path
 import re
 import shutil
 import subprocess
 import sys
-from urllib.request import urlopen
 import tempfile
+from pathlib import Path
+from urllib.request import urlopen
 
-from .generator import generate
-from .package_check import validate_distributions
-from .manifest import read_manifest
 from .check import check
+from .generator import generate
+from .manifest import read_manifest
+from .package_check import validate_distributions
 from .schema_version import SchemaVersion
 from .transaction import apply_transaction
 from .vocabulary import ValidationError, Vocabulary

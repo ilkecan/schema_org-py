@@ -1,9 +1,8 @@
 from pathlib import Path
 
 import pytest
-
-from schema_org_codegen.transaction import TransactionError, apply_transaction
 from schema_org_codegen import ValidationError
+from schema_org_codegen.transaction import TransactionError, apply_transaction
 
 
 def files(root: Path):
@@ -104,3 +103,16 @@ def test_transaction_reports_restoration_failure(tmp_path: Path):
 
     with pytest.raises(TransactionError, match="restoration failed"):
         apply_transaction(tmp_path, {"value": b"new"}, writer=writer)
+
+
+def test_transaction_injects_removal_failure_and_restores(tmp_path: Path):
+    (tmp_path / "remove").write_bytes(b"remove")
+    before = files(tmp_path)
+
+    def remover(path: Path):
+        path.unlink()
+        raise OSError("remove failed")
+
+    with pytest.raises(OSError, match="remove failed"):
+        apply_transaction(tmp_path, {}, ["remove"], remover=remover)
+    assert files(tmp_path) == before

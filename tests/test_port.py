@@ -1,17 +1,23 @@
 from __future__ import annotations
 
-from datetime import date
 import json
+from datetime import date
 from pathlib import Path
 
 import pytest
 from pydantic import ValidationError
-
-from schema_org import CircularReferenceError, ItemAvailability, Offer, Person, PostalAddress
-from schema_org_codegen import Subject, ValidationError as CodegenValidationError, Vocabulary
+from schema_org_codegen import Subject, Vocabulary
+from schema_org_codegen import ValidationError as CodegenValidationError
 from schema_org_codegen.naming import constant_name, module_name, property_name
 from schema_org_codegen.schema_version import SchemaVersion
 
+from schema_org import (
+    CircularReferenceError,
+    ItemAvailability,
+    Offer,
+    Person,
+    PostalAddress,
+)
 
 ROOT = Path(__file__).parents[1]
 
@@ -36,7 +42,7 @@ def test_v30_vocabulary_and_naming():
 def test_vocabulary_rejects_dangling_and_cycles():
     with pytest.raises(CodegenValidationError, match="Missing"):
         Vocabulary([subject("Thing"), subject("Child", parents=("https://schema.org/Missing",))])
-    with pytest.raises(CodegenValidationError, match="A.*B"):
+    with pytest.raises(CodegenValidationError, match=r"A.*B"):
         Vocabulary([subject("A", parents=("https://schema.org/B",)), subject("B", parents=("https://schema.org/A",))])
 
 
@@ -113,8 +119,7 @@ def test_parser_preserves_http_predicates_and_rejects_bad_shapes(tmp_path):
 
 
 def test_v30_runtime_identity_and_multiple_inheritance():
-    from schema_org import Credential, Error, SequentialArt, VisualArtwork, Book
-    from schema_org.datatypes import Quantity
+    from schema_org import Book, Credential, Error, SequentialArt, VisualArtwork
     from schema_org.schema_version import SCHEMA_VERSION
 
     assert SCHEMA_VERSION == "30.0"

@@ -2,14 +2,13 @@ from __future__ import annotations
 
 import hashlib
 import json
-from pathlib import Path
 import shutil
+from pathlib import Path
 
 import pytest
 import schema_org_codegen.transaction as transaction_module
 from schema_org_codegen.updater import SchemaUpdater
 from schema_org_codegen.vocabulary import ValidationError
-
 
 ROOT = Path(__file__).parents[1]
 TTL = """@prefix schema: <https://schema.org/> .
@@ -175,7 +174,7 @@ def test_validator_failure_preserves_every_tracked_artifact(tmp_path):
 
 
 def test_replacement_failure_rolls_back_all_files(tmp_path, monkeypatch):
-    root, target, _ = tracked_tree(tmp_path)
+    root, _target, _ = tracked_tree(tmp_path)
     existing = root / "src/schema_org/models/existing.py"
     existing.parent.mkdir(parents=True)
     existing.write_text("old", encoding="utf-8")

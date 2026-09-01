@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-from collections.abc import Iterable, Mapping
 import os
-from pathlib import Path
 import tempfile
+from collections.abc import Iterable, Mapping
+from contextlib import suppress
+from pathlib import Path
 
 from .path_validation import validate_relative_file_path
 from .vocabulary import ValidationError
@@ -19,8 +20,10 @@ def apply_transaction(
     removals: Iterable[str] = (),
     *,
     writer=None,
+    remover=None,
 ) -> None:
     writer = _replace_bytes if writer is None else writer
+    remover = _remove_path if remover is None else remover
     replacement_paths = set(replacements)
     removal_paths = set(removals)
     if replacement_paths & removal_paths:
@@ -45,13 +48,13 @@ def apply_transaction(
     try:
         for relative in sorted(changed_removals):
             attempted.add(relative)
-            paths[relative].unlink()
+            remover(paths[relative])
         for relative in sorted(changed_replacements):
             attempted.add(relative)
             writer(paths[relative], replacements[relative])
     except Exception:
         try:
-            _restore(paths, originals, writer, attempted)
+            _restore(paths, originals, writer, remover, attempted)
         except Exception as restore_error:
             raise TransactionError(f"transaction failed and restoration failed: {restore_error}") from restore_error
         raise
@@ -79,15 +82,17 @@ def _replace_bytes(path: Path, content: bytes) -> None:
         temporary = None
     finally:
         if temporary is not None:
-            try:
+            with suppress(FileNotFoundError):
                 temporary.unlink()
-            except FileNotFoundError:
-                pass
+
+def _remove_path(path: Path) -> None:
+    path.unlink()
 
 def _restore(
     paths: Mapping[str, Path],
     originals: Mapping[str, bytes | None],
     writer,
+    remover,
     attempted: Iterable[str],
 ) -> None:
     for relative in attempted:
@@ -95,6 +100,6 @@ def _restore(
         path = paths[relative]
         if content is None:
             if path.exists() or path.is_symlink():
-                path.unlink()
+                remover(path)
         else:
             writer(path, content)

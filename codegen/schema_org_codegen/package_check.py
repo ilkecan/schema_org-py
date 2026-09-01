@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from pathlib import Path, PurePosixPath
+import re
 import shutil
 import subprocess
 import sys
@@ -8,6 +8,8 @@ import tarfile
 import tempfile
 import venv
 import zipfile
+from pathlib import Path, PurePosixPath
+
 from .manifest import read_manifest
 from .vocabulary import ValidationError
 
@@ -65,6 +67,9 @@ def _validate_wheel(path: Path, runtime: set[str]) -> None:
     if len(dist_roots) != 1:
         raise ValidationError("wheel must contain one dist-info root")
     dist_info = next(iter(dist_roots))
+    expected_dist_info = _wheel_dist_info(path)
+    if expected_dist_info is not None and dist_info != expected_dist_info:
+        raise ValidationError("wheel has an unexpected dist-info root")
     if any(info.is_dir() or (info.external_attr >> 16) & 0o170000 not in {0, 0o100000} for info in infos):
         raise ValidationError("wheel contains non-regular entries")
     package_names = {f"schema_org/{name}" for name in runtime}
@@ -76,6 +81,13 @@ def _validate_wheel(path: Path, runtime: set[str]) -> None:
     }
     if set(names) != package_names | metadata_names:
         raise ValidationError("wheel contents do not match tracked runtime files")
+
+
+def _wheel_dist_info(path: Path) -> str | None:
+    parts = path.name.removesuffix(".whl").split("-")
+    if len(parts) < 5 or not re.fullmatch(r"\d+(?:\.\d+)+", parts[1]):
+        return None
+    return f"{parts[0]}-{parts[1]}.dist-info"
 
 def _validate_sdist(path: Path, runtime: set[str], project_root: Path) -> None:
     try:
