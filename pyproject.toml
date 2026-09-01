@@ -5,27 +5,32 @@ build-backend = "hatchling.build"
 [project]
 name = "schema-org"
 version = "0.1.0"
-description = "Generated Pydantic models for the Schema.org vocabulary"
+description = "Generated Schema.org models with strict validation and JSON-LD serialization"
+keywords = ["schema.org", "json-ld", "pydantic", "structured data"]
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT AND CC-BY-SA-3.0"
 license-files = ["LICENSE.txt", "LICENSE-SCHEMA-ORG.txt"]
 authors = [
-  { name = "Ilkecan Bozdogan", email = "ilkecan@protonmail.com" },
+  { name = "İlkecan Bozdoğan", email = "ilkecan@protonmail.com" },
 ]
 dependencies = [
   "pydantic>=2.9,<3",
   "typing-extensions>=4.12",
 ]
 classifiers = [
-  "Development Status :: 3 - Alpha",
+  "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Developers",
+  "Framework :: Pydantic",
+  "Framework :: Pydantic :: 2",
+  "Operating System :: OS Independent",
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
+  "Topic :: Software Development :: Libraries :: Python Modules",
   "Typing :: Typed",
 ]
 
@@ -42,6 +47,8 @@ dev = [
   "hatchling>=1.27,<2",
   "pytest>=8.3,<10",
   "rdflib>=7.1,<8",
+  "ruff>=0.16.5,<0.17",
+  "ty>=0.0.77,<0.1",
 ]
 
 [tool.hatch.build]
@@ -66,6 +73,30 @@ ignore-vcs = true
 path = "build_hooks.py"
 
 
+
+[tool.ruff]
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/schema_org/models/*.py" = ["RUF001"]
+"src/schema_org/registry.py" = ["RUF001"]
+
+[tool.ty.environment]
+python-version = "3.10"
+root = ["src", "codegen"]
+
+[tool.ty.src]
+include = ["src", "codegen", "tests/typing", "build_hooks.py"]
+
+[[tool.ty.overrides]]
+include = ["src/schema_org/models/*.py"]
+
+[tool.ty.overrides.rules]
+invalid-assignment = "ignore"
 [tool.pytest.ini_options]
 addopts = "-ra"
 pythonpath = ["src", "codegen"]

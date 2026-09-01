@@ -1,12 +1,12 @@
 Scope boundary
 
-All project-authored material and generator-emitted Ruby/RBS structure are offered under the MIT License. The complete codegen/data/schema.ttl snapshot and Schema.org descriptions copied from it into generated type/property comments and comment_lines metadata remain licensed under CC BY-SA 3.0.
+All project-authored material and generator-emitted Python/Pydantic structure are offered under the MIT License. The complete codegen/data/schema.ttl snapshot and Schema.org descriptions copied from it into generated class, property, and enumeration metadata remain licensed under CC BY-SA 3.0.
 
 Attribution
 
-This project includes generated material derived from Schema.org. The descriptions were extracted from Turtle and rendered as Ruby comments and metadata.
+This project includes generated material derived from Schema.org. The descriptions were extracted from Turtle and rendered into Python docstrings, field descriptions, and runtime metadata.
 
-The source is the Schema.org release exposed by SchemaOrg::SCHEMA_VERSION at:
+The source is the Schema.org release exposed by schema_org.SCHEMA_VERSION at:
 https://schema.org/version/<version without leading v>/schemaorg-all-https.ttl
 
 Schema.org terms:
