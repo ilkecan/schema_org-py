@@ -1,60 +1,165 @@
 name: Release
 
 on:
-  push:
-    tags: ["v[0-9]+.[0-9]+.[0-9]+"]
+  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions: {}
+
+env:
+  PYTHONUNBUFFERED: "1"
 
 jobs:
   verify:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     strategy:
+      fail-fast: false
       matrix:
         python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
-      - uses: astral-sh/setup-uv@v6
-      - name: Verify release tag
-        run: test "$GITHUB_REF_NAME" = "v$(uv version --short)"
-      - run: uv sync
+      - uses: astral-sh/setup-uv@v10
+      - run: uv sync --locked
       - run: uv run python -m pytest
       - run: uv run python -m schema_org_codegen.check
-      - run: uv run python -m build --outdir dist
-      - run: uv run python -m schema_org_codegen.package_check dist
-      - uses: actions/upload-artifact@v4
-        if: matrix.python-version == '3.12'
+      - run: uv run python -m build --outdir "$GITHUB_WORKSPACE/dist"
+      - run: uv run python -m schema_org_codegen.package_check "$GITHUB_WORKSPACE/dist"
+      - if: matrix.python-version == '3.14'
+        run: uv run ruff check .
+      - if: matrix.python-version == '3.14'
+        run: uv run ty check
+      - if: matrix.python-version == '3.12'
+        uses: actions/upload-artifact@v6
         with:
           name: distributions
-          path: dist/
+          path: |
+            ${{ github.workspace }}/dist/*.whl
+            ${{ github.workspace }}/dist/*.tar.gz
+          if-no-files-found: error
+
+  inspect:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      version: ${{ steps.release.outputs.version }}
+      pypi_exists: ${{ steps.release.outputs.pypi_exists }}
+      tag_exists: ${{ steps.release.outputs.tag_exists }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+      - uses: astral-sh/setup-uv@v10
+      - run: uv sync --locked
+      - id: release
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          git fetch --force origin main --tags
+          test "$GITHUB_SHA" = "$(git rev-parse refs/remotes/origin/main)"
+          version="$(uv version --short)"
+          grep -qF "## [$version]" CHANGELOG.md
+          pypi_exists="$(uv run python - "$version" <<'PY'
+          import json
+          import sys
+          import urllib.error
+          import urllib.request
+
+          version = sys.argv[1]
+          try:
+              response = urllib.request.urlopen("https://pypi.org/pypi/schema-org/json")
+          except urllib.error.HTTPError as error:
+              if error.code != 404:
+                  raise
+              print("false")
+          else:
+              releases = json.load(response)["releases"]
+              print("true" if releases.get(version) else "false")
+          PY
+          )"
+          tag="v$version"
+          tag_exists=false
+          if git show-ref --tags --verify --quiet "refs/tags/$tag"; then
+            test "$(git rev-list -n 1 "$tag")" = "$GITHUB_SHA"
+            tag_exists=true
+          fi
+          if test "$pypi_exists" = true && test "$tag_exists" != true; then
+            echo "PyPI contains $version without a matching tag" >&2
+            exit 1
+          fi
+          {
+            echo "version=$version"
+            echo "pypi_exists=$pypi_exists"
+            echo "tag_exists=$tag_exists"
+          } >> "$GITHUB_OUTPUT"
+
+  tag:
+    needs: inspect
+    if: needs.inspect.outputs.tag_exists != 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - env:
+          VERSION: ${{ needs.inspect.outputs.version }}
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git tag -a "v$VERSION" "$GITHUB_SHA" -m "Release v$VERSION"
+          git push origin "v$VERSION"
 
   publish:
-    needs: verify
+    needs: [verify, inspect, tag]
+    if: needs.inspect.outputs.pypi_exists != 'true' && (needs.tag.result == 'success' || needs.tag.result == 'skipped')
     runs-on: ubuntu-latest
     environment: pypi
     permissions:
       id-token: write
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v6
         with:
           name: distributions
-          path: dist/
+          path: dist
       - uses: pypa/gh-action-pypi-publish@release/v1
 
   github-release:
-    needs: publish
+    needs: [verify, inspect, tag, publish]
+    if: always() && needs.verify.result == 'success' && needs.inspect.result == 'success' && (needs.tag.result == 'success' || needs.tag.result == 'skipped') && (needs.publish.result == 'success' || needs.publish.result == 'skipped')
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v6
         with:
           name: distributions
-          path: dist/
+          path: dist
       - env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "${GITHUB_REF_NAME}" dist/* --generate-notes
+          VERSION: ${{ needs.inspect.outputs.version }}
+        run: |
+          set -euo pipefail
+          tag="v$VERSION"
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$tag" --repo "$GITHUB_REPOSITORY" dist/* --clobber
+          else
+            gh release create "$tag" --repo "$GITHUB_REPOSITORY" dist/* --title "$tag" --generate-notes
+          fi

@@ -1,0 +1,30 @@
+name: Pull Request
+
+on:
+  pull_request:
+
+concurrency:
+  group: pull-request-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+      - uses: astral-sh/setup-uv@v10
+      - run: uv sync --locked
+      - run: uv run python -m pytest
+      - run: uv run ruff check .
+      - run: uv run ty check
+      - run: uv run python -m schema_org_codegen.check
+      - run: uv run python -m build --outdir "$GITHUB_WORKSPACE/dist"
+      - run: uv run python -m schema_org_codegen.package_check "$GITHUB_WORKSPACE/dist"

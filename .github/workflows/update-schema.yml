@@ -17,12 +17,12 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - uses: astral-sh/setup-uv@v6
-      - run: uv sync
+      - uses: astral-sh/setup-uv@v10
+      - run: uv sync --locked
       - id: latest
         run: echo "version=$(uv run python -c 'from schema_org_codegen.updater import SchemaUpdater; print(SchemaUpdater().latest_version())')" >> "$GITHUB_OUTPUT"
       - id: update
@@ -32,7 +32,11 @@ jobs:
       - if: steps.update.outputs.changed == 'true'
         run: uv run python -m schema_org_codegen.check
       - if: steps.update.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v7
+        run: uv run ruff check .
+      - if: steps.update.outputs.changed == 'true'
+        run: uv run ty check
+      - if: steps.update.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v8
         with:
           branch: automation/schema-org-update
           delete-branch: true
