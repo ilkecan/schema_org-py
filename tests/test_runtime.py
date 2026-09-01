@@ -5,7 +5,14 @@ from datetime import date, datetime
 import pytest
 from pydantic import ValidationError
 
-from schema_org import DayOfWeek, ItemAvailability, Observation, Offer, Person, PostalAddress
+from schema_org import (
+    DayOfWeek,
+    ItemAvailability,
+    Observation,
+    Offer,
+    Person,
+    PostalAddress,
+)
 from schema_org.base import CircularReferenceError
 
 
@@ -74,8 +81,8 @@ def test_typed_inputs_reject_subclasses_and_report_raw_cycles():
 
 
 def test_lazy_model_resolution_is_cached_and_forceable():
-    from schema_org import registry
     from schema_org import Person as RootPerson
+    from schema_org import registry
     from schema_org.models import Person as ModelsPerson
 
     registry._MODEL_CACHE.clear()

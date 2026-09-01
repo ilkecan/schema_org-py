@@ -1,16 +1,16 @@
 from __future__ import annotations
 
-from collections.abc import Mapping
-from datetime import date, datetime, time
-from dataclasses import dataclass
-from enum import Enum
 import json
-from typing import ClassVar, TypeAlias
+from collections.abc import Mapping
+from dataclasses import dataclass
+from datetime import date, datetime, time
+from enum import Enum
+from typing import ClassVar, TypeAlias, cast
+
+from pydantic import BaseModel, ConfigDict, model_validator
 from typing_extensions import TypeAliasType
 
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
-
-JsonValue: TypeAlias = None | bool | int | float | str | list["JsonValue"] | dict[str, "JsonValue"]
+JsonValue: TypeAlias = bool | int | float | str | list["JsonValue"] | dict[str, "JsonValue"] | None
 
 
 class CircularReferenceError(ValueError):
@@ -123,11 +123,11 @@ class SchemaModel(BaseModel):
             _types_namespace=_types_namespace,
         )
 
-    def __setattr__(self, name: str, value: object) -> None:
-        super().__setattr__(name, value)
 
     def to_jsonld(self) -> dict[str, JsonValue]:
-        return _serialize(self, root=True, active={"objects": set()}, path="$" )  # type: ignore[return-value]
+        serialized = _serialize(self, root=True, active=set(), path="$")
+        assert isinstance(serialized, dict)
+        return serialized
 
     def to_jsonld_json(self, *, indent: int | None = None) -> str:
         return json.dumps(self.to_jsonld(), indent=indent, ensure_ascii=False, separators=None if indent is not None else (",", ":"))
@@ -296,14 +296,12 @@ def _walk_schema_value(
             raise CircularReferenceError(f"Circular reference at {path}")
         active.add(object_id)
         try:
-            metadata = {item.schema_name: item for item in type(value).SCHEMA_PROPERTIES}
             for field_name, field in type(value).model_fields.items():
                 if field_name in {"schema_id", "schema_type"}:
                     continue
                 item = getattr(value, field_name)
                 if item is not None:
                     alias = field.alias or field_name
-                    property_metadata = metadata.get(alias)
                     _walk_schema_value(
                         item,
                         path=f"{path}.{alias}",
@@ -364,20 +362,20 @@ def _walk_schema_value(
 
 
 
-def _serialize(value: object, *, root: bool, active: dict[str, object], path: str) -> JsonValue:
+def _serialize(value: object, *, root: bool, active: set[int], path: str) -> JsonValue:
     if isinstance(value, SchemaModel):
         object_id = id(value)
-        objects: set[int] = active["objects"]  # type: ignore[assignment]
-        if object_id in objects:
+        if object_id in active:
             raise CircularReferenceError(f"Circular reference at {path}")
-        objects.add(object_id)
+        active.add(object_id)
         try:
             result: dict[str, JsonValue] = {}
             if root:
                 result["@context"] = "https://schema.org"
             result["@type"] = value.SCHEMA_TYPE
-            if value.schema_id is not None:
-                result["@id"] = value.schema_id
+            schema_id = getattr(value, "schema_id", None)
+            if schema_id is not None:
+                result["@id"] = schema_id
             for field_name, field in type(value).model_fields.items():
                 if field_name in {"schema_id", "schema_type"}:
                     continue
@@ -388,34 +386,35 @@ def _serialize(value: object, *, root: bool, active: dict[str, object], path: st
                 result[alias] = _serialize(item, root=False, active=active, path=f"{path}.{alias}")
             return result
         finally:
-            objects.remove(object_id)
+            active.remove(object_id)
     if isinstance(value, SchemaEnum):
         return value.value
     if isinstance(value, datetime | date | time):
         return value.isoformat()
     if isinstance(value, list):
         object_id = id(value)
-        objects: set[int] = active["objects"]  # type: ignore[assignment]
-        if object_id in objects:
+        if object_id in active:
             raise CircularReferenceError(f"Circular reference at {path}")
-        objects.add(object_id)
+        active.add(object_id)
         try:
-            return [_serialize(item, root=False, active=active, path=f"{path}[{index}]") for index, item in enumerate(value)]
+            return [
+                _serialize(item, root=False, active=active, path=f"{path}[{index}]")
+                for index, item in enumerate(value)
+            ]
         finally:
-            objects.remove(object_id)
+            active.remove(object_id)
     if isinstance(value, dict):
         object_id = id(value)
-        objects: set[int] = active["objects"]  # type: ignore[assignment]
-        if object_id in objects:
+        if object_id in active:
             raise CircularReferenceError(f"Circular reference at {path}")
-        objects.add(object_id)
+        active.add(object_id)
         try:
-            result = {}
+            result: dict[str, JsonValue] = {}
             for key, item in value.items():
                 if not isinstance(key, str):
                     raise ValueError(f"invalid {path}: mapping keys must be str")
-                result[key] = _serialize(item, root=False, active=active, path=f'{path}[{key!r}]')
+                result[key] = _serialize(item, root=False, active=active, path=f"{path}[{key!r}]")
             return result
         finally:
-            objects.remove(object_id)
-    return value  # type: ignore[return-value]
+            active.remove(object_id)
+    return cast(JsonValue, value)
