@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import hashlib
-from pathlib import Path
 import tempfile
-from typing import cast
+from pathlib import Path
+
 from .generator import generate
 from .manifest import read_manifest
 
@@ -12,7 +12,7 @@ def check(project_root: str | Path | None = None) -> None:
     root = Path(project_root) if project_root is not None else Path(__file__).resolve().parents[2]
     manifest_path = root / "codegen/generated_manifest.json"
     current_manifest = read_manifest(manifest_path, project_root=root)
-    managed_paths = set(cast(list[str], current_manifest["paths"]))
+    managed_paths = set(current_manifest["paths"])
     actual_models = {
         path.relative_to(root).as_posix()
         for path in (root / "src/schema_org/models").glob("*.py")
