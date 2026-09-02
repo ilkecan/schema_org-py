@@ -3,7 +3,7 @@
 [![PyPI version](https://badge.fury.io/py/schema-org-py.svg)](https://badge.fury.io/py/schema-org-py)
 [![Release](https://github.com/ilkecan/schema_org-py/actions/workflows/release.yml/badge.svg)](https://github.com/ilkecan/schema_org-py/actions/workflows/release.yml)
 
-`schema_org-py` provides generated Pydantic 2 models for the Schema.org vocabulary. The package version is `0.1.0`; the checked-in vocabulary version is exposed as `schema_org.SCHEMA_VERSION`.
+`schema_org-py` provides generated Pydantic 2 models for the Schema.org vocabulary. Models perform strict runtime validation and JSON-LD serialization, while generated Python annotations provide static typing. The package version is `0.1.0`; the checked-in vocabulary version is exposed as `schema_org.SCHEMA_VERSION`.
 
 ## Installation
 
@@ -71,8 +71,9 @@ offer.to_jsonld_json()  # includes https://schema.org/InStock
 
 The package includes `py.typed` and generated annotations for the complete checked-in vocabulary. Models and enumerations are available from `schema_org` and from their generated modules.
 
-Generated models expose `SCHEMA_TYPE`, `SCHEMA_TYPES`, and frozen `SCHEMA_PROPERTIES`. Each `PropertyMetadata` value includes the Schema.org name, URL, accepted ranges, relationships, and source `comment`.
+Pydantic provides runtime validation for model construction and assignment, including Schema.org range checks, aliases, nested values, and unknown-field rejection. The generated annotations describe the same public properties for static type checkers. The project checks its source and typing fixtures with [ty](https://docs.astral.sh/ty/); downstream projects can use ty or another Python type checker.
 
+Generated models expose `SCHEMA_TYPE`, `SCHEMA_TYPES`, and frozen `SCHEMA_PROPERTIES`. Each `PropertyMetadata` value includes the Schema.org name, URL, accepted ranges, relationships, and source `comment`.
 ## Development
 
 ```sh
