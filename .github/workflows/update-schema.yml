@@ -38,11 +38,25 @@ jobs:
       - uses: astral-sh/setup-uv@v10
       - run: uv sync --locked
       - name: Generate schema artifacts
+        id: update
         env:
           VERSION: ${{ inputs.version }}
         run: |
           set -euo pipefail
-          uv run python -c 'import os; from schema_org_codegen.updater import SchemaUpdater; SchemaUpdater().update(os.environ["VERSION"])'
+          changed="$(uv run python -c 'import os; from schema_org_codegen.updater import SchemaUpdater; print("true" if SchemaUpdater().update(os.environ["VERSION"]) else "false")')"
+          echo "changed=${changed}" >> "$GITHUB_OUTPUT"
+      - name: Validate generated artifacts
+        if: steps.update.outputs.changed == 'true'
+        run: uv run python -m pytest
+      - name: Check generated drift
+        if: steps.update.outputs.changed == 'true'
+        run: uv run python -m schema_org_codegen.check
+      - name: Run Ruff
+        if: steps.update.outputs.changed == 'true'
+        run: uv run ruff check .
+      - name: Run ty
+        if: steps.update.outputs.changed == 'true'
+        run: uv run ty check
       - name: Check generated scope
         id: scope
         env:
@@ -71,28 +85,21 @@ jobs:
           fi
       - name: Create update pull request
         if: steps.scope.outputs.changed == '1'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          VERSION: ${{ inputs.version }}
-        run: |
-          set -euo pipefail
-          branch="automation/schema-org-${VERSION}"
-          git config user.name "schema-org-update[bot]"
-          git config user.email "schema-org-update[bot]@users.noreply.github.com"
-          gh auth setup-git
-          git add -- codegen/data/schema.ttl codegen/generated_manifest.json src/schema_org/__init__.py src/schema_org/datatypes.py src/schema_org/enums.py src/schema_org/registry.py src/schema_org/schema_version.py src/schema_org/py.typed src/schema_org/models
-          desired_tree="$(git write-tree)"
-          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
-            git fetch origin "refs/heads/${branch}:refs/remotes/origin/${branch}"
-            remote_tree="$(git rev-parse "refs/remotes/origin/${branch}^{tree}")"
-            [[ "${desired_tree}" == "${remote_tree}" ]] || { echo "Remote branch contains different schema artifacts: $branch" >&2; exit 1; }
-          else
-            git checkout -b "$branch"
-            git commit -m "schema: update to ${VERSION}"
-            git push --no-force origin "$branch"
-          fi
-          pr_url="$(gh pr list --repo "$GITHUB_REPOSITORY" --base main --head "$branch" --state open --json url --jq '.[0].url // empty')"
-          if [[ -z "${pr_url}" ]]; then
-            pr_url="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" --title "schema: update to ${VERSION}" --body "Generated Schema.org snapshot and artifacts await PR gate.")"
-          fi
-          echo "Schema update PR: ${pr_url}" >> "$GITHUB_STEP_SUMMARY"
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: automation/schema-org-${{ inputs.version }}
+          delete-branch: true
+          title: "schema: update to ${{ inputs.version }}"
+          commit-message: "schema: update to ${{ inputs.version }}"
+          body: "Generated Schema.org snapshot and artifacts await PR gate."
+          add-paths: |
+            codegen/data/schema.ttl
+            codegen/generated_manifest.json
+            src/schema_org/__init__.py
+            src/schema_org/datatypes.py
+            src/schema_org/enums.py
+            src/schema_org/registry.py
+            src/schema_org/schema_version.py
+            src/schema_org/py.typed
+            src/schema_org/models/__init__.py
+            src/schema_org/models/*.py
