@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from datetime import date
 from pathlib import Path
+from typing import Any, cast
 
 import pytest
 from pydantic import ValidationError
@@ -14,9 +15,11 @@ from schema_org_codegen.schema_version import SchemaVersion
 from schema_org import (
     CircularReferenceError,
     ItemAvailability,
+    Observation,
     Offer,
     Person,
     PostalAddress,
+    registry,
 )
 
 ROOT = Path(__file__).parents[1]
@@ -58,18 +61,18 @@ def test_schema_version_headers_are_strict(tmp_path):
 
 def test_strict_models_aliases_enums_and_assignment():
     person = Person(name="Ada", address=PostalAddress(address_locality="London"), birth_date=date(1990, 1, 2))
-    output = person.to_jsonld()
+    output = cast(Any, person.to_jsonld())
     assert output["@context"] == "https://schema.org"
     assert output["address"]["addressLocality"] == "London"
     assert output["birthDate"] == "1990-01-02"
-    assert Offer(availability=ItemAvailability.IN_STOCK).to_jsonld()["availability"] == "https://schema.org/InStock"
+    assert cast(Any, Offer(availability=ItemAvailability.IN_STOCK).to_jsonld())["availability"] == "https://schema.org/InStock"
     with pytest.raises(ValidationError):
-        Person(name=1)
+        cast(Any, Person)(name=1)
     with pytest.raises(ValidationError):
-        Person(unknown_field="x")
+        cast(Any, Person)(unknown_field="x")
     person.name = "Grace"
     with pytest.raises(ValidationError):
-        person.name = 1
+        cast(Any, person).name = 1
 
 
 def test_cycles_are_rejected_before_serialization():
@@ -81,12 +84,9 @@ def test_cycles_are_rejected_before_serialization():
         person.to_jsonld()
 
 
-def test_range_less_values_reject_nested_arrays_and_bad_keys():
-    from schema_org import Observation
-
     for value in ([1, [2]], {1: "bad"}, date.today()):
         with pytest.raises(ValidationError):
-            Observation(measured_property=value)
+            cast(Any, Observation)(measured_property=value)
 
 
 def test_parser_preserves_http_predicates_and_rejects_bad_shapes(tmp_path):
@@ -125,8 +125,7 @@ def test_v30_runtime_identity_and_multiple_inheritance():
     assert SCHEMA_VERSION == "30.0"
     assert Credential.SCHEMA_TYPE == "Credential"
     assert Error.SCHEMA_TYPE == "Error"
-    from schema_org import registry
-    assert registry.DATATYPES["Quantity"][0] == "DataType"
+    assert cast(Any, registry.DATATYPES["Quantity"])[0] == "DataType"
     assert SequentialArt.SCHEMA_TYPES[1:3] == ("Book", "VisualArtwork")
     assert issubclass(SequentialArt, Book)
     assert issubclass(SequentialArt, VisualArtwork)
@@ -138,10 +137,9 @@ def test_json_serialization_and_exact_declared_dates():
     from datetime import datetime
 
     with pytest.raises(ValidationError):
-        Person(birth_date=datetime(1990, 1, 2))
+        cast(Any, Person)(birth_date=datetime(1990, 1, 2))
     encoded = Person(name="Ada").to_jsonld_json()
     assert '"@context":"https://schema.org"' in encoded
-
 
 
 def test_non_generated_model_subclasses_are_rejected():
@@ -154,7 +152,7 @@ def test_non_generated_model_subclasses_are_rejected():
 
     custom = CustomPerson.model_construct(name="Ada")
     with pytest.raises(ValidationError):
-        Observation(measured_property=custom)
+        cast(Any, Observation)(measured_property=custom)
 
 def _fixture_schema(statements: str) -> str:
     return (
