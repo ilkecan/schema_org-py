@@ -337,7 +337,7 @@ wheels = [
 ]
 
 [[package]]
-name = "schema-org"
+name = "schema_org-py"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

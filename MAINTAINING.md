@@ -25,7 +25,7 @@ Before releasing, configure:
 
 - GitHub environment: `pypi`
 - Required reviewers and a `main` deployment branch restriction on that environment
-- PyPI trusted publisher for `schema-org`
+- PyPI trusted publisher for `schema_org-py`
 - Repository: `ilkecan/schema_org-py`
 - Workflow: `release.yml`
 

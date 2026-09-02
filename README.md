@@ -1,11 +1,11 @@
-# schema-org
+# schema_org-py
 
-`schema-org` provides generated Pydantic 2 models for the Schema.org vocabulary. The package version is `0.1.0`; the checked-in vocabulary version is exposed as `schema_org.SCHEMA_VERSION`.
+`schema_org-py` provides generated Pydantic 2 models for the Schema.org vocabulary. The package version is `0.1.0`; the checked-in vocabulary version is exposed as `schema_org.SCHEMA_VERSION`.
 
 ## Installation
 
 ```sh
-pip install schema-org==0.1.0
+pip install schema_org-py==0.1.0
 ```
 
 ## Supported Python versions

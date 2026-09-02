@@ -81,7 +81,7 @@ jobs:
 
           version = sys.argv[1]
           try:
-              response = urllib.request.urlopen("https://pypi.org/pypi/schema-org/json")
+              response = urllib.request.urlopen("https://pypi.org/pypi/schema_org-py/json")
           except urllib.error.HTTPError as error:
               if error.code != 404:
                   raise
