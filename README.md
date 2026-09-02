@@ -1,5 +1,8 @@
 # schema_org-py
 
+[![PyPI Package version](https://badge.fury.io/py/schema_org-py.svg)](https://badge.fury.io/py/schema_org-py)
+[![Release](https://github.com/ilkecan/schema_org-py/actions/workflows/release.yml/badge.svg)](https://github.com/ilkecan/schema_org-py/actions/workflows/release.yml)
+
 `schema_org-py` provides generated Pydantic 2 models for the Schema.org vocabulary. The package version is `0.1.0`; the checked-in vocabulary version is exposed as `schema_org.SCHEMA_VERSION`.
 
 ## Installation
