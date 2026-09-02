@@ -153,3 +153,138 @@ def test_vocabulary_from_graph_enforces_single_same_as(tmp_path: Path):
     )
     with pytest.raises(ValidationError, match="multiple sameAs"):
         Vocabulary.from_file(path)
+
+
+@pytest.mark.parametrize(
+    "statement",
+    [
+        "rdf:type \"Class\"",
+        "rdfs:subClassOf \"Thing\"",
+        "schema:domainIncludes \"Thing\"",
+        "schema:rangeIncludes \"Thing\"",
+        "schema:inverseOf \"value\"",
+        "schema:supersededBy \"value\"",
+        "owl:equivalentClass \"Thing\"",
+        "owl:equivalentProperty \"value\"",
+        "owl:sameAs \"value\"",
+        "rdfs:subPropertyOf \"value\"",
+        "schema:contributor \"person\"",
+        "schema:source \"source\"",
+    ],
+)
+def test_vocabulary_from_graph_rejects_non_uri_values_in_uri_relations(
+    tmp_path: Path, statement: str
+):
+    path = tmp_path / "schema.ttl"
+    path.write_text(
+        "# schema_org_release: v1.0\n"
+        "# schema_org_source: https://schema.org/version/1.0/schemaorg-all-https.ttl\n"
+        "@prefix schema: <https://schema.org/> .\n"
+        "@prefix owl: <http://www.w3.org/2002/07/owl#> .\n"
+        "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n"
+        "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n"
+        "schema:Thing a rdfs:Class ; rdfs:label \"Thing\" .\n"
+        "schema:value a rdf:Property ; rdfs:label \"value\" ; "
+        + statement
+        + " .\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(ValidationError, match="non-URI"):
+        Vocabulary.from_file(path)
+
+
+@pytest.mark.parametrize(
+    "statement",
+    [
+        "schema:Thing rdfs:label \"Thing\"",
+        "schema:Thing a rdfs:Class",
+        "schema:Thing a rdfs:Class ; rdfs:label \"Thing\", \"Other\"",
+        "schema:Thing a rdfs:Class ; rdfs:label \"Thing\" ; rdfs:comment \"one\", \"two\"",
+    ],
+)
+def test_vocabulary_from_graph_rejects_missing_or_ambiguous_metadata(
+    tmp_path: Path, statement: str
+):
+    path = tmp_path / "schema.ttl"
+    path.write_text(
+        "# schema_org_release: v1.0\n"
+        "# schema_org_source: https://schema.org/version/1.0/schemaorg-all-https.ttl\n"
+        "@prefix schema: <https://schema.org/> .\n"
+        "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n"
+        "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n"
+        + statement
+        + " .\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(ValidationError):
+        Vocabulary.from_file(path)
+
+
+@pytest.mark.parametrize("predicate", ["schema:inverseOf", "schema:supersededBy"])
+def test_vocabulary_from_graph_rejects_multiple_singleton_relations(
+    tmp_path: Path, predicate: str
+):
+    path = tmp_path / "schema.ttl"
+    path.write_text(
+        "# schema_org_release: v1.0\n"
+        "# schema_org_source: https://schema.org/version/1.0/schemaorg-all-https.ttl\n"
+        "@prefix schema: <https://schema.org/> .\n"
+        "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n"
+        "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n"
+        "schema:Thing a rdfs:Class ; rdfs:label \"Thing\" .\n"
+        "schema:value a rdf:Property ; rdfs:label \"value\" ; "
+        + predicate
+        + " schema:Thing, schema:Thing2 .\n"
+        "schema:Thing2 a rdfs:Class ; rdfs:label \"Thing2\" .\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(ValidationError, match="multiple"):
+        Vocabulary.from_file(path)
+
+
+@pytest.mark.parametrize(
+    ("first", "second"),
+    [
+        ("https://schema.org/Thing", "http://schema.org/Thing"),
+        ("http://schema.org/Thing", "https://schema.org/Thing"),
+    ],
+)
+def test_vocabulary_rejects_both_http_https_logical_collisions(first: str, second: str):
+    with pytest.raises(ValidationError, match="Duplicate schema name"):
+        Vocabulary([
+            Subject(
+                uri=first,
+                types=("Class",),
+                parents=(),
+                domains=(),
+                ranges=(),
+                label="Thing",
+                comment="",
+            ),
+            Subject(
+                uri=second,
+                types=("Class",),
+                parents=(),
+                domains=(),
+                ranges=(),
+                label="Thing",
+                comment="",
+            ),
+        ])
+
+
+def test_vocabulary_rejects_class_and_module_collisions():
+    with pytest.raises(ValidationError, match="Python class collision"):
+        Vocabulary([subject("Thing"), subject("3DModel"), subject("ThreeDModel")])
+    with pytest.raises(ValidationError, match="Python module collision"):
+        Vocabulary([
+            subject("Thing"),
+            subject("FooBar"),
+            subject("Foo_Bar"),
+        ])
+
+
+def test_vocabulary_rejects_duplicate_exact_uris():
+    duplicate = subject("Thing")
+    with pytest.raises(ValidationError, match="Duplicate schema URI"):
+        Vocabulary([duplicate, duplicate])

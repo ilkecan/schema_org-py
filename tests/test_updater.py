@@ -7,6 +7,7 @@ from pathlib import Path
 
 import pytest
 import schema_org_codegen.transaction as transaction_module
+import schema_org_codegen.updater as updater_module
 from schema_org_codegen.updater import SchemaUpdater
 from schema_org_codegen.vocabulary import ValidationError
 
@@ -208,3 +209,60 @@ def test_replacement_failure_rolls_back_all_files(tmp_path, monkeypatch):
         updater.update("v30.1")
     after = {path.relative_to(root): path.read_bytes() for path in root.rglob("*") if path.is_file()}
     assert after == before
+
+
+def _all_files(root: Path) -> dict[Path, bytes]:
+    return {
+        path.relative_to(root): path.read_bytes()
+        for path in root.rglob("*")
+        if path.is_file()
+    }
+
+
+def test_invalid_prior_manifest_preserves_every_file(tmp_path: Path):
+    root, target, _ = tracked_tree(tmp_path)
+    manifest = root / "codegen/generated_manifest.json"
+    manifest.write_text("{not-json", encoding="utf-8")
+    before = _all_files(root)
+    with pytest.raises(ValidationError):
+        SchemaUpdater(downloader=lambda url: TTL, target=target, project_root=root).update("v30.1")
+    assert _all_files(root) == before
+
+
+@pytest.mark.parametrize("stage", ["tests", "drift", "build", "archive"])
+def test_staged_validation_failures_preserve_every_file(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, stage: str
+):
+    root, target, _ = tracked_tree(tmp_path)
+    before = _all_files(root)
+
+    if stage == "tests":
+        def reject(command, cwd, environment, message):
+            if command[1:3] == ["-m", "pytest"]:
+                raise RuntimeError("tests failed")
+            return None
+
+        monkeypatch.setattr(updater_module, "_run_checked", reject)
+    elif stage == "drift":
+        def reject(_root):
+            raise RuntimeError("drift failed")
+
+        monkeypatch.setattr(updater_module, "check", reject)
+    elif stage == "build":
+        def reject(command, cwd, environment, message):
+            if command[1:3] == ["-m", "pytest"]:
+                return None
+            if command[1] == "-m" and command[2] == "build":
+                raise RuntimeError("build failed")
+            return None
+
+        monkeypatch.setattr(updater_module, "_run_checked", reject)
+    else:
+        def reject(_directory, *, project_root):
+            raise RuntimeError("archive failed")
+
+        monkeypatch.setattr(updater_module, "validate_distributions", reject)
+
+    with pytest.raises(RuntimeError):
+        SchemaUpdater(downloader=lambda url: TTL, target=target, project_root=root).update("v30.1")
+    assert _all_files(root) == before
