@@ -2,7 +2,7 @@
 
 ## Schema.org updates
 
-Schema.org updates are generated through the `Update Schema.org` workflow. It runs weekly and can also be dispatched manually. The workflow downloads the latest immutable Schema.org release, regenerates the artifacts, runs the verification gates, and opens a pull request.
+Schema.org updates are generated through the `Update Schema.org` workflow. Dispatch it manually from `main` with a `version` input in exact `v<major>.<minor>` form. The workflow downloads the requested immutable Schema.org release, regenerates the artifacts, checks the generated scope, and opens a pull request containing only the schema snapshot and generated outputs. The pull request runs the pull request gate.
 
 The workflow uses the repository's `GITHUB_TOKEN`. Enable **Allow GitHub Actions to create and approve pull requests** under **Settings -> Actions -> General -> Workflow permissions**. No GitHub App or long-lived token is required.
 
@@ -12,7 +12,7 @@ Run the same update locally with:
 
 ```sh
 uv sync --locked
-uv run python -c 'from schema_org_codegen.updater import SchemaUpdater; print(SchemaUpdater().update())'
+uv run python -c 'from schema_org_codegen.updater import SchemaUpdater; print(SchemaUpdater().update("v31.0"))'
 ```
 
 The generated pull request may change only `codegen/data/schema.ttl`, `codegen/generated_manifest.json`, `src/schema_org/__init__.py`, `src/schema_org/datatypes.py`, `src/schema_org/enums.py`, `src/schema_org/registry.py`, `src/schema_org/schema_version.py`, `src/schema_org/py.typed`, `src/schema_org/models/__init__.py`, and files under `src/schema_org/models/`.

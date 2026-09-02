@@ -1,56 +1,98 @@
 name: Update Schema.org
 
 on:
-  schedule:
-    - cron: "17 4 * * 1"
   workflow_dispatch:
+    inputs:
+      version:
+        description: Schema.org version in v<major>.<minor> form
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
 
 concurrency:
   group: schema-org-update
   cancel-in-progress: false
 
-
 jobs:
   update:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
+    name: Update Schema.org
     steps:
+      - name: Validate dispatch
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          [[ "${GITHUB_REF}" == "refs/heads/main" ]] || { echo "Schema updates must run from main" >&2; exit 1; }
+          [[ "${VERSION}" =~ ^v[0-9]+\.[0-9]+$ ]] || { echo "expected schema version v<major>.<minor>" >&2; exit 1; }
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
       - uses: actions/setup-python@v7
         with:
-          python-version: "3.12"
+          python-version: "3.14"
       - uses: astral-sh/setup-uv@v10
       - run: uv sync --locked
-      - id: latest
-        run: echo "version=$(uv run python -c 'from schema_org_codegen.updater import SchemaUpdater; print(SchemaUpdater().latest_version())')" >> "$GITHUB_OUTPUT"
-      - id: update
-        run: uv run python -c 'from schema_org_codegen.updater import SchemaUpdater; print("changed=true" if SchemaUpdater().update("${{ steps.latest.outputs.version }}") else "changed=false")' >> "$GITHUB_OUTPUT"
-      - if: steps.update.outputs.changed == 'true'
-        run: uv run python -m pytest
-      - if: steps.update.outputs.changed == 'true'
-        run: uv run python -m schema_org_codegen.check
-      - if: steps.update.outputs.changed == 'true'
-        run: uv run ruff check .
-      - if: steps.update.outputs.changed == 'true'
-        run: uv run ty check
-      - if: steps.update.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v8
-        with:
-          branch: automation/schema-org-update
-          delete-branch: true
-          title: "Update Schema.org to v${{ steps.latest.outputs.version }}"
-          commit-message: "Update Schema.org to v${{ steps.latest.outputs.version }}"
-          body: "Regenerate the package from the immutable Schema.org release."
-          add-paths: |
-            codegen/data/schema.ttl
-            codegen/generated_manifest.json
-            src/schema_org/__init__.py
-            src/schema_org/datatypes.py
-            src/schema_org/enums.py
-            src/schema_org/registry.py
-            src/schema_org/schema_version.py
-            src/schema_org/py.typed
-            src/schema_org/models/__init__.py
-            src/schema_org/models/*.py
+      - name: Generate schema artifacts
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          uv run python -c 'import os; from schema_org_codegen.updater import SchemaUpdater; SchemaUpdater().update(os.environ["VERSION"])'
+      - name: Check generated scope
+        id: scope
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          allowed() {
+            case "$1" in
+              codegen/data/schema.ttl|codegen/generated_manifest.json|src/schema_org/__init__.py|src/schema_org/datatypes.py|src/schema_org/enums.py|src/schema_org/registry.py|src/schema_org/schema_version.py|src/schema_org/py.typed|src/schema_org/models/*) return 0 ;;
+              *) return 1 ;;
+            esac
+          }
+          changed=0
+          while IFS= read -r line; do
+            [[ -n "$line" ]] || continue
+            path="${line:3}"
+            if [[ "$path" == *" -> "* ]]; then
+              path="${path##* -> }"
+            fi
+            allowed "$path" || { echo "Disallowed change: $path" >&2; exit 1; }
+            changed=1
+          done < <(git status --porcelain=v1)
+          echo "changed=${changed}" >> "$GITHUB_OUTPUT"
+          if [[ "$changed" == 0 ]]; then
+            echo "No schema changes for ${VERSION}" >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Create update pull request
+        if: steps.scope.outputs.changed == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          branch="automation/schema-org-${VERSION}"
+          git config user.name "schema-org-update[bot]"
+          git config user.email "schema-org-update[bot]@users.noreply.github.com"
+          gh auth setup-git
+          git add -- codegen/data/schema.ttl codegen/generated_manifest.json src/schema_org/__init__.py src/schema_org/datatypes.py src/schema_org/enums.py src/schema_org/registry.py src/schema_org/schema_version.py src/schema_org/py.typed src/schema_org/models
+          desired_tree="$(git write-tree)"
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+            git fetch origin "refs/heads/${branch}:refs/remotes/origin/${branch}"
+            remote_tree="$(git rev-parse "refs/remotes/origin/${branch}^{tree}")"
+            [[ "${desired_tree}" == "${remote_tree}" ]] || { echo "Remote branch contains different schema artifacts: $branch" >&2; exit 1; }
+          else
+            git checkout -b "$branch"
+            git commit -m "schema: update to ${VERSION}"
+            git push --no-force origin "$branch"
+          fi
+          pr_url="$(gh pr list --repo "$GITHUB_REPOSITORY" --base main --head "$branch" --state open --json url --jq '.[0].url // empty')"
+          if [[ -z "${pr_url}" ]]; then
+            pr_url="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" --title "schema: update to ${VERSION}" --body "Generated Schema.org snapshot and artifacts await PR gate.")"
+          fi
+          echo "Schema update PR: ${pr_url}" >> "$GITHUB_STEP_SUMMARY"
