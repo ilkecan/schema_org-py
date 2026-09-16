@@ -203,6 +203,7 @@ if TYPE_CHECKING:
     from .dated_money_specification import DatedMoneySpecification  # noqa: F401
     from .day_spa import DaySpa  # noqa: F401
     from .deactivate_action import DeactivateAction  # noqa: F401
+    from .declaration_of_conformity import DeclarationOfConformity  # noqa: F401
     from .defence_establishment import DefenceEstablishment  # noqa: F401
     from .defined_region import DefinedRegion  # noqa: F401
     from .defined_term import DefinedTerm  # noqa: F401
@@ -222,6 +223,7 @@ if TYPE_CHECKING:
     from .dietary_supplement import DietarySupplement  # noqa: F401
     from .digital_document import DigitalDocument  # noqa: F401
     from .digital_document_permission import DigitalDocumentPermission  # noqa: F401
+    from .digital_product_passport import DigitalProductPassport  # noqa: F401
     from .disagree_action import DisagreeAction  # noqa: F401
     from .discover_action import DiscoverAction  # noqa: F401
     from .discussion_forum_posting import DiscussionForumPosting  # noqa: F401
@@ -265,6 +267,9 @@ if TYPE_CHECKING:
     from .engine_specification import EngineSpecification  # noqa: F401
     from .entertainment_business import EntertainmentBusiness  # noqa: F401
     from .entry_point import EntryPoint  # noqa: F401
+    from .environmental_product_declaration import (
+        EnvironmentalProductDeclaration,  # noqa: F401
+    )
     from .episode import Episode  # noqa: F401
     from .error import Error  # noqa: F401
     from .event import Event  # noqa: F401
@@ -1055,6 +1060,7 @@ _SCHEMA_BY_EXPORT = {
     'DatedMoneySpecification': 'DatedMoneySpecification',
     'DaySpa': 'DaySpa',
     'DeactivateAction': 'DeactivateAction',
+    'DeclarationOfConformity': 'DeclarationOfConformity',
     'DefenceEstablishment': 'DefenceEstablishment',
     'DefinedRegion': 'DefinedRegion',
     'DefinedTerm': 'DefinedTerm',
@@ -1074,6 +1080,7 @@ _SCHEMA_BY_EXPORT = {
     'DietarySupplement': 'DietarySupplement',
     'DigitalDocument': 'DigitalDocument',
     'DigitalDocumentPermission': 'DigitalDocumentPermission',
+    'DigitalProductPassport': 'DigitalProductPassport',
     'DisagreeAction': 'DisagreeAction',
     'DiscoverAction': 'DiscoverAction',
     'DiscussionForumPosting': 'DiscussionForumPosting',
@@ -1113,6 +1120,7 @@ _SCHEMA_BY_EXPORT = {
     'EngineSpecification': 'EngineSpecification',
     'EntertainmentBusiness': 'EntertainmentBusiness',
     'EntryPoint': 'EntryPoint',
+    'EnvironmentalProductDeclaration': 'EnvironmentalProductDeclaration',
     'Episode': 'Episode',
     'Error': 'Error',
     'Event': 'Event',
