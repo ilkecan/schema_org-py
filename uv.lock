@@ -337,8 +337,8 @@ wheels = [
 ]
 
 [[package]]
-name = "schema_org-py"
-version = "0.1.0"
+name = "schema-org-py"
+version = "0.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "pydantic" },
