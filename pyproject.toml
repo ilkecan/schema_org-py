@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "schema_org-py"
-version = "0.1.0"
+version = "0.2.0"
 description = "Generated Schema.org models with strict validation and JSON-LD serialization"
 keywords = ["schema.org", "json-ld", "pydantic", "structured data"]
 readme = "README.md"

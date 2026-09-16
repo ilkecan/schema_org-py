@@ -3,12 +3,12 @@
 [![PyPI version](https://badge.fury.io/py/schema-org-py.svg)](https://badge.fury.io/py/schema-org-py)
 [![Release](https://github.com/ilkecan/schema_org-py/actions/workflows/release.yml/badge.svg)](https://github.com/ilkecan/schema_org-py/actions/workflows/release.yml)
 
-`schema_org-py` provides generated Pydantic 2 models for the Schema.org vocabulary. Models perform strict runtime validation and JSON-LD serialization, while generated Python annotations provide static typing. The package version is `0.1.0`; the checked-in vocabulary version is exposed as `schema_org.SCHEMA_VERSION`.
+`schema_org-py` provides generated Pydantic 2 models for the Schema.org vocabulary. Models perform strict runtime validation and JSON-LD serialization, while generated Python annotations provide static typing. The checked-in vocabulary version is exposed as `schema_org.SCHEMA_VERSION`.
 
 ## Installation
 
 ```sh
-pip install schema_org-py==0.1.0
+pip install schema_org-py==0.2.0
 ```
 
 ## Supported Python versions
