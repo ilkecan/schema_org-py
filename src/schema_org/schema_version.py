@@ -2,4 +2,4 @@
 # Schema.org descriptions are licensed under CC BY-SA 3.0.
 # See LICENSE-SCHEMA-ORG.txt.
 
-SCHEMA_VERSION = '30.0'
+SCHEMA_VERSION = '30.1'
