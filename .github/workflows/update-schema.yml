@@ -87,6 +87,7 @@ jobs:
         if: steps.scope.outputs.changed == '1'
         uses: peter-evans/create-pull-request@v8
         with:
+          base: main
           branch: automation/schema-org-${{ inputs.version }}
           delete-branch: true
           title: "schema: update to ${{ inputs.version }}"
