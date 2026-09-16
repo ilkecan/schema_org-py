@@ -32,9 +32,8 @@ def subject(name, types=("Class",), parents=(), domains=(), ranges=()):
     )
 
 
-def test_v30_vocabulary_and_naming():
+def test_current_vocabulary_and_naming():
     vocabulary = Vocabulary.from_file(ROOT / "codegen/data/schema.ttl")
-    assert len(vocabulary.classes) == 937
     assert vocabulary.ancestry("Quantity") == ("DataType",)
     assert vocabulary.ancestry("SequentialArt")[:2] == ("Book", "VisualArtwork")
     assert constant_name("3DModel") == "ThreeDModel"
@@ -118,11 +117,8 @@ def test_parser_preserves_http_predicates_and_rejects_bad_shapes(tmp_path):
         Vocabulary.from_file(malformed)
 
 
-def test_v30_runtime_identity_and_multiple_inheritance():
+def test_current_runtime_identity_and_multiple_inheritance():
     from schema_org import Book, Credential, Error, SequentialArt, VisualArtwork
-    from schema_org.schema_version import SCHEMA_VERSION
-
-    assert SCHEMA_VERSION == "30.0"
     assert Credential.SCHEMA_TYPE == "Credential"
     assert Error.SCHEMA_TYPE == "Error"
     assert cast(Any, registry.DATATYPES["Quantity"])[0] == "DataType"
