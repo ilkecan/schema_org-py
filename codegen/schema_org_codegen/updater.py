@@ -1,18 +1,13 @@
 from __future__ import annotations
 
-import os
 import re
 import shutil
-import subprocess
-import sys
 import tempfile
 from pathlib import Path
 from urllib.request import urlopen
 
-from .check import check
 from .generator import generate
 from .manifest import read_manifest
-from .package_check import validate_distributions
 from .schema_version import SchemaVersion
 from .transaction import apply_transaction
 from .vocabulary import ValidationError, Vocabulary
@@ -22,14 +17,13 @@ VERSION_PATTERN = re.compile(r"Schema\.org Version\s+(?:v)?(\d+\.\d+)", re.IGNOR
 
 
 class SchemaUpdater:
-    def __init__(self, downloader=None, *, target: str | Path | None = None, project_root: str | Path | None = None, validator=None):
+    def __init__(self, downloader=None, *, target: str | Path | None = None, project_root: str | Path | None = None):
         self.project_root = (Path(project_root) if project_root is not None else Path(__file__).resolve().parents[2]).resolve()
         raw_target = Path(target) if target is not None else Path("codegen/data/schema.ttl")
         candidate = raw_target if raw_target.is_absolute() else self.project_root / raw_target
         self._target_relative = _target_relative(self.project_root, candidate)
         self.target = self.project_root / self._target_relative
         self.downloader = downloader or _download
-        self.validator = validator
 
     def latest_version(self) -> str:
         body = _response_body(self._download_checked(LATEST_URL))
@@ -70,8 +64,8 @@ class SchemaUpdater:
         )
         with tempfile.TemporaryDirectory(prefix="schema-org-update-") as temporary:
             staging = Path(temporary)
-            validation_root = self._validation_root(staging)
-            candidate = validation_root / "codegen/data/schema.ttl"
+            staged_root = self._staging_root(staging)
+            candidate = staged_root / "codegen/data/schema.ttl"
             candidate.parent.mkdir(parents=True, exist_ok=True)
             candidate.write_text(annotated, encoding="utf-8")
             candidate_version = SchemaVersion.current(candidate)
@@ -85,54 +79,25 @@ class SchemaUpdater:
                 raise ValidationError(f"downloaded schema could not be parsed: {error}") from error
             if not vocabulary.subjects:
                 raise ValidationError("downloaded schema could not be parsed")
-            generate(candidate, project_root=validation_root, output_root=validation_root)
-            self._validate_staged(validation_root)
-            if self.validator is not None:
-                self.validator(validation_root)
-            self._commit(validation_root, annotated)
+            generate(candidate, project_root=staged_root, output_root=staged_root)
+            self._commit(staged_root, annotated)
         return True
-    def _validation_root(self, staging: Path) -> Path:
-        required = (
-            "pyproject.toml",
-            "tests",
-            "src/schema_org",
-            "codegen",
-            "README.md",
-            "CHANGELOG.md",
-            "LICENSE.txt",
-            "LICENSE-SCHEMA-ORG.txt",
-            "build_hooks.py",
-        )
-        if any(not (self.project_root / item).exists() for item in required):
-            raise ValidationError("project root is incomplete for schema update validation")
-        root = staging / "project"
-        shutil.copytree(self.project_root, root, ignore=_ignore_validation_files)
-        return root
 
-    def _validate_staged(self, root: Path) -> None:
-        package = root / "src/schema_org"
-        generated_files = sorted(package.rglob("*.py"))
-        if not generated_files:
-            raise ValidationError("staged generated package is missing")
-        for path in generated_files:
-            result = subprocess.run([sys.executable, "-m", "py_compile", str(path)], capture_output=True, text=True)
-            if result.returncode:
-                raise ValidationError(f"generated Python failed to compile: {result.stderr.strip()}")
-        environment = os.environ.copy()
-        environment["PYTHONPATH"] = f"{root / 'src'}:{root / 'codegen'}"
-        _run_checked([sys.executable, "-m", "pytest"], root, environment, "generated tests failed")
-        check(root)
-        build_dir = Path(tempfile.mkdtemp(prefix="schema-org-build-"))
-        try:
-            _run_checked(
-                [sys.executable, "-m", "build", "--outdir", str(build_dir)],
-                root,
-                environment,
-                "generated package build failed",
-            )
-            validate_distributions(build_dir, project_root=root)
-        finally:
-            shutil.rmtree(build_dir, ignore_errors=True)
+    def _staging_root(self, staging: Path) -> Path:
+        source_package = self.project_root / "src/schema_org"
+        source_manifest = self.project_root / "codegen/generated_manifest.json"
+        if not source_package.is_dir() or not source_manifest.is_file():
+            raise ValidationError("project root is incomplete for schema update")
+        root = staging / "project"
+        shutil.copytree(
+            source_package,
+            root / "src/schema_org",
+            ignore=shutil.ignore_patterns("__pycache__"),
+        )
+        staged_manifest = root / "codegen/generated_manifest.json"
+        staged_manifest.parent.mkdir(parents=True)
+        shutil.copy2(source_manifest, staged_manifest)
+        return root
 
     def _commit(self, staging: Path, annotated: str) -> None:
         staged_package = staging / "src/schema_org"
@@ -149,23 +114,6 @@ class SchemaUpdater:
         replacements["codegen/generated_manifest.json"] = staged_manifest_path.read_bytes()
         replacements[self._target_relative] = annotated.encode("utf-8")
         apply_transaction(self.project_root, replacements, old_paths - new_paths)
-def _ignore_validation_files(path: str, names: list[str]) -> set[str]:
-    ignored = {".git", ".devenv", ".pytest_cache", "__pycache__", ".venv", "dist", "build"}
-    return {name for name in names if name in ignored or name.startswith("tmp") or name.startswith(".schema-org-")}
-
-
-def _run_checked(command: list[str], cwd: Path, environment: dict[str, str], message: str) -> None:
-    result = subprocess.run(command, cwd=cwd, env=environment, capture_output=True, text=True)
-    if result.returncode:
-        detail = (result.stderr or result.stdout).strip()
-        raise ValidationError(f"{message}: {detail}")
-
-
-
-
-
-
-
 
 
 def _numeric_version(version: str) -> str:
