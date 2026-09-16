@@ -5,6 +5,7 @@ from types import MappingProxyType
 import pytest
 from schema_org_codegen import Vocabulary
 from schema_org_codegen.generator import _ordered_direct_parents, generate
+from schema_org_codegen.schema_version import SchemaVersion
 
 from schema_org import (
     AmpStory,
@@ -131,19 +132,19 @@ def test_manifest_and_generated_metadata_are_complete():
     )
 
 
-def test_provenance_has_only_ruby_headers_and_schema_version(tmp_path: Path):
+def test_provenance_and_generated_schema_version_are_consistent():
     root = Path(__file__).parents[1]
-    ttl_lines = (root / "codegen/data/schema.ttl").read_text().splitlines()
-    assert ttl_lines[:2] == [
-        "# schema_org_release: v30.0",
-        "# schema_org_source: https://schema.org/version/30.0/schemaorg-all-https.ttl",
-    ]
+    current = SchemaVersion.current(root / "codegen/data/schema.ttl")
     manifest = json.loads((root / "codegen/generated_manifest.json").read_text())
     assert set(manifest) == {"schema_version", "schema_source", "paths", "terms"}
-    schema_version = (root / "src/schema_org/schema_version.py").read_text()
-    assert "SCHEMA_VERSION = '30.0'" in schema_version
-    assert "SCHEMA_SOURCE" not in schema_version
-    assert "SHA256" not in schema_version
+    assert manifest["schema_version"] == current.version
+    assert manifest["schema_source"] == current.schema_source
+
+    from schema_org import schema_version
+
+    assert current.version == schema_version.SCHEMA_VERSION
+    assert not hasattr(schema_version, "SCHEMA_SOURCE")
+    assert not hasattr(schema_version, "SHA256")
 
 def test_c3_ordering_is_deterministic(tmp_path: Path):
     ttl = (
